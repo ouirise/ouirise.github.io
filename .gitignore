@@ -1,0 +1,11 @@
+dist/
+.DS_Store
+.env
+/node_modules/
+
+# React Router
+/.react-router/
+/build/
+
+# Deploy to Github Pages
+!/.github/workflows

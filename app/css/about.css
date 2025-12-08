@@ -1,0 +1,15 @@
+main.about {
+    display: flex;
+    min-height: 70vh;
+    flex-direction: column;
+    gap: 5vh;
+    max-width: 90%;
+    margin: auto;
+}
+main ul {
+    display: grid;
+    grid-template-rows: auto-fit;
+    gap: 1rem;
+    padding-left: 1.5rem;
+    
+}
