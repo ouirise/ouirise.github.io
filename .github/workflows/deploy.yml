@@ -1,0 +1,64 @@
+name: Deploy ouirise.github.io
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+# Grant GITHUB_TOKEN the permissions to deploy to Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment (skips outdated builds)
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build ouirise.github.io
+        run: npm run build
+
+      # ... previous steps (Build Cultural Gold) ...
+
+      # 1. FIX THE 404s (Disable Jekyll)
+      # This tells GitHub: "Don't ignore files starting with _"
+      - name: Disable Jekyll
+        run: touch build/client/.nojekyll
+
+      # 2. Fix the Refresh 404s (Copy index to 404)
+      - name: Create 404 fallback
+        run: cp build/client/index.html build/client/404.html
+
+      # 3. Upload artifact
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './build/client'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
