@@ -1,52 +1,79 @@
 import Layout from "~/layout";
-import { featuredCollections } from "~/data"
-import type { JSX } from "react";
+import { useEffect, useState, type JSX } from "react";
 import '~/css/home.css'
 
 interface Collection { name: string, symbol: string[], focus: string, description: string, category: string}
 
 export default function Home() {
-
     return (
         <Layout>
             <article className="hero">
-            <section>
-            <h2 className="ital"><span className="em">OUIRISE.</span>Collective of creatives, developers, entreprenuers</h2>
-            <h3 className="strong">bold with precision <span className="em">& INITIATIVE</span></h3>
-            <a className="btn" href="#services">si more</a>
-
-            </section>
+            <h2><span className='ital'>Where Vibrant Ideas</span><span className='strong'>Meet informed execution</span></h2>
+            <h3>sites and services crafted with
+              <span className='ital'>Creative</span> 
+              <span className="strong">Clarity</span>
+            </h3>
+            <a className="btn" href="#services">see more</a>
             </article>
 
-            <div id="services">.</div>
-            <h2  className="strong center">what oui do</h2>
-            <p></p>
+            <img src={`/images/iris-logo.png`} alt="OuiRise Initiative Logo"/>
 
-            <article className="collections">
-                {featuredCollections.slice(0, 2).map((collection: Collection): JSX.Element => (
-                    <CollectionCard key={collection.name} name={collection.name} symbol={collection.symbol} category={collection.category} focus={collection.focus} description={collection.description} />
-                ))}
-                
-            </article>
-            <article className="collections">
-            {featuredCollections.slice(2, 4).map((collection: Collection): JSX.Element => (
-                    <CollectionCard key={collection.name} name={collection.name} symbol={collection.symbol} category={collection.category} focus={collection.focus} description={collection.description} />
-                ))}
+            <div id="services" className="hidden">.</div>
+
+            <article className="services">
+              <h2 className="strong">what oui do</h2>
+              <ServicesList />
             </article>
         </Layout>
     )
 }
 
-function CollectionCard({ name, symbol, category, focus, description}: Collection) {
-    return (
-        <div className="card collection" key={name}>
-                        {/* <img src={`/images/${category}.jpg`} alt={name} /> */}
-                        <h4 className="em">{name.toUpperCase()}</h4>
-                        <p>{focus} {category}</p>
-                        <p>{description}</p>
+export interface iService {
+  id: string;
+  title: string;
+  description: string;
+  pricing?: string;
+  tier?: "Basic" | "Standard" | "Premium";
+  aiIntegration?: string;
+}
 
-                        {symbol.map(s => <a href="/about" className="right">{s}</a>)}
-                        <a className="btn">View Collection</a>
-                    </div>
-    )
+function ServicesList() {
+  const [services, setServices] = useState<iService[]>([]);
+
+  useEffect(() => {
+    fetch("/data/services.json")
+      .then(res => res.json())
+      .then((data: iService[]) => setServices(data))
+      .catch(console.error);
+  }, []);
+
+  return (
+    <table>
+      <tbody>
+        { services && services.map((s: iService) => <ServiceCard 
+            title={s.title}
+            description={s.description}
+            pricing={s.pricing}
+            aiIntegration={s.aiIntegration}
+            id={s.id}
+            key={s.id}
+        />)}
+        </tbody>
+    </table>
+  );
+}
+
+
+function ServiceCard({ 
+  title, 
+  description, 
+  pricing, 
+  aiIntegration, 
+  id
+}: iService) {
+  return (
+    <tr className="card">
+        <td>{title}</td>
+    </tr>
+  );
 }

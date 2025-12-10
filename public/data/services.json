@@ -1,0 +1,37 @@
+[
+  {
+    "id": "web-dev",
+    "title": "Web Development & Design",
+    "description": "Custom websites, SPAs, interactive visuals with cultural flair.",
+    "pricing": "$500+",
+    "aiIntegration": "IRIS generates project briefs & mockups"
+  },
+  {
+    "id": "maintenance",
+    "title": "Maintenance & Retainer Packages",
+    "description": "Tiered website support: bug fixes, updates, backups, and performance audits.",
+    "pricing": "$15-$50/month",
+    "aiIntegration": "IRIS monitors site health and generates automated reports"
+  },
+  {
+    "id": "content-marketing",
+    "title": "Content & Marketing Automation",
+    "description": "Blog and social media content planning and automated posting.",
+    "pricing": "Varies by package",
+    "aiIntegration": "GPT generates copy, IRIS recommends posting strategy"
+  },
+  {
+    "id": "generative-experiences",
+    "title": "Generative & Interactive Experiences",
+    "description": "Canvas art, interactive storytelling, NFT-ready visuals.",
+    "pricing": "Project-based",
+    "aiIntegration": "DALL·E / Stable Diffusion generates art, IRIS tracks user interaction"
+  },
+  {
+    "id": "ai-consulting",
+    "title": "AI Consulting & Integration",
+    "description": "Integrate AI tools into workflows, automate processes, and build dashboards.",
+    "pricing": "Project-based",
+    "aiIntegration": "IRIS orchestrates multiple AI models for client solutions"
+  }
+]

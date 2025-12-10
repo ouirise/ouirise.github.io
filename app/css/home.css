@@ -1,11 +1,83 @@
+/* Mobile first styles go here (default) */
+article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background: var(--bg-panel);
+  padding: 1rem;
+  border-radius: 0.3rem;
+}
+.hero {
+  width: fit-content;
+  margin: auto;
+}
 .hero h2, .hero h3 {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
     height: fit-content;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero h3 span {
+  position: relative;
+  bottom: 0.25rem;
+}
+
+.hero a {
+  background: var(--bg-dark);
+  padding: 0.5rem 1rem;
+  font-size: 2rem;
+  border-radius: 1rem;
+  position: relative;
+  border: solid balck 1px;
+}
+.hero a:hover {
+  background: var(--accent-hover);
+  color: var(--accent-primary);
+}
+.hero a:active {
+  background: var(--bg-panel);
+}
+
+#services {
+  --gap: 5vh;
+  margin-bottom: var(--gap);
+  margin-top: var(--gap);
+}
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9rem;
+}
+article.services {
+  margin-bottom: 9rem;
+  background: var(--bg-panel);
+  font-size: 3rem;
+}
+/* Tablet breakpoint */
+@media (min-width: 640px) {
+  /* Tablet-specific styles */
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  /* Desktop-specific styles */
+  
+
+.hero h3 {
+    gap: 0.5rem;
 }
 
 .hero .em {
     height: 2rem;
     padding-top: 4px;
 }
+}
+
+
+
