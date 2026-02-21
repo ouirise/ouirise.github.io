@@ -1,387 +1,235 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ouirise Initiative | Engineering Business Growth</title>
+    <title>OUIRISE | Flight Logs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root {
-            --bg-dark: rgb(12, 12, 12);
-            --border-red: #5e1e1e;
-            --text-light: #eaeaea;
-            --accent-blue: #3498db;
-            --card-bg: #1a1a1a;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background: var(--bg-dark);
-            color: var(--text-light);
-            overflow-x: hidden;
-        }
-
-        /* Layout Constraints */
-        header, main, footer {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Sticky Modern Header */
-        header {
-            position: sticky;
-            top: 0;
-            background: rgba(12, 12, 12, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: var(--border-red) solid 1px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-            margin-bottom: 2rem;
-        }
-        header img {
-            max-width: 20%;
-            max-height: 100%;
-        }
-        h1 {
-            font-size: 1.5rem;
-            letter-spacing: -1px;
-            margin: 0;
-            text-transform: lowercase;
-        }
-
-        h1 span {
-            color: var(--accent-blue);
-        }
-
-        /* Buttons & Links */
-        .btn-contact {
-            padding: 0.8rem 1.5rem;
-            background: transparent;
-            border: solid var(--border-red) 1px;
-            color: var(--text-light);
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .btn-contact:hover {
-            background: var(--border-red);
-            transform: translateY(-2px);
-        }
-
-        /* Hero / Introduction */
-        .hero {
-            padding: 4rem 0;
-            border-bottom: 1px solid #222;
-        }
-
-        .hero h2 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, #fff, #888);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Portfolio Grid */
-        .portfolio-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .portfolio-link {
-            padding: 2rem;
-            background: var(--card-bg);
-            border: 1px solid #333;
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--text-light);
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .portfolio-link:hover {
-            border-color: var(--accent-blue);
-            transform: scale(1.02);
-            background: #222;
-        }
-
-        .portfolio-link i {
-            color: var(--accent-blue);
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .portfolio-link:hover i {
-            opacity: 1;
-            transform: translateX(5px);
-        }
-
-        /* Project Plans Section */
-        .plans-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .card.plan {
-            background: var(--card-bg);
-            border: 1px solid #333;
-            padding: 2.5rem;
-            border-radius: 12px;
-            display: flex;
-            flex-direction: column;
-            transition: var(--transition);
-        }
-
-        .card.plan:hover {
-            border-color: var(--border-red);
-        }
-
-        .card.plan h3 {
-            color: var(--accent-blue);
-            font-size: 1.5rem;
-            margin-top: 0;
-        }
-
-        .card.plan p {
-            font-size: 0.95rem;
-            color: #ccc;
-            flex-grow: 1;
-        }
-
-        .card.plan .badge {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--border-red);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        /* Form Styling */
-        #contact-form {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: var(--bg-dark);
-            border: 1px solid var(--border-red);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            z-index: 1001;
-            width: 300px;
-        }
-
-        .hidden { display: none; }
-
-        input {
-            width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 1rem;
-            background: #111;
-            border: 1px solid #333;
-            color: white;
-            border-radius: 4px;
-        }
-
-        input:focus {
-            border-color: var(--accent-blue);
-            outline: none;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            header { height: auto; padding: 1rem;  gap: 1rem; }
-            .hero h2 { font-size: 2.5rem; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #e5e5e5;
+        }
+        
+        .tactical-gold { color: #f59e0b; }
+        .bg-tactical-gold { background: #f59e0b; }
+        
+        .flight-card {
+            transition: all 0.3s ease;
+            border: 1px solid #262626;
+        }
+        .flight-card:hover {
+            border-color: #f59e0b;
+            transform: translateY(-4px);
+        }
+        
+        .grain-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        
+        .access-granted {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
         }
 
-        header a, header a:visited header a:hover {
-            color: #fff;
+        .img-placeholder {
+            background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
         }
-
-        .plan li {
-            list-style: none;
+        .img-placeholder::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.03) 50%, transparent 70%);
+            transform: rotate(45deg);
         }
     </style>
 </head>
-<body class="dark">
-
-    <header>
-        <img src="./images/ouirise-logo.png">
-        <div>
-                <a href="https://github.com/ouiriseinit"><i class="fab fa-github" style="margin-left: 1rem;"></i></a>
-                <i class="fab fa-instagram" style="margin-left: 1rem"></i>
+<body class="min-h-screen">
+    <div class="grain-overlay"></div>
+    
+    <!-- Header -->
+    <header class="border-b border-neutral-800 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-tactical-gold rounded-sm flex items-center justify-center">
+                <i class="fas fa-drone text-black text-sm"></i>
             </div>
-        <!-- <button class="btn-contact" onclick="showContact()">Contact Project Lead</button> -->
+            <div>
+                <h1 class="font-bold text-lg tracking-tight">OUIRISE</h1>
+                <p class="text-xs text-neutral-500 uppercase tracking-widest">Flight Logs</p>
+            </div>
+        </div>
+        <nav class="hidden md:flex gap-6 text-sm">
+            <a href="#" class="tactical-gold">Gallery</a>
+            <a href="#" class="text-neutral-400 hover:text-white transition">Pilots</a>
+            <a href="#" class="text-neutral-400 hover:text-white transition">Equipment</a>
+            <a href="#" class="text-neutral-400 hover:text-white transition">Protocol</a>
+        </nav>
+        <div class="text-xs tactical-gold access-granted">
+            <i class="fas fa-satellite-dish mr-2"></i>ACCESS GRANTED
+        </div>
     </header>
 
-    <div id="contact-form" class="hidden">
-        <h3 style="margin-top:0">Get in Touch</h3>
-        <form action="#">
-            <input placeholder="Name" type="text" required />
-            <input placeholder="Email" type="email" required />
-            <textarea placeholder="Tell us about your project" style="width:100%; height:100px; background:#111; border:1px solid #333; color:white; margin-bottom:1rem; border-radius:4px; padding:0.8rem; font-family:inherit;"></textarea>
-            <input type="submit" value="Send Request" style="background:var(--accent-blue); border:none; cursor:pointer; font-weight:bold" />
-            <button type="button" onclick="showContact()" style="background:none; border:none; color:#888; width:100%; cursor:pointer">Close</button>
-        </form>
-    </div>
-
-    <main>
-        <section class="hero">
-            <h2>Ouirise Initiative <br>Launch and Scale Your Business</h2>
-            <p style="font-size: 1.25rem; color: #aaa; max-width: 800px;">
-                We bridge the gap between startup vision and enterprise-grade reality. 
-                Using agentic workflows and modern cloud architecture, we develop the tools innovators need to lead.
+    <!-- Hero -->
+    <section class="px-6 py-12 border-b border-neutral-800">
+        <div class="max-w-4xl">
+            <p class="text-neutral-500 text-sm mb-2 uppercase tracking-widest">// Field Reports</p>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">AERIAL <span class="tactical-gold">RECONNAISSANCE</span></h2>
+            <p class="text-neutral-400 max-w-xl">
+                Documented flights from the village hidden in the clouds. 
+                FPV operations, cinematic surveys, and tactical mapping.
             </p>
-        </section>
+        </div>
+    </section>
 
-        <section style="padding: 4rem 0;">
-            <h3>Our Software Engineers</h3>
-            <h4 style="color: var(--accent-blue);">Over 8 Years of Developing Custom Solutions</h4>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                <div>
-                    <p>Developed React, Angular, HTML, CSS, and Wordpress applications for industry innovators in FinTech, Entrepreneurship, and Startups.</p>
-                    <p>Incorporate modern cloud practices for data security and analytics. Use agentic workflows for smooth deployment timelines.</p>
-                </div>
-                <div>
-                    
-                    <p>Well versed in building custom interfaces and dashboards for a wide variety of industries.</p>
-                    <!-- <p>  in Hackathons and tutored while developing solutions for business students during the foundational year at HPU.</p> -->
-                    <p>Use leading AI research and automation methodologies to boost organizational workflows.</p>
-                </div>
-            </div>
-        </section>
-        
-        <section>
-            <h3>Recent Deployments</h3>
-            
-            <div class="portfolio-container">
-                <a href="./xavieraustingroup.html" class="portfolio-link">
-                    <span>Xavier Austin Group LLC</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-                <a href="./maleekmusic.html" class="portfolio-link">
-                    <span>Maleek Music</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-                <a href="./ourstyle.html" class="portfolio-link">
-                    <span>Our Style Apparel</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-                
-                <a href="./businesscents.html" class="portfolio-link">
-                    <span>Business Cents LLC</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-                
-                <a href="https://ouiriseinit.github.io/thejugobar/" class="portfolio-link">
-                    <span>theJugoBar</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-                <a href="https://ouiriseinit.github.io/culturalgold/" class="portfolio-link">
-                    <span>Cultural Gold</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-                </a>
-                <!-- <a href="./universalsolutions.html" class="portfolio-link">
-                    <span>Universal Solutions Construction</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a> -->
-                <!-- <a href="./borisandnatasha.html" class="portfolio-link">
-                    <span>Boris & Natasha</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a> -->
-                <a href="./homeserviceexprts.html" class="portfolio-link">
-                    <span>Home Service Experts</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-                <a href="https://ouiriseinit.github.io/miyu/" class="portfolio-link">
-                    <span>E-commerce Template</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-                
-                <!-- <a href="./" class="portfolio-link">
-                    <span></span>
-                    <i class="fas fa-arrow-right"></i>
-                </a> -->
-            </div>
-        </section>
-
-        <section style="padding: 4rem 0;">
-            <h2 style="text-align: center;">Project Plans</h2>
-            <p style="text-align: center; color: #888; margin-bottom: 3rem;">Engineered for scalability, drafted for success.</p>
-            
-            <div class="plans-grid">
-                <!-- SPA Plan -->
-                <div class="card plan">
-                    <span class="badge">Prototype</span>
-                    <h3>Single Page Application</h3>
-                    <p>The SPA Plan is built to draft ideas and to assist clients seeking cost-effective solutions without compromising quality. Perfect for landing pages and high-impact marketing assets.</p>
-                    <ul style="list-size: none; padding: 0; font-size: 0.85rem; color: #888;">
-                        <li><i class="fas fa-check" style="color:var(--accent-blue)"></i> Modern Cloud Deployment</li>
-                        <li><i class="fas fa-check" style="color:var(--accent-blue)"></i> Responsive Design</li>
-                        <li><i class="fas fa-check" style="color:var(--accent-blue)"></i> Speed Optimized</li>
-                    </ul>
-                </div>
-
-                <!-- MVP Plan -->
-                <div class="card plan" style="border-color: var(--accent-blue);">
-                    <span class="badge" style="color: var(--accent-blue);">Most Popular</span>
-                    <h3>The MVP Solution</h3>
-                    <p>Expert software engineers scale your business with an interactive cloud solution. A balanced approach between availability and flexibility, suitable for projects requiring consistent evolution.</p>
-                    <ul style="list-size: none; padding: 0; font-size: 0.85rem; color: #888;">
-                        <li><i class="fas fa-check" style="color:var(--accent-blue)"></i> Custom Database Integration</li>
-                        <li><i class="fas fa-check" style="color:var(--accent-blue)"></i> Server Management Included</li>
-                        <li><i class="fas fa-check" style="color:var(--accent-blue)"></i> Interactive Dashboards</li>
-                    </ul>
-                </div>
-
-                <!-- Big Data Plan -->
-                <div class="card plan">
-                    <span class="badge">Enterprise</span>
-                    <h3>Big Data & AI</h3>
-                    <p>Tailored for comprehensive support and prioritized attention. We build custom dashboards and AI agentic solutions to improve workflow productivity and data-driven decision making.</p>
-                    <ul style="list-size: none; padding: 0; font-size: 0.85rem; color: #888;">
-                        <li><i class="fas fa-check" style="color:var(--accent-blue)"></i> AI Agent Workflows</li>
-                        <li><i class="fas fa-check" style="color:var(--accent-blue)"></i> Full-time Engineering Focus</li>
-                        <li><i class="fas fa-check" style="color:var(--accent-blue)"></i> Custom Analytics Suites</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+    <!-- Gallery Grid -->
+    <main class="px-6 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="gallery">
+            <!-- Images injected via JS -->
+        </div>
     </main>
 
-    <footer style="border-top: 1px solid #222; padding: 4rem 0; margin-top: 4rem;">
-        <div style="display: flex; justify-content: center; align-items: center; opacity: 0.6;">
-            <p>&copy; 2025 Ouirise Initiative.</p>
-            
+    <!-- Lightbox -->
+    <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-2xl hover:text-amber-500 transition">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="lightbox-img" src="" class="max-w-full max-h-[90vh] object-contain border border-neutral-800">
+        <div class="absolute bottom-4 left-4 text-sm">
+            <p id="lightbox-title" class="font-bold tactical-gold"></p>
+            <p id="lightbox-meta" class="text-neutral-400 text-xs"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-neutral-800 px-6 py-6 mt-12">
+        <div class="flex justify-between items-center text-xs text-neutral-600">
+            <p>EST. 2025 // CLT</p>
+            <p>🌫️🌒</p>
         </div>
     </footer>
 
     <script>
-        const showContact = () => {
-            document.getElementById('contact-form').classList.toggle('hidden')
+        // Flight data — swap to your images later
+        const flights = [
+            {
+                id: 1,
+                title: "Golden Hour Dive",
+                pilot: "0KK",
+                location: "Charlotte, NC",
+                date: "2025-02-20",
+                url: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&q=80",
+                tags: ["fpv", "sunset", "dive"]
+            },
+            {
+                id: 2,
+                title: "Urban Canyon Run",
+                pilot: "Twin",
+                location: "Uptown CLT",
+                date: "2025-02-18",
+                url: "https://images.unsplash.com/photo-1506947411487-a56738267384?w=800&q=80",
+                tags: ["freestyle", "city", "gap"]
+            },
+            {
+                id: 3,
+                title: "Lake Norman Survey",
+                pilot: "0KK",
+                location: "Lake Norman, NC",
+                date: "2025-02-15",
+                url: "https://images.unsplash.com/photo-1508614589041-895b8c9d7ef5?w=800&q=80",
+                tags: ["cinematic", "water", "smooth"]
+            },
+            {
+                id: 4,
+                title: "Rail Yard Low Pass",
+                pilot: "Twin",
+                location: "Industrial District",
+                date: "2025-02-12",
+                url: "https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=800&q=80",
+                tags: ["risky", "low", "technical"]
+            },
+            {
+                id: 5,
+                title: "Cloud Break",
+                pilot: "0KK",
+                location: "Cloud Village",
+                date: "2025-02-10",
+                url: "https://images.unsplash.com/photo-1534234828563-0252171880df?w=800&q=80",
+                tags: ["altitude", "clouds", "serenity"]
+            },
+            {
+                id: 6,
+                title: "Night Ops Test",
+                pilot: "Twin",
+                location: "Training Grounds",
+                date: "2025-02-08",
+                url: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80",
+                tags: ["night", "nv", "experimental"]
+            }
+        ];
+
+        // Render gallery
+        const gallery = document.getElementById('gallery');
+        
+        flights.forEach(flight => {
+            const card = document.createElement('div');
+            card.className = 'flight-card bg-neutral-900 overflow-hidden cursor-pointer group';
+            card.onclick = () => openLightbox(flight);
+            
+            card.innerHTML = `
+                <div class="relative aspect-video overflow-hidden">
+                    <img src="${flight.url}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="absolute bottom-2 left-2 text-xs tactical-gold opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="fas fa-play-circle mr-1"></i> VIEW
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-sm mb-1">${flight.title}</h3>
+                    <div class="flex justify-between items-center text-xs text-neutral-500">
+                        <span>${flight.pilot}</span>
+                        <span>${flight.date}</span>
+                    </div>
+                    <div class="flex gap-2 mt-2">
+                        ${flight.tags.map(tag => `<span class="text-[10px] px-2 py-0.5 bg-neutral-800 text-neutral-400 rounded">${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+            
+            gallery.appendChild(card);
+        });
+
+        // Lightbox functions
+        function openLightbox(flight) {
+            document.getElementById('lightbox-img').src = flight.url;
+            document.getElementById('lightbox-title').textContent = flight.title;
+            document.getElementById('lightbox-meta').textContent = `${flight.pilot} // ${flight.location} // ${flight.date}`;
+            document.getElementById('lightbox').classList.remove('hidden');
         }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.add('hidden');
+        }
+
+        // Close on background click
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') closeLightbox();
+        });
     </script>
 </body>
 </html>

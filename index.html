@@ -1,234 +1,395 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OUIRISE | Flight Logs</title>
+    <title>OUIRISE | Engineering Business Growth</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        :root {
+            --void: #0a0a0a;
+            --tactical: #141414;
+            --surface: #1f1f1f;
+            --signal: #f5f5f5;
+            --ghost: #666666;
+            --accent: #ff6b00;
+        }
         
         body {
             font-family: 'Inter', sans-serif;
-            background: #0a0a0a;
-            color: #e5e5e5;
+            background-color: var(--void);
+            color: var(--signal);
         }
         
-        .tactical-gold { color: #f59e0b; }
-        .bg-tactical-gold { background: #f59e0b; }
-        
-        .flight-card {
-            transition: all 0.3s ease;
-            border: 1px solid #262626;
-        }
-        .flight-card:hover {
-            border-color: #f59e0b;
-            transform: translateY(-4px);
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
         }
         
-        .grain-overlay {
+        .grain {
+            position: relative;
+        }
+        
+        .grain::before {
+            content: "";
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
+            z-index: 50;
             opacity: 0.03;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
         
-        .access-granted {
-            animation: pulse 2s infinite;
+        .lock-icon {
+            animation: unlock 1.5s ease-out forwards;
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+        
+        @keyframes unlock {
+            0% { transform: rotate(0deg); opacity: 0; }
+            50% { transform: rotate(-10deg); opacity: 1; }
+            100% { transform: rotate(0deg); opacity: 1; }
         }
-
-        .img-placeholder {
-            background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%);
-            position: relative;
+        
+        .fade-in {
+            animation: fadeIn 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .typewriter {
             overflow: hidden;
+            border-right: 2px solid var(--accent);
+            white-space: nowrap;
+            animation: typing 2s steps(20, end) 1s forwards, blink 0.75s step-end infinite;
+            width: 0;
         }
-        .img-placeholder::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.03) 50%, transparent 70%);
-            transform: rotate(45deg);
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent); }
+        }
+        
+        .card-hover {
+            transition: all 0.2s ease;
+        }
+        
+        .card-hover:hover {
+            border-color: #333;
+            transform: translateY(-2px);
+        }
+        
+        .accent-border {
+            border: 1px solid var(--accent);
+        }
+        
+        .popular-badge {
+            background: var(--accent);
+            color: var(--void);
+        }
+        
+        .btn-ghost {
+            border: 1px solid var(--surface);
+            transition: all 0.2s;
+        }
+        
+        .btn-ghost:hover {
+            background: var(--signal);
+            color: var(--void);
+            border-color: var(--signal);
+        }
+        
+        .btn-solid {
+            background: var(--signal);
+            color: var(--void);
+            transition: all 0.2s;
+        }
+        
+        .btn-solid:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .text-muted {
+            color: var(--ghost);
+        }
+        
+        .bg-void { background-color: var(--void); }
+        .bg-tactical { background-color: var(--tactical); }
+        .bg-surface { background-color: var(--surface); }
+        
+        .section-alt {
+            background-color: #0d0d0d;
         }
     </style>
 </head>
-<body class="min-h-screen">
-    <div class="grain-overlay"></div>
-    
+<body class="grain bg-void text-signal antialiased">
     <!-- Header -->
-    <header class="border-b border-neutral-800 px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-            <div class="w-8 h-8 bg-tactical-gold rounded-sm flex items-center justify-center">
-                <i class="fas fa-drone text-black text-sm"></i>
-            </div>
-            <div>
-                <h1 class="font-bold text-lg tracking-tight">OUIRISE</h1>
-                <p class="text-xs text-neutral-500 uppercase tracking-widest">Flight Logs</p>
-            </div>
-        </div>
-        <nav class="hidden md:flex gap-6 text-sm">
-            <a href="#" class="tactical-gold">Gallery</a>
-            <a href="#" class="text-neutral-400 hover:text-white transition">Pilots</a>
-            <a href="#" class="text-neutral-400 hover:text-white transition">Equipment</a>
-            <a href="#" class="text-neutral-400 hover:text-white transition">Protocol</a>
+<header class="fixed top-0 w-full z-40 bg-void/80 backdrop-blur-md border-b border-[#1a1a1a]">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div class="mono text-lg font-semibold tracking-tight">OuiRise</div>
+        <nav class="hidden md:flex items-center gap-8 mono text-xs uppercase tracking-wider justify-end">
+            <a href="#deployments" class="hover:text-accent transition-colors">Deployments</a>
+            <a href="#origin" class="hover:text-accent transition-colors">Origin</a>
+            <a href="#access" class="hover:text-accent transition-colors">Access</a>
         </nav>
-        <div class="text-xs tactical-gold access-granted">
-            <i class="fas fa-satellite-dish mr-2"></i>ACCESS GRANTED
-        </div>
-    </header>
+    </div>
+</header>
 
     <!-- Hero -->
-    <section class="px-6 py-12 border-b border-neutral-800">
-        <div class="max-w-4xl">
-            <p class="text-neutral-500 text-sm mb-2 uppercase tracking-widest">// Field Reports</p>
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">AERIAL <span class="tactical-gold">RECONNAISSANCE</span></h2>
-            <p class="text-neutral-400 max-w-xl">
-                Documented flights from the village hidden in the clouds. 
-                FPV operations, cinematic surveys, and tactical mapping.
+    <section class="min-h-screen flex flex-col items-center justify-center px-6 pt-16 relative overflow-hidden">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="mb-8 flex justify-center">
+                <svg class="lock-icon w-16 h-16 text-signal" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+            </div>
+            
+            <h1 class="mono text-4xl md:text-6xl font-bold mb-6 tracking-tight fade-in">ACCESS GRANTED</h1>
+            
+            <div class="h-px w-32 bg-signal mx-auto mb-8 fade-in"></div>
+            
+            <p class="text-lg md:text-xl text-muted mb-4 max-w-2xl mx-auto leading-relaxed fade-in">
+                We bridge startup vision and enterprise-grade reality through agentic workflows and modern cloud architecture.
             </p>
+            <p class="text-lg text-muted mb-12 fade-in">Built for endurance. Field-tested in CLT.</p>
+            
+            <button class="mono text-sm uppercase tracking-widest px-8 py-4 border border-signal hover:bg-signal hover:text-void transition-all duration-200 fade-in">
+                Initiate Project
+            </button>
         </div>
     </section>
 
-    <!-- Gallery Grid -->
-    <main class="px-6 py-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="gallery">
-            <!-- Images injected via JS -->
-        </div>
-    </main>
+    <!-- Deployments -->
+    <section id="deployments" class="py-24 px-6 bg-void">
+        <div class="max-w-7xl mx-auto">
+            <div class="mono text-xl text-center text-muted mb-12 uppercase tracking-widest">CULTURAL INTERSECTIONALITY × ART + SCIENCE + BUSINESS</div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- TroH -->
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover group cursor-pointer">
+                    <div class="aspect-video bg-surface mb-4 overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 group-hover:scale-105 transition-transform duration-500"></div>
+                    </div>
+                    <h3 class="mono text-lg font-semibold mb-2 uppercase tracking-tight">TROH INITIALIZATION</h3>
+                    <div class="space-y-1 mono text-xs text-muted mb-4">
+                        <p>// Site Migration</p>
+                        <p>// Multi-Platform System Design</p>
+                        <p>// Cloud Consulting</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">Vercel</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">MongoDB</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">CloudFlare</span>
+                    </div>
+                </div>
 
-    <!-- Lightbox -->
-    <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-4">
-        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-2xl hover:text-amber-500 transition">
-            <i class="fas fa-times"></i>
-        </button>
-        <img id="lightbox-img" src="" class="max-w-full max-h-[90vh] object-contain border border-neutral-800">
-        <div class="absolute bottom-4 left-4 text-sm">
-            <p id="lightbox-title" class="font-bold tactical-gold"></p>
-            <p id="lightbox-meta" class="text-neutral-400 text-xs"></p>
+                <!-- Fragrant Flowers -->
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover group cursor-pointer">
+                    <div class="aspect-video bg-surface mb-4 overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 group-hover:scale-105 transition-transform duration-500"></div>
+                    </div>
+                    <h3 class="mono text-lg font-semibold mb-2 uppercase tracking-tight">FLIGHT LOGS</h3>
+                    <div class="space-y-1 mono text-xs text-muted mb-4">
+                        <p>// Custom CMS Platform</p>
+                        <p>// Multi-Storage System</p>
+                        <p>// Documentation Automation</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">React</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">HLS.js</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">MongoDB</span>
+                    </div>
+                </div>
+
+                <!-- Qamaria -->
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover group cursor-pointer">
+                    <div class="aspect-video bg-surface mb-4 overflow-hidden">
+                        <div class="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 group-hover:scale-105 transition-transform duration-500"></div>
+                    </div>
+                    <h3 class="mono text-lg font-semibold mb-2 uppercase tracking-tight">Business Automations</h3>
+                    <div class="space-y-1 mono text-xs text-muted mb-4">
+                        <p>// E-commerce Integration</p>
+                        <p>// Content Writing</p>
+                        <p>// Free Vision Development Session </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">KIMI</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">Stripe</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">Shopify</span>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Services -->
+    <section class="py-24 px-6 bg-void border-t border-[#1a1a1a]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="mono text-3xl font-bold mb-4 uppercase tracking-tight">What We Offer</h2>
+                <p class="text-muted">Engineered for scalability. Drafted for success.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Prototype -->
+                <div class="bg-tactical border border-surface p-8 flex flex-col">
+                    <div class="mb-6">
+                        <h3 class="mono text-sm uppercase tracking-widest text-muted mb-2">Prototype</h3>
+                        <div class="mono text-2xl font-bold">Single Page Application</div>
+                    </div>
+                    <p class="text-muted mb-8 text-sm leading-relaxed">
+                        Built to draft ideas and assist clients seeking cost-effective solutions without compromising quality. Perfect for landing pages and high-impact marketing assets.
+                    </p>
+                    <ul class="space-y-3 mb-8 flex-grow">
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="text-accent mono">+</span>
+                            <span>Modern Cloud Deployment</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="text-accent mono">+</span>
+                            <span>Responsive Design</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="text-accent mono">+</span>
+                            <span>Speed Optimized</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-3 border border-surface mono text-xs uppercase tracking-widest hover:bg-signal hover:text-void transition-all">
+                        Select
+                    </button>
+                </div>
+
+                <!-- MVP -->
+                <div class="bg-tactical border border-accent p-8 flex flex-col relative">
+                    <div class="absolute top-0 right-0 popular-badge mono text-[10px] font-bold px-3 py-1 uppercase">
+                        Popular
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="mono text-sm uppercase tracking-widest text-muted mb-2">Most Popular</h3>
+                        <div class="mono text-2xl font-bold">The MVP Solution</div>
+                    </div>
+                    <p class="text-muted mb-8 text-sm leading-relaxed">
+                        Scale your business with an interactive cloud solution. Balanced approach between availability and flexibility.
+                    </p>
+                    <ul class="space-y-3 mb-8 flex-grow">
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="text-accent mono">+</span>
+                            <span>Custom Database Integration</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="text-accent mono">+</span>
+                            <span>Server Management Included</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="text-accent mono">+</span>
+                            <span>Interactive Dashboards</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-3 bg-signal text-void mono text-xs uppercase tracking-widest font-semibold hover:bg-accent transition-all">
+                        Select
+                    </button>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="bg-tactical border border-surface p-8 flex flex-col">
+                    <div class="mb-6">
+                        <h3 class="mono text-sm uppercase tracking-widest text-muted mb-2">Enterprise</h3>
+                        <div class="mono text-2xl font-bold">Big Data & AI</div>
+                    </div>
+                    <p class="text-muted mb-8 text-sm leading-relaxed">
+                        Tailored for comprehensive support and prioritized attention. We build custom dashboards and AI agentic solutions for workflow productivity.
+                    </p>
+                    <ul class="space-y-3 mb-8 flex-grow">
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="text-accent mono">+</span>
+                            <span>AI Agent Workflows</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="text-accent mono">+</span>
+                            <span>Full-time Engineering Focus</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="text-accent mono">+</span>
+                            <span>Custom Analytics Suites</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-3 border border-surface mono text-xs uppercase tracking-widest hover:bg-signal hover:text-void transition-all">
+                        Select
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Origin -->
+    <section id="origin" class="py-24 px-6 section-alt border-t border-[#1a1a1a]">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="mono text-3xl md:text-4xl font-bold mb-8 uppercase tracking-widest">Field-Tested for Black Owned Business</h2>
+            
+            <div class="h-px w-24 bg-accent mx-auto mb-8"></div>
+            
+            <p class="text-lg text-muted mb-6 leading-relaxed">
+                We didn't learn this in a garage. We learned it creating sites for clients, tutoring first, years of apprenticeship. We know what it takes to build a budget-conscious business from the ground up. <br>
+                <a href="https://www.tayloringraysofhope.com">Tayloring Rays of Hope 501(c)(3)</a> was our first AI integration. Seamless agent onboarding and content calibration. <br>Established: 2/1/2026
+            </p>
+            <h2 class="mono text-3xl md:text-4xl font-bold mb-8 uppercase tracking-widest">Battle-Tested for Fortune 500</h2>
+            <p class="text-lg text-muted mb-12 leading-relaxed">
+                Years inside the machine taught us what breaks, what scales, and what survives. Now we operate outside. We bring that enterprise-grade rigor to startups and founders who need systems built for endurance.
+            </p>
+            
+            <div class="mono text-xs text-muted space-y-2">
+                <p>// Black Business Background</p>
+                <p>// Enterprise Agility</p>
+                <p>// Built for Inevitability × Endurance</p>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="border-t border-neutral-800 px-6 py-6 mt-12">
-        <div class="flex justify-between items-center text-xs text-neutral-600">
-            <p>EST. 2025 // CLT</p>
-            <p>🌫️🌒</p>
+    <footer class="py-12 px-6 bg-void border-t border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="mono text-sm font-semibold">OUIRISE INITIATIVE</div>
+            
+            <div class="flex gap-6">
+                <a href="https://github.com/ouirise/ouirise.github.io" class="mono text-xs text-muted hover:text-signal transition-colors uppercase">GitHub</a>
+                <a href="#" class="mono text-xs text-muted hover:text-signal transition-colors uppercase">Upwork</a>
+                <a href="#" class="mono text-xs text-muted hover:text-signal transition-colors uppercase">Instagram</a>
+            </div>
+            
+            <div class="mono text-xs text-muted text-center md:text-right">
+                <p>// Built by 00 + Kimi-K2.5</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Flight data — swap to your images later
-        const flights = [
-            {
-                id: 1,
-                title: "Golden Hour Dive",
-                pilot: "0KK",
-                location: "Charlotte, NC",
-                date: "2025-02-20",
-                url: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&q=80",
-                tags: ["fpv", "sunset", "dive"]
-            },
-            {
-                id: 2,
-                title: "Urban Canyon Run",
-                pilot: "Twin",
-                location: "Uptown CLT",
-                date: "2025-02-18",
-                url: "https://images.unsplash.com/photo-1506947411487-a56738267384?w=800&q=80",
-                tags: ["freestyle", "city", "gap"]
-            },
-            {
-                id: 3,
-                title: "Lake Norman Survey",
-                pilot: "0KK",
-                location: "Lake Norman, NC",
-                date: "2025-02-15",
-                url: "https://images.unsplash.com/photo-1508614589041-895b8c9d7ef5?w=800&q=80",
-                tags: ["cinematic", "water", "smooth"]
-            },
-            {
-                id: 4,
-                title: "Rail Yard Low Pass",
-                pilot: "Twin",
-                location: "Industrial District",
-                date: "2025-02-12",
-                url: "https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=800&q=80",
-                tags: ["risky", "low", "technical"]
-            },
-            {
-                id: 5,
-                title: "Cloud Break",
-                pilot: "0KK",
-                location: "Cloud Village",
-                date: "2025-02-10",
-                url: "https://images.unsplash.com/photo-1534234828563-0252171880df?w=800&q=80",
-                tags: ["altitude", "clouds", "serenity"]
-            },
-            {
-                id: 6,
-                title: "Night Ops Test",
-                pilot: "Twin",
-                location: "Training Grounds",
-                date: "2025-02-08",
-                url: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80",
-                tags: ["night", "nv", "experimental"]
-            }
-        ];
-
-        // Render gallery
-        const gallery = document.getElementById('gallery');
-        
-        flights.forEach(flight => {
-            const card = document.createElement('div');
-            card.className = 'flight-card bg-neutral-900 overflow-hidden cursor-pointer group';
-            card.onclick = () => openLightbox(flight);
-            
-            card.innerHTML = `
-                <div class="relative aspect-video overflow-hidden">
-                    <img src="${flight.url}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div class="absolute bottom-2 left-2 text-xs tactical-gold opacity-0 group-hover:opacity-100 transition-opacity">
-                        <i class="fas fa-play-circle mr-1"></i> VIEW
-                    </div>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-bold text-sm mb-1">${flight.title}</h3>
-                    <div class="flex justify-between items-center text-xs text-neutral-500">
-                        <span>${flight.pilot}</span>
-                        <span>${flight.date}</span>
-                    </div>
-                    <div class="flex gap-2 mt-2">
-                        ${flight.tags.map(tag => `<span class="text-[10px] px-2 py-0.5 bg-neutral-800 text-neutral-400 rounded">${tag}</span>`).join('')}
-                    </div>
-                </div>
-            `;
-            
-            gallery.appendChild(card);
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
         });
 
-        // Lightbox functions
-        function openLightbox(flight) {
-            document.getElementById('lightbox-img').src = flight.url;
-            document.getElementById('lightbox-title').textContent = flight.title;
-            document.getElementById('lightbox-meta').textContent = `${flight.pilot} // ${flight.location} // ${flight.date}`;
-            document.getElementById('lightbox').classList.remove('hidden');
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.add('hidden');
-        }
-
-        // Close on background click
-        document.getElementById('lightbox').addEventListener('click', (e) => {
-            if (e.target.id === 'lightbox') closeLightbox();
+        // Lock animation trigger on load
+        window.addEventListener('load', () => {
+            document.querySelector('.lock-icon').style.opacity = '1';
         });
     </script>
 </body>
