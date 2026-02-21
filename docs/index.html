@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OUIRISE | Flight Logs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #e5e5e5;
+        }
+        
+        .tactical-gold { color: #f59e0b; }
+        .bg-tactical-gold { background: #f59e0b; }
+        
+        .flight-card {
+            transition: all 0.3s ease;
+            border: 1px solid #262626;
+        }
+        .flight-card:hover {
+            border-color: #f59e0b;
+            transform: translateY(-4px);
+        }
+        
+        .grain-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        
+        .access-granted {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .img-placeholder {
+            background: linear-gradient(145deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .img-placeholder::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.03) 50%, transparent 70%);
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="grain-overlay"></div>
+    
+    <!-- Header -->
+    <header class="border-b border-neutral-800 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 bg-tactical-gold rounded-sm flex items-center justify-center">
+                <i class="fas fa-drone text-black text-sm"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-lg tracking-tight">OUIRISE</h1>
+                <p class="text-xs text-neutral-500 uppercase tracking-widest">Flight Logs</p>
+            </div>
+        </div>
+        <nav class="hidden md:flex gap-6 text-sm">
+            <a href="#" class="tactical-gold">Gallery</a>
+            <a href="#" class="text-neutral-400 hover:text-white transition">Pilots</a>
+            <a href="#" class="text-neutral-400 hover:text-white transition">Equipment</a>
+            <a href="#" class="text-neutral-400 hover:text-white transition">Protocol</a>
+        </nav>
+        <div class="text-xs tactical-gold access-granted">
+            <i class="fas fa-satellite-dish mr-2"></i>ACCESS GRANTED
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="px-6 py-12 border-b border-neutral-800">
+        <div class="max-w-4xl">
+            <p class="text-neutral-500 text-sm mb-2 uppercase tracking-widest">// Field Reports</p>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">AERIAL <span class="tactical-gold">RECONNAISSANCE</span></h2>
+            <p class="text-neutral-400 max-w-xl">
+                Documented flights from the village hidden in the clouds. 
+                FPV operations, cinematic surveys, and tactical mapping.
+            </p>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <main class="px-6 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="gallery">
+            <!-- Images injected via JS -->
+        </div>
+    </main>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-2xl hover:text-amber-500 transition">
+            <i class="fas fa-times"></i>
+        </button>
+        <img id="lightbox-img" src="" class="max-w-full max-h-[90vh] object-contain border border-neutral-800">
+        <div class="absolute bottom-4 left-4 text-sm">
+            <p id="lightbox-title" class="font-bold tactical-gold"></p>
+            <p id="lightbox-meta" class="text-neutral-400 text-xs"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-neutral-800 px-6 py-6 mt-12">
+        <div class="flex justify-between items-center text-xs text-neutral-600">
+            <p>EST. 2025 // CLT</p>
+            <p>🌫️🌒</p>
+        </div>
+    </footer>
+
+    <script>
+        // Flight data — swap to your images later
+        const flights = [
+            {
+                id: 1,
+                title: "Golden Hour Dive",
+                pilot: "0KK",
+                location: "Charlotte, NC",
+                date: "2025-02-20",
+                url: "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=800&q=80",
+                tags: ["fpv", "sunset", "dive"]
+            },
+            {
+                id: 2,
+                title: "Urban Canyon Run",
+                pilot: "Twin",
+                location: "Uptown CLT",
+                date: "2025-02-18",
+                url: "https://images.unsplash.com/photo-1506947411487-a56738267384?w=800&q=80",
+                tags: ["freestyle", "city", "gap"]
+            },
+            {
+                id: 3,
+                title: "Lake Norman Survey",
+                pilot: "0KK",
+                location: "Lake Norman, NC",
+                date: "2025-02-15",
+                url: "https://images.unsplash.com/photo-1508614589041-895b8c9d7ef5?w=800&q=80",
+                tags: ["cinematic", "water", "smooth"]
+            },
+            {
+                id: 4,
+                title: "Rail Yard Low Pass",
+                pilot: "Twin",
+                location: "Industrial District",
+                date: "2025-02-12",
+                url: "https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=800&q=80",
+                tags: ["risky", "low", "technical"]
+            },
+            {
+                id: 5,
+                title: "Cloud Break",
+                pilot: "0KK",
+                location: "Cloud Village",
+                date: "2025-02-10",
+                url: "https://images.unsplash.com/photo-1534234828563-0252171880df?w=800&q=80",
+                tags: ["altitude", "clouds", "serenity"]
+            },
+            {
+                id: 6,
+                title: "Night Ops Test",
+                pilot: "Twin",
+                location: "Training Grounds",
+                date: "2025-02-08",
+                url: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80",
+                tags: ["night", "nv", "experimental"]
+            }
+        ];
+
+        // Render gallery
+        const gallery = document.getElementById('gallery');
+        
+        flights.forEach(flight => {
+            const card = document.createElement('div');
+            card.className = 'flight-card bg-neutral-900 overflow-hidden cursor-pointer group';
+            card.onclick = () => openLightbox(flight);
+            
+            card.innerHTML = `
+                <div class="relative aspect-video overflow-hidden">
+                    <img src="${flight.url}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="absolute bottom-2 left-2 text-xs tactical-gold opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="fas fa-play-circle mr-1"></i> VIEW
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-bold text-sm mb-1">${flight.title}</h3>
+                    <div class="flex justify-between items-center text-xs text-neutral-500">
+                        <span>${flight.pilot}</span>
+                        <span>${flight.date}</span>
+                    </div>
+                    <div class="flex gap-2 mt-2">
+                        ${flight.tags.map(tag => `<span class="text-[10px] px-2 py-0.5 bg-neutral-800 text-neutral-400 rounded">${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+            
+            gallery.appendChild(card);
+        });
+
+        // Lightbox functions
+        function openLightbox(flight) {
+            document.getElementById('lightbox-img').src = flight.url;
+            document.getElementById('lightbox-title').textContent = flight.title;
+            document.getElementById('lightbox-meta').textContent = `${flight.pilot} // ${flight.location} // ${flight.date}`;
+            document.getElementById('lightbox').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.add('hidden');
+        }
+
+        // Close on background click
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') closeLightbox();
+        });
+    </script>
+</body>
+</html>
