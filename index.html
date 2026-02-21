@@ -16,12 +16,34 @@
             --signal: #f5f5f5;
             --ghost: #666666;
             --accent: #ff6b00;
+            --dark: #0a0a0a;
+            --mid-dark: #151515;
+            --maroon: #800000;
+            --bright-maroon: #a50000;
+            --text-gray: #b0b0b0;
+            --white: #ffffff;
+            --tactical-border: 1px solid #333;
         }
         
         body {
-            font-family: 'Inter', sans-serif;
             background-color: var(--void);
             color: var(--signal);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Tactical Background Grid */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(128, 0, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(128, 0, 0, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
         }
         
         .mono {
@@ -42,7 +64,7 @@
             pointer-events: none;
             z-index: 50;
             opacity: 0.03;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg '%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
         
         .lock-icon {
@@ -133,57 +155,118 @@
         .section-alt {
             background-color: #0d0d0d;
         }
+
+        /* Mobile menu animation */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(100%);
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
     </style>
 </head>
 <body class="grain bg-void text-signal antialiased">
     <!-- Header -->
-<header class="fixed top-0 w-full z-40 bg-void/80 backdrop-blur-md border-b border-[#1a1a1a]">
-    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <div class="mono text-lg font-semibold tracking-tight">OuiRise</div>
-        <nav class="hidden md:flex items-center gap-8 mono text-xs uppercase tracking-wider justify-end">
-            <a href="#deployments" class="hover:text-accent transition-colors">Deployments</a>
-            <a href="#origin" class="hover:text-accent transition-colors">Origin</a>
-            <a href="#access" class="hover:text-accent transition-colors">Access</a>
-        </nav>
-    </div>
-</header>
+    <header class="fixed top-0 w-full z-40 bg-void/95 backdrop-blur-md border-b border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+            <div class="mono text-base md:text-lg font-semibold tracking-tight">OUIRISE INITIATIVE</div>
+            
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8 mono text-xs uppercase tracking-wider">
+                <a href="#deployments" class="hover:text-accent transition-colors">Deployments</a>
+                <a href="#origin" class="hover:text-accent transition-colors">Origin</a>
+                <a href="#access" class="hover:text-accent transition-colors">Access</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden mono text-xs uppercase tracking-wider p-2 border border-surface hover:bg-surface transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed top-16 right-0 w-full md:w-80 h-[calc(100vh-4rem)] bg-tactical border-l border-surface p-6 md:hidden">
+            <nav class="flex flex-col gap-6 mono text-sm uppercase tracking-wider">
+                <a href="#deployments" class="hover:text-accent transition-colors py-2 border-b border-surface">Deployments</a>
+                <a href="#origin" class="hover:text-accent transition-colors py-2 border-b border-surface">Origin</a>
+                <a href="#access" class="hover:text-accent transition-colors py-2 border-b border-surface">Access</a>
+            </nav>
+            <div class="mt-8 mono text-xs text-muted">
+                <p>// Mobile Interface</p>
+                <p>// v2.6.7 responsive</p>
+            </div>
+        </div>
+    </header>
 
     <!-- Hero -->
-    <section class="min-h-screen flex flex-col items-center justify-center px-6 pt-16 relative overflow-hidden">
+    <section class="min-h-screen flex flex-col items-center justify-center px-4 md:px-6 pt-20 md:pt-16 relative overflow-hidden">
         <div class="max-w-3xl mx-auto text-center">
-            <div class="mb-8 flex justify-center">
-                <svg class="lock-icon w-16 h-16 text-signal" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <div class="mb-6 md:mb-8 flex justify-center">
+                <svg class="lock-icon w-12 h-12 md:w-16 md:h-16 text-signal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                 </svg>
             </div>
             
-            <h1 class="mono text-4xl md:text-6xl font-bold mb-6 tracking-tight fade-in">ACCESS GRANTED</h1>
+            <h1 class="mono text-3xl md:text-6xl font-bold mb-4 md:mb-6 tracking-tight fade-in">ACCESS GRANTED</h1>
             
-            <div class="h-px w-32 bg-signal mx-auto mb-8 fade-in"></div>
+            <div class="h-px w-24 md:w-32 bg-signal mx-auto mb-6 md:mb-8 fade-in"></div>
             
-            <p class="text-lg md:text-xl text-muted mb-4 max-w-2xl mx-auto leading-relaxed fade-in">
+            <p class="text-base md:text-xl text-muted mb-4 max-w-2xl mx-auto leading-relaxed px-2 md:px-0 fade-in">
                 We bridge startup vision and enterprise-grade reality through agentic workflows and modern cloud architecture.
             </p>
-            <p class="text-lg text-muted mb-12 fade-in">Built for endurance. Field-tested in CLT.</p>
+            <p class="text-base md:text-lg text-muted mb-8 md:mb-12 fade-in">Built for endurance. Field-tested in CLT.</p>
             
-            <button class="mono text-sm uppercase tracking-widest px-8 py-4 border border-signal hover:bg-signal hover:text-void transition-all duration-200 fade-in">
+            <button class="mono text-xs md:text-sm uppercase tracking-widest px-6 md:px-8 py-3 md:py-4 border border-signal hover:bg-signal hover:text-void transition-all duration-200 fade-in w-full md:w-auto">
                 Initiate Project
             </button>
         </div>
     </section>
 
+    <!-- About Section - Fixed -->
+    <section class="py-12 md:py-24 px-4 md:px-6 border-t border-[#1a1a1a]" id="about">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-8 md:gap-24">
+            <div class="w-full md:w-1/2">
+                <h2 class="text-lg md:text-xl mb-4 md:mb-6 mono">BLACK OWNED. <span class="text-[#a50000]">PURPOSE DRIVEN.</span></h2>
+                <img src="images/ouirise.webp" alt="OUIRISE" class="w-full h-auto max-w-md mx-auto md:mx-0 border border-surface">
+            </div>
+            <div class="flex flex-col justify-center gap-4 w-full md:w-1/2 pt-4 md:pt-16">
+                <p class="text-sm md:text-base">We are a tactical response to mainstream data extraction architecture.</p>
+                <p class="text-sm md:text-base font-semibold">Yes, OUI.</p>
+                <div class="text-sm md:text-base space-y-2">
+                    <p>We are researchers merging:</p>
+                    <ul class="list-disc list-inside pl-2 space-y-1 text-muted text-xs md:text-sm">
+                        <li>technical mastery of informational security</li>
+                        <li>creative scroll-stopping solutions</li>
+                        <li>psychology of business</li>
+                    </ul>
+                </div>
+                <div class="mono text-xs space-y-1 mt-4 text-muted">
+                    <p>// CODENAME: 8K.0</p>
+                    <p>// OPERATIONAL SYSTEMS STRATEGIST</p>
+                    <p>// EXPANDING CURIOSITY SINCE 2019</p>
+                    <p>// Artificial Understanding = AU</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Deployments -->
-    <section id="deployments" class="py-24 px-6 bg-void">
+    <section id="deployments" class="py-16 md:py-24 px-4 md:px-6 bg-void border-t border-[#1a1a1a]">
         <div class="max-w-7xl mx-auto">
-            <div class="mono text-xl text-center text-muted mb-12 uppercase tracking-widest">CULTURAL INTERSECTIONALITY × ART + SCIENCE + BUSINESS</div>
+            <div class="mono text-sm md:text-xl text-center text-muted mb-8 md:mb-12 uppercase tracking-widest px-2">
+                CULTURAL INTERSECTIONALITY × SCIENCE + ART + BUSINESS
+            </div>
             
-            <div class="grid md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                 <!-- TroH -->
-                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover group cursor-pointer">
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-4 md:p-6 card-hover group cursor-pointer">
                     <div class="aspect-video bg-surface mb-4 overflow-hidden">
                         <div class="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 group-hover:scale-105 transition-transform duration-500"></div>
                     </div>
-                    <h3 class="mono text-lg font-semibold mb-2 uppercase tracking-tight">TROH INITIALIZATION</h3>
+                    <h3 class="mono text-base md:text-lg font-semibold mb-2 uppercase tracking-tight">You + RISE INITIALIZATION</h3>
                     <div class="space-y-1 mono text-xs text-muted mb-4">
                         <p>// Site Migration</p>
                         <p>// Multi-Platform System Design</p>
@@ -191,42 +274,42 @@
                     </div>
                     <div class="flex flex-wrap gap-2 mt-4">
                         <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">Vercel</span>
-                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">MongoDB</span>
-                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">CloudFlare</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">Supabase</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">DNS</span>
                     </div>
                 </div>
 
                 <!-- Fragrant Flowers -->
-                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover group cursor-pointer">
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-4 md:p-6 card-hover group cursor-pointer">
                     <div class="aspect-video bg-surface mb-4 overflow-hidden">
                         <div class="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 group-hover:scale-105 transition-transform duration-500"></div>
                     </div>
-                    <h3 class="mono text-lg font-semibold mb-2 uppercase tracking-tight">FLIGHT LOGS</h3>
+                    <h3 class="mono text-base md:text-lg font-semibold mb-2 uppercase tracking-tight">DATA BRIDGE</h3>
                     <div class="space-y-1 mono text-xs text-muted mb-4">
                         <p>// Custom CMS Platform</p>
                         <p>// Multi-Storage System</p>
                         <p>// Documentation Automation</p>
                     </div>
                     <div class="flex flex-wrap gap-2 mt-4">
-                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">React</span>
-                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">HLS.js</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">SQL</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">R2</span>
                         <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">MongoDB</span>
                     </div>
                 </div>
 
                 <!-- Qamaria -->
-                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover group cursor-pointer">
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-4 md:p-6 card-hover group cursor-pointer">
                     <div class="aspect-video bg-surface mb-4 overflow-hidden">
                         <div class="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 group-hover:scale-105 transition-transform duration-500"></div>
                     </div>
-                    <h3 class="mono text-lg font-semibold mb-2 uppercase tracking-tight">Business Automations</h3>
+                    <h3 class="mono text-base md:text-lg font-semibold mb-2 uppercase tracking-tight">Business Automations</h3>
                     <div class="space-y-1 mono text-xs text-muted mb-4">
                         <p>// E-commerce Integration</p>
                         <p>// Content Writing</p>
-                        <p>// Free Vision Development Session </p>
+                        <p>// Free Vision Development Session</p>
                     </div>
                     <div class="flex flex-wrap gap-2 mt-4">
-                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">KIMI</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">Kimi-K2.5</span>
                         <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">Stripe</span>
                         <span class="mono text-[10px] bg-surface px-2 py-1 text-muted">Shopify</span>
                     </div>
@@ -236,33 +319,33 @@
     </section>
 
     <!-- Services -->
-    <section class="py-24 px-6 bg-void border-t border-[#1a1a1a]">
+    <section id="access" class="py-16 md:py-24 px-4 md:px-6 bg-void border-t border-[#1a1a1a]">
         <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="mono text-3xl font-bold mb-4 uppercase tracking-tight">What We Offer</h2>
-                <p class="text-muted">Engineered for scalability. Drafted for success.</p>
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="mono text-2xl md:text-3xl font-bold mb-4 uppercase tracking-tight">What We Offer</h2>
+                <p class="text-muted text-sm md:text-base">Engineered for scalability. Drafted for success.</p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                 <!-- Prototype -->
-                <div class="bg-tactical border border-surface p-8 flex flex-col">
+                <div class="bg-tactical border border-surface p-6 md:p-8 flex flex-col">
                     <div class="mb-6">
-                        <h3 class="mono text-sm uppercase tracking-widest text-muted mb-2">Prototype</h3>
-                        <div class="mono text-2xl font-bold">Single Page Application</div>
+                        <h3 class="mono text-xs uppercase tracking-widest text-muted mb-2">Prototype</h3>
+                        <div class="mono text-xl md:text-2xl font-bold">Single Page Application</div>
                     </div>
-                    <p class="text-muted mb-8 text-sm leading-relaxed">
+                    <p class="text-muted mb-8 text-xs md:text-sm leading-relaxed">
                         Built to draft ideas and assist clients seeking cost-effective solutions without compromising quality. Perfect for landing pages and high-impact marketing assets.
                     </p>
-                    <ul class="space-y-3 mb-8 flex-grow">
-                        <li class="flex items-center gap-3 text-sm">
+                    <ul class="space-y-3 mb-8 flex-grow text-xs md:text-sm">
+                        <li class="flex items-center gap-3">
                             <span class="text-accent mono">+</span>
                             <span>Modern Cloud Deployment</span>
                         </li>
-                        <li class="flex items-center gap-3 text-sm">
+                        <li class="flex items-center gap-3">
                             <span class="text-accent mono">+</span>
                             <span>Responsive Design</span>
                         </li>
-                        <li class="flex items-center gap-3 text-sm">
+                        <li class="flex items-center gap-3">
                             <span class="text-accent mono">+</span>
                             <span>Speed Optimized</span>
                         </li>
@@ -273,27 +356,27 @@
                 </div>
 
                 <!-- MVP -->
-                <div class="bg-tactical border border-accent p-8 flex flex-col relative">
+                <div class="bg-tactical border border-accent p-6 md:p-8 flex flex-col relative">
                     <div class="absolute top-0 right-0 popular-badge mono text-[10px] font-bold px-3 py-1 uppercase">
                         Popular
                     </div>
                     <div class="mb-6">
-                        <h3 class="mono text-sm uppercase tracking-widest text-muted mb-2">Most Popular</h3>
-                        <div class="mono text-2xl font-bold">The MVP Solution</div>
+                        <h3 class="mono text-xs uppercase tracking-widest text-muted mb-2">Most Popular</h3>
+                        <div class="mono text-xl md:text-2xl font-bold">The MVP Solution</div>
                     </div>
-                    <p class="text-muted mb-8 text-sm leading-relaxed">
+                    <p class="text-muted mb-8 text-xs md:text-sm leading-relaxed">
                         Scale your business with an interactive cloud solution. Balanced approach between availability and flexibility.
                     </p>
-                    <ul class="space-y-3 mb-8 flex-grow">
-                        <li class="flex items-center gap-3 text-sm">
+                    <ul class="space-y-3 mb-8 flex-grow text-xs md:text-sm">
+                        <li class="flex items-center gap-3">
                             <span class="text-accent mono">+</span>
                             <span>Custom Database Integration</span>
                         </li>
-                        <li class="flex items-center gap-3 text-sm">
+                        <li class="flex items-center gap-3">
                             <span class="text-accent mono">+</span>
                             <span>Server Management Included</span>
                         </li>
-                        <li class="flex items-center gap-3 text-sm">
+                        <li class="flex items-center gap-3">
                             <span class="text-accent mono">+</span>
                             <span>Interactive Dashboards</span>
                         </li>
@@ -304,24 +387,24 @@
                 </div>
 
                 <!-- Enterprise -->
-                <div class="bg-tactical border border-surface p-8 flex flex-col">
+                <div class="bg-tactical border border-surface p-6 md:p-8 flex flex-col">
                     <div class="mb-6">
-                        <h3 class="mono text-sm uppercase tracking-widest text-muted mb-2">Enterprise</h3>
-                        <div class="mono text-2xl font-bold">Big Data & AI</div>
+                        <h3 class="mono text-xs uppercase tracking-widest text-muted mb-2">Enterprise</h3>
+                        <div class="mono text-xl md:text-2xl font-bold">Big Data & AI</div>
                     </div>
-                    <p class="text-muted mb-8 text-sm leading-relaxed">
+                    <p class="text-muted mb-8 text-xs md:text-sm leading-relaxed">
                         Tailored for comprehensive support and prioritized attention. We build custom dashboards and AI agentic solutions for workflow productivity.
                     </p>
-                    <ul class="space-y-3 mb-8 flex-grow">
-                        <li class="flex items-center gap-3 text-sm">
+                    <ul class="space-y-3 mb-8 flex-grow text-xs md:text-sm">
+                        <li class="flex items-center gap-3">
                             <span class="text-accent mono">+</span>
                             <span>AI Agent Workflows</span>
                         </li>
-                        <li class="flex items-center gap-3 text-sm">
+                        <li class="flex items-center gap-3">
                             <span class="text-accent mono">+</span>
                             <span>Full-time Engineering Focus</span>
                         </li>
-                        <li class="flex items-center gap-3 text-sm">
+                        <li class="flex items-center gap-3">
                             <span class="text-accent mono">+</span>
                             <span>Custom Analytics Suites</span>
                         </li>
@@ -335,18 +418,20 @@
     </section>
 
     <!-- Origin -->
-    <section id="origin" class="py-24 px-6 section-alt border-t border-[#1a1a1a]">
+    <section id="origin" class="py-16 md:py-24 px-4 md:px-6 section-alt border-t border-[#1a1a1a]">
         <div class="max-w-3xl mx-auto">
-            <h2 class="mono text-3xl md:text-4xl font-bold mb-8 uppercase tracking-widest">Field-Tested for Black Owned Business</h2>
+            <h2 class="mono text-2xl md:text-4xl font-bold mb-6 md:mb-8 uppercase tracking-widest leading-tight">Field-Tested for Black Owned Business</h2>
             
-            <div class="h-px w-24 bg-accent mx-auto mb-8"></div>
+            <div class="h-px w-24 bg-accent mb-6 md:mb-8"></div>
             
-            <p class="text-lg text-muted mb-6 leading-relaxed">
-                We didn't learn this in a garage. We learned it creating sites for clients, tutoring first, years of apprenticeship. We know what it takes to build a budget-conscious business from the ground up. <br>
-                <a href="https://www.tayloringraysofhope.com">Tayloring Rays of Hope 501(c)(3)</a> was our first AI integration. Seamless agent onboarding and content calibration. <br>Established: 2/1/2026
+            <p class="text-sm md:text-lg text-muted mb-6 leading-relaxed">
+                We didn't learn this in a garage. We learned it creating sites for clients, tutoring first, years of apprenticeship. We know what it takes to build a budget-conscious business from the ground up. <br><br>
+                <a href="https://www.tayloringraysofhope.com" class="text-accent hover:underline break-all">Tayloring Rays of Hope 501(c)(3)</a> was our first AI integration. Seamless agent onboarding and content calibration. <br>
+                <span class="mono text-xs mt-2 block">Established: 2/1/2026</span>
             </p>
-            <h2 class="mono text-3xl md:text-4xl font-bold mb-8 uppercase tracking-widest">Battle-Tested for Fortune 500</h2>
-            <p class="text-lg text-muted mb-12 leading-relaxed">
+            
+            <h2 class="mono text-2xl md:text-4xl font-bold mb-6 md:mb-8 uppercase tracking-widest leading-tight mt-12">Battle-Tested for Fortune 500</h2>
+            <p class="text-sm md:text-lg text-muted mb-8 md:mb-12 leading-relaxed">
                 Years inside the machine taught us what breaks, what scales, and what survives. Now we operate outside. We bring that enterprise-grade rigor to startups and founders who need systems built for endurance.
             </p>
             
@@ -359,17 +444,17 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 bg-void border-t border-[#1a1a1a]">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="mono text-sm font-semibold">OUIRISE INITIATIVE</div>
+    <footer class="py-8 md:py-12 px-4 md:px-6 bg-void border-t border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6">
+            <div class="mono text-sm font-semibold order-1">OUIRISE INITIATIVE</div>
             
-            <div class="flex gap-6">
+            <div class="flex gap-4 md:gap-6 order-3 md:order-2">
                 <a href="https://github.com/ouirise/ouirise.github.io" class="mono text-xs text-muted hover:text-signal transition-colors uppercase">GitHub</a>
                 <a href="#" class="mono text-xs text-muted hover:text-signal transition-colors uppercase">Upwork</a>
                 <a href="#" class="mono text-xs text-muted hover:text-signal transition-colors uppercase">Instagram</a>
             </div>
             
-            <div class="mono text-xs text-muted text-center md:text-right">
+            <div class="mono text-xs text-muted text-center md:text-right order-2 md:order-3">
                 <p>// Built by 00 + Kimi-K2.5</p>
             </div>
         </div>
@@ -383,8 +468,18 @@
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.remove('open');
                 }
             });
+        });
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
         });
 
         // Lock animation trigger on load
