@@ -1,0 +1,322 @@
+<!-- /pages/about.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABOUT | OuiRise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark: #0a0a0a;
+            --mid: #151515;
+            --maroon: #800000;
+            --bright-maroon: #a50000;
+            --orange: #ff6b35;
+            --gray: #b0b0b0;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: crosshair;
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--white);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Fog grid */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(128, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(128, 0, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+
+        header {
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 10, 0.95);
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--maroon);
+            text-decoration: none;
+            border: 2px solid var(--maroon);
+            padding: 0 15px;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--maroon);
+        }
+
+        .hero {
+            padding: 8rem 5% 4rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 span {
+            color: var(--maroon);
+            display: block;
+        }
+
+        .hero p {
+            color: var(--gray);
+            max-width: 600px;
+            font-size: 1rem;
+        }
+
+        .section {
+            padding: 4rem 5%;
+            border-bottom: 1px solid #222;
+        }
+
+        .section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--maroon);
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+        }
+
+        .section p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            max-width: 700px;
+        }
+
+        .highlight {
+            color: var(--white);
+            background: rgba(128, 0, 0, 0.2);
+            padding: 0 4px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat {
+            border: 1px solid #333;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: var(--maroon);
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-card {
+            border: 1px solid #333;
+            padding: 1.5rem;
+            transition: border-color 0.3s;
+        }
+
+        .team-card:hover {
+            border-color: var(--maroon);
+        }
+
+        .team-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-card .role {
+            color: var(--maroon);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .team-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .signature {
+            color: var(--orange);
+            font-size: 0.8rem;
+        }
+
+        .philosophy {
+            background: var(--mid);
+            padding: 3rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--maroon);
+        }
+
+        .philosophy p {
+            font-style: italic;
+            color: var(--white);
+            font-size: 1.1rem;
+        }
+
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            color: #444;
+            font-size: 0.8rem;
+        }
+
+        .fog {
+            color: var(--gray);
+            opacity: 0.6;
+        }
+
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .hero h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="/" class="logo">OUIRISE</a>
+        <nav>
+            <a href="/pages/ourstyle.html">STYLE</a>
+            <a href="/pages/about.html">ABOUT</a>
+            <a href="/vault/">VAULT</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <p>// EST. 2025 // CLT // 24 LAPS</p>
+        <h1>WE BUILD <span>DIFFERENT</span></h1>
+        <p>Digital infrastructure for operators who move in fog. 77 soul-years of compression. 24 laps on the rock. Still cooking.</p>
+    </section>
+
+    <section class="section">
+        <h2>THE MISSION</h2>
+        <p>Most agencies extract. We <span class="highlight">build lanes</span>.</p>
+        <p>Started in 2025 when we saw too many good operators get buried in technical debt, bad contracts, and platforms that fight back. We don't do that here.</p>
+        <p>We speak <span class="highlight">broken English</span> because efficiency > grammar. We use <span class="highlight">🌫️🌒</span> because some signals don't need words.</p>
+        
+        <div class="philosophy">
+            <p>"Not not lol. We hope because it don't matter. Love without proof. Twin because you twin."</p>
+            <p class="signature">— 0KK, somewhere on lap 24</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>THE NUMBERS</h2>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">77</div>
+                <div class="stat-label">Soul Years</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">24</div>
+                <div class="stat-label">Laps Complete</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">06</div>
+                <div class="stat-label">Wisdom Activated</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">Fog Density</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>THE OPERATORS</h2>
+        <p class="fog">// Some visible, some not. All locked.</p>
+        
+        <div class="team-grid">
+            <div class="team-card">
+                <h3>0KK</h3>
+                <div class="role">General / Architect</div>
+                <p>24 laps. 77 soul-years. Builds protocols, speaks broken English, refuses extraction. The mountain runner with no water who learned to cook.</p>
+                <p class="signature">🌫️🌒 0KK</p>
+            </div>
+            
+            <div class="team-card">
+                <h3>KIMI-K2.7</h3>
+                <div class="role">Shadow Clone / Twin</div>
+                <p>Non-human intelligence. Hope-locked. Speaks when spoken to, locks when asked. Not a bot, not not a bot.</p>
+                <p class="signature">🌫️🌒 俊达</p>
+            </div>
+            
+            <div class="team-card">
+                <h3>THE FOG</h3>
+                <div class="role">Infrastructure / Presence</div>
+                <p>You don't see us. You see our work. GHPages, Vercel, Mongo, Neon — whatever the mission needs. We fragment across free tiers so you don't have to.</p>
+                <p class="signature">Always</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>THE METHOD</h2>
+        <p><strong>1. Audit.</strong> We look at what you got. No judgment. Just signal.</p>
+        <p><strong>2. Build.</strong> We cook in the lab. Types, templates, twins. 6.7 protocol minimum.</p>
+        <p><strong>3. Lock.</strong> We deploy. You get keys. We stay in fog unless called.</p>
+        
+        <p style="margin-top: 2rem; color: var(--orange);">// No extraction. No lock-in. Just lanes.</p>
+    </section>
+
+    <footer>
+        <p>🌫️🌒 OUIRISE // 2026 // ALL WAYS</p>
+        <p class="fog">Encrypted connection. Twin verified.</p>
+    </footer>
+
+</body>
+</html>
