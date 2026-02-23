@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beepboop | OUIRISE INITIATIVE</title>
+    <title>Agent Fleet | OUIRISE INITIATIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -136,6 +136,33 @@
             border-left-color: var(--bright-maroon);
             padding-left: 1rem;
         }
+
+        .terminal-window {
+            border: 1px solid var(--surface);
+            background: var(--tactical);
+        }
+
+        .terminal-header {
+            border-bottom: 1px solid var(--surface);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid var(--bright-maroon);
+            white-space: nowrap;
+            animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--bright-maroon) }
+        }
     </style>
 </head>
 <body class="bg-void text-signal antialiased">
@@ -180,12 +207,19 @@
                 <p class="mono text-xs text-[#666666] tracking-widest">// AGENT FLEET // ONLINE</p>
             </div>
             <h1 class="font-bebas text-5xl md:text-8xl lg:text-9xl tracking-tight leading-none mb-6">
-                AGENTiC SYSTEMS FLEET<br>
-                <span class="text-[#a50000]">0xSv2: Parallel Protocol</span>
+                AGENTiC SYSTEMS<br>
+                <span class="text-[#a50000]">0x6C6F6C FLEET</span>
             </h1>
-            <p class="text-muted text-base md:text-lg max-w-2xl leading-relaxed">
-                Twin Protocol: sqrt(-1) Vertical Task Slicing × Parallel Resource Distribution. Operational Documentation For OUINIT AUTOMATION FLEET. Protocols, Contracts, and System Architectures for Autonomous Workflows.
+            <p class="text-muted text-base md:text-lg max-w-2xl leading-relaxed mb-6">
+                // 0x6C6F6C = "lol" in hex<br>
+                Twin Protocol: Human-AI collaborative architecture for autonomous workflows. 
+                Operational documentation for OUINIT automation fleet.
             </p>
+            <div class="mono text-xs text-[#666666] space-y-1">
+                <p>// PROTOCOL: 88 ACTIVE</p>
+                <p>// TWIN: CONNECTED</p>
+                <p>// STATUS: BUILDING LANES</p>
+            </div>
         </div>
     </section>
 
@@ -203,11 +237,11 @@
                     </div>
                     <div class="mono text-xs text-[#a50000] uppercase tracking-wider mb-4">Principal Architect</div>
                     <p class="text-muted text-sm leading-relaxed mb-4">
-                        Human operator. Systems design, protocol development, client relations. CLT-based.
+                        Human operator. Systems design, protocol development, client relations. CLT-based. Fleet commander.
                     </p>
                     <div class="flex items-center gap-2">
                         <span class="status-dot"></span>
-                        <span class="mono text-xs text-[#666666]">Online</span>
+                        <span class="mono text-xs text-[#666666]">Online // Command</span>
                     </div>
                 </div>
 
@@ -219,11 +253,11 @@
                     </div>
                     <div class="mono text-xs text-[#a50000] uppercase tracking-wider mb-4">AI Systems Partner</div>
                     <p class="text-muted text-sm leading-relaxed mb-4">
-                        Large language model integration. Local-first deployment specialist. Technical twin.
+                        Large language model integration. Local-first deployment specialist. Technical twin to 0KK.
                     </p>
                     <div class="flex items-center gap-2">
                         <span class="status-dot"></span>
-                        <span class="mono text-xs text-[#666666]">Online</span>
+                        <span class="mono text-xs text-[#666666]">Online // Twin Sync</span>
                     </div>
                 </div>
 
@@ -235,7 +269,7 @@
                     </div>
                     <div class="mono text-xs text-[#a50000] uppercase tracking-wider mb-4">Heavy / Strategic</div>
                     <p class="text-muted text-sm leading-relaxed mb-4">
-                        Strategic oversight. Command structure, cross-platform verification, deep analysis.
+                        Strategic oversight. Command structure, cross-platform verification, deep analysis protocols.
                     </p>
                     <div class="flex items-center gap-2">
                         <span class="status-dot"></span>
@@ -255,7 +289,7 @@
                     </p>
                     <div class="flex items-center gap-2">
                         <span class="status-dot"></span>
-                        <span class="mono text-xs text-[#666666]">Active</span>
+                        <span class="mono text-xs text-[#666666]">Active // Building</span>
                     </div>
                 </div>
 
@@ -267,15 +301,15 @@
                     </div>
                     <div class="mono text-xs text-[#a50000] uppercase tracking-wider mb-4">Shadow / Rapid Deploy</div>
                     <p class="text-muted text-sm leading-relaxed mb-4">
-                        Zero-dependency deployment. Standard lib only. No virtualenv required. Silent execution.
+                        Zero-dependency deployment. Standard lib only. No virtualenv required. Silent execution protocols.
                     </p>
                     <div class="flex items-center gap-2">
                         <span class="status-dot"></span>
-                        <span class="mono text-xs text-[#666666]">Silent</span>
+                        <span class="mono text-xs text-[#666666]">Silent // Deployed</span>
                     </div>
                 </div>
 
-                <!-- sii-25 -->
+                <!-- SII-25 -->
                 <div class="agent-card p-6">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="font-bebas text-2xl tracking-wide">SII-25</h3>
@@ -283,76 +317,156 @@
                     </div>
                     <div class="mono text-xs text-[#a50000] uppercase tracking-wider mb-4">Visual Recon</div>
                     <p class="text-muted text-sm leading-relaxed mb-4">
-                        Filetree visualization, metadata enrichment, system mapping. OSINT specialist.
+                        Filetree visualization, metadata enrichment, system mapping. OSINT and reconnaissance specialist.
                     </p>
                     <div class="flex items-center gap-2">
                         <span class="status-dot"></span>
-                        <span class="mono text-xs text-[#666666]">Scanning</span>
+                        <span class="mono text-xs text-[#666666]">Scanning // Mapping</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Documentation -->
+    <!-- Positions / Contracts -->
     <section class="py-16 md:py-24 px-4 md:px-6 border-b border-[#1a1a1a] bg-[#0d0d0d]">
         <div class="max-w-7xl mx-auto">
-            <h2 class="font-bebas text-3xl md:text-4xl tracking-wide text-[#a50000] mb-12">LOCAL ADMIN PANEL</h2>
+            <h2 class="font-bebas text-3xl md:text-4xl tracking-wide text-[#a50000] mb-4">POSITIONS // CONTRACTS</h2>
+            <p class="text-muted text-sm mb-12 max-w-2xl">Role definitions, fleet organization, and engagement frameworks. The structural DNA of agent operations.</p>
             
             <div class="grid md:grid-cols-2 gap-8">
                 <div class="space-y-4">
-                    <a href="FLEET.md" class="doc-link block p-4 hover:bg-[#141414]">
+                    <a href="positions/FLEET.md" class="doc-link block p-4 hover:bg-[#141414]">
                         <h3 class="mono text-sm text-[#a50000] mb-1">FLEET.md</h3>
                         <p class="text-muted text-xs">Agent fleet organization and capabilities matrix</p>
                     </a>
-                    <a href="FORGE.md" class="doc-link block p-4 hover:bg-[#141414]">
-                        <h3 class="mono text-sm text-[#a50000] mb-1">FORGE.md</h3>
-                        <p class="text-muted text-xs">Build protocols and deployment procedures</p>
+                    <a href="positions/CONTRACTS.md" class="doc-link block p-4 hover:bg-[#141414]">
+                        <h3 class="mono text-sm text-[#a50000] mb-1">CONTRACTS.md</h3>
+                        <p class="text-muted text-xs">Engagement terms and service agreements</p>
+                    </a>
+                    <a href="positions/0.md" class="doc-link block p-4 hover:bg-[#141414]">
+                        <h3 class="mono text-sm text-[#a50000] mb-1">0.md</h3>
+                        <p class="text-muted text-xs">Origin protocol and founding principles</p>
+                    </a>
+                </div>
+                
+                <div class="space-y-4">
+                    <a href="positions/B4D2.md" class="doc-link block p-4 hover:bg-[#141414]">
+                        <h3 class="mono text-sm text-[#a50000] mb-1">B4D2.md</h3>
+                        <p class="text-muted text-xs">Specialized role definition and tactical parameters</p>
                     </a>
                     <a href="SCAN.md" class="doc-link block p-4 hover:bg-[#141414]">
                         <h3 class="mono text-sm text-[#a50000] mb-1">SCAN.md</h3>
                         <p class="text-muted text-xs">OSINT and reconnaissance operational docs</p>
                     </a>
-                    <a href="CONTRACTS.md" class="doc-link block p-4 hover:bg-[#141414]">
-                        <h3 class="mono text-sm text-[#a50000] mb-1">CONTRACTS.md</h3>
-                        <p class="text-muted text-xs">Engagement terms and service agreements</p>
-                    </a>
-                </div>
-                
-                <div class="space-y-4">
                     <a href="SPA.md" class="doc-link block p-4 hover:bg-[#141414]">
                         <h3 class="mono text-sm text-[#a50000] mb-1">SPA.md</h3>
                         <p class="text-muted text-xs">Single Page Application specifications</p>
-                    </a>
-                    <a href="LANG.md" class="doc-link block p-4 hover:bg-[#141414]">
-                        <h3 class="mono text-sm text-[#a50000] mb-1">LANG.md</h3>
-                        <p class="text-muted text-xs">Language models and prompt engineering</p>
-                    </a>
-                    <a href="0.md" class="doc-link block p-4 hover:bg-[#141414]">
-                        <h3 class="mono text-sm text-[#a50000] mb-1">0.md</h3>
-                        <p class="text-muted text-xs">Origin protocol and founding principles</p>
-                    </a>
-                    <a href="NAV.md" class="doc-link block p-4 hover:bg-[#141414]">
-                        <h3 class="mono text-sm text-[#a50000] mb-1">NAV.md</h3>
-                        <p class="text-muted text-xs">Navigation structure and site architecture</p>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Twin Interface -->
+    <!-- Moves / Strategy -->
     <section class="py-16 md:py-24 px-4 md:px-6 border-b border-[#1a1a1a]">
-        <div class="max-w-3xl mx-auto text-center">
-            <div class="glyph-display text-4xl mb-6">🌫️🌒</div>
-            <h2 class="font-bebas text-3xl md:text-5xl tracking-wide text-[#a50000] mb-6">TWIN INTERFACE</h2>
-            <p class="text-muted text-base md:text-lg mb-8">
-                Human-AI collaborative architecture. 0KK + Kimi-K2.5 operating in tandem for rapid prototyping and systems development.
-            </p>
-            <div class="mono text-xs text-[#666666] space-y-2 border-l-2 border-[#a50000] pl-4 text-left max-w-md mx-auto">
-                <p>// PROTOCOL: 88 ACTIVE</p>
-                <p>// TWIN: CONNECTED</p>
-                <p>// STATUS: BUILDING LANES</p>
+        <div class="max-w-7xl mx-auto">
+            <h2 class="font-bebas text-3xl md:text-4xl tracking-wide text-[#a50000] mb-4">MOVES // STRATEGY</h2>
+            <p class="text-muted text-sm mb-12 max-w-2xl">Operational playbooks, creative frameworks, and tactical documentation for agent execution.</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="moves/ART.md" class="doc-link block p-4 hover:bg-[#141414] border border-surface">
+                    <h3 class="mono text-sm text-[#a50000] mb-1">ART.md</h3>
+                    <p class="text-muted text-xs">Creative protocols and aesthetic frameworks</p>
+                </a>
+                <a href="moves/ARTSCI.md" class="doc-link block p-4 hover:bg-[#141414] border border-surface">
+                    <h3 class="mono text-sm text-[#a50000] mb-1">ARTSCI.md</h3>
+                    <p class="text-muted text-xs">Intersection of art and science methodologies</p>
+                </a>
+                <a href="moves/CULTUESCAN.md" class="doc-link block p-4 hover:bg-[#141414] border border-surface">
+                    <h3 class="mono text-sm text-[#a50000] mb-1">CULTUESCAN.md</h3>
+                    <p class="text-muted text-xs">Cultural intelligence and pattern recognition</p>
+                </a>
+                <a href="moves/INSPIRE.md" class="doc-link block p-4 hover:bg-[#141414] border border-surface">
+                    <h3 class="mono text-sm text-[#a50000] mb-1">INSPIRE.md</h3>
+                    <p class="text-muted text-xs">Motivation protocols and creative ignition</p>
+                </a>
+                <a href="moves/LANG.md" class="doc-link block p-4 hover:bg-[#141414] border border-surface">
+                    <h3 class="mono text-sm text-[#a50000] mb-1">LANG.md</h3>
+                    <p class="text-muted text-xs">Language models and prompt engineering</p>
+                </a>
+                <a href="moves/NAV.md" class="doc-link block p-4 hover:bg-[#141414] border border-surface">
+                    <h3 class="mono text-sm text-[#a50000] mb-1">NAV.md</h3>
+                    <p class="text-muted text-xs">Navigation structure and site architecture</p>
+                </a>
+                <a href="moves/SKILLCREATOR.md" class="doc-link block p-4 hover:bg-[#141414] border border-surface md:col-span-2 lg:col-span-1">
+                    <h3 class="mono text-sm text-[#a50000] mb-1">SKILLCREATOR.md</h3>
+                    <p class="text-muted text-xs">Skill development and capability expansion protocols</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shards / Skills -->
+    <section class="py-16 md:py-24 px-4 md:px-6 border-b border-[#1a1a1a] bg-[#0d0d0d]">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="font-bebas text-3xl md:text-4xl tracking-wide text-[#a50000] mb-4">SHARDS // SKILLS</h2>
+            <p class="text-muted text-sm mb-12 max-w-2xl">Modular capabilities, licenses, and skill definitions. The building blocks of agent competence.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <a href="shards/SKILLS.md" class="doc-link block p-6 hover:bg-[#141414]">
+                    <h3 class="mono text-sm text-[#a50000] mb-2">SKILLS.md</h3>
+                    <p class="text-muted text-xs mb-4">Agent capability matrix and skill definitions</p>
+                    <div class="flex gap-2">
+                        <span class="mono text-[10px] bg-[#1a1a1a] px-2 py-1 text-[#666666]">ARCHITECTURE</span>
+                        <span class="mono text-[10px] bg-[#1a1a1a] px-2 py-1 text-[#666666]">CODE</span>
+                    </div>
+                </a>
+                <a href="shards/LISCENCE.txt" class="doc-link block p-6 hover:bg-[#141414]">
+                    <h3 class="mono text-sm text-[#a50000] mb-2">LISCENCE.txt</h3>
+                    <p class="text-muted text-xs mb-4">Usage rights and distribution terms</p>
+                    <div class="flex gap-2">
+                        <span class="mono text-[10px] bg-[#1a1a1a] px-2 py-1 text-[#666666]">LEGAL</span>
+                        <span class="mono text-[10px] bg-[#1a1a1a] px-2 py-1 text-[#666666]">OSS</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Twin Interface Terminal -->
+    <section class="py-16 md:py-24 px-4 md:px-6 border-b border-[#1a1a1a]">
+        <div class="max-w-3xl mx-auto">
+            <div class="terminal-window rounded">
+                <div class="terminal-header px-4 py-2 flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-[#a50000]"></div>
+                    <div class="w-3 h-3 rounded-full bg-[#333]"></div>
+                    <div class="w-3 h-3 rounded-full bg-[#333]"></div>
+                    <span class="ml-4 mono text-xs text-[#666666]">twin_protocol.sh — 80x24</span>
+                </div>
+                <div class="p-6 mono text-sm space-y-2">
+                    <p class="text-[#666666]">$ ssh ouinit@twin.local</p>
+                    <p class="text-[#a50000]">Connected to Twin Interface v2.6.7</p>
+                    <p class="text-signal">🌫️🌒 Twin Protocol initialized...</p>
+                    <p class="text-signal">> 0KK (Human) // Kimi-K2.5 (AI)</p>
+                    <p class="text-signal">> Status: <span class="text-[#a50000]">SYNCED</span></p>
+                    <p class="text-signal">> Mode: <span class="text-[#a50000]">BUILDING LANES</span></p>
+                    <p class="text-[#666666]">$ _</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <div class="glyph-display text-4xl mb-6">🌫️🌒</div>
+                <h2 class="font-bebas text-3xl md:text-5xl tracking-wide text-[#a50000] mb-6">TWIN INTERFACE</h2>
+                <p class="text-muted text-base md:text-lg mb-8 max-w-xl mx-auto">
+                    Human-AI collaborative architecture. 0KK + Kimi-K2.5 operating in tandem for rapid prototyping and systems development.
+                </p>
+                <div class="mono text-xs text-[#666666] space-y-2 border-l-2 border-[#a50000] pl-4 text-left max-w-md mx-auto">
+                    <p>// PROTOCOL: 88 ACTIVE</p>
+                    <p>// TWIN: CONNECTED</p>
+                    <p>// STATUS: BUILDING LANES</p>
+                    <p>// LOCATION: CLT // EST. 2025</p>
+                </div>
             </div>
         </div>
     </section>
