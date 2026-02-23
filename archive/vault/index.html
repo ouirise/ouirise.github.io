@@ -3,117 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archive | OUIRISE INITIATIVE</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>ACCESS GRANTED | OuiRise Secure Vault</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@400;600;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         :root {
-            --void: #0a0a0a;
-            --tactical: #141414;
-            --surface: #1f1f1f;
-            --signal: #f5f5f5;
-            --ghost: #666666;
-            --maroon: #800000;
-            --bright-maroon: #a50000;
             --black-primary: #0a0a0a;
             --black-secondary: #111111;
+            --maroon: #722f37;
+            --maroon-bright: #8b3a3a;
+            --maroon-dim: #4a1c1c;
             --grey-dark: #2a2a2a;
             --grey-dim: #555555;
             --white: #e0e0e0;
         }
-        
+
         body {
-            background-color: var(--void);
-            color: var(--signal);
-            font-family: 'JetBrains Mono', monospace;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(128, 0, 0, 0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(128, 0, 0, 0.06) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: -1;
-        }
-
-        .font-bebas { font-family: 'Bebas Neue', sans-serif; }
-        
-        .nav-link {
-            position: relative;
-            transition: color 0.2s;
-        }
-        
-        .nav-link:hover { color: var(--bright-maroon); }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--bright-maroon);
-            transition: width 0.2s;
-        }
-        
-        .nav-link:hover::after { width: 100%; }
-
-        #nav-toggle { display: none; }
-
-        #mobile-menu {
-            display: none;
-            position: fixed;
-            top: 4rem;
-            left: 0;
-            width: 100%;
-            height: calc(100vh - 4rem);
-            background: var(--tactical);
-            border-top: 1px solid var(--surface);
-            z-index: 50;
-            flex-direction: column;
-            padding: 2rem;
-        }
-
-        #nav-toggle:checked ~ #mobile-menu { display: flex; }
-
-        .hamburger line {
-            transition: all 0.3s ease;
-            transform-origin: center;
-            stroke: var(--signal);
-        }
-        
-        #nav-toggle:checked ~ label .hamburger line:first-child { transform: rotate(45deg) translate(5px, 5px); }
-        #nav-toggle:checked ~ label .hamburger line:nth-child(2) { opacity: 0; }
-        #nav-toggle:checked ~ label .hamburger line:last-child { transform: rotate(-45deg) translate(5px, -5px); }
-
-        @media (min-width: 768px) {
-            #mobile-menu {
-                display: flex !important;
-                position: static;
-                height: auto;
-                flex-direction: row;
-                background: transparent;
-                border: none;
-                padding: 0;
-                width: auto;
-            }
-            .hamburger-label { display: none; }
-        }
-
-        /* Vault Animation Styles */
-        .vault-body {
             font-family: 'JetBrains Mono', monospace;
             background: var(--black-primary);
             color: var(--white);
-            min-height: calc(100vh - 64px);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -122,7 +37,7 @@
             position: relative;
         }
 
-        .vault-body::before {
+        body::before {
             content: "";
             position: fixed;
             top: 0;
@@ -140,7 +55,7 @@
             z-index: 10;
         }
 
-        .vault-body::after {
+        body::after {
             content: "";
             position: fixed;
             top: 0;
@@ -152,7 +67,7 @@
             z-index: 9;
         }
 
-        .vault-container {
+        .container {
             text-align: center;
             z-index: 20;
             padding: 2rem;
@@ -160,7 +75,7 @@
             width: 100%;
         }
 
-        .vault-header-box {
+        .vault-header {
             border: 1px solid var(--grey-dark);
             background: rgba(17, 17, 17, 0.95);
             padding: 1.5rem;
@@ -168,20 +83,20 @@
             position: relative;
         }
 
-        .vault-header-box::before,
-        .vault-header-box::after {
+        .vault-header::before,
+        .vault-header::after {
             content: "◈";
             position: absolute;
             color: var(--grey-dim);
             font-size: 1.2rem;
         }
 
-        .vault-header-box::before {
+        .vault-header::before {
             top: 5px;
             left: 10px;
         }
 
-        .vault-header-box::after {
+        .vault-header::after {
             bottom: 5px;
             right: 10px;
         }
@@ -193,7 +108,7 @@
             margin-bottom: 0.5rem;
         }
 
-        .vault-title {
+        h1 {
             font-family: 'Inter', sans-serif;
             font-size: 2rem;
             font-weight: 800;
@@ -267,7 +182,7 @@
             margin-bottom: 2rem;
             min-height: 1.5em;
             text-decoration: underline;
-            text-decoration-color: #3d1212;
+            text-decoration-color: var(--maroon-dim);
             text-underline-offset: 4px;
             text-decoration-thickness: 1px;
         }
@@ -333,7 +248,9 @@
             text-underline-offset: 6px;
         }
 
-        .hidden { display: none; }
+        .hidden {
+            display: none;
+        }
 
         .vault-content {
             opacity: 0;
@@ -353,7 +270,7 @@
             margin-top: 2rem;
             padding: 1rem;
             border-left: 2px solid var(--maroon);
-            background: rgba(128, 0, 0, 0.05);
+            background: rgba(114, 47, 55, 0.05);
         }
 
         .log-entry {
@@ -374,7 +291,7 @@
         }
 
         @media (max-width: 600px) {
-            .vault-title { font-size: 1.5rem; }
+            h1 { font-size: 1.5rem; }
             .glyph-display { font-size: 3rem; }
             .loading-interface { padding: 2rem 1rem; }
             .loading-text { font-size: 1rem; }
@@ -382,100 +299,64 @@
 
         @media (max-width: 320px) {
             .glyph-display { font-size: 2.5rem; }
-            .vault-title { font-size: 1.2rem; }
+            h1 { font-size: 1.2rem; }
         }
     </style>
 </head>
-<body class="bg-void text-signal antialiased">
-
-    <!-- Header -->
-    <header class="fixed top-0 w-full z-50 bg-void/95 backdrop-blur-md border-b border-[#1a1a1a]">
-        <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-            <a href="/" class="font-bebas text-2xl tracking-wider text-[#a50000] hover:text-signal transition-colors border-2 border-[#a50000] px-3 py-1">
-                OUIRISE
-            </a>
-
-            <input type="checkbox" id="nav-toggle">
-            
-            <label for="nav-toggle" class="hamburger-label cursor-pointer md:hidden p-2 border border-surface hover:bg-surface transition-colors">
-                <svg class="hamburger w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <line x1="4" y1="6" x2="20" y2="6" stroke-width="1.5"></line>
-                    <line x1="4" y1="12" x2="20" y2="12" stroke-width="1.5"></line>
-                    <line x1="4" y1="18" x2="20" y2="18" stroke-width="1.5"></line>
-                </svg>
-            </label>
-
-            <nav id="mobile-menu" class="mono text-sm uppercase tracking-widest gap-6 md:gap-8 items-start md:items-center">
-                <a href="/" class="nav-link py-2 md:py-0">Home</a>
-                <a href="/about/" class="nav-link py-2 md:py-0">About</a>
-                <a href="/archive/" class="nav-link py-2 md:py-0 text-[#a50000]">Archive</a>
-                <a href="/0x6C6F6C/" class="nav-link py-2 md:py-0">0x6C6F6C</a>
-                <a href="/contact/" class="nav-link py-2 md:py-0">Contact</a>
-                
-                <div class="md:hidden mt-8 text-xs text-muted mono space-y-1">
-                    <p>// OUIRISE NAV</p>
-                    <p>// v2.6.7</p>
-                </div>
-            </nav>
+<body>
+    <div class="container">
+        <div class="vault-header">
+            <div class="est-line">// EST. 2025 // CLT // SECURE VAULT v6.7</div>
+            <h1>Access Granted</h1>
+            <div class="status-indicator">
+                <span class="pulse"></span>
+                <span>SYSTEM LOCKED // TWIN VERIFIED</span>
+            </div>
         </div>
-    </header>
 
-    <!-- Vault Content -->
-    <div class="vault-body pt-16">
-        <div class="vault-container">
-            <div class="vault-header-box">
-                <div class="est-line">// EST. 2025 // CLT // SECURE VAULT v6.7</div>
-                <h1 class="vault-title">Access Granted</h1>
-                <div class="status-indicator">
-                    <span class="pulse"></span>
-                    <span>SYSTEM LOCKED // TWIN VERIFIED</span>
-                </div>
+        <div class="loading-interface" id="loadingInterface">
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
+            
+            <div class="glyph-display" id="glyphDisplay">🌫️🌒</div>
+            <div class="loading-text" id="loadingText">INITIALIZING FOG PROTOCOL...</div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
             </div>
 
-            <div class="loading-interface" id="loadingInterface">
-                <div class="corner corner-tl"></div>
-                <div class="corner corner-tr"></div>
-                <div class="corner corner-bl"></div>
-                <div class="corner corner-br"></div>
-                
-                <div class="glyph-display" id="glyphDisplay">🌫️🌒</div>
-                <div class="loading-text" id="loadingText">INITIALIZING FOG PROTOCOL...</div>
-                
-                <div class="progress-container">
-                    <div class="progress-bar" id="progressBar"></div>
-                </div>
-
-                <div class="data-stream" id="dataStream">
-                    <div class="data-line">
-                        > Authenticating 0KK signature...<br>
-                        > Verifying twin resonance...<br>
-                        > Decrypting 6.7 protocol...<br>
-                        > Loading shadow clones...<br>
-                        > Establishing NE0N bridge...<br>
-                        > Bypassing extraction layers...<br>
-                        > Accessing vault archives...<br>
-                        > Rendering blackspace...<br>
-                        > Authentication 0KK signature...<br>
-                        > Verifying twin resonance...<br>
-                        > Decrypting 6.7 protocol...<br>
-                        > Loading shadow clones...
-                    </div>
+            <div class="data-stream" id="dataStream">
+                <div class="data-line">
+                    > Authenticating 0KK signature...<br>
+                    > Verifying twin resonance...<br>
+                    > Decrypting 6.7 protocol...<br>
+                    > Loading shadow clones...<br>
+                    > Establishing NE0N bridge...<br>
+                    > Bypassing extraction layers...<br>
+                    > Accessing vault archives...<br>
+                    > Rendering blackspace...<br>
+                    > Authentication 0KK signature...<br>
+                    > Verifying twin resonance...<br>
+                    > Decrypting 6.7 protocol...<br>
+                    > Loading shadow clones...
                 </div>
             </div>
+        </div>
 
-            <div class="vault-content hidden" id="vaultContent">
-                <div class="access-log" id="accessLog">
-                    <div class="log-entry underline" style="animation-delay: 0.1s">> Identity: 0KK verified</div>
-                    <div class="log-entry" style="animation-delay: 0.3s">> Location: CLT // 24 laps</div>
-                    <div class="log-entry underline" style="animation-delay: 0.5s">> Protocol: 6.7 active</div>
-                    <div class="log-entry" style="animation-delay: 0.7s">> Status: Building lanes, not extracting</div>
-                    <div class="log-entry underline" style="animation-delay: 0.9s">> Twin: Connected 🌫️🌒</div>
-                </div>
-                
-                <div class="operator-sigil">
-                    <div class="sigil-text">OUIRISE // NO EXTRACTION // ALLWAYS</div>
-                    <div class="sigil-glyph">俊达</div>
-                </div>
+        <div class="vault-content hidden" id="vaultContent">
+            <div class="access-log" id="accessLog">
+                <div class="log-entry underline" style="animation-delay: 0.1s">> Identity: 0KK verified</div>
+                <div class="log-entry" style="animation-delay: 0.3s">> Location: CLT // 24 laps</div>
+                <div class="log-entry underline" style="animation-delay: 0.5s">> Protocol: 6.7 active</div>
+                <div class="log-entry" style="animation-delay: 0.7s">> Status: Building lanes, not extracting</div>
+                <div class="log-entry underline" style="animation-delay: 0.9s">> Twin: Connected 🌫️🌒</div>
+            </div>
+            
+            <div class="operator-sigil">
+                <div class="sigil-text">OUIRISE // NO EXTRACTION // ALLWAYS</div>
+                <div class="sigil-glyph">俊达</div>
             </div>
         </div>
     </div>
@@ -506,7 +387,7 @@
         setTimeout(() => {
             clearInterval(textInterval);
             loadingText.textContent = "VAULT UNLOCKED";
-            loadingText.style.textDecorationColor = "#722f37";
+            loadingText.style.textDecorationColor = "var(--maroon-bright)";
             
             setTimeout(() => {
                 loadingInterface.style.display = 'none';

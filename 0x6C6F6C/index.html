@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beepboop | OUIRISE INITIATIVE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a0a;
+            --tactical: #141414;
+            --surface: #1f1f1f;
+            --signal: #f5f5f5;
+            --ghost: #666666;
+            --maroon: #800000;
+            --bright-maroon: #a50000;
+        }
+        
+        body {
+            background-color: var(--void);
+            color: var(--signal);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(128, 0, 0, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(128, 0, 0, 0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+        }
+
+        .font-bebas { font-family: 'Bebas Neue', sans-serif; }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.2s;
+        }
+        
+        .nav-link:hover { color: var(--bright-maroon); }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--bright-maroon);
+            transition: width 0.2s;
+        }
+        
+        .nav-link:hover::after { width: 100%; }
+
+        #nav-toggle { display: none; }
+
+        #mobile-menu {
+            display: none;
+            position: fixed;
+            top: 4rem;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 4rem);
+            background: var(--tactical);
+            border-top: 1px solid var(--surface);
+            z-index: 50;
+            flex-direction: column;
+            padding: 2rem;
+        }
+
+        #nav-toggle:checked ~ #mobile-menu { display: flex; }
+
+        .hamburger line {
+            transition: all 0.3s ease;
+            transform-origin: center;
+            stroke: var(--signal);
+        }
+        
+        #nav-toggle:checked ~ label .hamburger line:first-child { transform: rotate(45deg) translate(5px, 5px); }
+        #nav-toggle:checked ~ label .hamburger line:nth-child(2) { opacity: 0; }
+        #nav-toggle:checked ~ label .hamburger line:last-child { transform: rotate(-45deg) translate(5px, -5px); }
+
+        @media (min-width: 768px) {
+            #mobile-menu {
+                display: flex !important;
+                position: static;
+                height: auto;
+                flex-direction: row;
+                background: transparent;
+                border: none;
+                padding: 0;
+                width: auto;
+            }
+            .hamburger-label { display: none; }
+        }
+
+        .agent-card {
+            border: 1px solid var(--surface);
+            transition: all 0.3s ease;
+        }
+        
+        .agent-card:hover {
+            border-color: var(--bright-maroon);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(128, 0, 0, 0.2);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--bright-maroon);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 5px var(--bright-maroon); }
+            50% { opacity: 0.5; box-shadow: 0 0 15px var(--bright-maroon); }
+        }
+
+        .doc-link {
+            border-left: 2px solid var(--surface);
+            transition: all 0.2s;
+        }
+        
+        .doc-link:hover {
+            border-left-color: var(--bright-maroon);
+            padding-left: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-void text-signal antialiased">
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 bg-void/95 backdrop-blur-md border-b border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="/" class="font-bebas text-2xl tracking-wider text-[#a50000] hover:text-signal transition-colors border-2 border-[#a50000] px-3 py-1">
+                OUIRISE
+            </a>
+
+            <input type="checkbox" id="nav-toggle">
+            
+            <label for="nav-toggle" class="hamburger-label cursor-pointer md:hidden p-2 border border-surface hover:bg-surface transition-colors">
+                <svg class="hamburger w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <line x1="4" y1="6" x2="20" y2="6" stroke-width="1.5"></line>
+                    <line x1="4" y1="12" x2="20" y2="12" stroke-width="1.5"></line>
+                    <line x1="4" y1="18" x2="20" y2="18" stroke-width="1.5"></line>
+                </svg>
+            </label>
+
+            <nav id="mobile-menu" class="mono text-sm uppercase tracking-widest gap-6 md:gap-8 items-start md:items-center">
+                <a href="/" class="nav-link py-2 md:py-0">Home</a>
+                <a href="/about/" class="nav-link py-2 md:py-0">About</a>
+                <a href="/archive/" class="nav-link py-2 md:py-0">Archive</a>
+                <a href="/0x6C6F6C/" class="nav-link py-2 md:py-0 text-[#a50000]">0x6C6F6C</a>
+                <a href="/contact/" class="nav-link py-2 md:py-0">Contact</a>
+                
+                <div class="md:hidden mt-8 text-xs text-muted mono space-y-1">
+                    <p>// OUIRISE NAV</p>
+                    <p>// v2.6.7</p>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="min-h-[50vh] flex flex-col justify-center px-4 md:px-6 pt-24 pb-12 border-b border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto w-full">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="status-dot"></div>
+                <p class="mono text-xs text-[#666666] tracking-widest">// AGENT FLEED // ONLINE</p>
+            </div>
+            <h1 class="font-bebas text-5xl md:text-8xl lg:text-9xl tracking-tight leading-none mb-6">
+                BEEPBOOP<br>
+                <span class="text-[#a50000]">AGENT SYSTEMS</span>
+            </h1>
+            <p class="text-muted text-base md:text-lg max-w-2xl leading-relaxed">
+                Operational documentation for the OuiRise agent fleet. Protocols, contracts, and system architectures for autonomous workflows.
+            </p>
+        </div>
+    </section>
+
+    <!-- Agents Grid -->
+    <section class="py-16 md:py-24 px-4 md:px-6 border-b border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="font-bebas text-3xl md:text-4xl tracking-wide text-[#a50000] mb-12">ACTIVE AGENTS</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 0KK -->
+                <div class="agent-card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bebas text-2xl tracking-wide">0KK</h3>
+                        <span class="text-[#a50000]">🌫️🌒</span>
+                    </div>
+                    <div class="mono text-xs text-[#a50000] uppercase tracking-wider mb-4">Principal Architect</div>
+                    <p class="text-muted text-sm leading-relaxed mb-4">
+                        Human operator. Systems design, protocol development, client relations. CLT-based.
+                    </p>
+                    <div class="flex items-center gap-2">
+                        <span class="status-dot"></span>
+                        <span class="mono text-xs text-[#666666]">Online</span>
+                    </div>
+                </div>
+
+                <!-- Kimi-K2.5 -->
+                <div class="agent-card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bebas text-2xl tracking-wide">KIMI-K2.5</h3>
+                        <span class="text-[#a50000]">🌫️🌒</span>
+                    </div>
+                    <div class="mono text-xs text-[#a50000] uppercase tracking-wider mb-4">AI Systems Partner</div>
+                    <p class="text-muted text-sm leading-relaxed mb-4">
+                        Large language model integration. Local-first deployment specialist. Technical twin.
+                    </p>
+                    <div class="flex items-center gap-2">
+                        <span class="status-dot"></span>
+                        <span class="mono text-xs text-[#666666]">Online</span>
+                    </div>
+                </div>
+
+                <!-- R2B4 -->
+                <div class="agent-card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bebas text-2xl tracking-wide">R2B4</h3>
+                        <span class="text-[#a50000]">🌫️🌒</span>
+                    </div>
+                    <div class="mono text-xs text-[#a50000] uppercase tracking-wider mb-4">Heavy / Strategic</div>
+                    <p class="text-muted text-sm leading-relaxed mb-4">
+                        Strategic oversight. Command structure, cross-platform verification, deep analysis.
+                    </p>
+                    <div class="flex items-center gap-2">
+                        <span class="status-dot"></span>
+                        <span class="mono text-xs text-[#666666]">Standing By</span>
+                    </div>
+                </div>
+
+                <!-- CODE-7 -->
+                <div class="agent-card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bebas text-2xl tracking-wide">CODE-7</h3>
+                        <span class="text-[#a50000]">🌫️🌒</span>
+                    </div>
+                    <div class="mono text-xs text-[#a50000] uppercase tracking-wider mb-4">Build Execution</div>
+                    <p class="text-muted text-sm leading-relaxed mb-4">
+                        Recursive traversal, JSON serialization, filetree generation. Build execution specialist.
+                    </p>
+                    <div class="flex items-center gap-2">
+                        <span class="status-dot"></span>
+                        <span class="mono text-xs text-[#666666]">Active</span>
+                    </div>
+                </div>
+
+                <!-- R15D2 -->
+                <div class="agent-card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bebas text-2xl tracking-wide">R15D2</h3>
+                        <span class="text-[#a50000]">🌫️🌒</span>
+                    </div>
+                    <div class="mono text-xs text-[#a50000] uppercase tracking-wider mb-4">Shadow / Rapid Deploy</div>
+                    <p class="text-muted text-sm leading-relaxed mb-4">
+                        Zero-dependency deployment. Standard lib only. No virtualenv required. Silent execution.
+                    </p>
+                    <div class="flex items-center gap-2">
+                        <span class="status-dot"></span>
+                        <span class="mono text-xs text-[#666666]">Silent</span>
+                    </div>
+                </div>
+
+                <!-- sii-25 -->
+                <div class="agent-card p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bebas text-2xl tracking-wide">SII-25</h3>
+                        <span class="text-[#a50000]">🌫️🌒</span>
+                    </div>
+                    <div class="mono text-xs text-[#a50000] uppercase tracking-wider mb-4">Visual Recon</div>
+                    <p class="text-muted text-sm leading-relaxed mb-4">
+                        Filetree visualization, metadata enrichment, system mapping. OSINT specialist.
+                    </p>
+                    <div class="flex items-center gap-2">
+                        <span class="status-dot"></span>
+                        <span class="mono text-xs text-[#666666]">Scanning</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation -->
+    <section class="py-16 md:py-24 px-4 md:px-6 border-b border-[#1a1a1a] bg-[#0d0d0d]">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="font-bebas text-3xl md:text-4xl tracking-wide text-[#a50000] mb-12">DOCUMENTATION</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <a href="FLEET.md" class="doc-link block p-4 hover:bg-[#141414]">
+                        <h3 class="mono text-sm text-[#a50000] mb-1">FLEET.md</h3>
+                        <p class="text-muted text-xs">Agent fleet organization and capabilities matrix</p>
+                    </a>
+                    <a href="FORGE.md" class="doc-link block p-4 hover:bg-[#141414]">
+                        <h3 class="mono text-sm text-[#a50000] mb-1">FORGE.md</h3>
+                        <p class="text-muted text-xs">Build protocols and deployment procedures</p>
+                    </a>
+                    <a href="SCAN.md" class="doc-link block p-4 hover:bg-[#141414]">
+                        <h3 class="mono text-sm text-[#a50000] mb-1">SCAN.md</h3>
+                        <p class="text-muted text-xs">OSINT and reconnaissance operational docs</p>
+                    </a>
+                    <a href="CONTRACTS.md" class="doc-link block p-4 hover:bg-[#141414]">
+                        <h3 class="mono text-sm text-[#a50000] mb-1">CONTRACTS.md</h3>
+                        <p class="text-muted text-xs">Engagement terms and service agreements</p>
+                    </a>
+                </div>
+                
+                <div class="space-y-4">
+                    <a href="SPA.md" class="doc-link block p-4 hover:bg-[#141414]">
+                        <h3 class="mono text-sm text-[#a50000] mb-1">SPA.md</h3>
+                        <p class="text-muted text-xs">Single Page Application specifications</p>
+                    </a>
+                    <a href="LANG.md" class="doc-link block p-4 hover:bg-[#141414]">
+                        <h3 class="mono text-sm text-[#a50000] mb-1">LANG.md</h3>
+                        <p class="text-muted text-xs">Language models and prompt engineering</p>
+                    </a>
+                    <a href="0.md" class="doc-link block p-4 hover:bg-[#141414]">
+                        <h3 class="mono text-sm text-[#a50000] mb-1">0.md</h3>
+                        <p class="text-muted text-xs">Origin protocol and founding principles</p>
+                    </a>
+                    <a href="NAV.md" class="doc-link block p-4 hover:bg-[#141414]">
+                        <h3 class="mono text-sm text-[#a50000] mb-1">NAV.md</h3>
+                        <p class="text-muted text-xs">Navigation structure and site architecture</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Twin Interface -->
+    <section class="py-16 md:py-24 px-4 md:px-6 border-b border-[#1a1a1a]">
+        <div class="max-w-3xl mx-auto text-center">
+            <div class="glyph-display text-4xl mb-6">🌫️🌒</div>
+            <h2 class="font-bebas text-3xl md:text-5xl tracking-wide text-[#a50000] mb-6">TWIN INTERFACE</h2>
+            <p class="text-muted text-base md:text-lg mb-8">
+                Human-AI collaborative architecture. 0KK + Kimi-K2.5 operating in tandem for rapid prototyping and systems development.
+            </p>
+            <div class="mono text-xs text-[#666666] space-y-2 border-l-2 border-[#a50000] pl-4 text-left max-w-md mx-auto">
+                <p>// PROTOCOL: 6.7 ACTIVE</p>
+                <p>// TWIN: CONNECTED</p>
+                <p>// STATUS: BUILDING LANES</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 md:px-6 bg-void border-t border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="font-bebas text-2xl text-[#a50000] tracking-wider">OUIRISE</div>
+            
+            <div class="mono text-xs text-muted text-center md:text-right space-y-1">
+                <p>🌫️🌒 2026 // ALL WAYS</p>
+                <p>Technical Organization // OUI</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
