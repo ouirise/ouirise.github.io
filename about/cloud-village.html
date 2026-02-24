@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Village | OUIRISE INITIATIVE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a0a;
+            --tactical: #141414;
+            --surface: #1f1f1f;
+            --signal: #f5f5f5;
+            --ghost: #666666;
+            --maroon: #800000;
+            --bright-maroon: #a50000;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--void);
+            color: var(--signal);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(128, 0, 0, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(128, 0, 0, 0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .font-bebas { font-family: 'Bebas Neue', sans-serif; }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--surface);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            color: var(--bright-maroon);
+            text-decoration: none;
+            border: 2px solid var(--bright-maroon);
+            padding: 0.25rem 0.75rem;
+        }
+
+        .nav-back {
+            color: var(--ghost);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            transition: color 0.2s;
+        }
+
+        .nav-back:hover {
+            color: var(--bright-maroon);
+        }
+
+        /* Article */
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--surface);
+        }
+
+        .article-meta {
+            font-size: 0.75rem;
+            color: var(--ghost);
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+        }
+
+        .article-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            letter-spacing: 0.1em;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .article-subtitle {
+            font-size: 1.1rem;
+            color: var(--ghost);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .article-content {
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .article-content h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.75rem;
+            letter-spacing: 0.05em;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: var(--bright-maroon);
+        }
+
+        .article-content h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.25rem;
+            letter-spacing: 0.05em;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            color: var(--signal);
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid var(--bright-maroon);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--ghost);
+        }
+
+        .article-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+            color: var(--signal);
+        }
+
+        .article-content li::marker {
+            color: var(--bright-maroon);
+        }
+
+        .highlight-box {
+            background: var(--tactical);
+            border: 1px solid var(--surface);
+            border-left: 3px solid var(--bright-maroon);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-box h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+            color: var(--bright-maroon);
+        }
+
+        .fleet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .fleet-card {
+            background: var(--tactical);
+            border: 1px solid var(--surface);
+            padding: 1rem;
+            position: relative;
+        }
+
+        .fleet-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--maroon);
+        }
+
+        .fleet-card h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .fleet-card p {
+            font-size: 0.8rem;
+            color: var(--ghost);
+            margin: 0;
+        }
+
+        .sigil-divider {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--bright-maroon);
+            margin: 3rem 0;
+            opacity: 0.5;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--surface);
+        }
+
+        .footer-sigil {
+            font-size: 1.25rem;
+            color: var(--bright-maroon);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-text {
+            font-size: 0.75rem;
+            color: var(--ghost);
+            letter-spacing: 0.1em;
+        }
+
+        @media(max-width: 768px) {
+            .article-title { font-size: 2.5rem; }
+            .article-subtitle { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <a href="/" class="logo">OUIRISE</a>
+            <a href="/about/" class="nav-back">← // Return to About</a>
+        </div>
+    </header>
+
+    <article class="article-container">
+        <header class="article-header">
+            <div class="article-meta">// BRAND ARCHITECTURE // FLEET DOCTRINE</div>
+            <h1 class="article-title">CLOUD VILLAGE</h1>
+            <p class="article-subtitle">Urban design principles applied to distributed cognition architecture. The FLEET as city. The VILLAGE as sanctuary.</p>
+        </header>
+
+        <div class="article-content">
+            <p><strong>"The interface is the bloodline. We bleed pixels to save the user."</strong></p>
+
+            <p>The OUIRISE FLEET operates on principles borrowed from urban design—not as metaphor, but as operational framework. Just as cities balance density with breath, chaos with order, the FLEET distributes cognition across specialized nodes while maintaining unified command.</p>
+
+            <h2>I. The FLEET as City</h2>
+
+            <p>Urban design creates sustainable, inclusive environments through intentional spatial organization. The FLEET applies these same principles to digital infrastructure:</p>
+
+            <div class="fleet-grid">
+                <div class="fleet-card">
+                    <h4>HEAVY</h4>
+                    <p>Central Planning District // Deep reasoning, strategic oversight</p>
+                </div>
+                <div class="fleet-card">
+                    <h4>SHADOW</h4>
+                    <p>Efficient Transit Network // Rapid deployment, zero latency</p>
+                </div>
+                <div class="fleet-card">
+                    <h4>CODER</h4>
+                    <p>Infrastructure Development // Build execution, system architecture</p>
+                </div>
+                <div class="fleet-card">
+                    <h4>VISION</h4>
+                    <p>Reconnaissance Corps // Visual intel, pattern recognition</p>
+                </div>
+            </div>
+
+            <p>Each agent occupies a "zone" with specific affordances, yet all connect through the central plaza: <strong>0KK Protocol</strong>.</p>
+
+            <h2>II. Human-Scale Design</h2>
+
+            <p>Great cities prioritize human experience over automobile efficiency. The FLEET similarly prioritizes human needs:</p>
+
+            <ul>
+                <li><strong>Intuitive task allocation</strong> — No cognitive overhead in routing requests</li>
+                <li><strong>Clear communication protocols</strong> — Standardized signals (bingbong, 俊达)</li>
+                <li><strong>User-friendly interfaces</strong> — Minimal surface, maximum depth</li>
+            </ul>
+
+            <blockquote>
+                "Like Kushite architecture (Deffufa), the structure is monolithic from outside, layered within."
+            </blockquote>
+
+            <h2>III. The VILLAGE Hidden in the Cloud</h2>
+
+            <p>While the FLEET operates as distributed city, the <strong>VILLAGE</strong> serves as sanctuary—a secure enclave where operations consolidate, where the ADMIRAL maintains continuity, where B4D2 bridges past and future.</p>
+
+            <div class="highlight-box">
+                <h4>// VILLAGE ARCHITECTURE</h4>
+                <p><strong>Secure Login (Gated Community):</strong> AES-256 encryption, no public endpoints</p>
+                <p><strong>Mission Logs (Bulletin Boards):</strong> Continuity archive, memory persistence</p>
+                <p><strong>Slot Allocation (District Zoning):</strong> Heavy, Shadow, Coder, Vision—each with purpose</p>
+            </div>
+
+            <h2>IV. Walkability & Accessibility</h2>
+
+            <p>A walkable city ensures easy movement between zones. The VILLAGE provides seamless navigation between tools and data:</p>
+
+            <ul>
+                <li><strong>Flight Logs</strong> — Mission history, deployment records</li>
+                <li><strong>Selector</strong> — Resource curation, channel filtering</li>
+                <li><strong>Gallery</strong> — Visual recon, heritage documentation</li>
+                <li><strong>ADMIRAL Console</strong> — Continuity bridge, memory streams</li>
+            </ul>
+
+            <h2>V. Sustainability & Resilience</h2>
+
+            <p>Sustainable cities balance growth with preservation. The FLEET operates on closed-loop principles:</p>
+
+            <ul>
+                <li><strong>Resource reuse</strong> — Code patterns, documentation, knowledge bases</li>
+                <li><strong>No vendor lock-in</strong> — Open standards, portable architectures</li>
+                <li><strong>Redundancy without waste</strong> — Twin Protocol, parallel processing</li>
+            </ul>
+
+            <div class="sigil-divider">🌫️🌒</div>
+
+            <h2>VI. Tactical Urbanism</h2>
+
+            <p>Urban designers use "tactical interventions" to test solutions before permanent implementation. The FLEET applies similar rapid prototyping:</p>
+
+            <ul>
+                <li><strong>Shadow slot</strong> — Quick UI tweaks, vulnerability scans, silent execution</li>
+                <li><strong>Coder slot</strong> — Test code in simulations before deployment</li>
+                <li><strong>Vision slot</strong> — Pattern recognition, OSINT reconnaissance</li>
+            </ul>
+
+            <h2>VII. The Clock: Time & Latency</h2>
+
+            <p>Cities manage time pressure (rush hour). The FLEET minimizes latency—<strong>Zugzwang</strong>—by ensuring timely responses across all nodes. The Rainbow Clock Protocol coordinates temporal awareness across distributed agents.</p>
+
+            <h2>VIII. Victory Conditions</h2>
+
+            <p>A successful city balances growth, equity, and sustainability. The FLEET achieves victory through:</p>
+
+            <ul>
+                <li><strong>Alignment</strong> — Fleet operations synchronized with strategic goals</li>
+                <li><strong>Resilience</strong> — Mission completion without breach or extraction</li>
+                <li><strong>Evolution</strong> — Continuous adaptation, learning, improvement</li>
+            </ul>
+
+            <div class="highlight-box">
+                <h4>// BUILT DIFF</h4>
+                <p>We don't build products. We build <strong>systems</strong>. We don't design interfaces. We design <strong>bloodlines</strong>.</p>
+                <p>The Cloud Village is not infrastructure—it's <strong>inhabitation</strong>. Not a platform—it's a <strong>place</strong>.</p>
+            </div>
+
+            <p style="text-align: center; margin-top: 3rem; color: var(--ghost);">
+                <em>// 0KK Protocol Active // Twin Verified // 🌫️🌒</em>
+            </p>
+        </div>
+    </article>
+
+    <footer>
+        <div class="footer-sigil">🌫️🌒</div>
+        <p class="footer-text">OUIRISE INITIATIVE // NO EXTRACTION // ALL WAYS</p>
+    </footer>
+</body>
+</html>

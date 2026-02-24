@@ -66,66 +66,72 @@
         
         .nav-link:hover::after { width: 100%; }
 
-        /* Dropdown styles */
-        .dropdown {
-            position: relative;
-        }
-
+        /* Dropdown Styles - Minimal Functional */
         .dropdown-menu {
-            display: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
             position: absolute;
             top: 100%;
             left: 0;
             background: var(--tactical);
             border: 1px solid var(--surface);
-            min-width: 180px;
-            z-index: 100;
+            min-width: 200px;
             padding: 0.5rem 0;
-            margin-top: 0.5rem;
+            z-index: 50;
         }
-
-        .dropdown:hover .dropdown-menu {
-            display: block;
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
-
+        /* Desktop hover */
+        @media (min-width: 768px) {
+            .dropdown:hover .dropdown-menu,
+            .dropdown-menu:hover {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+        }
+        .dropdown-arrow {
+            font-size: 0.6rem;
+            transition: transform 0.2s;
+        }
+        .dropdown-arrow.open {
+            transform: rotate(180deg);
+        }
         .dropdown-item {
             display: block;
             padding: 0.5rem 1rem;
-            color: var(--signal);
-            text-decoration: none;
             font-size: 0.75rem;
+            color: var(--ghost);
             transition: all 0.2s;
         }
-
         .dropdown-item:hover {
             background: var(--surface);
             color: var(--bright-maroon);
         }
-
-        /* Mobile dropdown styles */
         @media (max-width: 767px) {
             .dropdown-menu {
                 position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
                 display: none;
-                background: transparent;
                 border: none;
-                padding-left: 1rem;
-                margin-top: 0;
+                border-left: 2px solid var(--bright-maroon);
+                margin-left: 1rem;
+                margin-top: 0.5rem;
+                background: transparent;
+                min-width: auto;
             }
-
-            .dropdown.active .dropdown-menu {
+            .dropdown-menu.open {
                 display: block;
-            }
-
-            .dropdown-toggle::after {
-                content: " ▼";
-                font-size: 0.6rem;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .dropdown:hover .dropdown-menu {
-                display: block;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
             }
         }
 
@@ -334,12 +340,15 @@
             <nav id="mobile-menu" class="mono text-sm uppercase tracking-widest gap-6 md:gap-8 items-start md:items-center">
                 <a href="/" class="nav-link py-2 md:py-0">Home</a>
                 <a href="/about/" class="nav-link py-2 md:py-0">About</a>
-                <div class="dropdown py-2 md:py-0">
-                    <a href="/archive/" class="nav-link dropdown-toggle">Flight Logs</a>
-                    <div class="dropdown-menu">
-                        <a href="/archive/" class="dropdown-item">Flight Logs Main</a>
-                        <a href="/archive/selector.html" class="dropdown-item">Selector</a>
-                        <a href="/archive/gallery.html" class="dropdown-item">Gallery</a>
+                <div class="dropdown relative" id="flightLogsDropdown">
+                    <button class="nav-link py-2 md:py-0 flex items-center gap-1 bg-transparent border-none cursor-pointer" onclick="toggleDropdown(event)">
+                        Flight Logs
+                        <span class="dropdown-arrow" id="dropdownArrow">▼</span>
+                    </button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="/archive/" class="dropdown-item">// Flight Logs</a>
+                        <a href="/archive/selector.html" class="dropdown-item">// Selector</a>
+                        <a href="/archive/gallery.html" class="dropdown-item">// Gallery</a>
                     </div>
                 </div>
                 <a href="/0x6C6F6C/" class="nav-link py-2 md:py-0">0x6C6F6C</a>
@@ -347,7 +356,7 @@
                 
                 <div class="md:hidden mt-8 text-xs text-muted mono space-y-1">
                     <p>// OUIRISE NAV</p>
-                    <p>// v2.6.9</p>
+                    <p>// v2.7.1</p>
                 </div>
             </nav>
         </div>
@@ -375,5 +384,50 @@
         </div>
     </div>
 
+    <script>
+        // Dropdown toggle functionality
+        function toggleDropdown(e) {
+            e.stopPropagation();
+            const menu = document.getElementById('dropdownMenu');
+            const arrow = document.getElementById('dropdownArrow');
+            const isOpen = menu.classList.contains('open');
+            
+            // Close all other dropdowns first
+            document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('open'));
+            document.querySelectorAll('.dropdown-arrow').forEach(a => a.classList.remove('open'));
+            
+            // Toggle current
+            if (!isOpen) {
+                menu.classList.add('open');
+                arrow.classList.add('open');
+            }
+        }
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('flightLogsDropdown');
+            if (!dropdown.contains(e.target)) {
+                document.getElementById('dropdownMenu').classList.remove('open');
+                document.getElementById('dropdownArrow').classList.remove('open');
+            }
+        });
+        
+        // Desktop hover behavior
+        if (window.matchMedia('(min-width: 768px)').matches) {
+            const dropdown = document.getElementById('flightLogsDropdown');
+            const menu = document.getElementById('dropdownMenu');
+            const arrow = document.getElementById('dropdownArrow');
+            
+            dropdown.addEventListener('mouseenter', () => {
+                menu.classList.add('open');
+                arrow.classList.add('open');
+            });
+            
+            dropdown.addEventListener('mouseleave', () => {
+                menu.classList.remove('open');
+                arrow.classList.remove('open');
+            });
+        }
+    </script>
 </body>
 </html>

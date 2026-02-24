@@ -4,7 +4,7 @@
 > **Domain**: ouirise.github.io  
 > **Established**: 2025  
 > **Location**: CLT (Charlotte, NC)  
-> **Version**: v2.6.9  
+> **Version**: v2.7.1  
 
 ---
 
@@ -354,8 +354,9 @@ python app.py   # Runs on localhost:5000
 ## 10. Security Considerations
 
 ### Form Handling
-- Contact form currently redirects to `/404/` (no backend)
-- For production forms, integrate with Formspree, Netlify Forms, or custom API
+- Contact form uses Formspree for submission handling
+- Form endpoint: `https://formspree.io/f/xnqevwrd`
+- For production, verify Formspree account and update endpoint if needed
 
 ### Environment Variables
 - `.env` files are gitignored
