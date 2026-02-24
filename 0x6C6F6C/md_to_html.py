@@ -341,7 +341,7 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
 <body>
     <header>
         <div class="header-content">
-            <a href="/0x6C6F6C/" class="logo">0x6C6F6C</a>
+            <a href="/0x6C6F6C/" class="logo">Agents</a>
             <nav class="nav">
                 <a href="/0x6C6F6C/">Fleet</a>
                 <a href="/0x6C6F6C/moves/">Moves</a>
@@ -353,7 +353,7 @@ HTML_TEMPLATE = '''<!DOCTYPE html>
 
     <main>
         <div class="breadcrumb">
-            <a href="/0x6C6F6C/">0x6C6F6C</a>
+            <a href="/0x6C6F6C/">Agents</a>
             <span class="breadcrumb-sep">//</span>
             <a href="{parent_url}">{parent_name}</a>
             <span class="breadcrumb-sep">//</span>
