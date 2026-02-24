@@ -2,6 +2,22 @@
   "version": "1.0",
   "lastUpdated": "2026-02-24",
   "categories": {
+    "heritage": {
+      "name": "Heritage Sites",
+      "description": "Ancient architecture and cultural landmarks",
+      "images": [
+        {
+          "id": "heritage-001",
+          "filename": "image.webp",
+          "title": "Meroë Pyramids",
+          "description": "Kushite pyramids at Meroë // Ancient Nubian architecture",
+          "location": "Meroë, Sudan",
+          "date": "2026-02-24",
+          "tags": ["heritage", "kushite", "pyramids", "africa"],
+          "featured": true
+        }
+      ]
+    },
     "aerial": {
       "name": "Aerial Recon",
       "description": "Drone and elevated perspective photography",
@@ -14,7 +30,7 @@
           "location": "Charlotte, NC",
           "date": "2026-02-16",
           "tags": ["aerial", "clt", "recon"],
-          "featured": true
+          "featured": false
         }
       ]
     },
@@ -104,8 +120,8 @@
     }
   },
   "featured": {
-    "homepage": "aerial-001",
+    "homepage": "heritage-001",
     "about": null,
-    "flightLogs": ["aerial-001", "urban-001", "texture-001"]
+    "flightLogs": ["heritage-001", "aerial-001", "urban-001"]
   }
 }
