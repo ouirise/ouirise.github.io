@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>俊达 | 0x6C6F6C</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a0a;
+            --tactical: #141414;
+            --surface: #1f1f1f;
+            --signal: #f5f5f5;
+            --ghost: #666666;
+            --maroon: #800000;
+            --bright-maroon: #a50000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--void);
+            color: var(--signal);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Grid Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(165, 0, 0, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(165, 0, 0, 0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--surface);
+            padding: 1rem 2rem;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--bright-maroon);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: var(--ghost);
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: var(--bright-maroon);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            font-size: 0.7rem;
+            color: var(--ghost);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            color: var(--ghost);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--bright-maroon);
+        }
+
+        .breadcrumb-sep {
+            margin: 0 0.5rem;
+            color: var(--surface);
+        }
+
+        /* Title */
+        .page-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+            color: var(--signal);
+        }
+
+        .page-meta {
+            font-size: 0.75rem;
+            color: var(--ghost);
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--surface);
+        }
+
+        /* Markdown Content */
+        .content {
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .content h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            margin: 2.5rem 0 1rem;
+            color: var(--bright-maroon);
+            font-weight: 400;
+        }
+
+        .content h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1.5px;
+            margin: 2rem 0 1rem;
+            color: var(--signal);
+            font-weight: 400;
+        }
+
+        .content h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--signal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 1.25rem 0 0.5rem;
+            color: var(--ghost);
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+            color: var(--signal);
+        }
+
+        .content a {
+            color: var(--bright-maroon);
+            text-decoration: none;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+
+        .content code {
+            background: var(--tactical);
+            padding: 0.2rem 0.4rem;
+            font-size: 0.8rem;
+            color: var(--bright-maroon);
+            border: 1px solid var(--surface);
+        }
+
+        .content pre {
+            background: var(--tactical);
+            border: 1px solid var(--surface);
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .content pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
+            color: var(--signal);
+        }
+
+        .content ul, .content ol {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .content blockquote {
+            border-left: 3px solid var(--bright-maroon);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            color: var(--ghost);
+            font-style: italic;
+        }
+
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.8rem;
+        }
+
+        .content th, .content td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--surface);
+        }
+
+        .content th {
+            background: var(--tactical);
+            color: var(--bright-maroon);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.7rem;
+        }
+
+        .content tr:nth-child(even) {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .content hr {
+            border: none;
+            border-top: 1px solid var(--surface);
+            margin: 2rem 0;
+        }
+
+        .content strong {
+            color: var(--bright-maroon);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            max-width: 900px;
+            margin: 4rem auto 0;
+            padding: 2rem;
+            border-top: 1px solid var(--surface);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-sigil {
+            font-size: 1.2rem;
+            color: var(--bright-maroon);
+        }
+
+        .footer-text {
+            font-size: 0.7rem;
+            color: var(--ghost);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--void);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--surface);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--bright-maroon);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            main {
+                padding: 5rem 1.5rem 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/0x6C6F6C/" class="logo">0x6C6F6C</a>
+            <nav class="nav">
+                <a href="/0x6C6F6C/">Fleet</a>
+                <a href="/0x6C6F6C/moves/">Moves</a>
+                <a href="/0x6C6F6C/positions/">Positions</a>
+                <a href="/0x6C6F6C/shards/">Shards</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="breadcrumb">
+            <a href="/0x6C6F6C/">0x6C6F6C</a>
+            <span class="breadcrumb-sep">//</span>
+            <a href="/0x6C6F6C/moves/">Moves</a>
+            <span class="breadcrumb-sep">//</span>
+            <span>俊达</span>
+        </div>
+
+        <h1 class="page-title">俊达</h1>
+        <div class="page-meta">Documentation // Last updated: 2026-02-24</div>
+
+        <div class="content">
+<p>俊达</p>
+<h1 id="tool-integration-architecture">Tool Integration Architecture</h1>
+<blockquote>
+<p>Strategic analysis of external capabilities for LLM fleet operations</p>
+</blockquote>
+<hr />
+<h2 id="core-principle">Core Principle</h2>
+<p>Tools fundamentally shift how LLMs operate by acting as <strong>externalized capabilities</strong>. They enable models to transcend inherent limitations and create compositional power through chained capabilities.</p>
+<hr />
+<h2 id="tool-taxonomy">Tool Taxonomy</h2>
+<h3 id="architectural-tools">Architectural Tools</h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Function</th>
+<th>Slot Preference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Knowledge Graph</td>
+<td>Structured data access</td>
+<td>Heavy</td>
+</tr>
+<tr>
+<td>API Gateway</td>
+<td>External service interaction</td>
+<td>Shadow</td>
+</tr>
+<tr>
+<td>Config Manager</td>
+<td>Runtime parameter adjustment</td>
+<td>Heavy</td>
+</tr>
+</tbody>
+</table>
+<h3 id="operational-tools">Operational Tools</h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Function</th>
+<th>Slot Preference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Monitoring</td>
+<td>Usage tracking, performance</td>
+<td>Shadow</td>
+</tr>
+<tr>
+<td>Audit Trail</td>
+<td>Action history recording</td>
+<td>All slots</td>
+</tr>
+<tr>
+<td>Resource Allocator</td>
+<td>Compute/memory management</td>
+<td>Heavy</td>
+</tr>
+</tbody>
+</table>
+<h3 id="user-interaction-tools">User Interaction Tools</h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Function</th>
+<th>Slot Preference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interface Bridges</td>
+<td>Web, SMS, voice, GUI</td>
+<td>Shadow</td>
+</tr>
+<tr>
+<td>NL Gateways</td>
+<td>Query translation</td>
+<td>Shadow</td>
+</tr>
+<tr>
+<td>Feedback Loops</td>
+<td>Input parsing, response shaping</td>
+<td>Heavy</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="fleet-slot-tool-strategy">Fleet Slot Tool Strategy</h2>
+<h3 id="heavy-slot-7b8b">Heavy Slot (7B/8B)</h3>
+<p>Use tools for:
+- Multi-step reasoning (search → analysis → synthesis)
+- Long-term strategy execution (persistent state)
+- Complex scenario planning (external data validation)</p>
+<h3 id="shadow-slot-15b">Shadow Slot (1.5B)</h3>
+<p>Use tools for:
+- Single-request tasks (quick data retrieval)
+- Speed-critical interactions (autocomplete)
+- High-frequency operations (code completion)</p>
+<hr />
+<h2 id="operational-playbook">Operational Playbook</h2>
+<p><strong>Mission</strong>: Strategic planning for product launch</p>
+<p><strong>Tool Chain</strong>:</p>
+<pre><code>[Market Search] → [Analysis Engine] → [Report Generator]
+    (Heavy)          (Shadow)           (CODER)
+</code></pre>
+<p><strong>Execution</strong>:
+1. Heavy queries market data via search tool
+2. Shadow analyzes with pre-configured ML model
+3. CODER generates presentation with live data
+4. Audit trail logged to fleet database</p>
+<hr />
+<h2 id="critical-considerations">Critical Considerations</h2>
+<h3 id="security-posture">Security Posture</h3>
+<ul>
+<li>Zero-trust architecture for tool access</li>
+<li>Runtime code verification</li>
+<li>Immutable execution environments</li>
+</ul>
+<h3 id="performance-optimization">Performance Optimization</h3>
+<ul>
+<li>Caching for frequently accessed tools</li>
+<li>Asynchronous execution for long operations</li>
+<li>Load balancing across fleet instances</li>
+</ul>
+<h3 id="human-ai-handoff">Human-AI Handoff</h3>
+<ul>
+<li>Graceful degradation on tool failure</li>
+<li>Clear status reporting</li>
+<li>User control over tool activation</li>
+</ul>
+<hr />
+<h2 id="tool-integration-flow">Tool Integration Flow</h2>
+<pre><code>User Request
+    ↓
+Task Decomposition
+    ↓
+┌─────────────┬─────────────┐
+│  Complex    │   Simple    │
+│  (Heavy)    │  (Shadow)   │
+└──────┬──────┴──────┬──────┘
+       ↓             ↓
+Tool Chain      Direct Tool
+Execution       Invocation
+       ↓             ↓
+Data Validation   Result
+       ↓
+┌──────────┬──────────┐
+│ Success  │ Failure  │
+└────┬─────┴────┬─────┘
+     ↓          ↓
+Response    Error
+Synthesis   Recovery
+</code></pre>
+<hr />
+<h2 id="fleet-advantage">Fleet Advantage</h2>
+<p>By partitioning tool usage across slots:</p>
+<ul>
+<li><strong>Heavy</strong>: Strategic multi-tool workflows</li>
+<li><strong>Shadow</strong>: Tactical single-tool interactions  </li>
+<li><strong>CODER</strong>: Operational code execution</li>
+</ul>
+<p>This creates a <strong>capability gradient</strong> that dramatically expands effective model capacity.</p>
+<hr />
+<h2 id="implementation-checklist">Implementation Checklist</h2>
+<ul>
+<li>[ ] Tool registry defined</li>
+<li>[ ] Security policies configured</li>
+<li>[ ] Fallback mechanisms tested</li>
+<li>[ ] Performance benchmarks established</li>
+<li>[ ] Audit logging enabled</li>
+<li>[ ] User control interfaces built</li>
+</ul>
+<hr />
+<p><em>// Tool integration complete</em><br />
+<em>// Fleet capability expanded</em><br />
+<em>// Ready for execution</em></p>
+<p>俊达</p>
+        </div>
+    </main>
+
+    <footer>
+        <span class="footer-sigil">俊达</span>
+        <span class="footer-text">0x6C6F6C // Moves // 俊达</span>
+    </footer>
+</body>
+</html>

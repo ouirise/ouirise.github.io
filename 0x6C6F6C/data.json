@@ -129,6 +129,18 @@
           "word_count": 824
         },
         {
+          "id": "tools",
+          "title": "\u4fca\u8fbe",
+          "description": "> Strategic analysis of external capabilities for LLM fleet operations",
+          "url": "/0x6C6F6C/moves/tools/",
+          "tags": [
+            "DESIGN",
+            "AI",
+            "OPS"
+          ],
+          "word_count": 490
+        },
+        {
           "id": "ui",
           "title": "UI.md \u2014 Interface Architecture",
           "description": "> *\"The interface is the bloodline. We bleed pixels to save the user.\"*",
@@ -156,8 +168,8 @@
           "word_count": 1320
         }
       ],
-      "count": 12,
-      "last_updated": "2026-02-24T15:48:39.438781"
+      "count": 13,
+      "last_updated": "2026-02-24T16:08:10.066573"
     },
     {
       "id": "positions",
@@ -252,7 +264,7 @@
         }
       ],
       "count": 7,
-      "last_updated": "2026-02-24T15:48:39.462423"
+      "last_updated": "2026-02-24T16:08:10.085451"
     },
     {
       "id": "shards",
@@ -276,10 +288,10 @@
         }
       ],
       "count": 1,
-      "last_updated": "2026-02-24T15:48:39.469113"
+      "last_updated": "2026-02-24T16:08:10.092474"
     }
   ],
-  "total_documents": 20,
-  "last_updated": "2026-02-24T15:48:39.515069",
+  "total_documents": 21,
+  "last_updated": "2026-02-24T16:08:10.164562",
   "api_version": "1.0"
 }
