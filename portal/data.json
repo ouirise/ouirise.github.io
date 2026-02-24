@@ -64,6 +64,16 @@
       "description": "Access to Flight Logs and Archive",
       "url": "/archive/",
       "external": true
+    },
+    {
+      "id": "continue",
+      "name": "Continue Config",
+      "description": "0KK-Fleet Continue.dev configuration with 5 models and MCP servers",
+      "url": "/portal/continue-config.yaml",
+      "action": "openWindow('continue')",
+      "version": "6.7.0",
+      "models": ["R2B4", "R15D2", "CODE-7", "SII-25", "INSTINCT-0"],
+      "mcpServers": ["browser", "filesystem", "github", "brave-search"]
     }
   ],
   "api": {

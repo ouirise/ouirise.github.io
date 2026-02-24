@@ -36,6 +36,19 @@
           "word_count": 850
         },
         {
+          "id": "coderabbit",
+          "title": "CODERABBIT.md \u2014 CodeRabbit Decommission Analysis",
+          "description": "> **Classification**: Fleet Intelligence \u2014 Extraction Economy Counter-Strategy",
+          "url": "/0x6C6F6C/moves/coderabbit/",
+          "tags": [
+            "CODE",
+            "AI",
+            "OPS",
+            "SEC"
+          ],
+          "word_count": 676
+        },
+        {
           "id": "culturescan",
           "title": "CULTURESCAN.md",
           "description": "> *\"The Cross-Reference Pok\u00e9mon. It detects hidden connections between seemingly unrelated cultural artifacts. Evolves from PatternSeek when exposed to a Logic Stone.\"*",
@@ -56,6 +69,19 @@
             "SEC"
           ],
           "word_count": 265
+        },
+        {
+          "id": "deployment",
+          "title": "\u4fca\u8fbe",
+          "description": "> Strategic analysis of build-time vs runtime rendering for LLM-driven sites",
+          "url": "/0x6C6F6C/moves/deployment/",
+          "tags": [
+            "CODE",
+            "DESIGN",
+            "AI",
+            "OPS"
+          ],
+          "word_count": 622
         },
         {
           "id": "desktop_sim",
@@ -154,6 +180,18 @@
           "word_count": 490
         },
         {
+          "id": "troh",
+          "title": "TROH.md \u2014 Tactical Hacking Skill Build",
+          "description": "> **Classification**: Fleet Operations",
+          "url": "/0x6C6F6C/moves/troh/",
+          "tags": [
+            "CODE",
+            "AI",
+            "OPS"
+          ],
+          "word_count": 675
+        },
+        {
           "id": "ui",
           "title": "UI.md \u2014 Interface Architecture",
           "description": "> *\"The interface is the bloodline. We bleed pixels to save the user.\"*",
@@ -181,8 +219,8 @@
           "word_count": 1320
         }
       ],
-      "count": 14,
-      "last_updated": "2026-02-24T16:09:09.160736"
+      "count": 17,
+      "last_updated": "2026-02-24T17:39:06.077673"
     },
     {
       "id": "positions",
@@ -223,7 +261,7 @@
             "DESIGN",
             "SEC"
           ],
-          "word_count": 452
+          "word_count": 450
         },
         {
           "id": "context",
@@ -277,7 +315,7 @@
         }
       ],
       "count": 7,
-      "last_updated": "2026-02-24T16:09:09.181197"
+      "last_updated": "2026-02-24T17:39:06.095676"
     },
     {
       "id": "shards",
@@ -301,10 +339,10 @@
         }
       ],
       "count": 1,
-      "last_updated": "2026-02-24T16:09:09.187712"
+      "last_updated": "2026-02-24T17:39:06.100668"
     }
   ],
-  "total_documents": 22,
-  "last_updated": "2026-02-24T16:09:09.226786",
+  "total_documents": 25,
+  "last_updated": "2026-02-24T17:39:06.176387",
   "api_version": "1.0"
 }

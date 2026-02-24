@@ -139,6 +139,7 @@
         #icon-contact { top: 40px; left: 140px; }
         #icon-reports { top: 40px; left: 240px; }
         #icon-vault { top: 40px; left: 340px; }
+        #icon-continue { top: 160px; left: 40px; }
 
         /* Taskbar */
         #taskbar {
@@ -583,6 +584,7 @@
         #icon-contact { animation-delay: 0.1s; }
         #icon-reports { animation-delay: 0.15s; }
         #icon-vault { animation-delay: 0.2s; }
+        #icon-continue { animation-delay: 0.25s; }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
@@ -736,6 +738,15 @@
                 </svg>
             </div>
             <span class="icon-label">Vault</span>
+        </div>
+
+        <div class="desktop-icon" id="icon-continue" onclick="openWindow('continue')">
+            <div class="icon-frame">
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+            </div>
+            <span class="icon-label">Continue</span>
         </div>
     </div>
 
@@ -905,6 +916,79 @@
         </div>
     </div>
 
+    <!-- Continue Config Window -->
+    <div id="window-continue" class="window">
+        <div class="window-header">
+            <div class="window-title">Continue Config // 0KK-Fleet</div>
+            <div class="window-controls">
+                <div class="window-btn minimize" onclick="minimizeWindow('continue')"></div>
+                <div class="window-btn maximize" onclick="maximizeWindow('continue')"></div>
+                <div class="window-btn close" onclick="closeWindow('continue')"></div>
+            </div>
+        </div>
+        <div class="window-content">
+            <div class="prompts-container">
+                <div class="prompts-header">0KK-Fleet Configuration</div>
+                <div class="prompts-subheader">Continue.dev setup // Version 6.7.0 // Copy config.yaml</div>
+
+                <div class="bg-[#0a0a0a] border border-[#333] p-4 mb-4">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-[#a50000] text-lg">⚡</span>
+                        <span class="mono text-sm text-signal">5 Fleet Models Configured</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs mono">
+                        <div class="text-muted">R2B4 (Heavy)</div>
+                        <div class="text-[#666666]">deepseek-r1:8b</div>
+                        <div class="text-muted">R15D2 (Shadow)</div>
+                        <div class="text-[#666666]">deepseek-r1:1.5b</div>
+                        <div class="text-muted">CODE-7 (Coder)</div>
+                        <div class="text-[#666666]">qwen2.5-coder:7b</div>
+                        <div class="text-muted">SII-25 (Vision)</div>
+                        <div class="text-[#666666]">qwen2.5vl:3b</div>
+                        <div class="text-muted">INSTINCT-0</div>
+                        <div class="text-[#666666]">nate/instinct</div>
+                    </div>
+                </div>
+
+                <div class="bg-[#0a0a0a] border border-[#333] p-4 mb-4">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-[#a50000] text-lg">🔌</span>
+                        <span class="mono text-sm text-signal">4 MCP Servers</span>
+                    </div>
+                    <ul class="space-y-1 text-xs mono text-muted">
+                        <li>• browser (Playwright automation)</li>
+                        <li>• filesystem (AI-enhanced file ops)</li>
+                        <li>• github (Repository management)</li>
+                        <li>• brave-search (Privacy web search)</li>
+                    </ul>
+                </div>
+
+                <div class="prompt-card" onclick="copyContinueConfig()">
+                    <div class="prompt-title">📋 Copy Full Config</div>
+                    <div class="prompt-desc">Copy the complete config.yaml to clipboard. Paste into ~/.continue/config.yaml</div>
+                    <span class="prompt-tag">Setup</span>
+                </div>
+
+                <div class="prompt-card" onclick="window.open('continue-config.yaml', '_blank')">
+                    <div class="prompt-title">📥 Download config.yaml</div>
+                    <div class="prompt-desc">Download the configuration file directly for manual installation</div>
+                    <span class="prompt-tag">Download</span>
+                </div>
+
+                <div class="mt-4 p-3 border border-[#a50000] bg-[#a50000]/10">
+                    <p class="mono text-xs text-signal mb-2">Installation Steps:</p>
+                    <ol class="mono text-[10px] text-muted space-y-1 list-decimal list-inside">
+                        <li>Install Continue.dev extension in VS Code/Cursor</li>
+                        <li>Copy or download config.yaml</li>
+                        <li>Paste to ~/.continue/config.yaml</li>
+                        <li>Ensure Ollama is running with required models</li>
+                        <li>Restart IDE</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Notification Container -->
     <div id="notification-container"></div>
 
@@ -1033,6 +1117,20 @@
             }).catch(() => {
                 showNotification('Error', 'Failed to copy prompt');
             });
+        }
+
+        // Copy Continue Config
+        function copyContinueConfig() {
+            fetch('continue-config.yaml')
+                .then(response => response.text())
+                .then(text => {
+                    navigator.clipboard.writeText(text).then(() => {
+                        showNotification('Config Copied', 'Full config.yaml copied to clipboard');
+                    });
+                })
+                .catch(() => {
+                    showNotification('Error', 'Failed to load config');
+                });
         }
 
         // Contact Form Submit
