@@ -1,0 +1,33 @@
+{
+  "flight": "21",
+  "title": "Business Automations",
+  "status": "complete",
+  "category": "automation",
+  "description": "AI-powered e-commerce integration with automated content workflows and payment processing",
+  "url": "/archive/businessautomations/",
+  "api": "/archive/businessautomations/data.json",
+  "stack": {
+    "ecommerce": "Shopify",
+    "payments": "Stripe",
+    "ai": "OpenAI",
+    "runtime": "Node.js",
+    "events": "Webhooks",
+    "deployment": "Serverless"
+  },
+  "features": [
+    "AI product description generation",
+    "Inventory synchronization",
+    "Dynamic pricing",
+    "Customer segmentation",
+    "Cart recovery",
+    "Real-time analytics"
+  ],
+  "results": {
+    "content_time_reduction": "80%",
+    "conversion_improvement": "23%",
+    "availability": "99.9%",
+    "cost_reduction": "15%"
+  },
+  "last_updated": "2026-02-23",
+  "sigil": "俊达"
+}

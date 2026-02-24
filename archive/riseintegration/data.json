@@ -1,0 +1,31 @@
+{
+  "flight": "23",
+  "title": "Rise Integration",
+  "status": "complete",
+  "category": "dashboard",
+  "description": "Human + AI collaborative dashboard with real-time agent monitoring and unified data visualization",
+  "url": "/archive/riseintegration/",
+  "api": "/archive/riseintegration/data.json",
+  "stack": {
+    "framework": "Next.js 15",
+    "ui": "React 19",
+    "language": "TypeScript",
+    "styling": "Tailwind 4",
+    "deployment": "Vercel",
+    "ai": "AI SDK"
+  },
+  "features": [
+    "Real-time AI agent monitoring",
+    "Human-in-the-loop workflows",
+    "Unified data visualization",
+    "Responsive design",
+    "Edge deployment"
+  ],
+  "architecture": {
+    "pattern": "Modular with Server/Client Components",
+    "state": "React hooks + Context",
+    "ai_layer": "Unified abstraction for multiple providers"
+  },
+  "last_updated": "2026-02-23",
+  "sigil": "俊达"
+}
