@@ -75,7 +75,7 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 │   ├── moves/                  # Strategy and documentation
 │   │   ├── ART.md
 │   │   ├── ARTSCI.md
-│   │   ├── CULTUESCAN.md
+│   │   ├── CULTURESCAN.md
 │   │   ├── INSPIRE.md
 │   │   ├── LANG.md
 │   │   ├── NAV.md

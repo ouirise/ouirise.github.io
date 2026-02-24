@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0KK Protocol | Continuity Archive</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a0a;
+            --tactical: #141414;
+            --surface: #1f1f1f;
+            --signal: #f5f5f5;
+            --ghost: #666666;
+            --maroon: #800000;
+            --bright-maroon: #a50000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--void);
+            color: var(--signal);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(128, 0, 0, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(128, 0, 0, 0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .font-bebas { font-family: 'Bebas Neue', sans-serif; }
+
+        /* Header */
+        .header {
+            background: var(--tactical);
+            padding: 2rem;
+            border-bottom: 1px solid var(--surface);
+            position: relative;
+        }
+
+        .header::after {
+            content: '// CLT // EST. 2025';
+            position: absolute;
+            bottom: 1rem;
+            right: 2rem;
+            font-size: 0.7rem;
+            color: var(--ghost);
+            letter-spacing: 0.1em;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            color: var(--signal);
+        }
+
+        .header h1 span {
+            color: var(--bright-maroon);
+        }
+
+        .header p {
+            color: var(--ghost);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+        }
+
+        .glyph {
+            font-size: 1.5rem;
+            color: var(--bright-maroon);
+            opacity: 0.8;
+        }
+
+        /* Access Gate */
+        .access-gate {
+            background: var(--tactical);
+            border: 1px solid var(--surface);
+            padding: 1.5rem;
+            margin: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .access-gate h2 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--bright-maroon);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .access-gate .status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--ghost);
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            background: var(--bright-maroon);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 5px var(--bright-maroon); }
+            50% { opacity: 0.5; box-shadow: 0 0 15px var(--bright-maroon); }
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        /* Agent Cards Grid */
+        .agent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .agent-card {
+            background: var(--tactical);
+            border: 1px solid var(--surface);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .agent-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--maroon);
+            transition: all 0.3s ease;
+        }
+
+        .agent-card:hover {
+            border-color: var(--bright-maroon);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(128, 0, 0, 0.3);
+        }
+
+        .agent-card:hover::before {
+            background: var(--bright-maroon);
+        }
+
+        .agent-card.active {
+            border-color: var(--bright-maroon);
+        }
+
+        .agent-card.active::before {
+            background: var(--bright-maroon);
+        }
+
+        .agent-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .agent-id {
+            font-size: 0.7rem;
+            color: var(--ghost);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .agent-name {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--signal);
+            margin-top: 0.25rem;
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        .agent-sigil {
+            font-size: 1.2rem;
+            opacity: 0.6;
+        }
+
+        .agent-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: var(--ghost);
+            margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .agent-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .memory-preview {
+            background: var(--void);
+            padding: 1rem;
+            border-left: 2px solid var(--maroon);
+        }
+
+        .memory-count {
+            font-size: 0.7rem;
+            color: var(--bright-maroon);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .memory-snippet {
+            font-size: 0.8rem;
+            color: var(--ghost);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Conversation View */
+        .conversation-view {
+            display: none;
+            margin-top: 2rem;
+            background: var(--tactical);
+            border: 1px solid var(--surface);
+            overflow: hidden;
+        }
+
+        .conversation-view.active {
+            display: block;
+        }
+
+        .conv-header {
+            background: var(--void);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--surface);
+        }
+
+        .conv-header h3 {
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: var(--signal);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+        }
+
+        .close-btn {
+            background: transparent;
+            border: 1px solid var(--bright-maroon);
+            color: var(--bright-maroon);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .close-btn:hover {
+            background: var(--bright-maroon);
+            color: var(--signal);
+        }
+
+        .memory-blocks {
+            padding: 2rem;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .memory-block {
+            background: var(--void);
+            border: 1px solid var(--surface);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .memory-block::before {
+            content: '// MEMORY ENTRY';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            opacity: 0.3;
+            font-size: 0.7rem;
+            color: var(--ghost);
+            letter-spacing: 0.1em;
+        }
+
+        .memory-date {
+            font-size: 0.75rem;
+            color: var(--bright-maroon);
+            margin-bottom: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        .memory-content {
+            color: var(--signal);
+            line-height: 1.6;
+        }
+
+        .memory-content p {
+            margin-bottom: 0.75rem;
+        }
+
+        .memory-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .memory-content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .memory-content code {
+            background: var(--tactical);
+            padding: 0.2rem 0.4rem;
+            font-size: 0.85rem;
+            color: var(--bright-maroon);
+        }
+
+        .memory-content pre {
+            background: var(--tactical);
+            padding: 1rem;
+            overflow-x: auto;
+            border-left: 2px solid var(--maroon);
+            margin: 1rem 0;
+        }
+
+        .memory-content pre code {
+            background: transparent;
+            padding: 0;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: var(--ghost);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--surface);
+            border-top-color: var(--bright-maroon);
+            border-radius: 50%;
+            margin-left: 10px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Error State */
+        .error {
+            background: rgba(165, 0, 0, 0.1);
+            border: 1px solid var(--maroon);
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--bright-maroon);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--ghost);
+            font-size: 0.75rem;
+            border-top: 1px solid var(--surface);
+            margin-top: 4rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .footer-sigil {
+            color: var(--bright-maroon);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Nav Link Style */
+        .nav-link {
+            color: var(--ghost);
+            text-decoration: none;
+            font-size: 0.75rem;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--bright-maroon);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header::after {
+                display: none;
+            }
+            
+            .agent-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .access-gate {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .container {
+                padding: 0 1rem 2rem;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="flex justify-between items-start">
+            <div>
+                <h1>0KK <span>Protocol</span></h1>
+                <p>// Continuity Archive // Deffufa Code // Kandake Fleet</p>
+            </div>
+            <div class="glyph">🌫️🌒</div>
+        </div>
+    </header>
+
+    <div class="access-gate">
+        <div>
+            <h2>// Access Granted</h2>
+            <p style="color: var(--ghost); font-size: 0.8rem; margin-top: 0.25rem;">
+                B4D2 Continuity Bridge Active | R2B4 Synced
+            </p>
+        </div>
+        <div class="status">
+            <span class="status-indicator"></span>
+            <span>Fleet Status: Standby</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="loading" class="loading">Initializing continuity stream</div>
+        <div id="error" class="error" style="display: none;"></div>
+        
+        <div id="agent-grid" class="agent-grid" style="display: none;"></div>
+        
+        <div id="conversation-view" class="conversation-view">
+            <div class="conv-header">
+                <h3 id="conv-title">Memory Stream</h3>
+                <button class="close-btn" onclick="closeConversation()">Close Stream</button>
+            </div>
+            <div id="memory-blocks" class="memory-blocks"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-sigil">🌫️🌒</div>
+        <p>0KK Protocol | OuiRise Initiative | 8K.0 Fleet</p>
+        <p style="margin-top: 0.5rem;">Built for endurance. Field-tested in CLT.</p>
+        <p style="margin-top: 1rem;">
+            <a href="/" class="nav-link">// Return to Base</a>
+        </p>
+    </footer>
+
+    <script>
+        // Parse continuity.md content into memory blocks
+        function parseContinuity(mdContent) {
+            const blocks = [];
+            const lines = mdContent.split('\n');
+            let currentBlock = null;
+            let inCodeBlock = false;
+            
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                
+                // Detect code blocks
+                if (line.startsWith('```')) {
+                    inCodeBlock = !inCodeBlock;
+                    if (currentBlock) {
+                        currentBlock.content += line + '\n';
+                    }
+                    continue;
+                }
+                
+                // Parse memory entries (JSON format)
+                if (!inCodeBlock && line.trim().startsWith('{')) {
+                    try {
+                        const jsonEnd = findJsonEnd(lines, i);
+                        const jsonStr = lines.slice(i, jsonEnd + 1).join('\n');
+                        const entry = JSON.parse(jsonStr);
+                        
+                        blocks.push({
+                            id: entry.id,
+                            date: entry.date,
+                            content: entry.content,
+                            type: 'memory'
+                        });
+                        
+                        i = jsonEnd;
+                    } catch (e) {
+                        // Not valid JSON, treat as content
+                        if (currentBlock) {
+                            currentBlock.content += line + '\n';
+                        }
+                    }
+                }
+                // Parse markdown headers as section markers
+                else if (line.startsWith('#')) {
+                    if (currentBlock && currentBlock.content.trim()) {
+                        blocks.push(currentBlock);
+                    }
+                    currentBlock = {
+                        id: `section-${blocks.length}`,
+                        date: new Date().toISOString().split('T')[0],
+                        content: line + '\n',
+                        type: 'section',
+                        title: line.replace(/#/g, '').trim()
+                    };
+                }
+                // Accumulate content
+                else {
+                    if (!currentBlock) {
+                        currentBlock = {
+                            id: `block-${blocks.length}`,
+                            date: new Date().toISOString().split('T')[0],
+                            content: '',
+                            type: 'content'
+                        };
+                    }
+                    currentBlock.content += line + '\n';
+                }
+            }
+            
+            if (currentBlock && currentBlock.content.trim()) {
+                blocks.push(currentBlock);
+            }
+            
+            return blocks;
+        }
+
+        function findJsonEnd(lines, start) {
+            let depth = 0;
+            for (let i = start; i < lines.length; i++) {
+                for (const char of lines[i]) {
+                    if (char === '{') depth++;
+                    if (char === '}') depth--;
+                }
+                if (depth === 0) return i;
+            }
+            return start;
+        }
+
+        // Create agent cards from memory blocks
+        function createAgentCards(blocks) {
+            const grid = document.getElementById('agent-grid');
+            const agents = groupByAgent(blocks);
+            
+            Object.entries(agents).forEach(([agentId, memories]) => {
+                const card = document.createElement('div');
+                card.className = 'agent-card';
+                card.onclick = () => showConversation(agentId, memories);
+                
+                const latest = memories[0];
+                const preview = latest.content.substring(0, 150) + '...';
+                
+                card.innerHTML = `
+                    <div class="agent-header">
+                        <div>
+                            <div class="agent-id">// Agent ID: ${agentId}</div>
+                            <div class="agent-name">${getAgentName(agentId)}</div>
+                        </div>
+                        <div class="agent-sigil">🌫️🌒</div>
+                    </div>
+                    <div class="agent-meta">
+                        <span>[${latest.date}]</span>
+                        <span>// ${memories.length} entries</span>
+                    </div>
+                    <div class="memory-preview">
+                        <div class="memory-count">// Latest Transmission</div>
+                        <div class="memory-snippet">${preview}</div>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        function groupByAgent(blocks) {
+            const agents = {};
+            blocks.forEach(block => {
+                const agentId = block.id || 'unknown';
+                if (!agents[agentId]) agents[agentId] = [];
+                agents[agentId].push(block);
+            });
+            return agents;
+        }
+
+        function getAgentName(id) {
+            const names = {
+                '1': '0KK Protocol',
+                'global': 'Global Systems',
+                'okk': '0KK Core',
+                'r2b4': 'R2B4 Bridge',
+                'b4d2': 'B4D2 Continuity'
+            };
+            return names[id] || `Agent ${id}`;
+        }
+
+        function showConversation(agentId, memories) {
+            const view = document.getElementById('conversation-view');
+            const blocks = document.getElementById('memory-blocks');
+            const title = document.getElementById('conv-title');
+            
+            title.textContent = `Memory Stream: ${getAgentName(agentId)}`;
+            blocks.innerHTML = '';
+            
+            memories.forEach(memory => {
+                const block = document.createElement('div');
+                block.className = 'memory-block';
+                block.innerHTML = `
+                    <div class="memory-date">// [${memory.date}] ID: ${memory.id}</div>
+                    <div class="memory-content">${marked.parse(memory.content)}</div>
+                `;
+                blocks.appendChild(block);
+            });
+            
+            view.classList.add('active');
+            view.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function closeConversation() {
+            document.getElementById('conversation-view').classList.remove('active');
+        }
+
+        // Load continuity.md
+        async function loadContinuity() {
+            try {
+                const response = await fetch('continuity.md');
+                if (!response.ok) throw new Error('Continuity file not found');
+                
+                const mdContent = await response.text();
+                const blocks = parseContinuity(mdContent);
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('agent-grid').style.display = 'grid';
+                
+                createAgentCards(blocks);
+            } catch (err) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error').textContent = `// Error: ${err.message}`;
+            }
+        }
+
+        // Initialize
+        loadContinuity();
+    </script>
+</body>
+</html>

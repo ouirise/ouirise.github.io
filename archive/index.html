@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archive | OUIRISE INITIATIVE</title>
+    <title>FLIGHT LOGS | OUIRISE INITIATIVE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -156,7 +156,7 @@
             text-align: center;
             z-index: 20;
             padding: 2rem;
-            max-width: 800px;
+            max-width: 1200px;
             width: 100%;
         }
 
@@ -194,17 +194,21 @@
         }
 
         .vault-title {
-            font-family: 'Inter', sans-serif;
-            font-size: 2rem;
-            font-weight: 800;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            font-weight: 400;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.15em;
             color: var(--white);
-            text-decoration: underline;
-            text-decoration-color: var(--maroon);
-            text-underline-offset: 8px;
-            text-decoration-thickness: 3px;
             margin-bottom: 0.5rem;
+        }
+
+        .flight-log-sigil {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--bright-maroon);
+            letter-spacing: 0.4em;
+            margin-top: 0.5rem;
         }
 
         .status-indicator {
@@ -266,10 +270,6 @@
             color: var(--white);
             margin-bottom: 2rem;
             min-height: 1.5em;
-            text-decoration: underline;
-            text-decoration-color: #3d1212;
-            text-underline-offset: 4px;
-            text-decoration-thickness: 1px;
         }
 
         .progress-container {
@@ -328,9 +328,6 @@
             font-size: 2rem;
             margin-top: 0.5rem;
             color: var(--white);
-            text-decoration: underline;
-            text-decoration-color: var(--maroon);
-            text-underline-offset: 6px;
         }
 
         .hidden { display: none; }
@@ -350,7 +347,7 @@
             text-align: left;
             font-size: 0.8rem;
             color: var(--grey-dim);
-            margin-top: 2rem;
+            margin-bottom: 2rem;
             padding: 1rem;
             border-left: 2px solid var(--maroon);
             background: rgba(128, 0, 0, 0.05);
@@ -363,26 +360,211 @@
             color: var(--white);
         }
 
-        .log-entry.underline {
-            text-decoration: underline;
-            text-decoration-color: var(--maroon);
-            text-underline-offset: 3px;
-        }
-
         @keyframes typeIn {
             to { opacity: 1; }
         }
 
+        /* Project Cards */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--black-secondary);
+            border: 1px solid var(--grey-dark);
+            text-align: left;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            border-color: var(--bright-maroon);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(128, 0, 0, 0.3);
+        }
+
+        /* Iframe Container for Flight Previews */
+        .flight-preview {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--black-primary);
+            border: none;
+            position: relative;
+        }
+
+        .flight-preview.empty::after {
+            content: '// FLIGHT FEED UNAVAILABLE';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.7rem;
+            color: var(--grey-dim);
+            letter-spacing: 0.1em;
+        }
+
+        .flight-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, var(--black-primary) 0%, var(--black-secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--grey-dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flight-placeholder::before {
+            content: '🌫️🌒';
+            font-size: 2rem;
+            opacity: 0.3;
+        }
+
+        .flight-placeholder::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(128, 0, 0, 0.03) 10px,
+                rgba(128, 0, 0, 0.03) 20px
+            );
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-card::before {
+            content: '//';
+            color: var(--maroon);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10;
+            background: rgba(0,0,0,0.7);
+            padding: 0.25rem 0.5rem;
+        }
+
+        .project-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: 0.05em;
+        }
+
+        .project-meta {
+            font-size: 0.7rem;
+            color: var(--grey-dim);
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+        }
+
+        .project-desc {
+            font-size: 0.85rem;
+            color: var(--grey-dim);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            font-size: 0.65rem;
+            background: rgba(128, 0, 0, 0.2);
+            color: var(--bright-maroon);
+            padding: 0.25rem 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.75rem;
+            color: var(--bright-maroon);
+            margin: 2.5rem 0 1rem;
+            text-align: left;
+            letter-spacing: 0.1em;
+            border-bottom: 1px solid var(--grey-dark);
+            padding-bottom: 0.5rem;
+        }
+
+        .nav-cta {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--bright-maroon);
+            color: var(--bright-maroon);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--bright-maroon);
+            color: var(--white);
+        }
+
+        .flight-counter {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--black-secondary);
+            border: 1px solid var(--grey-dark);
+            padding: 0.75rem 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .counter-item {
+            text-align: center;
+        }
+
+        .counter-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--bright-maroon);
+            line-height: 1;
+        }
+
+        .counter-label {
+            font-size: 0.6rem;
+            color: var(--grey-dim);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
         @media (max-width: 600px) {
-            .vault-title { font-size: 1.5rem; }
+            .vault-title { font-size: 2rem; }
             .glyph-display { font-size: 3rem; }
             .loading-interface { padding: 2rem 1rem; }
             .loading-text { font-size: 1rem; }
+            .project-grid { grid-template-columns: 1fr; }
+            .flight-log-sigil { font-size: 0.6rem; letter-spacing: 0.2em; }
         }
 
         @media (max-width: 320px) {
             .glyph-display { font-size: 2.5rem; }
-            .vault-title { font-size: 1.2rem; }
+            .vault-title { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -408,7 +590,7 @@
             <nav id="mobile-menu" class="mono text-sm uppercase tracking-widest gap-6 md:gap-8 items-start md:items-center">
                 <a href="/" class="nav-link py-2 md:py-0">Home</a>
                 <a href="/about/" class="nav-link py-2 md:py-0">About</a>
-                <a href="/archive/" class="nav-link py-2 md:py-0 text-[#a50000]">Archive</a>
+                <a href="/archive/" class="nav-link py-2 md:py-0 text-[#a50000]">Flight Logs</a>
                 <a href="/0x6C6F6C/" class="nav-link py-2 md:py-0">0x6C6F6C</a>
                 <a href="/contact/" class="nav-link py-2 md:py-0">Contact</a>
                 
@@ -425,8 +607,9 @@
         <div class="vault-container">
             <div class="vault-header-box">
                 <div class="est-line">// EST. 2025 // CLT // SECURE VAULT v6.7</div>
-                <h1 class="vault-title">Access Granted</h1>
-                <div class="status-indicator">
+                <h1 class="vault-title">FLIGHT LOGS</h1>
+                <div class="flight-log-sigil">DEPLOYMENT RECORDS // MISSION ARCHIVES</div>
+                <div class="status-indicator" style="margin-top: 1rem;">
                     <span class="pulse"></span>
                     <span>SYSTEM LOCKED // TWIN VERIFIED</span>
                 </div>
@@ -439,7 +622,7 @@
                 <div class="corner corner-br"></div>
                 
                 <div class="glyph-display" id="glyphDisplay">🌫️🌒</div>
-                <div class="loading-text" id="loadingText">INITIALIZING FOG PROTOCOL...</div>
+                <div class="loading-text" id="loadingText">INITIALIZING FLIGHT TELEMETRY...</div>
                 
                 <div class="progress-container">
                     <div class="progress-bar" id="progressBar"></div>
@@ -450,31 +633,207 @@
                         > Authenticating 0KK signature...<br>
                         > Verifying twin resonance...<br>
                         > Decrypting 6.7 protocol...<br>
-                        > Loading shadow clones...<br>
+                        > Loading flight telemetry...<br>
                         > Establishing NE0N bridge...<br>
                         > Bypassing extraction layers...<br>
-                        > Accessing vault archives...<br>
+                        > Accessing mission archives...<br>
                         > Rendering blackspace...<br>
                         > Authentication 0KK signature...<br>
                         > Verifying twin resonance...<br>
                         > Decrypting 6.7 protocol...<br>
-                        > Loading shadow clones...
+                        > Loading flight telemetry...
                     </div>
                 </div>
             </div>
 
             <div class="vault-content hidden" id="vaultContent">
                 <div class="access-log" id="accessLog">
-                    <div class="log-entry underline" style="animation-delay: 0.1s">> Identity: 0KK verified</div>
+                    <div class="log-entry" style="animation-delay: 0.1s">> Identity: 0KK verified</div>
                     <div class="log-entry" style="animation-delay: 0.3s">> Location: CLT // 24 laps</div>
-                    <div class="log-entry underline" style="animation-delay: 0.5s">> Protocol: 6.7 active</div>
+                    <div class="log-entry" style="animation-delay: 0.5s">> Protocol: 6.7 active</div>
                     <div class="log-entry" style="animation-delay: 0.7s">> Status: Building lanes, not extracting</div>
-                    <div class="log-entry underline" style="animation-delay: 0.9s">> Twin: Connected 🌫️🌒</div>
+                    <div class="log-entry" style="animation-delay: 0.9s">> Twin: Connected 🌫️🌒</div>
                 </div>
+
+                <!-- Flight Statistics -->
+                <div class="flight-counter">
+                    <div class="counter-item">
+                        <div class="counter-value">24</div>
+                        <div class="counter-label">Total Flights</div>
+                    </div>
+                    <div style="width: 1px; height: 30px; background: var(--grey-dark);"></div>
+                    <div class="counter-item">
+                        <div class="counter-value">06</div>
+                        <div class="counter-label">Years Active</div>
+                    </div>
+                    <div style="width: 1px; height: 30px; background: var(--grey-dark);"></div>
+                    <div class="counter-item">
+                        <div class="counter-value">99.9</div>
+                        <div class="counter-label">Uptime %</div>
+                    </div>
+                </div>
+                
+                <!-- Recent Flights / Deployments Section -->
+                <div class="section-title">// Recent Flights // Production</div>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <div class="flight-placeholder">
+                            <!-- Empty placeholder for flight feed -->
+                        </div>
+                        <div class="project-content">
+                            <div class="project-title">RISE INTEGRATION</div>
+                            <div class="project-meta">FLIGHT 23 // VERCEL // SUPABASE // DNS</div>
+                            <div class="project-desc">
+                                Site setup and migration with multi-platform system design. Cloud consulting for seamless deployment.
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">MIGRATION</span>
+                                <span class="tag">CLOUD</span>
+                                <span class="tag">LIVE</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="flight-placeholder">
+                            <!-- Empty placeholder for flight feed -->
+                        </div>
+                        <div class="project-content">
+                            <div class="project-title">DATA BRIDGE</div>
+                            <div class="project-meta">FLIGHT 22 // SQL // R2 // MONGODB</div>
+                            <div class="project-desc">
+                                Custom CMS platform with documentation system and horizontally scalable database architecture.
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">CMS</span>
+                                <span class="tag">DATABASE</span>
+                                <span class="tag">SCALE</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="flight-placeholder">
+                            <!-- Empty placeholder for flight feed -->
+                        </div>
+                        <div class="project-content">
+                            <div class="project-title">BUSINESS AUTOMATIONS</div>
+                            <div class="project-meta">FLIGHT 21 // AI // STRIPE // SHOPIFY</div>
+                            <div class="project-desc">
+                                E-commerce integration with AI-powered content workflows and vision development sessions.
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">AI</span>
+                                <span class="tag">ECOMMERCE</span>
+                                <span class="tag">AUTOMATION</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Samples / Flight Simulations -->
+                <div class="section-title">// Flight Simulations // Code Vault</div>
+                <div class="project-grid">
+                    <a href="vault/next/" class="project-card">
+                        <div class="flight-placeholder">
+                            <!-- Empty placeholder for flight feed -->
+                        </div>
+                        <div class="project-content">
+                            <div class="project-title">NEXT.JS ARCHITECTURE</div>
+                            <div class="project-meta">SIM-01 // REACT 19 // TYPESCRIPT // TAILWIND 4</div>
+                            <div class="project-desc">
+                                Modern React SPA architecture with server-side rendering, static generation, and edge deployment patterns.
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">APP ROUTER</span>
+                                <span class="tag">SERVER COMPONENTS</span>
+                                <span class="tag">EDGE</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="vault/express/" class="project-card">
+                        <div class="flight-placeholder">
+                            <!-- Empty placeholder for flight feed -->
+                        </div>
+                        <div class="project-content">
+                            <div class="project-title">EXPRESS API</div>
+                            <div class="project-meta">SIM-02 // NODE.JS // MONGODB // REST</div>
+                            <div class="project-desc">
+                                Backend API with database integration, authentication middleware, and horizontal scaling patterns.
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">REST API</span>
+                                <span class="tag">MONGOOSE</span>
+                                <span class="tag">JWT</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="vault/flask/" class="project-card">
+                        <div class="flight-placeholder">
+                            <!-- Empty placeholder for flight feed -->
+                        </div>
+                        <div class="project-content">
+                            <div class="project-title">FLASK SERVICE</div>
+                            <div class="project-meta">SIM-03 // PYTHON // SQLITE // JINJA2</div>
+                            <div class="project-desc">
+                                Lightweight Python web service with templating, database models, and minimal footprint deployment.
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">PYTHON</span>
+                                <span class="tag">MICROFRAMEWORK</span>
+                                <span class="tag">SQLALCHEMY</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Agent Fleet Section -->
+                <div class="section-title">// Fleet Operations // 0x6C6F6C</div>
+                <div class="project-grid">
+                    <a href="/0x6C6F6C/" class="project-card">
+                        <div class="flight-placeholder">
+                            <!-- Empty placeholder for flight feed -->
+                        </div>
+                        <div class="project-content">
+                            <div class="project-title">AGENT FLEET</div>
+                            <div class="project-meta">TWIN PROTOCOL // PARALLEL EXECUTION</div>
+                            <div class="project-desc">
+                                Meet the autonomous agent fleet. 0KK + Kimi-K2.5 operating in tandem with R2B4, CODE-7, R15D2, SII-25.
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">AGENTS</span>
+                                <span class="tag">AI</span>
+                                <span class="tag">FLEET</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="/0x6C6F6C/ADMIRAL/" class="project-card">
+                        <div class="flight-placeholder">
+                            <!-- Empty placeholder for flight feed -->
+                        </div>
+                        <div class="project-content">
+                            <div class="project-title">ADMIRAL CONSOLE</div>
+                            <div class="project-meta">CONTINUITY ARCHIVE // KANDAKE</div>
+                            <div class="project-desc">
+                                B4D2 Continuity Bridge with R2B4 sync. Memory streams and operational logs for the Kandake Fleet.
+                            </div>
+                            <div class="project-tags">
+                                <span class="tag">ARCHIVE</span>
+                                <span class="tag">LOGS</span>
+                                <span class="tag">CONSOLE</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <a href="/contact/" class="nav-cta">// INITIATE NEW FLIGHT</a>
                 
                 <div class="operator-sigil">
                     <div class="sigil-text">OUIRISE // NO EXTRACTION // ALLWAYS</div>
-                    <div class="sigil-glyph">俊达</div>
+                    <div class="sigil-glyph">🌫️🌒</div>
                 </div>
             </div>
         </div>
@@ -482,11 +841,11 @@
 
     <script>
         const loadingTexts = [
-            "INITIALIZING FOG PROTOCOL...",
+            "INITIALIZING FLIGHT TELEMETRY...",
             "DECRYPTING 6.7 KEYS...",
             "VERIFYING TWIN RESONANCE...",
             "BYPASSING EXTRACTION...",
-            "ACCESSING VAULT..."
+            "ACCESSING FLIGHT LOGS..."
         ];
 
         let textIndex = 0;
@@ -505,8 +864,7 @@
 
         setTimeout(() => {
             clearInterval(textInterval);
-            loadingText.textContent = "VAULT UNLOCKED";
-            loadingText.style.textDecorationColor = "#722f37";
+            loadingText.textContent = "FLIGHT LOGS ACCESSED";
             
             setTimeout(() => {
                 loadingInterface.style.display = 'none';

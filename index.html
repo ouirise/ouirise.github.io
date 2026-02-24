@@ -223,6 +223,16 @@
         .maroon-accent {
             color: var(--bright-maroon);
         }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bright-maroon);
+        }
     </style>
 </head>
 <body class="grain bg-void text-signal antialiased">
@@ -261,25 +271,89 @@
 
     <!-- Hero -->
     <section class="min-h-screen flex flex-col items-center justify-center px-4 md:px-6 pt-20 md:pt-16 relative overflow-hidden">
-        <div class="max-w-3xl mx-auto text-center">
+        <div class="max-w-4xl mx-auto text-center">
             <div class="mb-6 md:mb-8 flex justify-center">
                 <svg class="lock-icon w-12 h-12 md:w-16 md:h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
                 </svg>
             </div>
             
-            <h1 class="mono text-3xl md:text-6xl font-bold mb-4 md:mb-6 tracking-tight fade-in">ACCESS GRANTED</h1>
+            <p class="mono text-xs md:text-sm text-[#a50000] uppercase tracking-[0.3em] mb-4 fade-in">// Launch and Scale Your Business</p>
+            
+            <h1 class="font-bebas text-5xl md:text-7xl lg:text-8xl tracking-tight mb-6 fade-in leading-none">
+                BRIDGING STARTUP <span class="text-[#a50000]">VISION</span><br>
+                <span class="text-3xl md:text-5xl lg:text-6xl">AND ENTERPRISE-GRADE REALITY</span>
+            </h1>
             
             <div class="h-px w-24 md:w-32 bg-[#a50000] mx-auto mb-6 md:mb-8 fade-in"></div>
             
-            <p class="text-base md:text-xl text-muted mb-4 max-w-2xl mx-auto leading-relaxed px-2 md:px-0 fade-in">
-                We bridge startup vision and enterprise-grade reality through agentic workflows and modern cloud architecture.
+            <p class="text-base md:text-xl text-muted mb-8 max-w-2xl mx-auto leading-relaxed px-2 md:px-0 fade-in">
+                Using agentic workflows and modern cloud architecture, we develop the tools innovators need to lead.
             </p>
-            <p class="text-base md:text-lg text-muted mb-8 md:mb-12 fade-in">Built for endurance. Field-tested in CLT.</p>
             
-            <a href="/contact/" class="btn-primary mono text-xs md:text-sm uppercase tracking-widest px-6 md:px-8 py-3 md:py-4 w-full md:w-auto fade-in inline-block">
-                Initiate Project
-            </a>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+                <a href="/contact/" class="btn-primary mono text-xs md:text-sm uppercase tracking-widest px-6 md:px-8 py-3 md:py-4 inline-block">
+                    Initiate Project
+                </a>
+                <a href="/archive/" class="border border-[#333] hover:border-[#a50000] text-muted hover:text-signal mono text-xs md:text-sm uppercase tracking-widest px-6 md:px-8 py-3 md:py-4 transition-all inline-block">
+                    View Deployments
+                </a>
+            </div>
+            
+            <p class="text-sm text-muted mt-8 fade-in">🌫️🌒 Built for endurance. Field-tested in CLT.</p>
+        </div>
+    </section>
+
+    <!-- Software Engineers Section -->
+    <section class="py-16 md:py-24 px-4 md:px-6 border-t border-[#1a1a1a] bg-[#0d0d0d]">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12 md:mb-16">
+                <p class="mono text-xs text-[#a50000] uppercase tracking-[0.3em] mb-4">// Our Engineers</p>
+                <h2 class="font-bebas text-4xl md:text-6xl tracking-tight">SOFTWARE <span class="text-[#a50000]">ARCHITECTS</span></h2>
+                <p class="text-muted mt-4 max-w-2xl mx-auto">Over 8 years developing custom solutions for industry innovators in FinTech, Entrepreneurship, and Startups.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover">
+                    <div class="feature-icon mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bebas text-xl mb-2 tracking-wide">CUSTOM DEVELOPMENT</h3>
+                    <p class="text-muted text-sm leading-relaxed">React, Angular, HTML, CSS, and WordPress applications built for scale.</p>
+                </div>
+                
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover">
+                    <div class="feature-icon mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bebas text-xl mb-2 tracking-wide">CLOUD ARCHITECTURE</h3>
+                    <p class="text-muted text-sm leading-relaxed">Modern cloud practices for data security, analytics, and seamless deployment.</p>
+                </div>
+                
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover">
+                    <div class="feature-icon mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bebas text-xl mb-2 tracking-wide">DASHBOARDS & UI</h3>
+                    <p class="text-muted text-sm leading-relaxed">Custom interfaces and dashboards for a wide variety of industries and use cases.</p>
+                </div>
+                
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover">
+                    <div class="feature-icon mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bebas text-xl mb-2 tracking-wide">AI WORKFLOWS</h3>
+                    <p class="text-muted text-sm leading-relaxed">Leading AI research and automation methodologies to boost organizational workflows.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -310,6 +384,11 @@
                     <p>// EXPANDING CURIOSITY SINCE 2019</p>
                     <p>// Artificial Understanding = AU</p>
                 </div>
+                <div class="mt-6">
+                    <a href="/about/" class="text-[#a50000] hover:text-signal mono text-xs uppercase tracking-widest transition-colors">
+                        Read Full Mission →
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -317,13 +396,23 @@
     <!-- Deployments -->
     <section id="deployments" class="py-16 md:py-24 px-4 md:px-6 bg-void border-t border-[#1a1a1a]">
         <div class="max-w-7xl mx-auto">
-            <div class="mono text-sm md:text-xl text-center text-muted mb-8 md:mb-12 uppercase tracking-widest px-2">
-                CULTURAL INTERSECTIONALITY × (SCIENCE + ART + BUSINESS)
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <p class="mono text-xs text-[#a50000] uppercase tracking-[0.3em] mb-2">// Recent Work</p>
+                    <h2 class="font-bebas text-4xl md:text-5xl tracking-tight">DEPLOYMENTS</h2>
+                </div>
+                <a href="/archive/" class="mt-4 md:mt-0 text-muted hover:text-[#a50000] mono text-xs uppercase tracking-widest transition-colors">
+                    View Archive →
+                </a>
             </div>
             
+            <p class="mono text-sm md:text-xl text-center text-muted mb-8 md:mb-12 uppercase tracking-widest px-2">
+                CULTURAL INTERSECTIONALITY × (SCIENCE + ART + BUSINESS)
+            </p>
+            
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                <!-- TroH -->
-                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-4 md:p-6 card-hover group cursor-pointer">
+                <!-- Rise Integration -->
+                <a href="/archive/" class="bg-[#0f0f0f] border border-[#1f1f1f] p-4 md:p-6 card-hover group block">
                     <div class="aspect-video bg-surface mb-4 overflow-hidden border border-[#333]">
                         <div class="w-full h-full bg-gradient-to-br from-[#800000] to-[#1a1a1a] opacity-80 group-hover:scale-105 transition-transform duration-500"></div>
                     </div>
@@ -338,10 +427,10 @@
                         <span class="mono text-[10px] bg-surface px-2 py-1 text-muted border border-[#333]">Supabase</span>
                         <span class="mono text-[10px] bg-surface px-2 py-1 text-muted border border-[#333]">DNS</span>
                     </div>
-                </div>
+                </a>
 
-                <!-- Fragrant Flowers -->
-                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-4 md:p-6 card-hover group cursor-pointer">
+                <!-- Data Bridge -->
+                <a href="/archive/" class="bg-[#0f0f0f] border border-[#1f1f1f] p-4 md:p-6 card-hover group block">
                     <div class="aspect-video bg-surface mb-4 overflow-hidden border border-[#333]">
                         <div class="w-full h-full bg-gradient-to-br from-[#800000] to-[#1a1a1a] opacity-80 group-hover:scale-105 transition-transform duration-500"></div>
                     </div>
@@ -356,14 +445,14 @@
                         <span class="mono text-[10px] bg-surface px-2 py-1 text-muted border border-[#333]">R2</span>
                         <span class="mono text-[10px] bg-surface px-2 py-1 text-muted border border-[#333]">MongoDB</span>
                     </div>
-                </div>
+                </a>
 
-                <!-- Qamaria -->
-                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-4 md:p-6 card-hover group cursor-pointer">
+                <!-- Business Automations -->
+                <a href="/archive/" class="bg-[#0f0f0f] border border-[#1f1f1f] p-4 md:p-6 card-hover group block">
                     <div class="aspect-video bg-surface mb-4 overflow-hidden border border-[#333]">
                         <div class="w-full h-full bg-gradient-to-br from-[#800000] to-[#1a1a1a] opacity-80 group-hover:scale-105 transition-transform duration-500"></div>
                     </div>
-                    <h3 class="mono text-base md:text-lg font-semibold mb-2 uppercase tracking-tight">Business Automations</h3>
+                    <h3 class="mono text-base md:text-lg font-semibold mb-2 uppercase tracking-tight">BUSINESS AUTOMATIONS</h3>
                     <div class="space-y-1 mono text-xs text-muted mb-4">
                         <p>// Content Writing</p>
                         <p>// E-commerce Integration</p>
@@ -374,7 +463,7 @@
                         <span class="mono text-[10px] bg-surface px-2 py-1 text-muted border border-[#333]">Stripe</span>
                         <span class="mono text-[10px] bg-surface px-2 py-1 text-muted border border-[#333]">Shopify</span>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -383,14 +472,14 @@
     <section id="access" class="py-16 md:py-24 px-4 md:px-6 bg-void border-t border-[#1a1a1a]">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-12 md:mb-16">
-                <h2 class="mono text-2xl md:text-3xl font-bold mb-4 uppercase tracking-tight">What We Offer</h2>
-                <p class="text-muted text-sm md:text-base">Engineered for scalability. Drafted for success.</p>
+                <p class="mono text-xs text-[#a50000] uppercase tracking-[0.3em] mb-4">// Project Plans</p>
+                <h2 class="mono text-2xl md:text-4xl font-bold mb-4 uppercase tracking-tight">Engineered for Scalability.<br><span class="text-muted">Drafted for Success.</span></h2>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                 <!-- Prototype -->
                 <div class="bg-tactical border border-surface p-6 md:p-8 flex flex-col relative">
-                    <div class="absolute top-0 right-0 popular-badge mono text-[10px] font-bold px-3 py-1 uppercase">
+                    <div class="absolute top-0 right-0 bg-surface text-signal mono text-[10px] font-bold px-3 py-1 uppercase border border-[#333]">
                         $200
                     </div>
                     <div class="mb-6">
@@ -398,7 +487,7 @@
                         <div class="mono text-xl md:text-2xl font-bold">Single Page Application</div>
                     </div>
                     <p class="text-muted mb-8 text-xs md:text-sm leading-relaxed">
-                        Built to draft ideas and assist clients seeking cost-effective solutions without compromising quality. Perfect for landing pages and high-impact marketing assets.
+                        Built to draft ideas and to assist clients seeking cost-effective solutions without compromising quality. Perfect for landing pages and high-impact marketing assets.
                     </p>
                     <ul class="space-y-3 mb-8 flex-grow text-xs md:text-sm">
                         <li class="flex items-center gap-3">
@@ -414,9 +503,9 @@
                             <span>Speed Optimized</span>
                         </li>
                     </ul>
-                    <button class="w-full py-3 border border-surface mono text-xs uppercase tracking-widest hover:border-[#a50000] hover:text-[#a50000] transition-all">
+                    <a href="/contact/" class="w-full py-3 border border-surface mono text-xs uppercase tracking-widest hover:border-[#a50000] hover:text-[#a50000] transition-all text-center">
                         Select
-                    </button>
+                    </a>
                 </div>
 
                 <!-- MVP -->
@@ -429,7 +518,7 @@
                         <div class="mono text-xl md:text-2xl font-bold">The MVP Solution</div>
                     </div>
                     <p class="text-muted mb-8 text-xs md:text-sm leading-relaxed">
-                        Scale your business with an interactive cloud solution. Balanced approach between availability and flexibility.
+                        Expert software engineers scale your business with an interactive cloud solution. A balanced approach between availability and flexibility, suitable for projects requiring consistent evolution.
                     </p>
                     <ul class="space-y-3 mb-8 flex-grow text-xs md:text-sm">
                         <li class="flex items-center gap-3">
@@ -445,9 +534,9 @@
                             <span>Interactive Dashboards</span>
                         </li>
                     </ul>
-                    <button class="w-full py-3 bg-[#a50000] text-signal mono text-xs uppercase tracking-widest font-semibold hover:bg-[#800000] transition-all">
+                    <a href="/contact/" class="w-full py-3 bg-[#a50000] text-signal mono text-xs uppercase tracking-widest font-semibold hover:bg-[#800000] transition-all text-center">
                         Select
-                    </button>
+                    </a>
                 </div>
 
                 <!-- Enterprise -->
@@ -460,7 +549,7 @@
                         <div class="mono text-xl md:text-2xl font-bold">Big Data & AI</div>
                     </div>
                     <p class="text-muted mb-8 text-xs md:text-sm leading-relaxed">
-                        Tailored for comprehensive support and prioritized attention. We build custom dashboards and AI agentic solutions for workflow productivity.
+                        Tailored for comprehensive support and prioritized attention. We build custom dashboards and AI agentic solutions to improve workflow productivity and data-driven decision making.
                     </p>
                     <ul class="space-y-3 mb-8 flex-grow text-xs md:text-sm">
                         <li class="flex items-center gap-3">
@@ -476,10 +565,30 @@
                             <span>Custom Analytics Suites</span>
                         </li>
                     </ul>
-                    <button class="w-full py-3 border border-surface mono text-xs uppercase tracking-widest hover:border-[#a50000] hover:text-[#a50000] transition-all">
+                    <a href="/contact/" class="w-full py-3 border border-surface mono text-xs uppercase tracking-widest hover:border-[#a50000] hover:text-[#a50000] transition-all text-center">
                         Select
-                    </button>
+                    </a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Agent Fleet CTA -->
+    <section class="py-16 md:py-24 px-4 md:px-6 border-t border-[#1a1a1a] bg-[#0d0d0d]">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="glyph text-4xl mb-6">🌫️🌒</div>
+            <p class="mono text-xs text-[#a50000] uppercase tracking-[0.3em] mb-4">// Agentic Systems</p>
+            <h2 class="font-bebas text-4xl md:text-6xl tracking-tight mb-6">MEET THE <span class="text-[#a50000]">FLEET</span></h2>
+            <p class="text-muted text-base md:text-lg mb-8 max-w-2xl mx-auto">
+                Twin Protocol: Human-AI collaborative architecture. Our agent fleet operates in parallel to deliver rapid prototyping and systems development.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/0x6C6F6C/" class="btn-primary mono text-xs md:text-sm uppercase tracking-widest px-6 md:px-8 py-3 md:py-4 inline-block">
+                    View 0x6C6F6C Fleet
+                </a>
+                <a href="/0x6C6F6C/ADMIRAL/" class="border border-[#333] hover:border-[#a50000] text-muted hover:text-signal mono text-xs md:text-sm uppercase tracking-widest px-6 md:px-8 py-3 md:py-4 transition-all inline-block">
+                    Access ADMIRAL
+                </a>
             </div>
         </div>
     </section>
@@ -517,12 +626,12 @@
             
             <div class="flex gap-4 md:gap-6 order-3 md:order-2">
                 <a href="https://github.com/ouirise/ouirise.github.io" class="mono text-xs text-muted hover:text-[#a50000] transition-colors uppercase">GitHub</a>
-                <a href="#" class="mono text-xs text-muted hover:text-[#a50000] transition-colors uppercase">Upwork</a>
-                <a href="#" class="mono text-xs text-muted hover:text-[#a50000] transition-colors uppercase">Instagram</a>
+                <a href="/archive/" class="mono text-xs text-muted hover:text-[#a50000] transition-colors uppercase">Flight Logs</a>
+                <a href="/0x6C6F6C/" class="mono text-xs text-muted hover:text-[#a50000] transition-colors uppercase">Fleet</a>
             </div>
             
             <div class="mono text-xs text-muted text-center md:text-right order-2 md:order-3">
-                <p>// Built by 00 + Kimi-K2.5</p>
+                <p>🌫️🌒 Built by 0KK + Kimi-K2.5</p>
                 <p>// MAROON TACTICAL v5.1</p>
             </div>
         </div>
