@@ -1,0 +1,52 @@
+{
+  "site": "ouirise.github.io",
+  "version": "2.7.1",
+  "last_updated": "2026-02-23",
+  "sigil": "俊达",
+  "routes": {
+    "home": {
+      "url": "/",
+      "title": "OUIRISE Initiative",
+      "description": "Grant Compliance Rescue - 7 days to filed + compliant"
+    },
+    "about": {
+      "url": "/about/",
+      "title": "About",
+      "description": "Infrastructure without extraction"
+    },
+    "contact": {
+      "url": "/contact/",
+      "title": "Contact",
+      "description": "Request access - Direct lines"
+    },
+    "archive": {
+      "url": "/archive/",
+      "title": "Flight Logs",
+      "description": "Deployment records and mission archive"
+    },
+    "fleet": {
+      "url": "/0x6C6F6C/",
+      "title": "Agent Fleet",
+      "description": "0x6C6F6C - Agent systems fleet dashboard"
+    },
+    "portal": {
+      "url": "/portal/",
+      "title": "Client Portal",
+      "description": "JUNDA desktop environment"
+    },
+    "docs": {
+      "url": "/0x6C6F6C/docs/",
+      "title": "Documentation",
+      "description": "Complete fleet documentation with search"
+    }
+  },
+  "api": {
+    "endpoints": [
+      "/data.json",
+      "/0x6C6F6C/data.json",
+      "/0x6C6F6C/moves/data.json",
+      "/0x6C6F6C/positions/data.json",
+      "/0x6C6F6C/shards/data.json"
+    ]
+  }
+}

@@ -137,6 +137,41 @@
             padding-left: 1rem;
         }
 
+        /* Agent card mobile optimization */
+        .agent-card {
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .agent-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(165, 0, 0, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .agent-card:hover::before {
+            left: 100%;
+        }
+
+        .agent-card:active {
+            transform: scale(0.98);
+        }
+
+        /* Mobile touch feedback */
+        .touch-device .agent-card {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .touch-device .agent-card:active {
+            background: rgba(165, 0, 0, 0.1);
+        }
+
         /* Dropdown Styles - Minimal Functional */
         .dropdown-menu {
             opacity: 0;
@@ -310,7 +345,7 @@
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- 0KK -->
-                <div class="agent-card p-6">
+                <div class="agent-card p-6 cursor-pointer" onclick="copyAgentPrompt('0KK', 'Principal Architect', 'Systems design, protocol development, client relations. CLT-based. Fleet commander. Human operator with 6+ years enterprise infrastructure experience.')">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="font-bebas text-2xl tracking-wide">0KK</h3>
                         <span class="text-[#a50000]">俊达</span>
@@ -319,14 +354,17 @@
                     <p class="text-muted text-sm leading-relaxed mb-4">
                         Human operator. Systems design, protocol development, client relations. CLT-based. Fleet commander.
                     </p>
-                    <div class="flex items-center gap-2">
-                        <span class="status-dot"></span>
-                        <span class="mono text-xs text-[#666666]">Online // Command</span>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="status-dot"></span>
+                            <span class="mono text-xs text-[#666666]">Online // Command</span>
+                        </div>
+                        <span class="mono text-[10px] text-[#a50000] opacity-0 group-hover:opacity-100 transition-opacity">CLICK TO COPY</span>
                     </div>
                 </div>
 
                 <!-- Kimi-K2.5 -->
-                <div class="agent-card p-6">
+                <div class="agent-card p-6 cursor-pointer" onclick="copyAgentPrompt('KIMI-K2.5', 'AI Systems Partner', 'Large language model integration specialist. Local-first deployment expert. Technical twin to 0KK for rapid prototyping and code generation. Agentic workflow architect.')">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="font-bebas text-2xl tracking-wide">KIMI-K2.5</h3>
                         <span class="text-[#a50000]">俊达</span>
@@ -335,14 +373,17 @@
                     <p class="text-muted text-sm leading-relaxed mb-4">
                         Large language model integration. Local-first deployment specialist. Technical twin to 0KK.
                     </p>
-                    <div class="flex items-center gap-2">
-                        <span class="status-dot"></span>
-                        <span class="mono text-xs text-[#666666]">Online // Twin Sync</span>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="status-dot"></span>
+                            <span class="mono text-xs text-[#666666]">Online // Twin Sync</span>
+                        </div>
+                        <span class="mono text-[10px] text-[#a50000] opacity-0 group-hover:opacity-100 transition-opacity">CLICK TO COPY</span>
                     </div>
                 </div>
 
                 <!-- R2B4 -->
-                <div class="agent-card p-6">
+                <div class="agent-card p-6 cursor-pointer" onclick="copyAgentPrompt('R2B4', 'Heavy / Strategic', 'Strategic oversight and command structure. Cross-platform verification specialist. Deep analysis protocols. B4D2 bridge operator. Continuity and archival systems.')">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="font-bebas text-2xl tracking-wide">R2B4</h3>
                         <span class="text-[#a50000]">俊达</span>
@@ -351,14 +392,17 @@
                     <p class="text-muted text-sm leading-relaxed mb-4">
                         Strategic oversight. Command structure, cross-platform verification, deep analysis protocols.
                     </p>
-                    <div class="flex items-center gap-2">
-                        <span class="status-dot"></span>
-                        <span class="mono text-xs text-[#666666]">Standing By</span>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="status-dot"></span>
+                            <span class="mono text-xs text-[#666666]">Standing By</span>
+                        </div>
+                        <span class="mono text-[10px] text-[#a50000] opacity-0 group-hover:opacity-100 transition-opacity">CLICK TO COPY</span>
                     </div>
                 </div>
 
                 <!-- CODE-7 -->
-                <div class="agent-card p-6">
+                <div class="agent-card p-6 cursor-pointer" onclick="copyAgentPrompt('CODE-7', 'Build Execution', 'Recursive traversal specialist. JSON serialization expert. Filetree generation and build execution. Python automation. Zero-dependency scripts. Silent deployment protocols.')">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="font-bebas text-2xl tracking-wide">CODE-7</h3>
                         <span class="text-[#a50000]">俊达</span>
@@ -367,14 +411,17 @@
                     <p class="text-muted text-sm leading-relaxed mb-4">
                         Recursive traversal, JSON serialization, filetree generation. Build execution specialist.
                     </p>
-                    <div class="flex items-center gap-2">
-                        <span class="status-dot"></span>
-                        <span class="mono text-xs text-[#666666]">Active // Building</span>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="status-dot"></span>
+                            <span class="mono text-xs text-[#666666]">Active // Building</span>
+                        </div>
+                        <span class="mono text-[10px] text-[#a50000] opacity-0 group-hover:opacity-100 transition-opacity">CLICK TO COPY</span>
                     </div>
                 </div>
 
                 <!-- R15D2 -->
-                <div class="agent-card p-6">
+                <div class="agent-card p-6 cursor-pointer" onclick="copyAgentPrompt('R15D2', 'Shadow / Rapid Deploy', 'Zero-dependency deployment specialist. Standard library only. No virtualenv required. Silent execution protocols. Shadow operations. Rapid response and extraction.')">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="font-bebas text-2xl tracking-wide">R15D2</h3>
                         <span class="text-[#a50000]">俊达</span>
@@ -383,14 +430,17 @@
                     <p class="text-muted text-sm leading-relaxed mb-4">
                         Zero-dependency deployment. Standard lib only. No virtualenv required. Silent execution protocols.
                     </p>
-                    <div class="flex items-center gap-2">
-                        <span class="status-dot"></span>
-                        <span class="mono text-xs text-[#666666]">Silent // Deployed</span>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="status-dot"></span>
+                            <span class="mono text-xs text-[#666666]">Silent // Deployed</span>
+                        </div>
+                        <span class="mono text-[10px] text-[#a50000] opacity-0 group-hover:opacity-100 transition-opacity">CLICK TO COPY</span>
                     </div>
                 </div>
 
                 <!-- SII-25 -->
-                <div class="agent-card p-6">
+                <div class="agent-card p-6 cursor-pointer" onclick="copyAgentPrompt('SII-25', 'Visual Recon', 'Filetree visualization and metadata enrichment. System mapping specialist. OSINT and reconnaissance operations. Visual intelligence and pattern recognition.')">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="font-bebas text-2xl tracking-wide">SII-25</h3>
                         <span class="text-[#a50000]">俊达</span>
@@ -654,6 +704,33 @@
                 menu.classList.remove('open');
                 arrow.classList.remove('open');
             });
+        }
+
+        // Copy agent prompt to clipboard
+        function copyAgentPrompt(name, role, description) {
+            const prompt = `You are ${name}, ${role} at OUIRISE Initiative. ${description} Operate with the OUIRISE philosophy: infrastructure without extraction, no vendor lock-in, field-tested in CLT. Respond with 俊达 protocol markers. Be direct, efficient, surgical.`;
+            
+            navigator.clipboard.writeText(prompt).then(() => {
+                // Visual feedback
+                const cards = document.querySelectorAll('.agent-card');
+                cards.forEach(card => {
+                    if (card.textContent.includes(name)) {
+                        card.style.borderColor = '#a50000';
+                        card.style.boxShadow = '0 0 20px rgba(165, 0, 0, 0.3)';
+                        setTimeout(() => {
+                            card.style.borderColor = '';
+                            card.style.boxShadow = '';
+                        }, 500);
+                    }
+                });
+            }).catch(err => {
+                console.log('Copy failed:', err);
+            });
+        }
+
+        // Touch device detection for mobile
+        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+            document.body.classList.add('touch-device');
         }
     </script>
 </body>
