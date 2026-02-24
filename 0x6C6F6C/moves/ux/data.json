@@ -1,0 +1,21 @@
+{
+  "id": "ux",
+  "title": "UX.md \u2014 Experience Architecture",
+  "description": "> *\"We don't design for users. We design for humans who happen to use systems.\"*",
+  "url": "/0x6C6F6C/moves/ux/",
+  "section": "MOVES",
+  "tags": [
+    "CODE",
+    "DESIGN",
+    "AI",
+    "OPS",
+    "ART"
+  ],
+  "stats": {
+    "word_count": 1320,
+    "code_blocks": 7
+  },
+  "last_modified": "2026-02-24T15:44:02.669137",
+  "format": "documentation",
+  "access_level": "public"
+}

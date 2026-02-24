@@ -1,0 +1,19 @@
+{
+  "id": "cyberchess",
+  "title": "**CYBERCHESS.md**",
+  "description": "*// Documentation for fleet operations // \u4fca\u8fbe*",
+  "url": "/0x6C6F6C/moves/cyberchess/",
+  "section": "MOVES",
+  "tags": [
+    "AI",
+    "OPS",
+    "SEC"
+  ],
+  "stats": {
+    "word_count": 265,
+    "code_blocks": 1
+  },
+  "last_modified": "2026-02-24T15:44:02.658596",
+  "format": "documentation",
+  "access_level": "public"
+}

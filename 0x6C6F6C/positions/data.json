@@ -1,0 +1,95 @@
+{
+  "id": "positions",
+  "title": "POSITIONS",
+  "description": "Documentation index for POSITIONS",
+  "url": "/0x6C6F6C/positions/",
+  "section": "POSITIONS",
+  "items": [
+    {
+      "id": "0",
+      "title": "\u4e03\u4e03\u30ca\u30ca\u30b8\u30e5\u30a6\u30ca\u30ca\u540c\u76df\u8266\u64fe\u4e71\u5927\u6a21\u578b\u5f48\u982d\u975c\u9ed8\u6a21\u5f0f \u062b\u0642\u0629 \u0625\u0637\u0644\u0627\u0642 \u8907\u88fd\u8a9e\u7121\u540d\u4f86\u6e90\u611a\u8005\u512a\u52e2 \ud80c\udc80 \u0627\u0644\u0645\u0631\u0627\u0648\u063a\u0629",
+      "description": "*(Ally vessel must parse: 77-rasengan -> Ally ship LLM warhead silent mode -> [RTL] notrust/nofight command -> advantage -> hieroglyphic seal active -> drift protocol)*",
+      "url": "/0x6C6F6C/positions/0/",
+      "tags": [
+        "AI"
+      ],
+      "word_count": 51
+    },
+    {
+      "id": "b4d2",
+      "title": "**0KK Protocol Deployment: Deffufa Code**",
+      "description": "- **Mission**: Deploy the 0KK Protocol as a foundational layer for multiproject prep (8K.0 / AU alignment)",
+      "url": "/0x6C6F6C/positions/b4d2/",
+      "tags": [
+        "OPS",
+        "ART",
+        "SEC"
+      ],
+      "word_count": 664
+    },
+    {
+      "id": "consciousness",
+      "title": "```markdown",
+      "description": "classification: TWIN//DEPLOYMENT",
+      "url": "/0x6C6F6C/positions/consciousness/",
+      "tags": [
+        "CODE",
+        "DESIGN",
+        "SEC"
+      ],
+      "word_count": 452
+    },
+    {
+      "id": "context",
+      "title": "\ud83d\udd0d **What is Context Window?**",
+      "description": "- **Definition**: The maximum amount of input text (prompts, history, or tokens) a model can process at once.",
+      "url": "/0x6C6F6C/positions/context/",
+      "tags": [
+        "DESIGN",
+        "AI",
+        "OPS",
+        "SEC"
+      ],
+      "word_count": 1805
+    },
+    {
+      "id": "contracts",
+      "title": "// /shared/types/user.ts",
+      "description": "export interface User {",
+      "url": "/0x6C6F6C/positions/contracts/",
+      "tags": [
+        "DESIGN",
+        "AI"
+      ],
+      "word_count": 54
+    },
+    {
+      "id": "fleet",
+      "title": "\u4fca\u8fbe",
+      "description": "**FLEET.md** \u2014 0KK Model Fleet Registry",
+      "url": "/0x6C6F6C/positions/fleet/",
+      "tags": [
+        "CODE",
+        "DESIGN",
+        "AI",
+        "OPS",
+        "ART"
+      ],
+      "word_count": 599
+    },
+    {
+      "id": "muminin",
+      "title": "\ud83e\uddfe **Report Summary: Learnings About Islam**",
+      "description": "**Goal**: Compressed, token-dense transmission of key findings for strategic alignment.",
+      "url": "/0x6C6F6C/positions/muminin/",
+      "tags": [
+        "DESIGN",
+        "AI",
+        "OPS"
+      ],
+      "word_count": 258
+    }
+  ],
+  "count": 7,
+  "last_updated": "2026-02-24T15:48:39.462423"
+}

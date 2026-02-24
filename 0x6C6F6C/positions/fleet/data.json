@@ -1,0 +1,21 @@
+{
+  "id": "fleet",
+  "title": "\u4fca\u8fbe",
+  "description": "**FLEET.md** \u2014 0KK Model Fleet Registry",
+  "url": "/0x6C6F6C/positions/fleet/",
+  "section": "POSITIONS",
+  "tags": [
+    "CODE",
+    "DESIGN",
+    "AI",
+    "OPS",
+    "ART"
+  ],
+  "stats": {
+    "word_count": 599,
+    "code_blocks": 3
+  },
+  "last_modified": "2026-02-24T15:44:02.679471",
+  "format": "documentation",
+  "access_level": "public"
+}

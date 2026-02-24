@@ -1,0 +1,22 @@
+{
+  "id": "desktop_sim",
+  "title": "DESKTOP SIMULATION \u2014 Code Archaeology Report",
+  "description": "> **Source:** Anonymous submission",
+  "url": "/0x6C6F6C/moves/desktop_sim/",
+  "section": "MOVES",
+  "tags": [
+    "CODE",
+    "DESIGN",
+    "AI",
+    "OPS",
+    "ART",
+    "SEC"
+  ],
+  "stats": {
+    "word_count": 2180,
+    "code_blocks": 32
+  },
+  "last_modified": "2026-02-24T15:45:34.943064",
+  "format": "documentation",
+  "access_level": "public"
+}

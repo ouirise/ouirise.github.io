@@ -1,0 +1,24 @@
+{
+  "id": "shards",
+  "title": "SHARDS",
+  "description": "Documentation index for SHARDS",
+  "url": "/0x6C6F6C/shards/",
+  "section": "SHARDS",
+  "items": [
+    {
+      "id": "skills",
+      "title": "name: skill-creator",
+      "description": "description: Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized know...",
+      "url": "/0x6C6F6C/shards/skills/",
+      "tags": [
+        "CODE",
+        "DESIGN",
+        "AI",
+        "OPS"
+      ],
+      "word_count": 2566
+    }
+  ],
+  "count": 1,
+  "last_updated": "2026-02-24T15:48:39.469113"
+}

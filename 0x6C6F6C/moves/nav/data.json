@@ -1,0 +1,20 @@
+{
+  "id": "nav",
+  "title": "Codebase Assessment Summary",
+  "description": "| Page | Status | Notes |",
+  "url": "/0x6C6F6C/moves/nav/",
+  "section": "MOVES",
+  "tags": [
+    "CODE",
+    "DESIGN",
+    "AI",
+    "OPS"
+  ],
+  "stats": {
+    "word_count": 342,
+    "code_blocks": 0
+  },
+  "last_modified": "2026-02-24T15:44:02.661600",
+  "format": "documentation",
+  "access_level": "public"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "skills",
+  "title": "name: skill-creator",
+  "description": "description: Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized know...",
+  "url": "/0x6C6F6C/shards/skills/",
+  "section": "SHARDS",
+  "tags": [
+    "CODE",
+    "DESIGN",
+    "AI",
+    "OPS"
+  ],
+  "stats": {
+    "word_count": 2566,
+    "code_blocks": 8
+  },
+  "last_modified": "2026-02-23T12:21:57.135106",
+  "format": "documentation",
+  "access_level": "public"
+}
