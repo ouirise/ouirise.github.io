@@ -44,6 +44,12 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 | `express/` | Node.js + Express + MongoDB | Backend API with database integration |
 | `flask/` | Python + Flask | Lightweight Python web service |
 
+### Automation Tools
+| Tool | Language | Purpose |
+|------|----------|---------|
+| `shadow_clone_501c3.py` | Python 3 + Playwright | Nonprofit compliance risk hunting |
+| `0x6C6F6C/tree.py` | Python | Filetree generation |
+
 ---
 
 ## 3. Project Structure
@@ -54,39 +60,35 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 ├── sitemap.xml                 # SEO sitemap
 ├── filetree.json               # Generated directory tree
 ├── README.md                   # Product Requirements Document (PRD)
+├── shadow_clone_501c3.py       # 501(c)(3) compliance rescue hunter
+├── manual_hunt_guide.md        # Manual hunting documentation
 │
 ├── about/                      # Organization info
-│   └── index.html              # Mission, capacity stats, team, engagement model
+│   ├── index.html              # Mission, capacity stats, team, engagement model
+│   └── cloud-village.html      # Cloud village documentation
 │
 ├── contact/                    # Contact page
-│   └── index.html              # Contact form, direct lines, availability
+│   ├── index.html              # Contact form, direct lines, availability
+│   └── call.html               # Call scheduling
 │
 ├── archive/                    # FLIGHT LOGS - Deployment records
 │   ├── index.html              # Vault unlock animation + mission archive
 │   ├── selector.html           # Flight/resource selector interface
-│   ├── gallery.html            # Visual deployment gallery
+│   ├── gallery.html            # Gallery view
 │   └── vault/                  # Code samples and experiments
-│       ├── index.html          # Vault access portal
 │       ├── next/               # Next.js sample project
-│       │   ├── package.json    # Dependencies: next@16.1.6, react@19.2.3
-│       │   ├── next.config.ts  # Next.js configuration
-│       │   ├── tsconfig.json   # TypeScript config
-│       │   ├── app/            # App router pages
-│       │   └── ...
 │       ├── express/            # Express.js sample project
-│       │   ├── app.js          # Main server file
-│       │   ├── .env            # MongoDB URI (gitignored in production)
-│       │   └── routes/         # HTML route templates
-│       └── flask/              # Flask sample project
-│           ├── app.py          # Main application
-│           └── requirements.txt # flask, gunicorn
+│       ├── flask/              # Flask sample project
+│       ├── react/              # React sample project
+│       └── sqrt(-1)/           # Complex number experiment
 │
 ├── 0x6C6F6C/                   # Agent fleet documentation (hex for "lol")
 │   ├── index.html              # Agent systems fleet dashboard
-│   ├── 0x.html                 # Alternate fleet view
-│   ├── SPA.md                  # Single Page Application sales kit
+│   ├── 0x.html                 # Alternative fleet view
 │   ├── SCAN.md                 # OSINT and reconnaissance docs
-│   ├── notes.txt               # Fleet operational notes
+│   ├── SPA.md                  # Single Page Application specs
+│   ├── notes.txt               # Fleet notes
+│   ├── tree.py                 # Filetree generator
 │   ├── ADMIRAL/                # Continuity archive console
 │   │   └── index.html          # B4D2 bridge interface
 │   ├── moves/                  # Strategy and documentation
@@ -97,14 +99,15 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 │   │   ├── INSPIRE.md
 │   │   ├── LANG.md
 │   │   ├── NAV.md
-│   │   ├── SKILLCREATOR.md     # Skill creation guidelines
+│   │   ├── SKILLCREATOR.md
 │   │   ├── UI.md
 │   │   └── UX.md
 │   ├── positions/              # Role definitions
 │   │   ├── 0.md
 │   │   ├── B4D2.md
 │   │   ├── CONTRACTS.md
-│   │   └── FLEET.md            # 0KK Model Fleet Registry
+│   │   ├── FLEET.md            # Model fleet registry
+│   │   └── MUMININ.md
 │   └── shards/                 # License and skills
 │       ├── LISCENCE.txt
 │       └── SKILLS.md
@@ -116,7 +119,7 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 │
 └── images/                     # Static image assets
     ├── ouirise.webp            # Organization logo
-    ├── image.webp              # Hero background (Kushite pyramids)
+    ├── image.webp              # Hero background
     └── *.jpg, *.png            # Various project images
 ```
 
@@ -172,10 +175,7 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 - Right: `🌫️🌒 2026 // ALL WAYS` + "Technical Organization // OUI"
 
 ### Landing Page (`/`)
-1. **Hero** - "GRANT COMPLIANCE RESCUE" — direct response CTA for 501c3 compliance
-   - Headline: "7 DAYS TO FILED + COMPLIANT"
-   - Subhead: Overdue 990 pain point messaging
-   - CTA: "Fix My Compliance ($2,500/Week)" → mailto:0kk@ouirise.org with pre-filled subject/body
+1. **Hero** - "ACCESS GRANTED" with lock icon animation
 2. **Software Engineers** - 8+ years experience, 4 feature cards
 3. **About Section** - Organization identity and research areas
 4. **Deployments** - 3 project cards (Rise Integration, Data Bridge, Business Automations)
@@ -188,18 +188,13 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 - Mission statement
 - Capacity stats (06 years, 24 projects, $0 lock-in, 99.9% uptime)
 - Team cards (0KK, Kimi-K2.5, The Fog)
-- **Professor X Section**: Tina Huang feature — external mentor in data science & AI education
-  - Ex-Meta data scientist, MSc UPenn
-  - Founder of Lonely Octopus (~1M YouTube subscribers)
-  - AI Agent Bootcamp creator
-  - Links: YouTube, Lonely Octopus, Bootcamp waitlist
 - Engagement model (Audit → Build → Transfer)
 
 ### Contact Page (`/contact/`)
 - Hero: "REQUEST ACCESS"
 - Direct contact card (email, phone)
 - Location info (Charlotte, NC coordinates)
-- Project initiation form (Formspree integration)
+- Project initiation form
 
 ### Archive Page (`/archive/`) — FLIGHT LOGS
 - **Rebranded**: "FLIGHT LOGS" (was "Archive")
@@ -224,9 +219,6 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 - **Positions** section: FLEET.md, CONTRACTS.md, 0.md, B4D2.md
 - **Moves** section: All 8 strategy documents
 - **Shards** section: SKILLS.md, LISCENCE.txt
-- **External Intelligence** section: Allied operators and knowledge sources
-  - Tina Huang (Professor X) — Ex-Meta DS, AI educator, Lonely Octopus founder
-  - Lonely Octopus — AI Agent Bootcamp platform
 
 ### ADMIRAL Console (`/0x6C6F6C/ADMIRAL/`)
 - Continuity archive interface
@@ -310,51 +302,45 @@ body::before {
 ### Main Site
 No build process required - static HTML files served directly via GitHub Pages.
 
-### Archive/Vault Samples
+### Vault Samples
 
-#### Next.js Sample
+**Next.js Sample** (`archive/vault/next/`):
 ```bash
 cd archive/vault/next
 npm install
 npm run dev      # Development server on localhost:3000
 npm run build    # Production build
-npm start        # Start production server
-npm run lint     # Run ESLint
+npm run lint     # ESLint
 ```
 
-**Configuration Files:**
-- `package.json`: Dependencies and scripts
-- `next.config.ts`: Next.js configuration (TypeScript)
-- `tsconfig.json`: TypeScript compiler options
-- `eslint.config.mjs`: ESLint configuration
-- `postcss.config.mjs`: PostCSS with Tailwind v4
-
-#### Express Sample
+**Express Sample** (`archive/vault/express/`):
 ```bash
 cd archive/vault/express
 npm install
-node app.js      # Requires .env with MONGODB URI
+node app.js      # Requires .env with MONGODB_URI
 ```
 
-**Dependencies:**
-- express
-- mongodb
-- dotenv
-
-**Configuration:**
-- `.env`: MONGODB connection string (not committed)
-- Port: 3000 (default)
-
-#### Flask Sample
+**Flask Sample** (`archive/vault/flask/`):
 ```bash
 cd archive/vault/flask
 pip install -r requirements.txt
 python app.py    # Runs on localhost:5000
 ```
 
-**Dependencies:**
-- flask
-- gunicorn (for production)
+### Automation Scripts
+
+**Shadow Clone 501c3 Hunter**:
+```bash
+# Requires Python 3.8+ and Playwright
+pip install playwright
+playwright install chromium
+python shadow_clone_501c3.py
+```
+
+**Filetree Generator**:
+```bash
+python 0x6C6F6C/tree.py
+```
 
 ---
 
@@ -362,35 +348,29 @@ python app.py    # Runs on localhost:5000
 
 ### Manual Testing Checklist
 
-#### Visual/Layout
-- [ ] Maroon tactical grid visible on all pages
+**Cross-Browser Testing**:
+- [ ] Chrome/Edge (Chromium)
+- [ ] Firefox
+- [ ] Safari (if available)
+- [ ] Mobile Chrome/Safari
+
+**Responsive Testing**:
+- [ ] Mobile (< 768px) - Hamburger menu functional
+- [ ] Tablet (768px - 1024px)
+- [ ] Desktop (> 1024px) - Full navigation visible
+
+**Functional Testing**:
+- [ ] Navigation links work
+- [ ] Dropdown menus (Flight Logs) open/close
+- [ ] Smooth scroll to anchors
+- [ ] Mobile menu toggle works
+- [ ] All external links open in new tab (if applicable)
+
+**Visual Testing**:
+- [ ] Maroon grid background visible
 - [ ] Grain texture overlay present
-- [ ] Typography renders correctly (JetBrains Mono, Bebas Neue)
-- [ ] Color contrast meets accessibility standards
-
-#### Navigation
-- [ ] All nav links functional
-- [ ] Mobile hamburger menu toggles correctly
-- [ ] Dropdown menus work on desktop hover
-- [ ] Mobile dropdowns expand/collapse
-
-#### Responsive
-- [ ] Layout adapts at 768px breakpoint
-- [ ] No horizontal scroll on mobile
-- [ ] Images scale proportionally
-- [ ] Text remains readable at all sizes
-
-#### Interactive Elements
 - [ ] Card hover effects work
-- [ ] Button hover states functional
-- [ ] Form inputs focus correctly
-- [ ] Lock icon animation plays on hero
-
-### Performance Testing
-- [ ] Lighthouse score >90 on all metrics
-- [ ] Page load <2s on 3G connection
-- [ ] No render-blocking resources
-- [ ] Images optimized (WebP preferred)
+- [ ] No FOUC (Flash of Unstyled Content)
 
 ---
 
@@ -415,7 +395,49 @@ python app.py    # Runs on localhost:5000
 
 ---
 
-## 10. Content Guidelines
+## 10. Security Considerations
+
+### Form Handling
+- Contact form uses Formspree for submission handling
+- Form endpoint: `https://formspree.io/f/xnqevwrd`
+- For production, verify Formspree account and update endpoint if needed
+
+### Environment Variables
+- `.env` files are gitignored (see `.gitignore`)
+- Sample projects in vault use `.env` for MongoDB URIs (not committed)
+
+### Content Security
+- No user-generated content on static pages
+- External resources: Google Fonts, Tailwind CDN
+
+### Automation Scripts
+- `shadow_clone_501c3.py` uses Playwright for web scraping
+- Respect robots.txt and rate limits when hunting
+- Data collected is for outreach purposes only
+
+---
+
+## 11. Maintenance Notes
+
+### Regular Updates
+1. **Sitemap dates** - Update `<lastmod>` when modifying pages
+2. **Version number** - Increment in mobile nav footer (`// vX.X.X`)
+3. **Year in footer** - Update copyright year if needed
+4. **AGENTS.md** - Keep project structure current
+
+### Performance
+- No JavaScript bundling required
+- Images should be optimized (WebP preferred)
+- Consider lazy loading for below-fold images
+
+### Accessibility
+- Semantic HTML5 elements
+- `aria-label` attributes for icon-only buttons
+- Sufficient color contrast (maroon on black is decorative only)
+
+---
+
+## 12. Content Guidelines
 
 ### Writing Style
 - No corporate speak
@@ -440,43 +462,6 @@ Every page should include:
 
 ---
 
-## 11. Security Considerations
-
-### Form Handling
-- Contact form uses Formspree for submission handling
-- Form endpoint: `https://formspree.io/f/xnqevwrd`
-- For production, verify Formspree account and update endpoint if needed
-
-### Environment Variables
-- `.env` files are gitignored
-- Sample projects in vault use `.env` for MongoDB URIs (not committed)
-
-### Content Security
-- No user-generated content on static pages
-- External resources: Google Fonts, Tailwind CDN
-
----
-
-## 12. Maintenance Notes
-
-### Regular Updates
-1. **Sitemap dates** - Update `<lastmod>` when modifying pages
-2. **Version number** - Increment in mobile nav footer (`// vX.X.X`)
-3. **Year in footer** - Update copyright year if needed
-4. **AGENTS.md** - Keep project structure current
-
-### Performance
-- No JavaScript bundling required
-- Images should be optimized (WebP preferred)
-- Consider lazy loading for below-fold images
-
-### Accessibility
-- Semantic HTML5 elements
-- `aria-label` attributes for icon-only buttons
-- Sufficient color contrast (maroon on black is decorative only)
-
----
-
 ## 13. Agent Context
 
 This project is maintained by a human-AI collaborative team:
@@ -492,6 +477,14 @@ This project is maintained by a human-AI collaborative team:
 - `bingbong` - Internal signal, no response required
 - `俊达` - Confirmation receipt
 - `0xSummary.md` - Fleet-wide session logging format
+
+### Local Fleet (Ollama)
+Per `0x6C6F6C/positions/FLEET.md`:
+- **EYE** - qwen2.5-vl:3b - Vision/OCR processing
+- **MIND** - qwen3:1.5b - Light reasoning
+- **HAND** - qwen2.5-coder:7b - Code generation
+- **BLADE** - nate/instinct - Surgical code modification
+- **DEEP** - deepseek-r1:7b - Heavy reasoning (reserve)
 
 ---
 
