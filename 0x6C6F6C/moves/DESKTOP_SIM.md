@@ -91,7 +91,7 @@ Each applies a dark overlay gradient to ensure icon text readability.
 Device name:    TWIN-0KK
 Processor:      Kimi K3 Architecture (i)
 Installed RAM:  6.7 TB
-Device ID:      ALLWAYS-🌫️🌒
+Device ID:      ALLWAYS-俊达
 ```
 
 **Analysis:** The author knows this codebase. References:
@@ -163,7 +163,7 @@ Acceptable for standalone demo. Production should use event delegation.
    - Dark theme already matches `--void` aesthetic
 
 2. **Glyph replacement**
-   - Change `🌫️🌒` to `// 0.` per sigil evolution
+   - Change `俊达` to `俊达` per sigil evolution
 
 3. **Rebrand system info**
    ```

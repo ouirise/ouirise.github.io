@@ -151,7 +151,7 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 - **Navigation**: Fixed header, 60px height, mobile hamburger menu
 
 ### Signature Elements
-- Glyph: `🌫️🌒` (Fog + Crescent Moon) - organization sigil
+- Glyph: `俊达` (Fog + Crescent Moon) - organization sigil
 - Comments: `// EST. 2025 // CLT // [CONTEXT]`
 - Status indicators: Pulsing maroon dot
 - Version tags: `// v2.7.1`
@@ -172,7 +172,7 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 
 #### Footer
 - Left: OUIRISE logo
-- Right: `🌫️🌒 2026 // ALL WAYS` + "Technical Organization // OUI"
+- Right: `俊达 2026 // ALL WAYS` + "Technical Organization // OUI"
 
 ### Landing Page (`/`)
 1. **Hero** - "ACCESS GRANTED" with lock icon animation
@@ -490,4 +490,4 @@ Per `0x6C6F6C/positions/FLEET.md`:
 
 *// Built by OuiRise*  
 *// 0KK Protocol Active*  
-*// 🌫️🌒*
+*// 俊达*

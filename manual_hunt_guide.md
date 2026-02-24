@@ -138,4 +138,4 @@ OUIRISE INITIATIVE
 ---
 
 *// Hunt begins now. No excuses.*
-*// 🌫️🌒*
+*// 俊达*

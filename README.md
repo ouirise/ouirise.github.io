@@ -335,4 +335,4 @@ So instead of selling t-shirts, you're selling **systems**—but keeping the **e
 
 The diagram in Section 5.1 shows the layout—dark cards on darker background, monospace "//" comments as flavor, three-tier offerings with MVP highlighted, and that leadership split section at the bottom anchoring the credibility.
 
-🌫️🌒
+俊达
