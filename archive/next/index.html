@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXT Architecture | OUIRISE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a0a;
+            --tactical: #141414;
+            --surface: #1f1f1f;
+            --signal: #f5f5f5;
+            --ghost: #666666;
+            --maroon: #800000;
+            --bright-maroon: #a50000;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--void);
+            color: var(--signal);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(165, 0, 0, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(165, 0, 0, 0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        header {
+            position: fixed;
+            top: 0; width: 100%; z-index: 50;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--surface);
+            padding: 1rem 2rem;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--bright-maroon);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav { display: flex; gap: 2rem; }
+        .nav a {
+            color: var(--ghost);
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+        .nav a:hover { color: var(--bright-maroon); }
+
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .breadcrumb {
+            font-size: 0.7rem;
+            color: var(--ghost);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a { color: var(--ghost); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--bright-maroon); }
+
+        .page-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            letter-spacing: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-meta {
+            color: var(--ghost);
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--surface);
+        }
+
+        .section { margin-bottom: 3rem; }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            color: var(--bright-maroon);
+        }
+
+        .section-content {
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: var(--signal);
+        }
+
+        .section-content p { margin-bottom: 1rem; }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .tech-item {
+            background: var(--tactical);
+            border: 1px solid var(--surface);
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        .tech-name {
+            color: var(--bright-maroon);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .tech-role { color: var(--ghost); font-size: 0.7rem; }
+
+        .feature-list {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .feature-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.85rem;
+        }
+
+        .feature-list li::before {
+            content: '//';
+            position: absolute;
+            left: 0;
+            color: var(--bright-maroon);
+        }
+
+        .api-section {
+            background: var(--tactical);
+            border: 1px solid var(--surface);
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .api-title {
+            font-size: 0.8rem;
+            color: var(--ghost);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .api-link {
+            color: var(--bright-maroon);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .api-link:hover { text-decoration: underline; }
+
+        footer {
+            max-width: 1000px;
+            margin: 4rem auto 0;
+            padding: 2rem;
+            border-top: 1px solid var(--surface);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-sigil { font-size: 1.2rem; color: var(--bright-maroon); }
+        .footer-text { font-size: 0.7rem; color: var(--ghost); text-transform: uppercase; }
+
+        @media (max-width: 768px) {
+            .nav { display: none; }
+            .page-title { font-size: 2.5rem; }
+            .tech-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">OUIRISE</a>
+            <nav class="nav">
+                <a href="/archive/">Flight Logs</a>
+                <a href="/0x6C6F6C/docs/">Docs</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="breadcrumb">
+            <a href="/">Home</a> // <a href="/archive/">Flight Logs</a> // NEXT Architecture
+        </div>
+
+        <h1 class="page-title">NEXT ARCHITECTURE</h1>
+        <div class="page-meta">Modern React // App Router // Edge Deployment</div>
+
+        <div class="section">
+            <h2 class="section-title">Overview</h2>
+            <div class="section-content">
+                <p>Modern React SPA architecture with server-side rendering, static generation, and edge deployment patterns. Built as the reference implementation for scalable frontend applications.</p>
+                <p>The architecture leverages Next.js 15 with React 19, TypeScript, and Tailwind 4 for rapid development with type safety and performance.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Technology Stack</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-name">NEXT.JS 15</div>
+                    <div class="tech-role">Framework</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">REACT 19</div>
+                    <div class="tech-role">UI Library</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">TYPESCRIPT</div>
+                    <div class="tech-role">Type Safety</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">TAILWIND 4</div>
+                    <div class="tech-role">Styling</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">APP ROUTER</div>
+                    <div class="tech-role">Routing</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-name">SERVER COMPONENTS</div>
+                    <div class="tech-role">Rendering</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Key Features</h2>
+            <ul class="feature-list">
+                <li>Server Components for reduced client JS</li>
+                <li>Edge deployment for global low latency</li>
+                <li>Static generation for performance</li>
+                <li>Streaming SSR for progressive loading</li>
+                <li>Built-in API routes</li>
+                <li>Image optimization and font loading</li>
+            </ul>
+        </div>
+
+        <div class="api-section">
+            <div class="api-title">API Reference</div>
+            <a href="data.json" class="api-link">/archive/next/data.json</a>
+        </div>
+    </main>
+
+    <footer>
+        <span class="footer-sigil">俊达</span>
+        <span class="footer-text">NEXT Architecture // OUIRISE</span>
+    </footer>
+</body>
+</html>

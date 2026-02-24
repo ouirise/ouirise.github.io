@@ -1,0 +1,25 @@
+{
+  "title": "Cloudflare Edge",
+  "category": "infrastructure",
+  "description": "Edge-first deployment with global CDN, Workers, and R2 storage",
+  "url": "/archive/cloudflare/",
+  "api": "/archive/cloudflare/data.json",
+  "stack": {
+    "compute": "Workers",
+    "storage": "R2",
+    "caching": "CDN",
+    "hosting": "Pages",
+    "kv": "KV",
+    "database": "D1"
+  },
+  "features": [
+    "300+ edge locations",
+    "Zero cold start",
+    "S3-compatible storage",
+    "SSL and DDoS protection",
+    "Edge caching",
+    "Git-based CI/CD"
+  ],
+  "last_updated": "2026-02-23",
+  "sigil": "俊达"
+}

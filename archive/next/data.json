@@ -1,0 +1,25 @@
+{
+  "title": "NEXT Architecture",
+  "category": "frontend",
+  "description": "Modern React SPA architecture with SSR, static generation, and edge deployment",
+  "url": "/archive/next/",
+  "api": "/archive/next/data.json",
+  "stack": {
+    "framework": "Next.js 15",
+    "ui": "React 19",
+    "language": "TypeScript",
+    "styling": "Tailwind 4",
+    "routing": "App Router",
+    "rendering": "Server Components"
+  },
+  "features": [
+    "Server Components",
+    "Edge deployment",
+    "Static generation",
+    "Streaming SSR",
+    "API routes",
+    "Image optimization"
+  ],
+  "last_updated": "2026-02-23",
+  "sigil": "俊达"
+}
