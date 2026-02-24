@@ -64,17 +64,31 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 ├── archive/                    # FLIGHT LOGS - Deployment records
 │   ├── index.html              # Vault unlock animation + mission archive
 │   ├── selector.html           # Flight/resource selector interface
+│   ├── gallery.html            # Visual deployment gallery
 │   └── vault/                  # Code samples and experiments
+│       ├── index.html          # Vault access portal
 │       ├── next/               # Next.js sample project
+│       │   ├── package.json    # Dependencies: next@16.1.6, react@19.2.3
+│       │   ├── next.config.ts  # Next.js configuration
+│       │   ├── tsconfig.json   # TypeScript config
+│       │   ├── app/            # App router pages
+│       │   └── ...
 │       ├── express/            # Express.js sample project
+│       │   ├── app.js          # Main server file
+│       │   ├── .env            # MongoDB URI (gitignored in production)
+│       │   └── routes/         # HTML route templates
 │       └── flask/              # Flask sample project
+│           ├── app.py          # Main application
+│           └── requirements.txt # flask, gunicorn
 │
 ├── 0x6C6F6C/                   # Agent fleet documentation (hex for "lol")
 │   ├── index.html              # Agent systems fleet dashboard
+│   ├── 0x.html                 # Alternate fleet view
+│   ├── SPA.md                  # Single Page Application sales kit
+│   ├── SCAN.md                 # OSINT and reconnaissance docs
+│   ├── notes.txt               # Fleet operational notes
 │   ├── ADMIRAL/                # Continuity archive console
 │   │   └── index.html          # B4D2 bridge interface
-│   ├── SCAN.md                 # OSINT and reconnaissance docs
-│   ├── SPA.md                  # Single Page Application specs
 │   ├── moves/                  # Strategy and documentation
 │   │   ├── ART.md
 │   │   ├── ARTSCI.md
@@ -83,12 +97,14 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 │   │   ├── INSPIRE.md
 │   │   ├── LANG.md
 │   │   ├── NAV.md
-│   │   └── SKILLCREATOR.md
+│   │   ├── SKILLCREATOR.md     # Skill creation guidelines
+│   │   ├── UI.md
+│   │   └── UX.md
 │   ├── positions/              # Role definitions
 │   │   ├── 0.md
 │   │   ├── B4D2.md
 │   │   ├── CONTRACTS.md
-│   │   └── FLEET.md
+│   │   └── FLEET.md            # 0KK Model Fleet Registry
 │   └── shards/                 # License and skills
 │       ├── LISCENCE.txt
 │       └── SKILLS.md
@@ -100,6 +116,7 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 │
 └── images/                     # Static image assets
     ├── ouirise.webp            # Organization logo
+    ├── image.webp              # Hero background (Kushite pyramids)
     └── *.jpg, *.png            # Various project images
 ```
 
@@ -134,7 +151,7 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 - Glyph: `🌫️🌒` (Fog + Crescent Moon) - organization sigil
 - Comments: `// EST. 2025 // CLT // [CONTEXT]`
 - Status indicators: Pulsing maroon dot
-- Version tags: `// v2.6.8`
+- Version tags: `// v2.7.1`
 
 ---
 
@@ -155,7 +172,10 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 - Right: `🌫️🌒 2026 // ALL WAYS` + "Technical Organization // OUI"
 
 ### Landing Page (`/`)
-1. **Hero** - "ACCESS GRANTED" with lock icon animation
+1. **Hero** - "GRANT COMPLIANCE RESCUE" — direct response CTA for 501c3 compliance
+   - Headline: "7 DAYS TO FILED + COMPLIANT"
+   - Subhead: Overdue 990 pain point messaging
+   - CTA: "Fix My Compliance ($2,500/Week)" → mailto:0kk@ouirise.org with pre-filled subject/body
 2. **Software Engineers** - 8+ years experience, 4 feature cards
 3. **About Section** - Organization identity and research areas
 4. **Deployments** - 3 project cards (Rise Integration, Data Bridge, Business Automations)
@@ -168,13 +188,18 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 - Mission statement
 - Capacity stats (06 years, 24 projects, $0 lock-in, 99.9% uptime)
 - Team cards (0KK, Kimi-K2.5, The Fog)
+- **Professor X Section**: Tina Huang feature — external mentor in data science & AI education
+  - Ex-Meta data scientist, MSc UPenn
+  - Founder of Lonely Octopus (~1M YouTube subscribers)
+  - AI Agent Bootcamp creator
+  - Links: YouTube, Lonely Octopus, Bootcamp waitlist
 - Engagement model (Audit → Build → Transfer)
 
 ### Contact Page (`/contact/`)
 - Hero: "REQUEST ACCESS"
 - Direct contact card (email, phone)
 - Location info (Charlotte, NC coordinates)
-- Project initiation form
+- Project initiation form (Formspree integration)
 
 ### Archive Page (`/archive/`) — FLIGHT LOGS
 - **Rebranded**: "FLIGHT LOGS" (was "Archive")
@@ -199,6 +224,9 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 - **Positions** section: FLEET.md, CONTRACTS.md, 0.md, B4D2.md
 - **Moves** section: All 8 strategy documents
 - **Shards** section: SKILLS.md, LISCENCE.txt
+- **External Intelligence** section: Allied operators and knowledge sources
+  - Tina Huang (Professor X) — Ex-Meta DS, AI educator, Lonely Octopus founder
+  - Lonely Octopus — AI Agent Bootcamp platform
 
 ### ADMIRAL Console (`/0x6C6F6C/ADMIRAL/`)
 - Continuity archive interface
@@ -277,7 +305,96 @@ body::before {
 
 ---
 
-## 7. Deployment Process
+## 7. Build and Test Commands
+
+### Main Site
+No build process required - static HTML files served directly via GitHub Pages.
+
+### Archive/Vault Samples
+
+#### Next.js Sample
+```bash
+cd archive/vault/next
+npm install
+npm run dev      # Development server on localhost:3000
+npm run build    # Production build
+npm start        # Start production server
+npm run lint     # Run ESLint
+```
+
+**Configuration Files:**
+- `package.json`: Dependencies and scripts
+- `next.config.ts`: Next.js configuration (TypeScript)
+- `tsconfig.json`: TypeScript compiler options
+- `eslint.config.mjs`: ESLint configuration
+- `postcss.config.mjs`: PostCSS with Tailwind v4
+
+#### Express Sample
+```bash
+cd archive/vault/express
+npm install
+node app.js      # Requires .env with MONGODB URI
+```
+
+**Dependencies:**
+- express
+- mongodb
+- dotenv
+
+**Configuration:**
+- `.env`: MONGODB connection string (not committed)
+- Port: 3000 (default)
+
+#### Flask Sample
+```bash
+cd archive/vault/flask
+pip install -r requirements.txt
+python app.py    # Runs on localhost:5000
+```
+
+**Dependencies:**
+- flask
+- gunicorn (for production)
+
+---
+
+## 8. Testing Instructions
+
+### Manual Testing Checklist
+
+#### Visual/Layout
+- [ ] Maroon tactical grid visible on all pages
+- [ ] Grain texture overlay present
+- [ ] Typography renders correctly (JetBrains Mono, Bebas Neue)
+- [ ] Color contrast meets accessibility standards
+
+#### Navigation
+- [ ] All nav links functional
+- [ ] Mobile hamburger menu toggles correctly
+- [ ] Dropdown menus work on desktop hover
+- [ ] Mobile dropdowns expand/collapse
+
+#### Responsive
+- [ ] Layout adapts at 768px breakpoint
+- [ ] No horizontal scroll on mobile
+- [ ] Images scale proportionally
+- [ ] Text remains readable at all sizes
+
+#### Interactive Elements
+- [ ] Card hover effects work
+- [ ] Button hover states functional
+- [ ] Form inputs focus correctly
+- [ ] Lock icon animation plays on hero
+
+### Performance Testing
+- [ ] Lighthouse score >90 on all metrics
+- [ ] Page load <2s on 3G connection
+- [ ] No render-blocking resources
+- [ ] Images optimized (WebP preferred)
+
+---
+
+## 9. Deployment Process
 
 ### GitHub Pages Deployment
 1. **Source**: Main branch, root directory
@@ -298,7 +415,7 @@ body::before {
 
 ---
 
-## 8. Content Guidelines
+## 10. Content Guidelines
 
 ### Writing Style
 - No corporate speak
@@ -323,35 +440,7 @@ Every page should include:
 
 ---
 
-## 9. Archive/Vault Development
-
-The `archive/vault/` directory contains sample projects for demonstration purposes. These are NOT deployed to production but serve as code portfolio examples.
-
-### Next.js Sample
-```bash
-cd archive/vault/next
-npm install
-npm run dev     # Development server
-npm run build   # Production build
-```
-
-### Express Sample
-```bash
-cd archive/vault/express
-npm install
-node app.js     # Requires .env with MONGODB URI
-```
-
-### Flask Sample
-```bash
-cd archive/vault/flask
-pip install -r requirements.txt
-python app.py   # Runs on localhost:5000
-```
-
----
-
-## 10. Security Considerations
+## 11. Security Considerations
 
 ### Form Handling
 - Contact form uses Formspree for submission handling
@@ -368,7 +457,7 @@ python app.py   # Runs on localhost:5000
 
 ---
 
-## 11. Maintenance Notes
+## 12. Maintenance Notes
 
 ### Regular Updates
 1. **Sitemap dates** - Update `<lastmod>` when modifying pages
@@ -388,7 +477,7 @@ python app.py   # Runs on localhost:5000
 
 ---
 
-## 12. Agent Context
+## 13. Agent Context
 
 This project is maintained by a human-AI collaborative team:
 
