@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CODERABBIT.md — CodeRabbit Decommission Analysis | 0x6C6F6C</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a0a;
+            --tactical: #141414;
+            --surface: #1f1f1f;
+            --signal: #f5f5f5;
+            --ghost: #666666;
+            --maroon: #800000;
+            --bright-maroon: #a50000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--void);
+            color: var(--signal);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Grid Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(165, 0, 0, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(165, 0, 0, 0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--surface);
+            padding: 1rem 2rem;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--bright-maroon);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: var(--ghost);
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: var(--bright-maroon);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            font-size: 0.7rem;
+            color: var(--ghost);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            color: var(--ghost);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--bright-maroon);
+        }
+
+        .breadcrumb-sep {
+            margin: 0 0.5rem;
+            color: var(--surface);
+        }
+
+        /* Title */
+        .page-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+            color: var(--signal);
+        }
+
+        .page-meta {
+            font-size: 0.75rem;
+            color: var(--ghost);
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--surface);
+        }
+
+        /* Markdown Content */
+        .content {
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .content h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            margin: 2.5rem 0 1rem;
+            color: var(--bright-maroon);
+            font-weight: 400;
+        }
+
+        .content h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1.5px;
+            margin: 2rem 0 1rem;
+            color: var(--signal);
+            font-weight: 400;
+        }
+
+        .content h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--signal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 1.25rem 0 0.5rem;
+            color: var(--ghost);
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+            color: var(--signal);
+        }
+
+        .content a {
+            color: var(--bright-maroon);
+            text-decoration: none;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+
+        .content code {
+            background: var(--tactical);
+            padding: 0.2rem 0.4rem;
+            font-size: 0.8rem;
+            color: var(--bright-maroon);
+            border: 1px solid var(--surface);
+        }
+
+        .content pre {
+            background: var(--tactical);
+            border: 1px solid var(--surface);
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .content pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
+            color: var(--signal);
+        }
+
+        .content ul, .content ol {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .content blockquote {
+            border-left: 3px solid var(--bright-maroon);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            color: var(--ghost);
+            font-style: italic;
+        }
+
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.8rem;
+        }
+
+        .content th, .content td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--surface);
+        }
+
+        .content th {
+            background: var(--tactical);
+            color: var(--bright-maroon);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.7rem;
+        }
+
+        .content tr:nth-child(even) {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .content hr {
+            border: none;
+            border-top: 1px solid var(--surface);
+            margin: 2rem 0;
+        }
+
+        .content strong {
+            color: var(--bright-maroon);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            max-width: 900px;
+            margin: 4rem auto 0;
+            padding: 2rem;
+            border-top: 1px solid var(--surface);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-sigil {
+            font-size: 1.2rem;
+            color: var(--bright-maroon);
+        }
+
+        .footer-text {
+            font-size: 0.7rem;
+            color: var(--ghost);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--void);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--surface);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--bright-maroon);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            main {
+                padding: 5rem 1.5rem 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/0x6C6F6C/" class="logo">0x6C6F6C</a>
+            <nav class="nav">
+                <a href="/0x6C6F6C/">Fleet</a>
+                <a href="/0x6C6F6C/moves/">Moves</a>
+                <a href="/0x6C6F6C/positions/">Positions</a>
+                <a href="/0x6C6F6C/shards/">Shards</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="breadcrumb">
+            <a href="/0x6C6F6C/">0x6C6F6C</a>
+            <span class="breadcrumb-sep">//</span>
+            <a href="/0x6C6F6C/moves/">Moves</a>
+            <span class="breadcrumb-sep">//</span>
+            <span>CODERABBIT.md — CodeRabbit Decommission Analysis</span>
+        </div>
+
+        <h1 class="page-title">CODERABBIT.md — CodeRabbit Decommission Analysis</h1>
+        <div class="page-meta">Documentation // Last updated: 2026-02-24</div>
+
+        <div class="content">
+<h1 id="coderabbitmd-coderabbit-decommission-analysis">CODERABBIT.md — CodeRabbit Decommission Analysis</h1>
+<blockquote>
+<p><strong>Classification</strong>: Fleet Intelligence — Extraction Economy Counter-Strategy<br />
+<strong>Status</strong>: Operational Playbook<br />
+<strong>Payload Density</strong>: 9.9/10</p>
+</blockquote>
+<hr />
+<h2 id="executive-summary">Executive Summary</h2>
+<p>CodeRabbit represents a classic <strong>extraction economy</strong> case study—leveraging FUD (fear, uncertainty, doubt) to lock clients into a SaaS treadmill. Their tiered model mirrors the GPT-4o Copilot trap: pay per use, per seat, per token, cloud-locked, and opaque.</p>
+<p>This document outlines the <strong>vertical slice + federated fleet</strong> counter-strategy—the actual 0KK play for code review autonomy.</p>
+<hr />
+<h2 id="coderabbits-saas-cracks">CodeRabbit's SaaS Cracks</h2>
+<table>
+<thead>
+<tr>
+<th>Flaw</th>
+<th>Impact</th>
+<th>Fleet Counter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Per-seat billing</strong></td>
+<td>$24/dev → 100 devs = $2.4K/year → lifetime value → lock-in</td>
+<td>Federated: no recurring fees; install once → serve entire org</td>
+</tr>
+<tr>
+<td><strong>Rate limits</strong></td>
+<td>200 files/hour → bottleneck → overburdened teams</td>
+<td>Shadow slot handles 1-click lint → Heavy slot handles deep reviews</td>
+</tr>
+<tr>
+<td><strong>Cloud dependency</strong></td>
+<td>Requires GitHub/GitLab → audit trail → extraction</td>
+<td>Ollama local slice → no cloud lock → audit in <em>your</em> HTML log</td>
+</tr>
+<tr>
+<td><strong>Extraction risk</strong></td>
+<td>Jira/Linear hooks → proprietary tools → vendor lock</td>
+<td>Mama's approval → open standards → no vendor lock</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="vertical-slice-playbook">Vertical Slice Playbook</h2>
+<h3 id="phase-1-decommission-coderabbit">Phase 1: Decommission CodeRabbit</h3>
+<p><strong>Signal</strong>: Heavy (DeepSeek-R1:8B) → analyze PR diff → detect gaps</p>
+<p><strong>Output</strong>: Generate <strong>self-documenting commit messages</strong>:</p>
+<pre><code>fix lint: reformat imports per PEP8
+test coverage: added 35 lines to ensure 90% coverage
+refactor: extract utility function to reduce complexity
+</code></pre>
+<h3 id="phase-2-federate-the-fleet">Phase 2: Federate the Fleet</h3>
+<p><strong>Shadow Slot</strong> — Speed Layer:
+- Handle 1-click lint → GitHub Action → enforce style
+- Pre-commit hooks → instant feedback
+- 200+ files/hour → no rate limits</p>
+<p><strong>Heavy Slot</strong> — Reasoning Layer:
+- Run chain-of-thought → detect architectural debt
+- Example output:
+  <code>warn: this function calls external API without timeout → risk DDoS
+  suggest: add circuit breaker pattern → see moves/CIRCUIT.md</code></p>
+<p><strong>CODER Slot</strong> — Execution Layer:
+- Generate <strong>fixit patches</strong> → VS Code extension
+- Auto-apply safe transformations
+- Queue complex refactors for review</p>
+<h3 id="phase-3-audit-trail">Phase 3: Audit Trail</h3>
+<ul>
+<li>Mission log (HTML) → timestamp every review</li>
+<li>Track fixes → measure ROI</li>
+<li>No external billing → internal org metrics</li>
+<li>Zero cost → zero friction</li>
+</ul>
+<hr />
+<h2 id="fleet-architecture">Fleet Architecture</h2>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│                    PR SUBMISSION                            │
+└───────────────────────┬─────────────────────────────────────┘
+                        │
+        ┌───────────────┼───────────────┐
+        ▼               ▼               ▼
+┌──────────────┐ ┌──────────────┐ ┌──────────────┐
+Shadow Slot    │ │ Heavy Slot   │ │ CODER Slot   │
+(1-click lint) │ │ (deep review)│ │ (fixit gen)  │
+└──────┬───────┘ └──────┬───────┘ └──────┬───────┘
+       │                │                │
+       ▼                ▼                ▼
+GitHub Action    Chain-of-thought    VS Code Ext
+Pre-commit       Architecture        Auto-patch
+                 Debt Detection      Queue complex
+       │                │                │
+       └────────────────┼────────────────┘
+                        ▼
+              ┌─────────────────┐
+              │  MISSION LOG    │
+              │  (HTML Audit)   │
+              └─────────────────┘
+</code></pre>
+<hr />
+<h2 id="admirals-counter-play">Admiral's Counter-Play</h2>
+<p><strong>Signal</strong>: <em>"Drop CodeRabbit → deploy TroH skill fleet-wide"</em></p>
+<p><strong>Payload</strong>:</p>
+<pre><code class="language-bash"># Ollama query for vertical slice
+ollama run qwen2.5:7b &quot;analyze PR diff at $(PWD)&quot; --output-format=markdown
+
+# Fleet deployment
+git fleet deploy --skill=troh --target=org-wide --slot=all
+</code></pre>
+<p><strong>Victory Conditions</strong>:
+- [ ] Reduce review time by 50% → internal → no SaaS markup
+- [ ] Zero vendor lock → audit trail → transparency → trust
+- [ ] Federated deployment → horizontal scaling → no per-seat tax
+- [ ] Mission log completeness → 100% review coverage</p>
+<hr />
+<h2 id="economic-analysis">Economic Analysis</h2>
+<h3 id="coderabbit-costs-100-dev-team">CodeRabbit Costs (100 dev team)</h3>
+<pre><code>Year 1: $24 × 100 × 12 = $28,800
+Year 3: $86,400 (assuming no price hikes)
+Lock-in: Proprietary audit trail → migration cost → ?
+</code></pre>
+<h3 id="fleet-costs-100-dev-team">Fleet Costs (100 dev team)</h3>
+<pre><code>Year 1: $0 (Ollama local) + infra = ~$500
+Year 3: $1,500 (maintenance)
+Lock-in: None → open standards → HTML logs → portable
+Savings: $84,900 over 3 years
+</code></pre>
+<hr />
+<h2 id="related-documents">Related Documents</h2>
+<ul>
+<li><a href="./TROH.md">TROH.md</a> — Tactical Hacking skill build</li>
+<li><a href="./SLOT.md">SLOT.md</a> — Slot architecture</li>
+<li><a href="./HEAVY.md">HEAVY.md</a> — Heavy slot specifications</li>
+<li><a href="./SHADOW.md">SHADOW.md</a> — Shadow slot specifications</li>
+<li><a href="../positions/FLEET.md">FLEET.md</a> — Fleet operations</li>
+</ul>
+<hr />
+<h2 id="fleet-metrics">Fleet Metrics</h2>
+<pre><code>FLEET ALIGNED
+Payload density: 9.9/10
+Extraction resistance: MAXIMUM
+Vendor lock: ZERO
+TroH skill: CodeRabbit decommissioned
+</code></pre>
+<hr />
+<p><em>// Extraction economy countered</em><br />
+<em>// Federated code review active</em><br />
+<em>// 🌫️🌒</em></p>
+        </div>
+    </main>
+
+    <footer>
+        <span class="footer-sigil">俊达</span>
+        <span class="footer-text">0x6C6F6C // Moves // CODERABBIT.md — CodeRabbit Decommission Analysis</span>
+    </footer>
+</body>
+</html>

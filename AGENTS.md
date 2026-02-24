@@ -119,6 +119,7 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 │   │   ├── THEME.md            # Theming system
 │   │   ├── TOOLS.md            # Tool definitions
 │   │   ├── TROH.md             # Tactical Hacking skill build
+│   │   ├── CODERABBIT.md       # CodeRabbit extraction analysis
 │   │   ├── UI.md               # UI guidelines
 │   │   ├── UX.md               # UX guidelines
 │   │   └── [slug]/             # Generated HTML for each doc
