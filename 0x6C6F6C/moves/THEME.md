@@ -84,7 +84,7 @@ After a preferred theme is selected:
 - Use glassmorphism effects (backdrop-filter: blur) for overlay cards
 - Implement subtle ambient fog via radial gradients (purple/indigo at 15% opacity)
 - Animate interactions with cubic-bezier(0.4, 0, 0.2, 1) transitions
-- Use 🌫️🌒 symbology for operational markers
+- Use 俊达 symbology for operational markers
 
 ## Create your Own Theme
 To handle cases where none of the existing themes work for an artifact, create a custom theme. Based on provided inputs, generate a new theme similar to the ones above. Give the theme a similar name describing what the font/color combinations represent. Use any basic description provided to choose appropriate colors/fonts. After generating the theme, show it for review and verification. Following that, apply the theme as described above.

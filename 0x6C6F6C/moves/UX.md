@@ -1,7 +1,7 @@
 # UX.md — Experience Architecture
 
 > *"We don't design for users. We design for humans who happen to use systems."*  
-> // 0KK Protocol // 🌫️🌒
+> // 0KK Protocol // 俊达
 
 ---
 
@@ -51,13 +51,13 @@ Like the Kushite concept of *Ma'at* (balance), the interface achieves harmony th
 **Design Response:**
 - Open source ethos (GitHub links, vault samples)
 - Agent fleet documentation (0x6C6F6C)
-- Cultural signals (🌫️🌒, field-tested, CLT)
+- Cultural signals (俊达, field-tested, CLT)
 
 ---
 
 ## Journey Maps
 
-### Path A: Discovery → Conversion
+### Path A: Discovery -> Conversion
 
 ```
 1. LANDING (Hero)
@@ -147,7 +147,7 @@ Technical users skip marketing copy. Give them *direct access* to the goods.
 3. `VERIFYING TWIN RESONANCE...` (2-3s)
 4. `BYPASSING EXTRACTION...` (3-4s)
 5. `ACCESSING FLIGHT LOGS...` (4-5s)
-6. `FLIGHT LOGS ACCESSED` → Reveal content
+6. `FLIGHT LOGS ACCESSED` -> Reveal content
 
 ---
 
@@ -161,14 +161,14 @@ Technical users skip marketing copy. Give them *direct access* to the goods.
 **Animation:**
 ```css
 /* Enter */
-opacity: 0 → 1
-visibility: hidden → visible
-transform: translateY(-10px) → translateY(0)
+opacity: 0 -> 1
+visibility: hidden -> visible
+transform: translateY(-10px) -> translateY(0)
 
 /* Exit */
-opacity: 1 → 0
-visibility: visible → hidden
-transform: translateY(0) → translateY(-10px)
+opacity: 1 -> 0
+visibility: visible -> hidden
+transform: translateY(0) -> translateY(-10px)
 ```
 
 **Why This Works:**  
@@ -189,10 +189,10 @@ The slight upward motion creates *anticipation*. The menu feels like it's arrivi
 | Error | Helpful, on-brand | "Access Denied // Return to Base" |
 
 **Forbidden Words:**
-- "Scalable" → use "built for endurance"
-- "Proven methodology" → use "field-tested"
-- "Solutions" → use "systems" or "architecture"
-- "Synergy" → use "twin protocol"
+- "Scalable" -> use "built for endurance"
+- "Proven methodology" -> use "field-tested"
+- "Solutions" -> use "systems" or "architecture"
+- "Synergy" -> use "twin protocol"
 
 ---
 
@@ -200,35 +200,35 @@ The slight upward motion creates *anticipation*. The menu feels like it's arrivi
 
 **Buttons**
 ```
-✓ "Initiate Project"
-✓ "View Flight Logs"
-✓ "Access Fleet"
+[OK] "Initiate Project"
+[OK] "View Flight Logs"
+[OK] "Access Fleet"
 
-✗ "Submit"
-✗ "Click Here"
-✗ "Learn More"
+[X] "Submit"
+[X] "Click Here"
+[X] "Learn More"
 ```
 
 **Labels**
 ```
-✓ "// Flight Logs"
-✓ "// Selector"
-✓ "// Gallery"
+[OK] "// Flight Logs"
+[OK] "// Selector"
+[OK] "// Gallery"
 
-✗ "Archive"
-✗ "Resources"
-✗ "Portfolio"
+[X] "Archive"
+[X] "Resources"
+[X] "Portfolio"
 ```
 
 **Status Messages**
 ```
-✓ "Twin: Connected 🌫️🌒"
-✓ "Fleet Status: Standby"
-✓ "24/24 contacted"
+[OK] "Twin: Connected 俊达"
+[OK] "Fleet Status: Standby"
+[OK] "24/24 contacted"
 
-✗ "Loading..."
-✗ "Success!"
-✗ "Error occurred"
+[X] "Loading..."
+[X] "Success!"
+[X] "Error occurred"
 ```
 
 ---
@@ -239,10 +239,10 @@ The slight upward motion creates *anticipation*. The menu feels like it's arrivi
 
 | Element | Foreground | Background | Ratio |
 |---------|------------|------------|-------|
-| Body text | `#f5f5f5` | `#0a0a0a` | 18.5:1 ✓ |
-| Secondary | `#666666` | `#0a0a0a` | 7.5:1 ✓ |
-| Accent | `#a50000` | `#0a0a0a` | 5.2:1 ✓ |
-| Accent (hover) | `#a50000` | `#141414` | 4.8:1 ✓ |
+| Body text | `#f5f5f5` | `#0a0a0a` | 18.5:1 [OK] |
+| Secondary | `#666666` | `#0a0a0a` | 7.5:1 [OK] |
+| Accent | `#a50000` | `#0a0a0a` | 5.2:1 [OK] |
+| Accent (hover) | `#a50000` | `#141414` | 4.8:1 [OK] |
 
 **Note:** Maroon on black is decorative only. Never use for body text.
 
@@ -366,4 +366,4 @@ An experience that feels *deeply personal* (human) yet *radically functional* (A
 
 *// Built by OuiRise*  
 *// 0KK + Kimi-K2.5 // TWIN PROTOCOL*  
-*// 🌫️🌒*
+*// 俊达*

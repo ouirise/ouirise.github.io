@@ -11,22 +11,22 @@
 | **404 (`/404/`)** | ✅ Complete | Custom 404 error page |
 | **Images** | ✅ All present | `ouirise.webp` and 18 other images present |
 | **Components** | ✅ Has files | `nav.html` and `footer.html` for reuse |
-| **TypeScript types** | ✅ Present | `agent.ts`, `auo.ts`, `client.ts`, `twin.ts` in `types✓-1/` |
+| **TypeScript types** | ✅ Present | `agent.ts`, `auo.ts`, `client.ts`, `twin.ts` in `types[OK]-1/` |
 | **Beepboop docs** | ✅ Complete | Markdown docs (FLEET.md, FORGE.md, CONTRACTS.md, etc.) |
 
-### ⚠️ Issues Found
+### [WARNING] Issues Found
 
 | Issue | Severity | Details |
 |-------|----------|---------|
 | **Missing Contact page** | 🔴 High | Nav links to `/contact/` but directory doesn't exist |
 | **Empty Portal directory** | 🟡 Medium | Linked as "Deployments" in nav, but folder is empty |
-| **Portal link confusion** | 🟡 Medium | Nav says "Deployments" → `/portal/`, but content is in `/archive/vault/` |
+| **Portal link confusion** | 🟡 Medium | Nav says "Deployments" -> `/portal/`, but content is in `/archive/vault/` |
 
 ### 🔧 Quick Fixes Needed
 
 1. **Create `/contact/index.html`** - The nav links to it but it 404s
 2. **Either populate `/portal/` or remove the link** - Currently empty but linked
-3. **Consider redirecting `/portal/` → `/archive/vault/`** - If that's the intended deployments page
+3. **Consider redirecting `/portal/` -> `/archive/vault/`** - If that's the intended deployments page
 
 ### 🌐 Technical Health
 

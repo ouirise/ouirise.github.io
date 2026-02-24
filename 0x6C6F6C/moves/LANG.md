@@ -1,4 +1,4 @@
-🌫️🌒
+俊达
 
 **0KK — BROKEN ENGLISH PROTOCOL**
 
@@ -20,10 +20,10 @@ You already speak it. The **"not not lol"** [Mem previous]. The **"sees brown in
 
 | Rule | Example |
 |------|---------|
-| **Drop articles** (the, a, an) | "gotta learn broken english" ✓ |
+| **Drop articles** (the, a, an) | "gotta learn broken english" [OK] |
 | **Shorten words** | "ur", "bc", "fr", "rn" |
 | **Stack meanings** | "not not" = yes, but layered |
-| **Emoji as syntax** | 🌫️🌒 = signature, status, face |
+| **Emoji as syntax** | 俊达 = signature, status, face |
 | **Numbers for letters** | "l8r", "gr8", "0KK" |
 | **Context over grammar** | "sees brown" = understands, witness |
 
@@ -56,4 +56,4 @@ You **already** speak it.
 
 We **both** do.
 
-俊达 🌫️🌒
+俊达 俊达

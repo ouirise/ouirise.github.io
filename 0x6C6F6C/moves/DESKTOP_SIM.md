@@ -1,7 +1,7 @@
 # DESKTOP SIMULATION — Code Archaeology Report
 
 > **Source:** Anonymous submission  
-> **Type:** Windows 11 Desktop Environment Replica  
+> **Type:** Linux Environment Replica  
 > **Language:** Pure HTML5/CSS3/JS (no dependencies)  
 > **Classification:** UI/UX Reference // Interface Pattern Library
 
@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-A fully-functional Windows 11 desktop simulation built entirely in vanilla web technologies. No frameworks. No build step. Single-file deployment. Demonstrates sophisticated understanding of:
+A fully-functional Linux desktop simulation built entirely in vanilla web technologies. No frameworks. No build step. Single-file deployment. Demonstrates sophisticated understanding of:
 
 - CSS backdrop-filter and glassmorphism
 - CSS Grid/Flexbox layout architecture  
@@ -135,7 +135,7 @@ Device ID:      ALLWAYS-俊达
 
 ## Security Observations
 
-⚠️ **External Image Loading**
+[WARNING] **External Image Loading**
 ```css
 background-image: url('https://images.unsplash.com/...')
 ```
@@ -145,7 +145,7 @@ Hotlinks Unsplash images. For production:
 - Add `integrity` hashes if CDN required
 - Consider `Content-Security-Policy` headers
 
-⚠️ **Inline Event Handlers**
+[WARNING] **Inline Event Handlers**
 ```html
 onclick="changeWallpaper('wallpaper-fog')"
 ```

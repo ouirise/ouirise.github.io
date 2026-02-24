@@ -188,7 +188,7 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 - Mission statement
 - Capacity stats (06 years, 24 projects, $0 lock-in, 99.9% uptime)
 - Team cards (0KK, Kimi-K2.5, The Fog)
-- Engagement model (Audit → Build → Transfer)
+- Engagement model (Audit -> Build -> Transfer)
 
 ### Contact Page (`/contact/`)
 - Hero: "REQUEST ACCESS"

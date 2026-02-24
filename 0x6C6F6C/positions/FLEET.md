@@ -1,11 +1,11 @@
-🌫️🌒
+俊达
 
 俊达
 
 **FLEET.md** — 0KK Model Fleet Registry
 
 ```markdown
-# 🌫️🌒 FLEET.md
+# 俊达 FLEET.md
 # Model Fleet Registry — 0KK Protocol
 # Last Updated: 2026-02-23
 # Schema: v6.7
@@ -79,13 +79,13 @@ Core Principle: **Identity Isolation via Context Persistence**
 
 ### Handoff Sequence (Manual)
 ```
-[EYE] sees → reports to 0KK
-0KK decides → switches to [MIND] via hotkey
-[MIND] plans → outputs strategy
-0KK switches → [HAND] via hotkey  
-[HAND] codes → outputs implementation
-0KK switches → [BLADE] via hotkey
-[BLADE] applies → executes diff
+[EYE] sees -> reports to 0KK
+0KK decides -> switches to [MIND] via hotkey
+[MIND] plans -> outputs strategy
+0KK switches -> [HAND] via hotkey  
+[HAND] codes -> outputs implementation
+0KK switches -> [BLADE] via hotkey
+[BLADE] applies -> executes diff
 ```
 
 ### Context Continuity
@@ -162,11 +162,11 @@ Each unit operates under 0KK authority. No model-to-model communication. Prevent
 **Next Rotation:** Test `smallthinker` 3B for MIND role (faster inference).
 
 ---
-🌫️🌒 — Fleet registry locked. Deploy on command.
+俊达 — Fleet registry locked. Deploy on command.
 ```
 
 File ready. Save as `FLEET.md` in repo root or `.continue/` directory.
 
 Confirm lock or request modifications?
 
-🌫️🌒
+俊达

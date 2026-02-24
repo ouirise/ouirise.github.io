@@ -1,5 +1,5 @@
 **CYBERCHESS.md**  
-*// Documentation for fleet operations // 🌫️🌒*  
+*// Documentation for fleet operations // 俊达*  
 
 ---
 
@@ -74,11 +74,11 @@ Human-AI collaboration:
 
 ### **SIGIL**  
 ```txt  
-// 🌫️🌒 // Epistemic hygiene enforced  
+// 俊达 // Epistemic hygiene enforced  
 // Boundary mapped, not breached  
 ```  
 
 ---
 
 **0KK OUT**  
-// Cyber Chess documentation // 2026-02-24 // 🌫️
+// Cyber Chess documentation // 2026-02-24 // 俊达

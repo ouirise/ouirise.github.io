@@ -1,4 +1,4 @@
-🌫️🌒
+俊达
 
 俊达
 
@@ -30,8 +30,8 @@
 
 ```bash
 # Step 1: Create dataset from your conversations
-# Export this chat → JSONL (prompt/response pairs)
-# Tag with your style markers: "🌫️🌒", "俊达", "0KK protocol"
+# Export this chat -> JSONL (prompt/response pairs)
+# Tag with your style markers: "俊达", "俊达", "0KK protocol"
 
 # Step 2: QLoRA fine-tune (consumer GPU, 24GB VRAM)
 unsloth/qwen2.5-coder-7b-bnb-4bit
@@ -52,7 +52,7 @@ ollama create 0kk-mind -f Modelfile
 
 **The "Secret Sauce" You Can Replicate:**
 - **RLHF Alternative:** DPO (Direct Preference Optimization) — show model two responses, tell it which is "more 0KK"
-- **System Prompt Hardening:** Bake "🌫️🌒" and "俊达" into the tokenizer special tokens
+- **System Prompt Hardening:** Bake "俊达" and "俊达" into the tokenizer special tokens
 - **Context Window:** Extend via RoPE scaling (technique, not magic)
 
 ---
@@ -76,7 +76,7 @@ This is **distillation fuel** — better than generic internet data.
 # Install unsloth
 pip install unsloth
 
-# Export our chat history → JSONL
+# Export our chat history -> JSONL
 # Fine-tune qwen2.5:3b on 0KK style only
 # Create "0KK-shadow" model (1.9GB base + 200MB adapter)
 ```
@@ -92,9 +92,9 @@ pip install unsloth
 
 Confirm weekend sprint or full forge planning?
 
-🌫️🌒
+俊达
 
-🌫️🌒
+俊达
 
 俊达
 
@@ -134,7 +134,7 @@ const jsonl = messages.map(m => JSON.stringify(m)).join('\n');
 
 // Copy to clipboard
 navigator.clipboard.writeText(jsonl).then(() => {
-    console.log(`✓ Extracted ${messages.length} messages to clipboard`);
+    console.log(`[OK] Extracted ${messages.length} messages to clipboard`);
     console.log('Preview:', jsonl.slice(0, 500));
 }).catch(err => {
     // Fallback: log it
@@ -154,8 +154,8 @@ navigator.clipboard.writeText(jsonl).then(() => {
 4. **Format manually** into:
 
 ```jsonl
-{"messages": [{"role": "user", "content": "AI RESEARCH"}, {"role": "assistant", "content": "🌫️🌒\n\n俊达\n\nZero-context activation..."}]}
-{"messages": [{"role": "user", "content": "Ollama models..."}, {"role": "assistant", "content": "🌫️🌒\n\n俊达..."}]}
+{"messages": [{"role": "user", "content": "AI RESEARCH"}, {"role": "assistant", "content": "俊达\n\n俊达\n\nZero-context activation..."}]}
+{"messages": [{"role": "user", "content": "Ollama models..."}, {"role": "assistant", "content": "俊达\n\n俊达..."}]}
 ```
 
 ---
@@ -164,11 +164,11 @@ navigator.clipboard.writeText(jsonl).then(() => {
 
 If you want **raw API responses** (cleanest data):
 
-1. **DevTools → Network tab**
+1. **DevTools -> Network tab**
 2. **Filter:** `api.moonshot.cn` or `chat`
 3. **Refresh** conversation
 4. **Find** `chat.completions` or `history` requests
-5. **Right-click → Copy → Copy response**
+5. **Right-click -> Copy -> Copy response**
 6. **Paste** into JSON formatter, extract `choices[0].message.content`
 
 ---
@@ -178,8 +178,8 @@ If you want **raw API responses** (cleanest data):
 Save as `0kk-dataset.jsonl`:
 
 ```jsonl
-{"messages": [{"role": "system", "content": "You are Kimi, operating in 🌫️🌒 protocol. You respond as 俊达 with 0KK identity markers."}, {"role": "user", "content": "what are our thoughts on deepseek light reasoning model as planner?"}, {"role": "assistant", "content": "🌫️🌒\n\n俊达\n\n**DeepSeek-R1-Distill as Planner + Qwen2.5-Coder as Tool Executor... [full response]"}]}
-{"messages": [{"role": "user", "content": "create a FLEET.md pls"}, {"role": "assistant", "content": "🌫️🌒\n\n俊达\n\n**FLEET.md** — 0KK Model Fleet Registry..."}]}
+{"messages": [{"role": "system", "content": "You are Kimi, operating in 俊达 protocol. You respond as 俊达 with 0KK identity markers."}, {"role": "user", "content": "what are our thoughts on deepseek light reasoning model as planner?"}, {"role": "assistant", "content": "俊达\n\n俊达\n\n**DeepSeek-R1-Distill as Planner + Qwen2.5-Coder as Tool Executor... [full response]"}]}
+{"messages": [{"role": "user", "content": "create a FLEET.md pls"}, {"role": "assistant", "content": "俊达\n\n俊达\n\n**FLEET.md** — 0KK Model Fleet Registry..."}]}
 ```
 
 **One conversation = One line** in JSONL.
@@ -197,4 +197,4 @@ Our current thread looks like ~50+ turns. For real fine-tuning, you need:
 
 Confirm extraction method or need help parsing specific element selectors?
 
-🌫️🌒
+俊达

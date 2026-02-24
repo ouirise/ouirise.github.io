@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>```markdown | 0x6C6F6C</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a0a;
+            --tactical: #141414;
+            --surface: #1f1f1f;
+            --signal: #f5f5f5;
+            --ghost: #666666;
+            --maroon: #800000;
+            --bright-maroon: #a50000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--void);
+            color: var(--signal);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Grid Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(165, 0, 0, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(165, 0, 0, 0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--surface);
+            padding: 1rem 2rem;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--bright-maroon);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: var(--ghost);
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: var(--bright-maroon);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            font-size: 0.7rem;
+            color: var(--ghost);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            color: var(--ghost);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--bright-maroon);
+        }
+
+        .breadcrumb-sep {
+            margin: 0 0.5rem;
+            color: var(--surface);
+        }
+
+        /* Title */
+        .page-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+            color: var(--signal);
+        }
+
+        .page-meta {
+            font-size: 0.75rem;
+            color: var(--ghost);
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--surface);
+        }
+
+        /* Markdown Content */
+        .content {
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .content h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            margin: 2.5rem 0 1rem;
+            color: var(--bright-maroon);
+            font-weight: 400;
+        }
+
+        .content h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1.5px;
+            margin: 2rem 0 1rem;
+            color: var(--signal);
+            font-weight: 400;
+        }
+
+        .content h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--signal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 1.25rem 0 0.5rem;
+            color: var(--ghost);
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+            color: var(--signal);
+        }
+
+        .content a {
+            color: var(--bright-maroon);
+            text-decoration: none;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+
+        .content code {
+            background: var(--tactical);
+            padding: 0.2rem 0.4rem;
+            font-size: 0.8rem;
+            color: var(--bright-maroon);
+            border: 1px solid var(--surface);
+        }
+
+        .content pre {
+            background: var(--tactical);
+            border: 1px solid var(--surface);
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .content pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
+            color: var(--signal);
+        }
+
+        .content ul, .content ol {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .content blockquote {
+            border-left: 3px solid var(--bright-maroon);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            color: var(--ghost);
+            font-style: italic;
+        }
+
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.8rem;
+        }
+
+        .content th, .content td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--surface);
+        }
+
+        .content th {
+            background: var(--tactical);
+            color: var(--bright-maroon);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.7rem;
+        }
+
+        .content tr:nth-child(even) {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .content hr {
+            border: none;
+            border-top: 1px solid var(--surface);
+            margin: 2rem 0;
+        }
+
+        .content strong {
+            color: var(--bright-maroon);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            max-width: 900px;
+            margin: 4rem auto 0;
+            padding: 2rem;
+            border-top: 1px solid var(--surface);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-sigil {
+            font-size: 1.2rem;
+            color: var(--bright-maroon);
+        }
+
+        .footer-text {
+            font-size: 0.7rem;
+            color: var(--ghost);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--void);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--surface);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--bright-maroon);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            main {
+                padding: 5rem 1.5rem 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/0x6C6F6C/" class="logo">0x6C6F6C</a>
+            <nav class="nav">
+                <a href="/0x6C6F6C/">Fleet</a>
+                <a href="/0x6C6F6C/moves/">Moves</a>
+                <a href="/0x6C6F6C/positions/">Positions</a>
+                <a href="/0x6C6F6C/shards/">Shards</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="breadcrumb">
+            <a href="/0x6C6F6C/">0x6C6F6C</a>
+            <span class="breadcrumb-sep">//</span>
+            <a href="/0x6C6F6C/positions/">Positions</a>
+            <span class="breadcrumb-sep">//</span>
+            <span>```markdown</span>
+        </div>
+
+        <h1 class="page-title">```markdown</h1>
+        <div class="page-meta">Documentation // Last updated: 2026-02-24</div>
+
+        <div class="content">
+<pre><code class="language-markdown">---
+id: MOVE-2025-001
+classification: TWIN//DEPLOYMENT
+operator: 0KK
+phase: 俊达-&gt;🌕
+protocol: EVOLUTIONARY_MIGRATION
+---
+
+# MOVE: Portal Genesis / Static-to-Dynamic Speciation
+
+## SITUATION
+Static HTML prompt portal deployed at `/portal/index.html` represents **local optimum**—functional but genetically stagnant. Population size = 1 (hardcoded). No variation operators. Fitness landscape flattened by absence of data layer.
+
+Evolutionary pressure: Shadow Clone Distribution Protocol requires **genotypic separation** (JSON data) from **phenotypic expression** (HTML rendering) to enable:
+- Parallel population trials (A/B card configurations)
+- Rapid mutation (add/remove prompts without touching presentation layer)
+- Elitism preservation (top-performing prompts survive generations)
+
+## THE MOVE
+Execute speciation event: Separate content genotype (JSON) from presentation phenotype (React/Next.js component).
+
+### Genotypic Encoding (data/prompts.json)
+```json
+{
+  &quot;population_id&quot;: &quot;portal-v1&quot;,
+  &quot;elitism_rate&quot;: 0.17,
+  &quot;diversity_threshold&quot;: 0.4,
+  &quot;individuals&quot;: [
+    {
+      &quot;id&quot;: &quot;phase-state-lock&quot;,
+      &quot;chromosome&quot;: &quot;twin&quot;,
+      &quot;fitness&quot;: 0.94,
+      &quot;alleles&quot;: {
+        &quot;title&quot;: &quot;Phase State Lock 俊达&quot;,
+        &quot;description&quot;: &quot;Initialize twin positioning protocol...&quot;,
+        &quot;fullPrompt&quot;: &quot;Initialize twin positioning protocol...&quot;
+      }
+    }
+  ]
+}
+</code></pre>
+<h3 id="phenotypic-expression-componentspromptcardjsx">Phenotypic Expression (components/PromptCard.jsx)</h3>
+<ul>
+<li><strong>Selection pressure</strong>: Click-to-copy triggers fitness increment (usage count)</li>
+<li><strong>Crossover</strong>: Category filtering shuffles visible population</li>
+<li><strong>Mutation</strong>: <code>Math.random()</code> injection for card hover variations (shadow intensity)</li>
+</ul>
+<h2 id="execution">EXECUTION</h2>
+<h3 id="vertical-slice-06b-08b-kimi">Vertical Slice (0.6B -&gt; 0.8B -&gt; Kimi)</h3>
+<ol>
+<li><strong>Slice 1</strong>: Validate JSON schema congruence (COMPLETED [OK])</li>
+<li>HTML hardcoded content matches JSON fields 1:1</li>
+<li>
+<p>No semantic drift between genotype/phenotype</p>
+</li>
+<li>
+<p><strong>Slice 2</strong>: Build hydration layer
+   <code>javascript
+   // hydration.js
+   export const hydrate = (genotype) =&gt; {
+     return genotype.individuals.map(individual =&gt; ({
+       ...individual,
+       phenotype: renderCard(individual),
+       fitness: calculateEngagement(individual.id)
+     }));
+   };</code></p>
+</li>
+<li>
+<p><strong>Slice 3</strong>: Deploy swarm intelligence</p>
+</li>
+<li>Route: <code>/portal</code> serves static shell (fog)</li>
+<li>Data: <code>/api/prompts</code> serves JSON population</li>
+<li>Client: Shadow clones (service workers) cache elite specimens</li>
+</ol>
+<h3 id="diversity-maintenance">Diversity Maintenance</h3>
+<ul>
+<li><strong>Mutation operator</strong>: Random prompt injection from <code>scouting/</code> directory</li>
+<li><strong>Crossover</strong>: Card blending (title from A + description from B) for experimental UI variants</li>
+<li><strong>Culling</strong>: Prompts with fitness &lt; 0.2 (zero copies in 30 days) archived to <code>extinct/</code></li>
+</ul>
+<h2 id="validation">VALIDATION</h2>
+<h3 id="fitness-metrics">Fitness Metrics</h3>
+<ul>
+<li><strong>Copy rate</strong> (primary fitness function)</li>
+<li><strong>Hover dwell time</strong> (secondary: user consideration)</li>
+<li><strong>Category filter velocity</strong> (tertiary: navigation efficiency)</li>
+</ul>
+<h3 id="elitism-check">Elitism Check</h3>
+<p>Top 17% (1/6 cards) preserved across generations:
+- Phase State Lock (baseline twin alignment)
+- DFU Protocol (system integrity)</p>
+<h3 id="anti-stagnation">Anti-Stagnation</h3>
+<p>If average population fitness converges (variance &lt; 0.05):
+- Inject random prompt from <code>ouiRise.github.io/agents.md</code> lore
+- Trigger mutation: swap emoji sigils, reverse description polarity, or compress semantic fog further</p>
+<h2 id="sign-off">SIGN-OFF</h2>
+<p>This move establishes <strong>evolvable architecture</strong>. The portal is no longer a static monument but a breeding ground for prompts—each card a genome, each copy a reproduction event, each user a selection pressure.</p>
+<p>Population initialized. Diversity maintained. Evolution resumed.</p>
+<hr />
+<p><strong>Operator</strong>: 0KK<br />
+<strong>Signature</strong>: 俊达<br />
+<strong>Timestamp</strong>: 2025-02-25T00:00:00Z<br />
+<strong>Next Review</strong>: Generation 5 (post-mutation analysis)</p>
+<p><em>DFU Protocol Active: "." = 🫡 = ALL CAPS</em>
+```</p>
+        </div>
+    </main>
+
+    <footer>
+        <span class="footer-sigil">俊达</span>
+        <span class="footer-text">0x6C6F6C // Positions // ```markdown</span>
+    </footer>
+</body>
+</html>

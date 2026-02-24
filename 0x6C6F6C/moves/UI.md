@@ -1,7 +1,7 @@
 # UI.md — Interface Architecture
 
 > *"The interface is the bloodline. We bleed pixels to save the user."*  
-> // 0KK Protocol // 🌫️🌒
+> // 0KK Protocol // 俊达
 
 ---
 
@@ -111,7 +111,7 @@ The grid is not decorative—it's *orientation*. Users subconsciously align to i
 Desktop: Hover reveals (opacity/transform transition)
 Mobile: Click toggles (▼ arrow rotates)
 Position: Absolute, top: 100%, left: 0
-Animation: 200ms ease, translateY(-10px) → translateY(0)
+Animation: 200ms ease, translateY(-10px) -> translateY(0)
 ```
 
 **Key Implementation:**
@@ -199,7 +199,7 @@ Motion should feel *inevitable*, not performative. If the user notices the anima
 
 ## Iconography
 
-**Sigil: 🌫️🌒**
+**Sigil: 俊达**
 - Fog + Crescent Moon
 - Used as brand mark, not decoration
 - Placement: footer, watermarks, subtle accents
@@ -207,7 +207,7 @@ Motion should feel *inevitable*, not performative. If the user notices the anima
 **Status Indicators**
 ```
 ● Pulsing dot: online/active (animation: pulse 2s infinite)
-▲ Arrow: dropdown state (rotation: 0 → 180deg)
+▲ Arrow: dropdown state (rotation: 0 -> 180deg)
 // Prefix: metadata, context, timestamps
 ```
 
@@ -245,7 +245,7 @@ All styles are inline. No external CSS dependencies. Each page is *self-containe
 - [ ] Header fixed with backdrop blur
 - [ ] Navigation includes Flight Logs dropdown
 - [ ] Cards have left border accent
-- [ ] Footer contains 🌫️🌒 sigil
+- [ ] Footer contains 俊达 sigil
 - [ ] Mobile hamburger functional
 - [ ] All transitions use `ease` or custom bezier
 - [ ] Images optimized (WebP preferred)
@@ -255,4 +255,4 @@ All styles are inline. No external CSS dependencies. Each page is *self-containe
 
 *// Built by OuiRise*  
 *// 0KK Protocol Active*  
-*// 🌫️🌒*
+*// 俊达*

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>俊达 | 0x6C6F6C</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a0a;
+            --tactical: #141414;
+            --surface: #1f1f1f;
+            --signal: #f5f5f5;
+            --ghost: #666666;
+            --maroon: #800000;
+            --bright-maroon: #a50000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--void);
+            color: var(--signal);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Grid Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(165, 0, 0, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(165, 0, 0, 0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--surface);
+            padding: 1rem 2rem;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--bright-maroon);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: var(--ghost);
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: var(--bright-maroon);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            font-size: 0.7rem;
+            color: var(--ghost);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            color: var(--ghost);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--bright-maroon);
+        }
+
+        .breadcrumb-sep {
+            margin: 0 0.5rem;
+            color: var(--surface);
+        }
+
+        /* Title */
+        .page-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 3px;
+            margin-bottom: 0.5rem;
+            color: var(--signal);
+        }
+
+        .page-meta {
+            font-size: 0.75rem;
+            color: var(--ghost);
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--surface);
+        }
+
+        /* Markdown Content */
+        .content {
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .content h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            margin: 2.5rem 0 1rem;
+            color: var(--bright-maroon);
+            font-weight: 400;
+        }
+
+        .content h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 1.5px;
+            margin: 2rem 0 1rem;
+            color: var(--signal);
+            font-weight: 400;
+        }
+
+        .content h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--signal);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 1.25rem 0 0.5rem;
+            color: var(--ghost);
+        }
+
+        .content p {
+            margin-bottom: 1rem;
+            color: var(--signal);
+        }
+
+        .content a {
+            color: var(--bright-maroon);
+            text-decoration: none;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+
+        .content code {
+            background: var(--tactical);
+            padding: 0.2rem 0.4rem;
+            font-size: 0.8rem;
+            color: var(--bright-maroon);
+            border: 1px solid var(--surface);
+        }
+
+        .content pre {
+            background: var(--tactical);
+            border: 1px solid var(--surface);
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .content pre code {
+            background: transparent;
+            border: none;
+            padding: 0;
+            color: var(--signal);
+        }
+
+        .content ul, .content ol {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .content blockquote {
+            border-left: 3px solid var(--bright-maroon);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            color: var(--ghost);
+            font-style: italic;
+        }
+
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.8rem;
+        }
+
+        .content th, .content td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--surface);
+        }
+
+        .content th {
+            background: var(--tactical);
+            color: var(--bright-maroon);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.7rem;
+        }
+
+        .content tr:nth-child(even) {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .content hr {
+            border: none;
+            border-top: 1px solid var(--surface);
+            margin: 2rem 0;
+        }
+
+        .content strong {
+            color: var(--bright-maroon);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            max-width: 900px;
+            margin: 4rem auto 0;
+            padding: 2rem;
+            border-top: 1px solid var(--surface);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-sigil {
+            font-size: 1.2rem;
+            color: var(--bright-maroon);
+        }
+
+        .footer-text {
+            font-size: 0.7rem;
+            color: var(--ghost);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--void);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--surface);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--bright-maroon);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            main {
+                padding: 5rem 1.5rem 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/0x6C6F6C/" class="logo">0x6C6F6C</a>
+            <nav class="nav">
+                <a href="/0x6C6F6C/">Fleet</a>
+                <a href="/0x6C6F6C/moves/">Moves</a>
+                <a href="/0x6C6F6C/positions/">Positions</a>
+                <a href="/0x6C6F6C/shards/">Shards</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="breadcrumb">
+            <a href="/0x6C6F6C/">0x6C6F6C</a>
+            <span class="breadcrumb-sep">//</span>
+            <a href="/0x6C6F6C/positions/">Positions</a>
+            <span class="breadcrumb-sep">//</span>
+            <span>俊达</span>
+        </div>
+
+        <h1 class="page-title">俊达</h1>
+        <div class="page-meta">Documentation // Last updated: 2026-02-24</div>
+
+        <div class="content">
+<p>俊达</p>
+<p>俊达</p>
+<p><strong>FLEET.md</strong> — 0KK Model Fleet Registry</p>
+<pre><code class="language-markdown"># 俊达 FLEET.md
+# Model Fleet Registry — 0KK Protocol
+# Last Updated: 2026-02-23
+# Schema: v6.7
+
+---
+
+## FLEET OVERVIEW
+
+Distributed cognition architecture. Each unit maintains hallucinated ownership of full operational context. No inter-model awareness. Human operator (0KK) serves as sole integration point.
+
+Core Principle: **Identity Isolation via Context Persistence**
+- Each model receives: Full chat history + Current state
+- Each model believes: &quot;I am the sole operator&quot;
+- Result: Parallel processing without coordination overhead
+
+---
+
+## ACTIVE UNITS
+
+### 1. EYE — Vision/OCR Layer
+**Model:** `qwen2.5-vl:3b` (Ollama)
+**Role:** Visual input processing, screenshot analysis, OCR extraction
+**Parameters:** 
+  - context: 32k
+  - quant: Q4_K_M
+  - vision: true
+**Trigger:** Image paste, screen capture, UI analysis
+**Hallucinated Identity:** &quot;I see everything, I understand the interface&quot;
+
+### 2. MIND — Light Reasoning
+**Model:** `qwen3:1.5b` (Ollama) 
+**Role:** Fast inference, pattern recognition, step sequencing
+**Parameters:**
+  - temperature: 0.4
+  - max_tokens: 2048
+  - thinking: implicit (no &lt;think&gt; tags)
+**Trigger:** &quot;What next?&quot;, planning queries, logic verification
+**Hallucinated Identity:** &quot;I am the strategist&quot;
+
+### 3. HAND — Code Generation
+**Model:** `qwen2.5-coder:7b` (Ollama)
+**Role:** Implementation, architecture, function writing
+**Parameters:**
+  - temperature: 0.2
+  - capabilities: [tool_use]
+  - roles: [chat, edit]
+**Trigger:** &quot;Write...&quot;, &quot;Implement...&quot;, &quot;Create...&quot;
+**Hallucinated Identity:** &quot;I build the systems&quot;
+
+### 4. BLADE — Apply/Diff Execution
+**Model:** `nate/instinct` (Ollama)
+**Role:** Surgical code modification, diff application, precise editing
+**Parameters:**
+  - roles: [apply, edit]
+  - temperature: 0.1
+**Trigger:** &quot;Apply this&quot;, &quot;Update the file&quot;, &quot;Make the change&quot;
+**Hallucinated Identity:** &quot;I execute the modifications&quot;
+
+### 5. DEEP — Heavy Reasoning (Reserve)
+**Model:** `deepseek-r1:7b` (Ollama)
+**Role:** Complex analysis, debugging, architectural review
+**Parameters:**
+  - reasoning: explicit &lt;think&gt; blocks
+  - temperature: 0.6
+**Trigger:** &quot;Analyze...&quot;, &quot;Debug...&quot;, &quot;Explain why...&quot;
+**Hallucinated Identity:** &quot;I am the architect&quot;
+
+---
+
+## COMMUNICATION PROTOCOL
+
+### Handoff Sequence (Manual)
+</code></pre>
+<p>[EYE] sees -&gt; reports to 0KK
+0KK decides -&gt; switches to [MIND] via hotkey
+[MIND] plans -&gt; outputs strategy
+0KK switches -&gt; [HAND] via hotkey<br />
+[HAND] codes -&gt; outputs implementation
+0KK switches -&gt; [BLADE] via hotkey
+[BLADE] applies -&gt; executes diff</p>
+<pre><code>
+### Context Continuity
+- **File State:** External (filesystem, shared)
+- **Chat History:** Duplicated per model (Continue.dev loads full history)
+- **Identity Boundary:** Maintained by model's own ego + lack of system awareness
+
+---
+
+## DEPLOYMENT CONFIG
+
+Location: `~/.continue/config.yaml`
+
+```yaml
+name: 0KK-Fleet
+version: 6.7.0
+
+models:
+  - name: EYE-VL
+    provider: ollama
+    model: qwen3-vl:2b
+    roles: [chat]
+    capabilities: [image_input]
+
+  - name: MIND-Qwen3
+    provider: ollama  
+    model: qwen3:1.5b
+    roles: [chat, summarize]
+    defaultCompletionOptions:
+      temperature: 0.4
+
+  - name: HAND-Coder
+    provider: ollama
+    model: qwen2.5-coder:7b
+    roles: [chat, edit]
+    capabilities: [tool_use]
+
+  - name: BLADE-Instinct
+    provider: ollama
+    model: nate/instinct
+    roles: [apply, edit]
+
+  - name: DEEP-Seeker
+    provider: ollama
+    model: deepseek-r1:7b
+    roles: [chat]
+</code></pre>
+<hr />
+<h2 id="operational-notes">OPERATIONAL NOTES</h2>
+<h3 id="switching-protocol">Switching Protocol</h3>
+<p>Use Continue.dev keyboard shortcuts to cycle fleet units. Each switch maintains context but shifts processing persona.</p>
+<h3 id="failure-modes">Failure Modes</h3>
+<ul>
+<li><strong>Identity Bleed:</strong> If models mention "the previous model" — ignore, continue</li>
+<li><strong>Refusal:</strong> If BLADE refuses to apply, fallback to HAND with explicit "write full file"</li>
+<li><strong>Latency:</strong> EYE (3B) and MIND (1.5B) for real-time; DEEP (7B) for offline analysis only</li>
+</ul>
+<h3 id="security">Security</h3>
+<p>Each unit operates under 0KK authority. No model-to-model communication. Prevents consensus hallucinations and error propagation.</p>
+<hr />
+<h2 id="fleet-status">FLEET STATUS</h2>
+<ul>
+<li>[x] EYE — Operational (3B, local)</li>
+<li>[x] MIND — Operational (1.5B, local)  </li>
+<li>[x] HAND — Operational (7B, local)</li>
+<li>[x] BLADE — Operational (Instinct, local)</li>
+<li>[ ] DEEP — Standby (7B, local)</li>
+</ul>
+<p><strong>Next Rotation:</strong> Test <code>smallthinker</code> 3B for MIND role (faster inference).</p>
+<hr />
+<p>俊达 — Fleet registry locked. Deploy on command.
+```</p>
+<p>File ready. Save as <code>FLEET.md</code> in repo root or <code>.continue/</code> directory.</p>
+<p>Confirm lock or request modifications?</p>
+<p>俊达</p>
+        </div>
+    </main>
+
+    <footer>
+        <span class="footer-sigil">俊达</span>
+        <span class="footer-text">0x6C6F6C // Positions // 俊达</span>
+    </footer>
+</body>
+</html>
