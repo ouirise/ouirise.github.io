@@ -137,6 +137,88 @@
             padding-left: 1rem;
         }
 
+        /* Dropdown Menu Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--tactical);
+            border: 1px solid var(--surface);
+            min-width: 180px;
+            z-index: 100;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: var(--signal);
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--surface);
+            color: var(--bright-maroon);
+        }
+
+        /* Mobile dropdown styles */
+        @media (max-width: 767px) {
+            .dropdown {
+                width: 100%;
+            }
+
+            .dropdown-menu {
+                position: static;
+                display: none;
+                background: var(--void);
+                border: none;
+                border-left: 2px solid var(--bright-maroon);
+                margin-left: 1rem;
+                margin-top: 0.5rem;
+            }
+
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+
+            .dropdown-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .dropdown-arrow {
+                transition: transform 0.2s;
+            }
+
+            .dropdown.active .dropdown-arrow {
+                transform: rotate(180deg);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .dropdown-toggle {
+                cursor: default;
+            }
+
+            .dropdown-arrow {
+                display: inline-block;
+                margin-left: 4px;
+                font-size: 0.6rem;
+            }
+        }
+
         .terminal-window {
             border: 1px solid var(--surface);
             background: var(--tactical);
@@ -187,13 +269,20 @@
             <nav id="mobile-menu" class="mono text-sm uppercase tracking-widest gap-6 md:gap-8 items-start md:items-center">
                 <a href="/" class="nav-link py-2 md:py-0">Home</a>
                 <a href="/about/" class="nav-link py-2 md:py-0">About</a>
-                <a href="/archive/" class="nav-link py-2 md:py-0">Archive</a>
+                <div class="dropdown py-2 md:py-0">
+                    <span class="nav-link dropdown-toggle cursor-pointer">Flight Logs <span class="dropdown-arrow">▼</span></span>
+                    <div class="dropdown-menu">
+                        <a href="/archive/">Flight Logs</a>
+                        <a href="/archive/selector.html">Selector</a>
+                        <a href="/archive/gallery.html">Gallery</a>
+                    </div>
+                </div>
                 <a href="/0x6C6F6C/" class="nav-link py-2 md:py-0 text-[#a50000]">0x6C6F6C</a>
                 <a href="/contact/" class="nav-link py-2 md:py-0">Contact</a>
                 
                 <div class="md:hidden mt-8 text-xs text-muted mono space-y-1">
                     <p>// OUIRISE NAV</p>
-                    <p>// v2.6.7</p>
+                    <p>// v2.6.9</p>
                 </div>
             </nav>
         </div>
@@ -483,5 +572,23 @@
         </div>
     </footer>
 
+    <script>
+        // Mobile dropdown toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            dropdowns.forEach(function(dropdown) {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                
+                toggle.addEventListener('click', function(e) {
+                    // Only handle click on mobile (screen width < 768px)
+                    if (window.innerWidth < 768) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

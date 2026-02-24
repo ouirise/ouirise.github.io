@@ -66,6 +66,69 @@
         
         .nav-link:hover::after { width: 100%; }
 
+        /* Dropdown styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--tactical);
+            border: 1px solid var(--surface);
+            min-width: 180px;
+            z-index: 100;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: var(--signal);
+            text-decoration: none;
+            font-size: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background: var(--surface);
+            color: var(--bright-maroon);
+        }
+
+        /* Mobile dropdown styles */
+        @media (max-width: 767px) {
+            .dropdown-menu {
+                position: static;
+                display: none;
+                background: transparent;
+                border: none;
+                padding-left: 1rem;
+                margin-top: 0;
+            }
+
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+
+            .dropdown-toggle::after {
+                content: " ▼";
+                font-size: 0.6rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .dropdown:hover .dropdown-menu {
+                display: block;
+            }
+        }
+
         #nav-toggle { display: none; }
 
         #mobile-menu {
@@ -271,13 +334,20 @@
             <nav id="mobile-menu" class="mono text-sm uppercase tracking-widest gap-6 md:gap-8 items-start md:items-center">
                 <a href="/" class="nav-link py-2 md:py-0">Home</a>
                 <a href="/about/" class="nav-link py-2 md:py-0">About</a>
-                <a href="/archive/" class="nav-link py-2 md:py-0">Archive</a>
+                <div class="dropdown py-2 md:py-0">
+                    <a href="/archive/" class="nav-link dropdown-toggle">Flight Logs</a>
+                    <div class="dropdown-menu">
+                        <a href="/archive/" class="dropdown-item">Flight Logs Main</a>
+                        <a href="/archive/selector.html" class="dropdown-item">Selector</a>
+                        <a href="/archive/gallery.html" class="dropdown-item">Gallery</a>
+                    </div>
+                </div>
                 <a href="/0x6C6F6C/" class="nav-link py-2 md:py-0">0x6C6F6C</a>
                 <a href="/contact/" class="nav-link py-2 md:py-0">Contact</a>
                 
                 <div class="md:hidden mt-8 text-xs text-muted mono space-y-1">
                     <p>// OUIRISE NAV</p>
-                    <p>// v2.6.7</p>
+                    <p>// v2.6.9</p>
                 </div>
             </nav>
         </div>

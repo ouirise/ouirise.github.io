@@ -224,6 +224,41 @@
             color: var(--bright-maroon);
         }
 
+        /* Dropdown Styles */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu {
+            display: none;
+        }
+        .dropdown-menu:hover {
+            display: block;
+        }
+        .dropdown-arrow {
+            font-size: 0.6rem;
+            transition: transform 0.2s;
+        }
+        .dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        @media (max-width: 767px) {
+            .dropdown {
+                width: 100%;
+            }
+            .dropdown-menu {
+                position: static;
+                display: none;
+                border: none;
+                border-left: 2px solid var(--bright-maroon);
+                margin-left: 1rem;
+                margin-top: 0.5rem;
+                background: transparent;
+            }
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+        }
+
         .feature-icon {
             width: 48px;
             height: 48px;
@@ -257,13 +292,23 @@
             <nav id="mobile-menu" class="mono text-sm uppercase tracking-widest gap-6 md:gap-8 items-start md:items-center">
                 <a href="/" class="nav-link py-2 md:py-0 text-[#a50000]">Home</a>
                 <a href="/about/" class="nav-link py-2 md:py-0">About</a>
-                <a href="/archive/" class="nav-link py-2 md:py-0">Archive</a>
+                <div class="dropdown relative">
+                    <a href="/archive/" class="nav-link py-2 md:py-0 flex items-center gap-1">
+                        Flight Logs
+                        <span class="dropdown-arrow md:hidden">▼</span>
+                    </a>
+                    <div class="dropdown-menu hidden md:block absolute top-full left-0 bg-tactical border border-surface min-w-[200px] py-2 z-50">
+                        <a href="/archive/" class="dropdown-item block px-4 py-2 text-xs hover:bg-surface hover:text-[#a50000]">// Flight Logs</a>
+                        <a href="/archive/selector.html" class="dropdown-item block px-4 py-2 text-xs hover:bg-surface hover:text-[#a50000]">// Selector</a>
+                        <a href="/archive/gallery.html" class="dropdown-item block px-4 py-2 text-xs hover:bg-surface hover:text-[#a50000]">// Gallery</a>
+                    </div>
+                </div>
                 <a href="/0x6C6F6C/" class="nav-link py-2 md:py-0">0x6C6F6C</a>
                 <a href="/contact/" class="nav-link py-2 md:py-0">Contact</a>
                 
                 <div class="md:hidden mt-8 text-xs text-muted mono space-y-1">
                     <p>// OUIRISE NAV</p>
-                    <p>// v2.6.7</p>
+                    <p>// v2.6.9</p>
                 </div>
             </nav>
         </div>
@@ -650,6 +695,16 @@
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     document.getElementById('nav-toggle').checked = false;
+                }
+            });
+        });
+
+        // Mobile dropdown toggle
+        document.querySelectorAll('.dropdown').forEach(dropdown => {
+            dropdown.addEventListener('click', function(e) {
+                if (window.innerWidth < 768) {
+                    e.preventDefault();
+                    this.classList.toggle('active');
                 }
             });
         });
