@@ -53,10 +53,10 @@
     },
     {
       "id": "reports",
-      "name": "Reports",
-      "description": "Project reports and analytics (coming soon)",
-      "url": "/portal/",
-      "status": "planned"
+      "name": "0x6C6F6C",
+      "description": "Access Agent Fleet documentation and reports",
+      "url": "/0x6C6F6C/",
+      "external": true
     },
     {
       "id": "vault",
