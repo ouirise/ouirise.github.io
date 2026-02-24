@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Recon | OUIRISE INITIATIVE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #0a0a0a;
+            --tactical: #141414;
+            --surface: #1f1f1f;
+            --signal: #f5f5f5;
+            --ghost: #666666;
+            --maroon: #800000;
+            --bright-maroon: #a50000;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--void);
+            color: var(--signal);
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(128, 0, 0, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(128, 0, 0, 0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .font-bebas { font-family: 'Bebas Neue', sans-serif; }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--surface);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            color: var(--bright-maroon);
+            text-decoration: none;
+            border: 2px solid var(--bright-maroon);
+            padding: 0.25rem 0.75rem;
+        }
+
+        .nav-back {
+            color: var(--ghost);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            transition: color 0.2s;
+        }
+
+        .nav-back:hover {
+            color: var(--bright-maroon);
+        }
+
+        /* Gallery */
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: var(--ghost);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* Category Filter */
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            padding: 1rem;
+            background: var(--tactical);
+            border: 1px solid var(--surface);
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--surface);
+            color: var(--ghost);
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--bright-maroon);
+            color: var(--bright-maroon);
+        }
+
+        /* Image Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .image-card {
+            background: var(--tactical);
+            border: 1px solid var(--surface);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .image-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--maroon);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .image-card:hover {
+            border-color: var(--bright-maroon);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(128, 0, 0, 0.3);
+        }
+
+        .image-card:hover::before {
+            background: var(--bright-maroon);
+        }
+
+        .image-card.featured::after {
+            content: '// FEATURED';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--bright-maroon);
+            color: var(--signal);
+            padding: 0.25rem 0.5rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            z-index: 10;
+        }
+
+        .image-wrapper {
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            background: var(--void);
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .image-card:hover .image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .image-info {
+            padding: 1rem;
+        }
+
+        .image-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .image-desc {
+            font-size: 0.8rem;
+            color: var(--ghost);
+            margin-bottom: 0.75rem;
+        }
+
+        .image-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: var(--ghost);
+        }
+
+        .image-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .tag {
+            font-size: 0.65rem;
+            background: rgba(165, 0, 0, 0.15);
+            color: var(--bright-maroon);
+            padding: 0.2rem 0.4rem;
+            text-transform: uppercase;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 4rem;
+            color: var(--ghost);
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--surface);
+            border-top-color: var(--bright-maroon);
+            border-radius: 50%;
+            margin-left: 10px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -2rem;
+            right: 0;
+            color: var(--signal);
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .lightbox-info {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .lightbox-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--surface);
+            margin-top: 3rem;
+        }
+
+        .footer-sigil {
+            font-size: 1.25rem;
+            color: var(--bright-maroon);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-text {
+            font-size: 0.75rem;
+            color: var(--ghost);
+            letter-spacing: 0.1em;
+        }
+
+        @media(max-width: 768px) {
+            .page-header h1 { font-size: 2rem; }
+            .image-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <a href="/" class="logo">OUIRISE</a>
+            <a href="/archive/" class="nav-back">← // Return to Flight Logs</a>
+        </div>
+    </header>
+
+    <div class="gallery-container">
+        <div class="page-header">
+            <h1>VISUAL RECON</h1>
+            <p>// SII-25 // Image database // JSON-as-KV architecture</p>
+        </div>
+
+        <div class="filter-bar" id="filterBar">
+            <button class="filter-btn active" data-category="all">All</button>
+            <!-- Categories loaded dynamically -->
+        </div>
+
+        <div class="image-grid" id="imageGrid">
+            <div class="loading">Loading visual database</div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+        <div class="lightbox-content">
+            <button class="lightbox-close" onclick="closeLightbox()">×</button>
+            <img src="" alt="" id="lightboxImg">
+            <div class="lightbox-info">
+                <div class="lightbox-title" id="lightboxTitle"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-sigil">🌫️🌒</div>
+        <p class="footer-text">OUIRISE INITIATIVE // NO EXTRACTION // ALL WAYS</p>
+    </footer>
+
+    <script>
+        // Gallery Data Store (JSON-as-KV)
+        let galleryData = null;
+        let currentFilter = 'all';
+
+        // Fetch gallery data from JSON
+        async function loadGallery() {
+            try {
+                const response = await fetch('/images/gallery.json');
+                galleryData = await response.json();
+                renderFilters();
+                renderGallery();
+            } catch (error) {
+                document.getElementById('imageGrid').innerHTML = 
+                    '<div style="text-align: center; padding: 4rem; color: var(--bright-maroon);">// Error loading visual database</div>';
+            }
+        }
+
+        // Render category filters
+        function renderFilters() {
+            const filterBar = document.getElementById('filterBar');
+            filterBar.innerHTML = '<button class="filter-btn active" data-category="all">All</button>';
+            
+            Object.entries(galleryData.categories).forEach(([key, category]) => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn';
+                btn.dataset.category = key;
+                btn.textContent = category.name;
+                btn.onclick = () => setFilter(key);
+                filterBar.appendChild(btn);
+            });
+
+            // All button handler
+            filterBar.querySelector('[data-category="all"]').onclick = () => setFilter('all');
+        }
+
+        // Set active filter
+        function setFilter(category) {
+            currentFilter = category;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.category === category);
+            });
+            renderGallery();
+        }
+
+        // Render image grid
+        function renderGallery() {
+            const grid = document.getElementById('imageGrid');
+            grid.innerHTML = '';
+
+            let images = [];
+            
+            if (currentFilter === 'all') {
+                // Collect all images
+                Object.values(galleryData.categories).forEach(category => {
+                    images.push(...category.images.map(img => ({...img, category: category.name})));
+                });
+            } else {
+                // Filter by category
+                const category = galleryData.categories[currentFilter];
+                if (category) {
+                    images = category.images.map(img => ({...img, category: category.name}));
+                }
+            }
+
+            // Sort by featured first, then date
+            images.sort((a, b) => {
+                if (a.featured && !b.featured) return -1;
+                if (!a.featured && b.featured) return 1;
+                return new Date(b.date) - new Date(a.date);
+            });
+
+            images.forEach(image => {
+                const card = document.createElement('div');
+                card.className = `image-card ${image.featured ? 'featured' : ''}`;
+                card.onclick = () => openLightbox(image);
+                
+                card.innerHTML = `
+                    <div class="image-wrapper">
+                        <img src="/images/${image.filename}" alt="${image.title}" loading="lazy">
+                    </div>
+                    <div class="image-info">
+                        <div class="image-title">${image.title}</div>
+                        <div class="image-desc">${image.description}</div>
+                        <div class="image-meta">
+                            <span>${image.location}</span>
+                            <span>${image.date}</span>
+                        </div>
+                        <div class="image-tags">
+                            ${image.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+
+            if (images.length === 0) {
+                grid.innerHTML = '<div style="text-align: center; padding: 4rem; color: var(--ghost);">// No images in category</div>';
+            }
+        }
+
+        // Lightbox functions
+        function openLightbox(image) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightboxImg');
+            const title = document.getElementById('lightboxTitle');
+            
+            img.src = `/images/${image.filename}`;
+            img.alt = image.title;
+            title.textContent = `${image.title} // ${image.category}`;
+            
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox(event) {
+            if (!event || event.target.id === 'lightbox' || event.target.className === 'lightbox-close') {
+                document.getElementById('lightbox').classList.remove('active');
+            }
+        }
+
+        // Initialize
+        loadGallery();
+    </script>
+</body>
+</html>

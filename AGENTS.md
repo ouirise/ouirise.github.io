@@ -4,7 +4,7 @@
 > **Domain**: ouirise.github.io  
 > **Established**: 2025  
 > **Location**: CLT (Charlotte, NC)  
-> **Version**: v2.6.7  
+> **Version**: v2.6.8  
 
 ---
 
@@ -61,8 +61,9 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 ├── contact/                    # Contact page
 │   └── index.html              # Contact form, direct lines, availability
 │
-├── archive/                    # Archive section
-│   ├── index.html              # Vault animation unlock page
+├── archive/                    # FLIGHT LOGS - Deployment records
+│   ├── index.html              # Vault unlock animation + mission archive
+│   ├── selector.html           # Flight/resource selector interface
 │   └── vault/                  # Code samples and experiments
 │       ├── next/               # Next.js sample project
 │       ├── express/            # Express.js sample project
@@ -70,12 +71,15 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 │
 ├── 0x6C6F6C/                   # Agent fleet documentation (hex for "lol")
 │   ├── index.html              # Agent systems fleet dashboard
+│   ├── ADMIRAL/                # Continuity archive console
+│   │   └── index.html          # B4D2 bridge interface
 │   ├── SCAN.md                 # OSINT and reconnaissance docs
 │   ├── SPA.md                  # Single Page Application specs
 │   ├── moves/                  # Strategy and documentation
 │   │   ├── ART.md
 │   │   ├── ARTSCI.md
 │   │   ├── CULTURESCAN.md
+│   │   ├── CYBERCHESS.md       # Fleet wargame protocol
 │   │   ├── INSPIRE.md
 │   │   ├── LANG.md
 │   │   ├── NAV.md
@@ -130,7 +134,7 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 - Glyph: `🌫️🌒` (Fog + Crescent Moon) - organization sigil
 - Comments: `// EST. 2025 // CLT // [CONTEXT]`
 - Status indicators: Pulsing maroon dot
-- Version tags: `// v2.6.7`
+- Version tags: `// v2.6.8`
 
 ---
 
@@ -143,7 +147,7 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 <header class="fixed top-0 w-full z-50 bg-void/95 backdrop-blur-md border-b border-[#1a1a1a]">
 ```
 - Logo: "OUIRISE" in Bebas Neue with maroon border
-- Nav: Home, About, Archive, 0x6C6F6C, Contact
+- Nav: Home, About, Flight Logs, 0x6C6F6C, Contact
 - Mobile: Hamburger menu with CSS-only toggle (`#nav-toggle` checkbox)
 
 #### Footer
@@ -152,10 +156,12 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 
 ### Landing Page (`/`)
 1. **Hero** - "ACCESS GRANTED" with lock icon animation
-2. **About Section** - Organization identity and research areas
-3. **Deployments** - 3 project cards (Rise Integration, Data Bridge, Business Automations)
-4. **Services** - 3-tier pricing (Prototype $200, MVP Popular, Enterprise $10k+)
-5. **Origin** - "Field-Tested for Black Owned Business" + "Battle-Tested for Fortune 500"
+2. **Software Engineers** - 8+ years experience, 4 feature cards
+3. **About Section** - Organization identity and research areas
+4. **Deployments** - 3 project cards (Rise Integration, Data Bridge, Business Automations)
+5. **Agent Fleet CTA** - Link to 0x6C6F6C and ADMIRAL
+6. **Services** - 3-tier pricing (Prototype $200, MVP Popular, Enterprise $10k+)
+7. **Origin** - "Field-Tested for Black Owned Business" + "Battle-Tested for Fortune 500"
 
 ### About Page (`/about/`)
 - Hero: "INFRASTRUCTURE WITHOUT EXTRACTION"
@@ -170,15 +176,36 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 - Location info (Charlotte, NC coordinates)
 - Project initiation form
 
-### Archive Page (`/archive/`)
+### Archive Page (`/archive/`) — FLIGHT LOGS
+- **Rebranded**: "FLIGHT LOGS" (was "Archive")
 - Vault unlock animation (5-second loading sequence)
 - Progress bar with cycling status messages
 - Access log reveal after unlock
+- **Flight Statistics**: 24 Flights, 06 Years, 99.9% Uptime
+- **Recent Flights**: Production deployments with flight numbers
+- **Flight Simulations**: Code vault samples
+- **Fleet Operations**: Links to 0x6C6F6C and ADMIRAL
+- Flight preview placeholders (ready for iframe insertion)
+
+### Flight Selector (`/archive/selector.html`)
+- Resource/channel selector interface
+- Search by name, description, or tags
+- Tactical card grid with status indicators
+- Tag system (CODE, OPS, SEC, EDU, etc.)
 
 ### 0x6C6F6C Page (`/0x6C6F6C/`)
 - Agent fleet dashboard
 - 6 agent cards (0KK, Kimi-K2.5, R2B4, CODE-7, R15D2, SII-25)
-- Documentation links (FLEET.md, FORGE.md, SCAN.md, etc.)
+- **Positions** section: FLEET.md, CONTRACTS.md, 0.md, B4D2.md
+- **Moves** section: All 8 strategy documents
+- **Shards** section: SKILLS.md, LISCENCE.txt
+
+### ADMIRAL Console (`/0x6C6F6C/ADMIRAL/`)
+- Continuity archive interface
+- B4D2 bridge with R2B4 sync
+- Memory stream viewer
+- Agent card grid
+- Terminal window aesthetic
 
 ### 404 Page (`/404/`)
 - "Access Denied" themed error page
@@ -262,7 +289,8 @@ body::before {
 2. Create file: `newpage/index.html`
 3. Copy header/nav/footer template from existing page
 4. Update `sitemap.xml` with new URL
-5. Commit and push to main branch
+5. Update `AGENTS.md` with new page documentation
+6. Commit and push to main branch
 
 ### Static Assets
 - Images: Place in `/images/` directory
@@ -277,6 +305,7 @@ body::before {
 - Use "field-tested" not "proven methodology"
 - Use "built for endurance" not "scalable solutions"
 - Comments as design: `// Like this`
+- **Flight Logs terminology**: "Flights" instead of "projects", "Missions" for deployments
 
 ### Required Page Metadata
 Every page should include:
@@ -344,6 +373,7 @@ python app.py   # Runs on localhost:5000
 1. **Sitemap dates** - Update `<lastmod>` when modifying pages
 2. **Version number** - Increment in mobile nav footer (`// vX.X.X`)
 3. **Year in footer** - Update copyright year if needed
+4. **AGENTS.md** - Keep project structure current
 
 ### Performance
 - No JavaScript bundling required
@@ -367,6 +397,11 @@ This project is maintained by a human-AI collaborative team:
 | Kimi-K2.5 | AI Systems Partner | Code generation, rapid prototyping |
 
 **Twin Protocol**: Human-AI collaborative architecture for rapid development.
+
+### Fleet Signals
+- `bingbong` - Internal signal, no response required
+- `俊达` - Confirmation receipt
+- `0xSummary.md` - Fleet-wide session logging format
 
 ---
 

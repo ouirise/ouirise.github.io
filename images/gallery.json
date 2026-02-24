@@ -1,0 +1,111 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-02-24",
+  "categories": {
+    "aerial": {
+      "name": "Aerial Recon",
+      "description": "Drone and elevated perspective photography",
+      "images": [
+        {
+          "id": "aerial-001",
+          "filename": "IMG_20260216_1708011.jpg",
+          "title": "CLT Overhead",
+          "description": "Aerial view of Charlotte neighborhood // Field perspective",
+          "location": "Charlotte, NC",
+          "date": "2026-02-16",
+          "tags": ["aerial", "clt", "recon"],
+          "featured": true
+        }
+      ]
+    },
+    "urban": {
+      "name": "Urban Architecture",
+      "description": "City infrastructure and structural elements",
+      "images": [
+        {
+          "id": "urban-001",
+          "filename": "IMG_20260222_110339952.jpg",
+          "title": "University City Transit",
+          "description": "Light rail station // Infrastructure documentation",
+          "location": "Charlotte, NC",
+          "date": "2026-02-22",
+          "tags": ["transit", "infrastructure", "clt"],
+          "featured": false
+        },
+        {
+          "id": "urban-002",
+          "filename": "IMG_20260220_160328381.jpg",
+          "title": "Color Grid",
+          "description": "Architectural canopy study // Pattern recognition",
+          "location": "Charlotte, NC",
+          "date": "2026-02-20",
+          "tags": ["architecture", "color", "pattern"],
+          "featured": false
+        }
+      ]
+    },
+    "texture": {
+      "name": "Surface Studies",
+      "description": "Material and texture documentation",
+      "images": [
+        {
+          "id": "texture-001",
+          "filename": "pexels-jacobkelvin-4515858.jpg",
+          "title": "Submersion",
+          "description": "Hands in water // Elemental study",
+          "location": "Studio",
+          "date": "2026-02-22",
+          "tags": ["water", "hands", "texture"],
+          "featured": false
+        },
+        {
+          "id": "texture-002",
+          "filename": "IMG_20260220_154607201.jpg",
+          "title": "Lava Stone",
+          "description": "Volcanic rock texture // Material study",
+          "location": "Field",
+          "date": "2026-02-20",
+          "tags": ["stone", "texture", "natural"],
+          "featured": false
+        }
+      ]
+    },
+    "interior": {
+      "name": "Interior Spaces",
+      "description": "Built environment interiors",
+      "images": [
+        {
+          "id": "interior-001",
+          "filename": "IMG_20260215_095146505.jpg",
+          "title": "Service Counter",
+          "description": "Wood and steel interior // Commercial space",
+          "location": "Charlotte, NC",
+          "date": "2026-02-15",
+          "tags": ["interior", "wood", "commercial"],
+          "featured": false
+        }
+      ]
+    },
+    "notes": {
+      "name": "Field Notes",
+      "description": "Documentation and research materials",
+      "images": [
+        {
+          "id": "notes-001",
+          "filename": "IMG_20260219_003207500.jpg",
+          "title": "Research Log",
+          "description": "Handwritten notes and diagrams // Knowledge capture",
+          "location": "Studio",
+          "date": "2026-02-19",
+          "tags": ["notes", "research", "documentation"],
+          "featured": false
+        }
+      ]
+    }
+  },
+  "featured": {
+    "homepage": "aerial-001",
+    "about": null,
+    "flightLogs": ["aerial-001", "urban-001", "texture-001"]
+  }
+}
