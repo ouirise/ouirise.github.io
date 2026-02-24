@@ -111,6 +111,19 @@
       "word_count": 241
     },
     {
+      "id": "swebench",
+      "title": "\u4fca\u8fbe",
+      "description": "> Software engineering benchmarks and autonomous development capabilities",
+      "url": "/0x6C6F6C/moves/swebench/",
+      "tags": [
+        "CODE",
+        "DESIGN",
+        "AI",
+        "OPS"
+      ],
+      "word_count": 480
+    },
+    {
       "id": "theme",
       "title": "name: theme-factory",
       "description": "description: Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes plus the OuiRise operational theme with c...",
@@ -162,6 +175,6 @@
       "word_count": 1320
     }
   ],
-  "count": 13,
-  "last_updated": "2026-02-24T16:08:10.066573"
+  "count": 14,
+  "last_updated": "2026-02-24T16:09:09.160736"
 }
