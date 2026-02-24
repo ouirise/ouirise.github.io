@@ -4,7 +4,8 @@
 > **Domain**: ouirise.github.io  
 > **Established**: 2025  
 > **Location**: CLT (Charlotte, NC)  
-> **Version**: v2.8.0  
+> **Version**: v2.7.1  
+> **Sigil**: 俊达 (Junda)
 
 ---
 
@@ -44,11 +45,13 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 | `express/` | Node.js + Express + MongoDB | Backend API with database integration |
 | `flask/` | Python + Flask | Lightweight Python web service |
 
-### Automation Tools
-| Tool | Language | Purpose |
-|------|----------|---------|
-| `shadow_clone_501c3.py` | Python 3 + Playwright | Nonprofit compliance risk hunting |
-| `0x6C6F6C/tree.py` | Python | Filetree generation |
+### Python Automation Tools
+| Script | Purpose |
+|--------|---------|
+| `0x6C6F6C/md_to_html.py` | Converts Markdown docs to themed HTML pages |
+| `0x6C6F6C/generate_data_json.py` | Generates data.json indices for API/RAG consumption |
+| `0x6C6F6C/tree.py` | Generates hierarchical filetree JSON |
+| `shadow_clone_501c3.py` | ProPublica/NC SOS nonprofit compliance scraper |
 
 ---
 
@@ -58,59 +61,84 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 /
 ├── index.html                  # Landing page (Hero, Deployments, Services, Origin)
 ├── sitemap.xml                 # SEO sitemap
+├── data.json                   # Site metadata and route definitions
 ├── filetree.json               # Generated directory tree
 ├── README.md                   # Product Requirements Document (PRD)
-├── shadow_clone_501c3.py       # 501(c)(3) compliance rescue hunter
-├── manual_hunt_guide.md        # Manual hunting documentation
+├── manual_hunt_guide.md        # 501c3 nonprofit hunting guide
+├── shadow_clone_501c3.py       # Nonprofit scraper automation
 │
 ├── about/                      # Organization info
-│   ├── index.html              # Mission, capacity stats, team, engagement model
-│   └── cloud-village.html      # Cloud village documentation
+│   └── index.html              # Mission, capacity stats, team, engagement model
 │
 ├── contact/                    # Contact page
-│   ├── index.html              # Contact form, direct lines, availability
-│   └── call.html               # Call scheduling
+│   └── index.html              # Contact form, direct lines, availability
 │
 ├── archive/                    # FLIGHT LOGS - Deployment records
 │   ├── index.html              # Vault unlock animation + mission archive
 │   ├── selector.html           # Flight/resource selector interface
-│   ├── gallery.html            # Gallery view
+│   ├── gallery.html            # Project gallery
+│   ├── data.json               # Archive metadata
+│   ├── riseintegration/        # Project: Rise Integration
+│   ├── databridge/             # Project: Data Bridge
+│   ├── businessautomations/    # Project: Business Automations
+│   ├── cloudflare/             # Project: Cloudflare
+│   ├── next/                   # Project: Next.js sample
 │   └── vault/                  # Code samples and experiments
-│       ├── next/               # Next.js sample project
-│       ├── express/            # Express.js sample project
-│       ├── flask/              # Flask sample project
-│       ├── react/              # React sample project
-│       └── sqrt(-1)/           # Complex number experiment
+│       ├── index.html
+│       ├── next/               # Next.js 16 + React 19 + TypeScript
+│       ├── express/            # Express.js + MongoDB
+│       └── flask/              # Python Flask
 │
 ├── 0x6C6F6C/                   # Agent fleet documentation (hex for "lol")
 │   ├── index.html              # Agent systems fleet dashboard
-│   ├── 0x.html                 # Alternative fleet view
+│   ├── data.json               # Master fleet index
+│   ├── 0x.html                 # Alternate fleet view
 │   ├── SCAN.md                 # OSINT and reconnaissance docs
 │   ├── SPA.md                  # Single Page Application specs
-│   ├── notes.txt               # Fleet notes
 │   ├── tree.py                 # Filetree generator
+│   ├── md_to_html.py           # Markdown to HTML converter
+│   ├── generate_data_json.py   # Data index generator
+│   ├── notes.txt               # Fleet notes
 │   ├── ADMIRAL/                # Continuity archive console
 │   │   └── index.html          # B4D2 bridge interface
+│   ├── docs/                   # Documentation search interface
+│   │   ├── index.html
+│   │   └── search-header.js
 │   ├── moves/                  # Strategy and documentation
-│   │   ├── ART.md
-│   │   ├── ARTSCI.md
-│   │   ├── CULTURESCAN.md
+│   │   ├── ART.md              # Generative art framework
+│   │   ├── ARTSCI.md           # Art-science synthesis
+│   │   ├── CULTURESCAN.md      # Cultural intelligence
 │   │   ├── CYBERCHESS.md       # Fleet wargame protocol
-│   │   ├── INSPIRE.md
-│   │   ├── LANG.md
-│   │   ├── NAV.md
-│   │   ├── SKILLCREATOR.md
-│   │   ├── UI.md
-│   │   └── UX.md
+│   │   ├── DEPLOYMENT.md       # Deployment procedures
+│   │   ├── DESKTOP_SIM.md      # Desktop simulation
+│   │   ├── INSPIRE.md          # Inspiration framework
+│   │   ├── LANG.md             # Language systems
+│   │   ├── NAV.md              # Navigation protocols
+│   │   ├── SKILLCREATOR.md     # Skill creation guide
+│   │   ├── SWEBENCH.md         # SWE benchmark
+│   │   ├── THEME.md            # Theming system
+│   │   ├── TOOLS.md            # Tool definitions
+│   │   ├── TROH.md             # Tactical Hacking skill build
+│   │   ├── UI.md               # UI guidelines
+│   │   ├── UX.md               # UX guidelines
+│   │   └── [slug]/             # Generated HTML for each doc
+│   │       ├── index.html
+│   │       └── data.json
 │   ├── positions/              # Role definitions
-│   │   ├── 0.md
-│   │   ├── B4D2.md
-│   │   ├── CONTRACTS.md
-│   │   ├── FLEET.md            # Model fleet registry
-│   │   └── MUMININ.md
+│   │   ├── 0.md                # Zero position
+│   │   ├── B4D2.md             # B4D2 protocol
+│   │   ├── CONSCIOUSNESS.md    # Consciousness framework
+│   │   ├── CONTEXT.md          # Context management
+│   │   ├── CONTRACTS.md        # Contract templates
+│   │   ├── FLEET.md            # Fleet registry
+│   │   ├── MUMININ.md          # Muminin protocol
+│   │   ├── agents.json         # Agent definitions
+│   │   ├── mas.json            # Multi-agent system config
+│   │   └── OPENSOURCE.json     # Open source guidelines
 │   └── shards/                 # License and skills
-│       ├── LISCENCE.txt
-│       └── SKILLS.md
+│       ├── LISCENCE.txt        # License terms
+│       ├── SKILLS.md           # Skill definitions
+│       └── skills/
 │
 ├── 404/                        # Custom error page
 │   └── index.html              # "Access Denied" themed 404
@@ -119,7 +147,6 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 │
 └── images/                     # Static image assets
     ├── ouirise.webp            # Organization logo
-    ├── image.webp              # Hero background
     └── *.jpg, *.png            # Various project images
 ```
 
@@ -151,10 +178,11 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 - **Navigation**: Fixed header, 60px height, mobile hamburger menu
 
 ### Signature Elements
-- Glyph: `俊达` (JUNDA) - organization sigil. Two characters. Regal. Clean.
+- Glyph: `🌫️🌒` (Fog + Crescent Moon) - organization sigil
+- Sigil: `俊达` (Junda) - confirmation receipt
 - Comments: `// EST. 2025 // CLT // [CONTEXT]`
 - Status indicators: Pulsing maroon dot
-- Version tags: `// v2.8.0`
+- Version tags: `// v2.7.1`
 
 ---
 
@@ -172,7 +200,7 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 
 #### Footer
 - Left: OUIRISE logo
-- Right: `俊达 2026 // ALL WAYS` + "Technical Organization // OUI"
+- Right: `🌫️🌒 2026 // ALL WAYS` + "Technical Organization // OUI"
 
 ### Landing Page (`/`)
 1. **Hero** - "ACCESS GRANTED" with lock icon animation
@@ -188,7 +216,7 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 - Mission statement
 - Capacity stats (06 years, 24 projects, $0 lock-in, 99.9% uptime)
 - Team cards (0KK, Kimi-K2.5, The Fog)
-- Engagement model (Audit -> Build -> Transfer)
+- Engagement model (Audit → Build → Transfer)
 
 ### Contact Page (`/contact/`)
 - Hero: "REQUEST ACCESS"
@@ -302,79 +330,47 @@ body::before {
 ### Main Site
 No build process required - static HTML files served directly via GitHub Pages.
 
-### Vault Samples
-
-**Next.js Sample** (`archive/vault/next/`):
+### Next.js Sample (archive/vault/next)
 ```bash
 cd archive/vault/next
 npm install
 npm run dev      # Development server on localhost:3000
 npm run build    # Production build
-npm run lint     # ESLint
+npm run lint     # ESLint check
 ```
 
-**Express Sample** (`archive/vault/express/`):
+### Express Sample (archive/vault/express)
 ```bash
 cd archive/vault/express
 npm install
-node app.js      # Requires .env with MONGODB_URI
+node app.js      # Requires .env with MONGODB URI
 ```
 
-**Flask Sample** (`archive/vault/flask/`):
+### Flask Sample (archive/vault/flask)
 ```bash
 cd archive/vault/flask
 pip install -r requirements.txt
 python app.py    # Runs on localhost:5000
 ```
 
-### Automation Scripts
-
-**Shadow Clone 501c3 Hunter**:
+### Python Automation Tools
 ```bash
-# Requires Python 3.8+ and Playwright
-pip install playwright
-playwright install chromium
-python shadow_clone_501c3.py
-```
+# Generate documentation HTML from Markdown
+cd 0x6C6F6C
+python md_to_html.py
 
-**Filetree Generator**:
-```bash
-python 0x6C6F6C/tree.py
+# Generate data.json indices
+cd 0x6C6F6C
+python generate_data_json.py
+
+# Generate filetree
+cd 0x6C6F6C
+python tree.py .. -o ../filetree.json
 ```
 
 ---
 
-## 8. Testing Instructions
-
-### Manual Testing Checklist
-
-**Cross-Browser Testing**:
-- [ ] Chrome/Edge (Chromium)
-- [ ] Firefox
-- [ ] Safari (if available)
-- [ ] Mobile Chrome/Safari
-
-**Responsive Testing**:
-- [ ] Mobile (< 768px) - Hamburger menu functional
-- [ ] Tablet (768px - 1024px)
-- [ ] Desktop (> 1024px) - Full navigation visible
-
-**Functional Testing**:
-- [ ] Navigation links work
-- [ ] Dropdown menus (Flight Logs) open/close
-- [ ] Smooth scroll to anchors
-- [ ] Mobile menu toggle works
-- [ ] All external links open in new tab (if applicable)
-
-**Visual Testing**:
-- [ ] Maroon grid background visible
-- [ ] Grain texture overlay present
-- [ ] Card hover effects work
-- [ ] No FOUC (Flash of Unstyled Content)
-
----
-
-## 9. Deployment Process
+## 8. Deployment Process
 
 ### GitHub Pages Deployment
 1. **Source**: Main branch, root directory
@@ -386,8 +382,9 @@ python 0x6C6F6C/tree.py
 2. Create file: `newpage/index.html`
 3. Copy header/nav/footer template from existing page
 4. Update `sitemap.xml` with new URL
-5. Update `AGENTS.md` with new page documentation
-6. Commit and push to main branch
+5. Update `data.json` with new route metadata
+6. Update `AGENTS.md` with new page documentation
+7. Commit and push to main branch
 
 ### Static Assets
 - Images: Place in `/images/` directory
@@ -395,49 +392,7 @@ python 0x6C6F6C/tree.py
 
 ---
 
-## 10. Security Considerations
-
-### Form Handling
-- Contact form uses Formspree for submission handling
-- Form endpoint: `https://formspree.io/f/xnqevwrd`
-- For production, verify Formspree account and update endpoint if needed
-
-### Environment Variables
-- `.env` files are gitignored (see `.gitignore`)
-- Sample projects in vault use `.env` for MongoDB URIs (not committed)
-
-### Content Security
-- No user-generated content on static pages
-- External resources: Google Fonts, Tailwind CDN
-
-### Automation Scripts
-- `shadow_clone_501c3.py` uses Playwright for web scraping
-- Respect robots.txt and rate limits when hunting
-- Data collected is for outreach purposes only
-
----
-
-## 11. Maintenance Notes
-
-### Regular Updates
-1. **Sitemap dates** - Update `<lastmod>` when modifying pages
-2. **Version number** - Increment in mobile nav footer (`// vX.X.X`)
-3. **Year in footer** - Update copyright year if needed
-4. **AGENTS.md** - Keep project structure current
-
-### Performance
-- No JavaScript bundling required
-- Images should be optimized (WebP preferred)
-- Consider lazy loading for below-fold images
-
-### Accessibility
-- Semantic HTML5 elements
-- `aria-label` attributes for icon-only buttons
-- Sufficient color contrast (maroon on black is decorative only)
-
----
-
-## 12. Content Guidelines
+## 9. Content Guidelines
 
 ### Writing Style
 - No corporate speak
@@ -462,6 +417,71 @@ Every page should include:
 
 ---
 
+## 10. Archive/Vault Development
+
+The `archive/vault/` directory contains sample projects for demonstration purposes. These are NOT deployed to production but serve as code portfolio examples.
+
+### Next.js Sample
+```bash
+cd archive/vault/next
+npm install
+npm run dev     # Development server
+npm run build   # Production build
+```
+
+### Express Sample
+```bash
+cd archive/vault/express
+npm install
+node app.js     # Requires .env with MONGODB URI
+```
+
+### Flask Sample
+```bash
+cd archive/vault/flask
+pip install -r requirements.txt
+python app.py   # Runs on localhost:5000
+```
+
+---
+
+## 11. Security Considerations
+
+### Form Handling
+- Contact form uses Formspree for submission handling
+- Form endpoint: `https://formspree.io/f/xnqevwrd`
+- For production, verify Formspree account and update endpoint if needed
+
+### Environment Variables
+- `.env` files are gitignored
+- Sample projects in vault use `.env` for MongoDB URIs (not committed)
+
+### Content Security
+- No user-generated content on static pages
+- External resources: Google Fonts, Tailwind CDN
+
+---
+
+## 12. Maintenance Notes
+
+### Regular Updates
+1. **Sitemap dates** - Update `<lastmod>` when modifying pages
+2. **Version number** - Increment in mobile nav footer (`// vX.X.X`)
+3. **Year in footer** - Update copyright year if needed
+4. **AGENTS.md** - Keep project structure current
+
+### Performance
+- No JavaScript bundling required
+- Images should be optimized (WebP preferred)
+- Consider lazy loading for below-fold images
+
+### Accessibility
+- Semantic HTML5 elements
+- `aria-label` attributes for icon-only buttons
+- Sufficient color contrast (maroon on black is decorative only)
+
+---
+
 ## 13. Agent Context
 
 This project is maintained by a human-AI collaborative team:
@@ -478,16 +498,8 @@ This project is maintained by a human-AI collaborative team:
 - `俊达` - Confirmation receipt
 - `0xSummary.md` - Fleet-wide session logging format
 
-### Local Fleet (Ollama)
-Per `0x6C6F6C/positions/FLEET.md`:
-- **EYE** - qwen2.5-vl:3b - Vision/OCR processing
-- **MIND** - qwen3:1.5b - Light reasoning
-- **HAND** - qwen2.5-coder:7b - Code generation
-- **BLADE** - nate/instinct - Surgical code modification
-- **DEEP** - deepseek-r1:7b - Heavy reasoning (reserve)
-
 ---
 
 *// Built by OuiRise*  
 *// 0KK Protocol Active*  
-*// 俊达*
+*// 🌫️🌒*
