@@ -572,6 +572,105 @@
         </div>
     </section>
 
+    <!-- QuickDraw Move List -->
+    <section class="py-16 md:py-24 px-4 md:px-6 border-b border-[#1a1a1a] bg-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 border-2 border-[#a50000] bg-[#141414] flex items-center justify-center">
+                    <svg class="w-6 h-6 text-[#a50000]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="font-bebas text-3xl md:text-4xl tracking-wide text-[#a50000]">QUICKDRAW // MOVE LIST</h2>
+                    <p class="mono text-xs text-muted">Select a skill // Instant deployment</p>
+                </div>
+            </div>
+
+            <!-- Move List Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4" id="move-list">
+                <!-- Moves injected via JS -->
+            </div>
+
+            <!-- Quick Nav -->
+            <div class="mt-8 p-4 border border-[#1f1f1f] bg-[#0d0d0d]">
+                <div class="flex flex-wrap gap-4 items-center justify-between">
+                    <div class="flex gap-4">
+                        <button onclick="filterMoves('all')" class="move-filter active px-3 py-1 mono text-xs border border-[#a50000] bg-[#a50000] text-signal">ALL</button>
+                        <button onclick="filterMoves('moves')" class="move-filter px-3 py-1 mono text-xs border border-[#333] text-muted hover:border-[#a50000] transition-all">MOVES</button>
+                        <button onclick="filterMoves('positions')" class="move-filter px-3 py-1 mono text-xs border border-[#333] text-muted hover:border-[#a50000] transition-all">POSITIONS</button>
+                        <button onclick="filterMoves('shards')" class="move-filter px-3 py-1 mono text-xs border border-[#333] text-muted hover:border-[#a50000] transition-all">SHARDS</button>
+                    </div>
+                    <a href="docs/" class="mono text-xs text-[#a50000] hover:text-signal transition-colors">Open Docs Search →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const fleetMoves = [
+            { id: 'ART', name: 'Art Direction', type: 'moves', desc: 'Generative art framework', cost: 'LOW', power: '★★★☆☆' },
+            { id: 'ARTSCI', name: 'Art Science', type: 'moves', desc: 'Art-science synthesis', cost: 'MED', power: '★★★★☆' },
+            { id: 'CULTURESCAN', name: 'Culture Scan', type: 'moves', desc: 'Cultural intelligence', cost: 'LOW', power: '★★★☆☆' },
+            { id: 'CYBERCHESS', name: 'Cyber Chess', type: 'moves', desc: 'Fleet wargame protocol', cost: 'HIGH', power: '★★★★★' },
+            { id: 'DEPLOYMENT', name: 'Deployment', type: 'moves', desc: 'Deployment procedures', cost: 'MED', power: '★★★★☆' },
+            { id: 'DESKTOP_SIM', name: 'Desktop Sim', type: 'moves', desc: 'Desktop simulation', cost: 'MED', power: '★★★☆☆' },
+            { id: 'INSPIRE', name: 'Inspire', type: 'moves', desc: 'Creative ignition', cost: 'LOW', power: '★★☆☆☆' },
+            { id: 'LANG', name: 'Language', type: 'moves', desc: 'Language systems', cost: 'MED', power: '★★★★☆' },
+            { id: 'NAV', name: 'Navigation', type: 'moves', desc: 'Site architecture', cost: 'LOW', power: '★★★☆☆' },
+            { id: 'SKILLCREATOR', name: 'Skill Creator', type: 'moves', desc: 'Capability expansion', cost: 'HIGH', power: '★★★★★' },
+            { id: 'SWEBENCH', name: 'SWE Bench', type: 'moves', desc: 'SWE benchmark', cost: 'MED', power: '★★★★☆' },
+            { id: 'THEME', name: 'Theme', type: 'moves', desc: 'Theming system', cost: 'LOW', power: '★★☆☆☆' },
+            { id: 'TOOLS', name: 'Tools', type: 'moves', desc: 'Tool definitions', cost: 'LOW', power: '★★★☆☆' },
+            { id: 'TROH', name: 'TroH', type: 'moves', desc: 'Tactical Hacking', cost: 'HIGH', power: '★★★★★' },
+            { id: 'CODERABBIT', name: 'CodeRabbit', type: 'moves', desc: 'Extraction counter', cost: 'MED', power: '★★★★☆' },
+            { id: 'UI', name: 'UI', type: 'moves', desc: 'UI guidelines', cost: 'LOW', power: '★★★☆☆' },
+            { id: 'UX', name: 'UX', type: 'moves', desc: 'UX guidelines', cost: 'LOW', power: '★★★☆☆' },
+            { id: '0', name: 'Position Zero', type: 'positions', desc: 'Zero position', cost: 'MAX', power: '★★★★★' },
+            { id: 'B4D2', name: 'B4D2', type: 'positions', desc: 'B4D2 protocol', cost: 'HIGH', power: '★★★★★' },
+            { id: 'CONSCIOUSNESS', name: 'Consciousness', type: 'positions', desc: 'Consciousness framework', cost: 'MAX', power: '★★★★★' },
+            { id: 'CONTEXT', name: 'Context', type: 'positions', desc: 'Context management', cost: 'MED', power: '★★★★☆' },
+            { id: 'CONTRACTS', name: 'Contracts', type: 'positions', desc: 'Contract templates', cost: 'LOW', power: '★★☆☆☆' },
+            { id: 'FLEET', name: 'Fleet', type: 'positions', desc: 'Fleet registry', cost: 'HIGH', power: '★★★★★' },
+            { id: 'MUMININ', name: 'Muminin', type: 'positions', desc: 'Muminin protocol', cost: 'MED', power: '★★★★☆' },
+            { id: 'SKILLS', name: 'Skills', type: 'shards', desc: 'Skill definitions', cost: 'VAR', power: '★★★★☆' }
+        ];
+
+        function renderMoves(filter = 'all') {
+            const container = document.getElementById('move-list');
+            const moves = filter === 'all' ? fleetMoves : fleetMoves.filter(m => m.type === filter);
+            
+            container.innerHTML = moves.map(move => `
+                <a href="${move.type}/${move.id.toLowerCase()}/" class="move-card block p-4 border border-[#1f1f1f] bg-[#0d0d0d] hover:border-[#a50000] hover:bg-[#141414] transition-all group">
+                    <div class="flex items-start justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[#a50000] mono text-xs font-bold">[${move.type.slice(0,3).toUpperCase()}]</span>
+                            <span class="mono text-sm text-signal group-hover:text-[#a50000] transition-colors">${move.name}</span>
+                        </div>
+                        <span class="mono text-[10px] text-[#666666]">${move.cost}</span>
+                    </div>
+                    <p class="text-muted text-xs mb-3">${move.desc}</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-[#a50000] text-xs tracking-widest">${move.power}</span>
+                        <span class="mono text-[10px] text-[#666666] group-hover:text-signal transition-colors">EXECUTE →</span>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        function filterMoves(type) {
+            document.querySelectorAll('.move-filter').forEach(btn => {
+                btn.classList.remove('active', 'bg-[#a50000]', 'text-signal', 'border-[#a50000]');
+                btn.classList.add('text-muted', 'border-[#333]');
+            });
+            event.target.classList.add('active', 'bg-[#a50000]', 'text-signal', 'border-[#a50000]');
+            event.target.classList.remove('text-muted', 'border-[#333]');
+            renderMoves(type);
+        }
+
+        renderMoves();
+    </script>
+
     <!-- External Intelligence -->
     <section class="py-16 md:py-24 px-4 md:px-6 border-b border-[#1a1a1a]">
         <div class="max-w-7xl mx-auto">
