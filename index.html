@@ -331,11 +331,12 @@
                     </div>
                 </div>
                 <a href="/0x6C6F6C/" class="nav-link py-2 md:py-0">0x6C6F6C</a>
+                <a href="#site-report" class="nav-link py-2 md:py-0 text-[#a50000]">Report</a>
                 <a href="/contact/" class="nav-link py-2 md:py-0">Contact</a>
                 
                 <div class="md:hidden mt-8 text-xs text-muted mono space-y-1">
                     <p>// OUIRISE NAV</p>
-                    <p>// v2.7.1</p>
+                    <p>// v2.8.0</p>
                 </div>
             </nav>
         </div>
@@ -650,6 +651,88 @@
         </div>
     </section>
 
+    <!-- Site Report -->
+    <section id="site-report" class="py-16 md:py-24 px-4 md:px-6 border-t border-[#1a1a1a] bg-[#0d0d0d]">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12">
+                <div>
+                    <p class="mono text-xs text-[#a50000] uppercase tracking-[0.3em] mb-2">// System Status</p>
+                    <h2 class="font-bebas text-3xl md:text-5xl tracking-tight">SITE REPORT</h2>
+                </div>
+                <div class="mt-4 md:mt-0 text-right">
+                    <div class="mono text-xs text-muted">BUILD VERSION</div>
+                    <div class="font-bebas text-2xl text-[#a50000]">v2.8.0</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-4 text-center">
+                    <div class="font-bebas text-3xl text-[#a50000]" id="stat-routes">45</div>
+                    <div class="mono text-[10px] text-muted uppercase">Total Routes</div>
+                </div>
+                <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-4 text-center">
+                    <div class="font-bebas text-3xl text-[#a50000]" id="stat-docs">21</div>
+                    <div class="mono text-[10px] text-muted uppercase">Documentation</div>
+                </div>
+                <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-4 text-center">
+                    <div class="font-bebas text-3xl text-[#a50000]" id="stat-flights">3</div>
+                    <div class="mono text-[10px] text-muted uppercase">Active Flights</div>
+                </div>
+                <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-4 text-center">
+                    <div class="font-bebas text-3xl text-[#a50000]" id="stat-agents">6</div>
+                    <div class="mono text-[10px] text-muted uppercase">Fleet Agents</div>
+                </div>
+            </div>
+
+            <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-4 md:p-6 mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="mono text-xs text-[#a50000] uppercase tracking-wider">Recent Build Activity</h3>
+                    <a href="site-report.json" class="mono text-[10px] text-muted hover:text-[#a50000] transition-colors">View Full Report →</a>
+                </div>
+                <div class="space-y-2 mono text-xs" id="build-log">
+                    <div class="flex items-center gap-3 text-muted">
+                        <span class="text-[#a50000]">2026-02-23</span>
+                        <span>DEPLOYMENT.md architecture documentation added</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-muted">
+                        <span class="text-[#a50000]">2026-02-23</span>
+                        <span>Site report system implemented</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-muted">
+                        <span class="text-[#a50000]">2026-02-23</span>
+                        <span>Flight Simulations reorganized (NEXT, CLOUDFLARE, FLASH)</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-muted">
+                        <span class="text-[#a50000]">2026-02-23</span>
+                        <span>Project detail pages created (FLIGHT 21-23)</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-muted">
+                        <span class="text-[#a50000]">2026-02-23</span>
+                        <span>Global RAG documentation system deployed</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-4">
+                    <div class="mono text-[10px] text-muted uppercase mb-2">Latest Flight</div>
+                    <div class="font-bebas text-xl mb-1">RISE INTEGRATION</div>
+                    <div class="mono text-[10px] text-[#a50000]">FLIGHT 23 // COMPLETE</div>
+                </div>
+                <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-4">
+                    <div class="mono text-[10px] text-muted uppercase mb-2">Documentation Hub</div>
+                    <div class="font-bebas text-xl mb-1">0x6C6F6C/DOCS</div>
+                    <div class="mono text-[10px] text-[#a50000]">22 DOCUMENTS INDEXED</div>
+                </div>
+                <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-4">
+                    <div class="mono text-[10px] text-muted uppercase mb-2">Client Portal</div>
+                    <div class="font-bebas text-xl mb-1">JUNDA DESKTOP</div>
+                    <div class="mono text-[10px] text-[#a50000]">6 PROMPTS AVAILABLE</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Agent Fleet CTA -->
     <section class="py-16 md:py-24 px-4 md:px-6 border-t border-[#1a1a1a] bg-[#0d0d0d]">
         <div class="max-w-4xl mx-auto text-center">
@@ -769,6 +852,38 @@
                 arrow.classList.remove('open');
             });
         }
+
+        // Animate stats on scroll
+        function animateStats() {
+            const stats = document.querySelectorAll('[id^="stat-"]');
+            stats.forEach(stat => {
+                const target = parseInt(stat.textContent);
+                let current = 0;
+                const increment = target / 30;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        stat.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = Math.floor(current);
+                    }
+                }, 30);
+            });
+        }
+
+        // Trigger animation when site report is visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const siteReport = document.getElementById('site-report');
+        if (siteReport) observer.observe(siteReport);
     </script>
 </body>
 </html>

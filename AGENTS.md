@@ -4,7 +4,7 @@
 > **Domain**: ouirise.github.io  
 > **Established**: 2025  
 > **Location**: CLT (Charlotte, NC)  
-> **Version**: v2.7.1  
+> **Version**: v2.8.0  
 
 ---
 
@@ -154,7 +154,7 @@ The `archive/vault/` directory contains sample implementations demonstrating tec
 - Glyph: `俊达` (JUNDA) - organization sigil. Two characters. Regal. Clean.
 - Comments: `// EST. 2025 // CLT // [CONTEXT]`
 - Status indicators: Pulsing maroon dot
-- Version tags: `// v2.7.1`
+- Version tags: `// v2.8.0`
 
 ---
 
