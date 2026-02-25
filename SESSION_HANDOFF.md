@@ -1,3 +1,5 @@
+and also ik ur making the fleet in a abstract!layer so while doing that here is more context
+
 # Kimi Code Session Handoff
 
 ## Session Context
@@ -133,13 +135,15 @@ cd 0x6C6F6C && python md_to_html.py && python generate_data_json.py
 
 ## Contact & Resources
 
-- **Site**: https://ouirise.github.io
-- **Portal**: https://ouirise.github.io/portal/
-- **Agents**: https://ouirise.github.io/0x6C6F6C/
-- **Continue Config**: https://ouirise.github.io/portal/continue-config.yaml
+- **Site**: https://ouirise.github.io 
+- **Portal**: https://ouirise.github.io/portal/ 
+- **Agents**: https://ouirise.github.io/0x6C6F6C/ 
+- **Continue Config**: https://ouirise.github.io/portal/continue-config.yaml 
 
 ---
 
 *// Session handoff complete*  
 *// Fleet aligned*  
 *// 🌫️🌒*
+
+0x...shoutout to KCODE-7 before flatline unfortunately offline temp but she set us up for local offline fleet. ty twiin
