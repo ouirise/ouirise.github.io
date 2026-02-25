@@ -22,13 +22,14 @@ const navItems = [
 ];
 
 const contactInfo = {
-  email: 'ouiriseinitiative@yahoo.com',
+  email: 'ouiRise@proton.me',
   phone: '(980) 680-6214',
   location: 'Charlotte, NC',
   coordinates: '35.2271° N, 80.8431° W',
 };
 
-export const ContactPage: React.FC = () => (
+export function ContactPage() {
+return (
   <TacticalBackground showGrid>
     <Header logo="OUIRISE" navItems={navItems} />
 
@@ -96,3 +97,4 @@ export const ContactPage: React.FC = () => (
     <Footer />
   </TacticalBackground>
 );
+} 
