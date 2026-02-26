@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OUIRISE | Bridge Loading...</title>
+    <title>OUIRISE | Transform Base Metal Into Gold</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,6 +18,7 @@
             --ghost: #666666;
             --maroon: #800000;
             --bright-maroon: #a50000;
+            --mid-dark: #151515;
         }
         
         body {
@@ -39,166 +40,956 @@
             background-size: 40px 40px;
             z-index: -1;
         }
-
-        #fog-loader {
+        
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        .grain { position: relative; }
+        
+        .grain::before {
+            content: "";
             position: fixed;
-            inset: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            background: var(--void);
-            transition: opacity 0.5s ease;
-        }
-
-        #fog-loader.hidden {
-            opacity: 0;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        
+        .lock-icon {
+            animation: unlock 1.5s ease-out forwards;
+            color: var(--bright-maroon);
+        }
+        
+        @keyframes unlock {
+            0% { transform: rotate(0deg); opacity: 0; }
+            50% { transform: rotate(-10deg); opacity: 1; }
+            100% { transform: rotate(0deg); opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .card-hover {
+            transition: all 0.2s ease;
+        }
+        
+        .card-hover:hover {
+            border-color: var(--bright-maroon);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(128, 0, 0, 0.3);
+        }
+        
+        .text-muted { color: var(--ghost); }
+        .bg-void { background-color: var(--void); }
+        .bg-tactical { background-color: var(--tactical); }
+        .bg-surface { background-color: var(--surface); }
+        .section-alt { background-color: var(--mid-dark); }
+        .accent-border { border: 1px solid var(--bright-maroon); }
+        .popular-badge { background: var(--bright-maroon); color: var(--signal); }
+
+        #nav-toggle { display: none; }
+
+        #mobile-menu {
+            display: none;
+            position: fixed;
+            top: 4rem; left: 0;
+            width: 100%; height: calc(100vh - 4rem);
+            background: var(--tactical);
+            border-top: 1px solid var(--surface);
+            z-index: 50;
+            flex-direction: column;
+            padding: 2rem;
         }
 
-        .fog-moon {
-            font-size: 3rem;
-            animation: pulse 2s ease-in-out infinite;
+        #nav-toggle:checked ~ #mobile-menu { display: flex; }
+
+        .hamburger line {
+            transition: all 0.3s ease;
+            transform-origin: center;
+            stroke: var(--signal);
+        }
+        
+        #nav-toggle:checked ~ label .hamburger line:first-child { transform: rotate(45deg) translate(5px, 5px); }
+        #nav-toggle:checked ~ label .hamburger line:nth-child(2) { opacity: 0; }
+        #nav-toggle:checked ~ label .hamburger line:last-child { transform: rotate(-45deg) translate(5px, -5px); }
+
+        @media (min-width: 768px) {
+            #mobile-menu {
+                display: flex !important;
+                position: static;
+                height: auto;
+                flex-direction: row;
+                background: transparent;
+                border: none;
+                padding: 0;
+                width: auto;
+            }
+            .hamburger-label { display: none; }
         }
 
-        .fog-text {
-            margin-top: 1rem;
+        .font-bebas { font-family: 'Bebas Neue', sans-serif; }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.2s;
+        }
+        
+        .nav-link:hover { color: var(--bright-maroon); }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 1px;
+            background: var(--bright-maroon);
+            transition: width 0.2s;
+        }
+        
+        .nav-link:hover::after { width: 100%; }
+
+        .btn-primary {
+            border: 1px solid var(--bright-maroon);
+            background: transparent;
+            color: var(--signal);
+            transition: all 0.2s;
+        }
+        
+        .btn-primary:hover {
+            background: var(--bright-maroon);
+            color: var(--signal);
+            box-shadow: 0 0 20px rgba(165, 0, 0, 0.4);
+        }
+
+        .btn-solid {
+            background: var(--signal);
+            color: var(--void);
+            transition: all 0.2s;
+        }
+        
+        .btn-solid:hover {
+            background: var(--bright-maroon);
+            color: var(--signal);
+        }
+
+        .maroon-accent { color: var(--bright-maroon); }
+
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+            position: absolute;
+            top: 100%; left: 0;
+            background: var(--tactical);
+            border: 1px solid var(--surface);
+            min-width: 200px;
+            padding: 0.5rem 0;
+            z-index: 50;
+        }
+        
+        .dropdown-menu.open,
+        .dropdown:hover .dropdown-menu,
+        .dropdown-menu:hover {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-arrow { font-size: 0.6rem; transition: transform 0.2s; }
+        .dropdown-arrow.open { transform: rotate(180deg); }
+        
+        .dropdown-item {
+            display: block;
+            padding: 0.5rem 1rem;
             font-size: 0.75rem;
             color: var(--ghost);
-            letter-spacing: 0.2em;
+            transition: all 0.2s;
+        }
+        
+        .dropdown-item:hover {
+            background: var(--surface);
+            color: var(--bright-maroon);
+        }
+        
+        @media (max-width: 767px) {
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+                border: none;
+                border-left: 2px solid var(--bright-maroon);
+                margin-left: 1rem;
+                margin-top: 0.5rem;
+                background: transparent;
+                min-width: auto;
+            }
+            .dropdown-menu.open { display: block; }
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
-
-        #root {
-            min-height: 100vh;
+        .feature-icon {
+            width: 48px; height: 48px;
+            border: 1px solid var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bright-maroon);
         }
     </style>
 </head>
-<body>
-    <!-- Fog Loader -->
-    <div id="fog-loader">
-        <div class="fog-moon">🌫️🌒</div>
-        <div class="fog-text">WAITING IN FOG // 俊达</div>
-    </div>
+<body class="grain bg-void text-signal antialiased">
 
-    <!-- Content Root -->
-    <div id="root"></div>
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 bg-void/95 backdrop-blur-md border-b border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+            <a href="/" class="font-bebas text-2xl tracking-wider text-[#a50000] hover:text-signal transition-colors border-2 border-[#a50000] px-3 py-1">
+                OUIRISE
+            </a>
 
-    <script>
-        // DaBridge Ghost Loader v6.7.0
-        const summonDabridge = async (fragment = 'index') => {
-            const loader = document.getElementById('fog-loader');
-            const root = document.getElementById('root');
+            <input type="checkbox" id="nav-toggle">
             
-            try {
-                // 1. Fetch content fragment
-                const res = await fetch('/dabridge.json');
-                if (!res.ok) throw new Error('Bridge unreachable');
-                const bridge = await res.json();
+            <label for="nav-toggle" class="hamburger-label cursor-pointer md:hidden p-2 border border-surface hover:bg-surface transition-colors">
+                <svg class="hamburger w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <line x1="4" y1="6" x2="20" y2="6" stroke-width="1.5"></line>
+                    <line x1="4" y1="12" x2="20" y2="12" stroke-width="1.5"></line>
+                    <line x1="4" y1="18" x2="20" y2="18" stroke-width="1.5"></line>
+                </svg>
+            </label>
 
-                // 2. Verify signature
-                if (bridge.signature !== '🌫️🌒') {
-                    throw new Error('Signature mismatch');
-                }
-
-                // 3. Verify against OuiBridge (trust but verify)
-                let isValid = true;
-                try {
-                    const verifyRes = await fetch('/portal/OuiBridge.json');
-                    const canonical = await verifyRes.json();
-                    const allowedRoutes = canonical.OuiBridge?.allowedRoutes || [];
-                    const fragmentData = bridge.fragments[fragment];
-                    if (fragmentData?.links) {
-                        isValid = fragmentData.links.every(link => 
-                            allowedRoutes.includes('/' + link + '/') || 
-                            allowedRoutes.includes('/' + link)
-                        );
-                    }
-                } catch (verifyErr) {
-                    console.warn('Verification skipped:', verifyErr.message);
-                    // Continue anyway - local development mode
-                }
-
-                if (!isValid) {
-                    console.warn('Route validation warning');
-                }
-
-                // 4. Load fragment content
-                const fragmentData = bridge.fragments[fragment];
-                if (!fragmentData) {
-                    throw new Error('Fragment not found: ' + fragment);
-                }
-
-                // 5. Fetch actual HTML content
-                const contentRes = await fetch(`/fragments/${fragment}.html`);
-                if (contentRes.ok) {
-                    const html = await contentRes.text();
-                    root.innerHTML = html;
-                } else {
-                    // Fallback: render from bridge metadata
-                    root.innerHTML = renderFragment(fragmentData);
-                }
-
-                document.title = fragmentData.title;
-
-                // 6. Wire bridge links
-                document.querySelectorAll('a[data-bridge]').forEach(link => {
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const target = link.getAttribute('href');
-                        const route = target.replace(/^\//, '').replace(/\/$/, '') || 'index';
-                        window.location.href = `/portal/?route=${encodeURIComponent(route)}`;
-                    });
-                });
-
-                // 7. Hide loader
-                setTimeout(() => {
-                    loader.classList.add('hidden');
-                }, 300);
-
-                console.log('🌫️🌒 Bridge established:', fragment);
-
-            } catch (err) {
-                console.error('Extraction detected:', err);
-                root.innerHTML = `
-                    <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                        <div style="font-size:3rem;margin-bottom:1rem;">🌫️</div>
-                        <div style="color:#666;font-size:0.875rem;letter-spacing:0.1em;">CONNECTION LOST</div>
-                        <div style="color:#a50000;font-size:0.75rem;margin-top:0.5rem;">${err.message}</div>
-                        <button onclick="location.reload()" style="margin-top:2rem;padding:0.75rem 1.5rem;background:transparent;border:1px solid #a50000;color:#a50000;cursor:pointer;font-family:inherit;">
-                            RETRY
-                        </button>
-                    </div>
-                `;
-                loader.classList.add('hidden');
-            }
-        };
-
-        // Render minimal fragment from metadata
-        const renderFragment = (data) => {
-            return `
-                <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                    <h1 style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#f5f5f5;">${data.title.split('|')[0].trim()}</h1>
-                    <p style="color:#666;margin-top:1rem;">🌫️🌒 ${data.meta?.lineage || 'Cloud Village'}</p>
-                    <div style="margin-top:2rem;display:flex;gap:1rem;">
-                        ${data.links?.map(link => `
-                            <a href="/${link}/" data-bridge style="color:#a50000;text-decoration:none;padding:0.5rem 1rem;border:1px solid #a50000;">
-                                ${link.toUpperCase()}
-                            </a>
-                        `).join('') || ''}
+            <nav id="mobile-menu" class="mono text-sm uppercase tracking-widest gap-6 md:gap-8 items-start md:items-center">
+                <a href="/" class="nav-link py-2 md:py-0 text-[#a50000]">Home</a>
+                <a href="/about/" class="nav-link py-2 md:py-0">About</a>
+                <div class="dropdown relative">
+                    <a href="/archive/" class="nav-link py-2 md:py-0 flex items-center gap-1">
+                        Flight Logs
+                        <span class="dropdown-arrow md:hidden">▼</span>
+                    </a>
+                    <div class="dropdown-menu hidden md:block absolute top-full left-0 bg-tactical border border-surface min-w-[200px] py-2 z-50">
+                        <a href="/archive/" class="dropdown-item block px-4 py-2 text-xs hover:bg-surface hover:text-[#a50000]">// Flight Logs</a>
+                        <a href="/archive/selector.html" class="dropdown-item block px-4 py-2 text-xs hover:bg-surface hover:text-[#a50000]">// Selector</a>
+                        <a href="/archive/gallery.html" class="dropdown-item block px-4 py-2 text-xs hover:bg-surface hover:text-[#a50000]">// Gallery</a>
                     </div>
                 </div>
-            `;
-        };
+                <a href="/0x6C6F6C/" class="nav-link py-2 md:py-0">Agents</a>
+                <a href="/portal/" class="nav-link py-2 md:py-0">Portal</a>
+                <a href="#site-report" class="nav-link py-2 md:py-0 text-[#a50000]">Report</a>
+                <a href="/contact/" class="nav-link py-2 md:py-0">Contact</a>
+                
+                <div class="md:hidden mt-8 text-xs text-muted mono space-y-1">
+                    <p>// OUIRISE NAV</p>
+                    <p>// v2.8.0</p>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-        // Spawn on load
-        const path = window.location.pathname.replace(/^\//, '').replace(/\/$/, '') || 'index';
-        summonDabridge(path);
+    <!-- Hero -->
+    <section class="min-h-screen flex flex-col items-center justify-center px-4 md:px-6 pt-20 md:pt-16 relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="images/image.webp" alt="Kushite pyramids at Meroe" class="w-full h-full object-cover opacity-25">
+            <div class="absolute inset-0 bg-gradient-to-b from-void/90 via-void/70 to-void"></div>
+        </div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="mb-6 md:mb-8 flex justify-center">
+                <svg class="lock-icon w-12 h-12 md:w-16 md:h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+            </div>
+            
+            <h1 class="font-bebas text-5xl md:text-7xl lg:text-8xl tracking-tight mb-6 fade-in leading-none">
+                BUILT <span class="text-[#a50000]">DIFFERENT</span><br>
+                <span class="text-3xl md:text-5xl lg:text-6xl">FUNCTIONAL LIGHT // SYSTEMS THAT ENDURE</span>
+            </h1>
+            
+            <div class="h-px w-24 md:w-32 bg-[#a50000] mx-auto mb-6 md:mb-8 fade-in"></div>
+            
+            <p class="text-base md:text-xl text-muted mb-8 max-w-2xl mx-auto leading-relaxed px-2 md:px-0 fade-in">
+                We know the journey transforms both the seeker and the sought. 
+                We build systems for organizations who understand that infrastructure is inheritance—
+                code that outlasts the coder, structures that serve generations.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+                <a href="/portal/" class="btn-primary mono text-xs md:text-sm uppercase tracking-widest px-6 md:px-8 py-3 md:py-4 inline-block" style="background: var(--bright-maroon); color: var(--signal); border-color: var(--bright-maroon);">
+                    START
+                </a>
+                <a href="/contact/" class="border border-[#333] hover:border-[#a50000] text-muted hover:text-signal mono text-xs md:text-sm uppercase tracking-widest px-6 md:px-8 py-3 md:py-4 transition-all inline-block">
+                    Our Method
+                </a>
+            </div>
+            
+            <p class="text-sm text-muted mt-8 fade-in">俊达 // This little light of ours // Built for endurance</p>
+        </div>
+    </section>
+
+    <!-- How We Build: Philosophy Section -->
+    <section id="philosophy" class="py-16 md:py-24 px-4 md:px-6 border-t border-[#1a1a1a] bg-[#0d0d0d]">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12 md:mb-16">
+                <p class="mono text-xs text-[#a50000] uppercase tracking-[0.3em] mb-4">// The Method</p>
+                <h2 class="font-bebas text-4xl md:text-6xl tracking-tight">HOW WE <span class="text-[#a50000]">BUILD</span></h2>
+                <p class="text-muted mt-4 max-w-2xl mx-auto">Systems informed by deep roots. Technology as inheritance.</p>
+            </div>
+
+            <!-- Cultural Framework -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover">
+                    <div class="w-12 h-12 border border-[#a50000] flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#a50000]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path d="M9 3L5 9h14l-4-6"/>
+                            <path d="M5 9v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V9"/>
+                            <path d="M12 19v3"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bebas text-xl mb-2 tracking-wide">THE ALCHEMIST</h3>
+                    <p class="text-muted text-sm leading-relaxed">Personal Legend as operational principle. The journey transforms both builder and system. Santiago's search for treasure mirrors our search for elegant solutions.</p>
+                </div>
+                
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover">
+                    <div class="w-12 h-12 border border-[#a50000] flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#a50000]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5"/>
+                            <path d="M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bebas text-xl mb-2 tracking-wide">25TH DYNASTY</h3>
+                    <p class="text-muted text-sm leading-relaxed">Kushite kings and queens who ruled Egypt. Nubian architects who built structures lasting millennia. We build with that timeline in mind—infrastructure that outlasts regimes.</p>
+                </div>
+                
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover">
+                    <div class="w-12 h-12 border border-[#a50000] flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#a50000]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                            <path d="M2 12h20"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bebas text-xl mb-2 tracking-wide">THE MOORS</h3>
+                    <p class="text-muted text-sm leading-relaxed">Al-Andalus—where Islamic Spain advanced mathematics, astronomy, and architecture while Europe slept. The Moors built libraries, universities, and systems of knowledge exchange. We carry that legacy: infrastructure that educates, connects, and endures.</p>
+                </div>
+                
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover">
+                    <div class="w-12 h-12 border border-[#a50000] flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-[#a50000]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path d="M12 8a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2z"/>
+                            <path d="M17 11v2a5 5 0 0 1-10 0v-2"/>
+                            <line x1="12" y1="19" x2="12" y2="23"/>
+                            <line x1="8" y1="23" x2="16" y2="23"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-bebas text-xl mb-2 tracking-wide">THE BOONDOCKS</h3>
+                    <p class="text-muted text-sm leading-relaxed">Satirical precision as prompt reverse engineering framework. McGruder's lens—truth through absurdity. We cut through corporate speak to uncover hidden AI logical wiring.</p>
+                </div>
+            </div>
+
+            <!-- Black American Christianity -->
+            <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-8 mb-8">
+                <div class="flex items-start gap-6">
+                    <div class="w-16 h-16 border border-[#a50000] flex items-center justify-center flex-shrink-0">
+                        <svg class="w-8 h-8 text-[#a50000]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bebas text-2xl mb-4 tracking-wide">THE BLACK CHURCH // TESTIMONY</h3>
+                        <p class="text-muted mb-4">From the Baptist pulpit to the non-denominational storefront, Black American Christianity taught us that faith without works is dead. The call-and-response of the sanctuary mirrors our development process: we build, we test, we iterate, we testify. The church was our first open-source community—knowledge shared, burdens carried collectively, no one left behind.</p>
+                        <div class="flex flex-wrap gap-4 mono text-xs text-[#666666]">
+                            <span>• Call and Response = Feedback Loops</span>
+                            <span>• Testimony = Documentation</span>
+                            <span>• Fellowship = Pair Programming</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Zen Buddhism -->
+            <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-8 mb-8">
+                <div class="flex items-start gap-6">
+                    <div class="w-16 h-16 border border-[#a50000] flex items-center justify-center flex-shrink-0">
+                        <svg class="w-8 h-8 text-[#a50000]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path d="M12 3v18"/>
+                            <path d="M3 12h18"/>
+                            <circle cx="12" cy="12" r="9"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bebas text-2xl mb-4 tracking-wide">ZEN PRACTICE // 禅</h3>
+                        <p class="text-muted mb-4">The cushion teaches what the screen cannot. Zazen—seated meditation—trains the mind to observe without attachment, to act without forcing. This subtle discipline permeates every facet: the patience to debug, the clarity to simplify, the presence to listen before building. The code flows when the mind is still.</p>
+                        <div class="flex flex-wrap gap-4 mono text-xs text-[#666666]">
+                            <span>• Mushin (No-Mind) = Flow State</span>
+                            <span>• Kanso (Simplicity) = Clean Architecture</span>
+                            <span>• Shibumi (Understated Beauty) = Elegant Solutions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Islamic Precision -->
+            <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-8 mb-16">
+                <div class="flex items-start gap-6">
+                    <div class="w-16 h-16 border border-[#a50000] flex items-center justify-center flex-shrink-0">
+                        <svg class="w-8 h-8 text-[#a50000]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M16.2 7.8l-2 6.3l-6.4 2.1l2-6.3z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bebas text-2xl mb-4 tracking-wide">ISLAMIC PRECISION // البناء</h3>
+                        <p class="text-muted mb-4">Al-Bina—the art of building. From the geometric perfection of the Alhambra to the astronomical precision of the astrolabe, Islamic civilization advanced mathematics to serve the sacred. We apply this rigor: every line of code has purpose, every system has qibla (direction).</p>
+                        <div class="flex flex-wrap gap-4 mono text-xs text-[#666666]">
+                            <span>• Tawhid (Unity) = System Integration</span>
+                            <span>• Ihsan (Excellence) = Code Quality</span>
+                            <span>• Sabr (Patience) = Technical Debt Management</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- J. Cole -->
+            <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-8 mb-16">
+                <div class="flex items-start gap-6">
+                    <div class="w-16 h-16 border border-[#a50000] flex items-center justify-center flex-shrink-0">
+                        <svg class="w-8 h-8 text-[#a50000]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M2 12h20"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-bebas text-2xl mb-4 tracking-wide">J. COLE // FOREVER STORYTELLING</h3>
+                        <p class="text-muted mb-4">From <em>Note to Self</em> to <em>Wherever we go...</em> Cole taught us that the journey is the destination. The Dreamville ethos—work hard, stay humble, elevate others—runs through every system we build. No features without purpose. No shortcuts that compromise integrity. And wherever we go, <span class="text-signal">it's all Love</span>.</p>
+                        <div class="bg-[#0d0d0d] border-l-2 border-[#a50000] pl-4 py-3 mt-4">
+                            <p class="text-muted text-sm italic">"Love is the most powerful weapon on Earth."</p>
+                            <p class="mono text-xs text-[#666666] mt-2">— J. Cole, Note to Self</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Build Process -->
+            <div class="text-center mb-12">
+                <p class="mono text-xs text-[#a50000] uppercase tracking-[0.3em] mb-4">// Our Engineers</p>
+                <h2 class="font-bebas text-4xl md:text-6xl tracking-tight">SOFTWARE <span class="text-[#a50000]">ARCHITECTS</span></h2>
+                <p class="text-muted mt-4 max-w-2xl mx-auto">Over 8 years developing custom solutions for industry innovators in FinTech, Entrepreneurship, and Startups.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover">
+                    <div class="feature-icon mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bebas text-xl mb-2 tracking-wide">CUSTOM DEVELOPMENT</h3>
+                    <p class="text-muted text-sm leading-relaxed">React, Angular, HTML, CSS, and WordPress applications built for scale.</p>
+                </div>
+                
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover">
+                    <div class="feature-icon mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bebas text-xl mb-2 tracking-wide">CLOUD ARCHITECTURE</h3>
+                    <p class="text-muted text-sm leading-relaxed">Modern cloud practices for data security, analytics, and seamless deployment.</p>
+                </div>
+                
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover">
+                    <div class="feature-icon mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bebas text-xl mb-2 tracking-wide">DASHBOARDS & UI</h3>
+                    <p class="text-muted text-sm leading-relaxed">Custom interfaces and dashboards for a wide variety of industries and use cases.</p>
+                </div>
+                
+                <div class="bg-[#0f0f0f] border border-[#1f1f1f] p-6 card-hover">
+                    <div class="feature-icon mb-4">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-bebas text-xl mb-2 tracking-wide">AI WORKFLOWS</h3>
+                    <p class="text-muted text-sm leading-relaxed">Leading AI research and automation methodologies to boost organizational workflows.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-12 md:py-24 px-4 md:px-6 border-t border-[#1a1a1a]" id="about">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-8 md:gap-24">
+            <div class="w-full md:w-1/2">
+                <h2 class="text-lg md:text-xl mb-4 md:mb-6 mono">BLACK OWNED. <span class="text-[#a50000]">PURPOSE DRIVEN.</span></h2>
+                <div class="w-full h-auto bg-surface border border-[#333] flex items-center justify-center">
+                    <img src="images/ouirise.webp" alt="OUI RISE INITIATIVE" style="max-height: 100%; max-width: 100%;">
+                </div>
+            </div>
+            <div class="flex flex-col justify-center gap-4 w-full md:w-1/2 pt-4 md:pt-16">
+                <p class="text-sm md:text-base">We are descendants of the 25th Dynasty—Kushite builders who ruled Egypt and constructed monuments that stand three millennia later. We bring that timeline to code.</p>
+                <p class="text-sm md:text-base font-semibold text-[#a50000]">Yes, OUI.</p>
+                <div class="text-sm md:text-base space-y-2">
+                    <p>We are researchers merging:</p>
+                    <ul class="list-disc list-inside pl-2 space-y-1 text-muted text-xs md:text-sm">
+                        <li>Data Privacy and Information Security (Al-Muhafiz—the guardian)</li>
+                        <li>Psychology of Business (Neter—divine principle)</li>
+                        <li>Bias-Resistant Systems (Ma'at—truth and balance)</li>
+                        <li>Universal Cultural Exploration (Ibriy—crossing boundaries)</li>
+                    </ul>
+                </div>
+                <div class="mono text-xs space-y-1 mt-4 text-muted border-l-2 border-[#a50000] pl-4">
+                    <p>// LINEAGE: 25th Dynasty Kushite</p>
+                    <p>// METHOD: Al-Bina (The Build)</p>
+                    <p>// LENS: Boondocks Precision</p>
+                    <p>// QUEST: Personal Legend</p>
+                </div>
+                <div class="mt-6">
+                    <a href="/about/" class="text-[#a50000] hover:text-signal mono text-xs uppercase tracking-widest transition-colors">
+                        Read Full Mission →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deployments -->
+    <section id="deployments" class="py-16 md:py-24 px-4 md:px-6 bg-void border-t border-[#1a1a1a]">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <p class="mono text-xs text-[#a50000] uppercase tracking-[0.3em] mb-2">// Recent Work</p>
+                    <h2 class="font-bebas text-4xl md:text-5xl tracking-tight">DEPLOYMENTS</h2>
+                </div>
+                <a href="/archive/" class="mt-4 md:mt-0 text-muted hover:text-[#a50000] mono text-xs uppercase tracking-widest transition-colors">
+                    View Archive →
+                </a>
+            </div>
+            
+            <p class="mono text-sm md:text-xl text-center text-muted mb-8 md:mb-12 uppercase tracking-widest px-2">
+                CULTURAL INTERSECTIONALITY × (SCIENCE + ART + BUSINESS)
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                <!-- Rise Integration -->
+                <a href="/archive/" class="bg-[#0f0f0f] border border-[#1f1f1f] p-4 md:p-6 card-hover group block">
+                    <div class="aspect-video bg-surface mb-4 overflow-hidden border border-[#333]">
+                        <div class="w-full h-full bg-gradient-to-br from-[#800000] to-[#1a1a1a] opacity-80 group-hover:scale-105 transition-transform duration-500"></div>
+                    </div>
+                    <h3 class="mono text-base md:text-lg font-semibold mb-2 uppercase tracking-tight">RISE INTEGRATION</h3>
+                    <div class="space-y-1 mono text-xs text-muted mb-4">
+                        <p>// Site Setup + Migration</p>
+                        <p>// Cloud Consulting</p>
+                        <p>// Multi-Platform System Design</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted border border-[#333]">Vercel</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted border border-[#333]">Supabase</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted border border-[#333]">DNS</span>
+                    </div>
+                </a>
+
+                <!-- Data Bridge -->
+                <a href="/archive/databridge/" class="bg-[#0f0f0f] border border-[#1f1f1f] p-4 md:p-6 card-hover group block">
+                    <div class="aspect-video bg-surface mb-4 overflow-hidden border border-[#333]">
+                        <div class="w-full h-full bg-gradient-to-br from-[#800000] to-[#1a1a1a] opacity-80 group-hover:scale-105 transition-transform duration-500"></div>
+                    </div>
+                    <h3 class="mono text-base md:text-lg font-semibold mb-2 uppercase tracking-tight">DATA BRIDGE</h3>
+                    <div class="space-y-1 mono text-xs text-muted mb-4">
+                        <p>// Cloud Architecture</p>
+                        <p>// Documentation System</p>
+                        <p>// Horizontal Scaling Database</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted border border-[#333]">SQL</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted border border-[#333]">R2</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted border border-[#333]">MongoDB</span>
+                    </div>
+                </a>
+
+                <!-- Business Automations -->
+                <a href="/archive/" class="bg-[#0f0f0f] border border-[#1f1f1f] p-4 md:p-6 card-hover group block">
+                    <div class="aspect-video bg-surface mb-4 overflow-hidden border border-[#333]">
+                        <div class="w-full h-full bg-gradient-to-br from-[#800000] to-[#1a1a1a] opacity-80 group-hover:scale-105 transition-transform duration-500"></div>
+                    </div>
+                    <h3 class="mono text-base md:text-lg font-semibold mb-2 uppercase tracking-tight">BUSINESS AUTOMATIONS</h3>
+                    <div class="space-y-1 mono text-xs text-muted mb-4">
+                        <p>// Content Writing</p>
+                        <p>// E-commerce Integration</p>
+                        <p>// Free Vision Development Session</p>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted border border-[#333]">Kimi-K2.5</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted border border-[#333]">Stripe</span>
+                        <span class="mono text-[10px] bg-surface px-2 py-1 text-muted border border-[#333]">Shopify</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="access" class="py-16 md:py-24 px-4 md:px-6 bg-void border-t border-[#1a1a1a]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12 md:mb-16">
+                <p class="mono text-xs text-[#a50000] uppercase tracking-[0.3em] mb-4">// Project Plans</p>
+                <h2 class="mono text-2xl md:text-4xl font-bold mb-4 uppercase tracking-tight">Engineered for Scalability.<br><span class="text-muted">Drafted for Success.</span></h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                <!-- Prototype -->
+                <div class="bg-tactical border border-surface p-6 md:p-8 flex flex-col relative">
+                    <div class="absolute top-0 right-0 bg-surface text-signal mono text-[10px] font-bold px-3 py-1 uppercase border border-[#333]">
+                        Starting at $200
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="mono text-xs uppercase tracking-widest text-muted mb-2">Prototype</h3>
+                        <div class="mono text-xl md:text-2xl font-bold">Single Page Application</div>
+                    </div>
+                    <p class="text-muted mb-8 text-xs md:text-sm leading-relaxed">
+                        Built to draft ideas and to assist clients seeking cost-effective solutions without compromising quality. Perfect for landing pages and high-impact marketing assets.
+                    </p>
+                    <ul class="space-y-3 mb-8 flex-grow text-xs md:text-sm">
+                        <li class="flex items-center gap-3">
+                            <span class="text-[#a50000] mono">+</span>
+                            <span>Modern Cloud Deployment</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-[#a50000] mono">+</span>
+                            <span>Responsive Design</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-[#a50000] mono">+</span>
+                            <span>Speed Optimized</span>
+                        </li>
+                    </ul>
+                    <a href="/contact/" class="w-full py-3 border border-surface mono text-xs uppercase tracking-widest hover:border-[#a50000] hover:text-[#a50000] transition-all text-center">
+                        Select
+                    </a>
+                </div>
+
+                <!-- MVP -->
+                <div class="bg-tactical border border-[#a50000] p-6 md:p-8 flex flex-col relative">
+                    <div class="absolute top-0 right-0 popular-badge mono text-[10px] font-bold px-3 py-1 uppercase">
+                        $2,000 - $5,000
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="mono text-xs uppercase tracking-widest text-muted mb-2">Most Popular</h3>
+                        <div class="mono text-xl md:text-2xl font-bold">The MVP Solution</div>
+                    </div>
+                    <p class="text-muted mb-8 text-xs md:text-sm leading-relaxed">
+                        Expert software engineers scale your business with an interactive cloud solution. A balanced approach between availability and flexibility, suitable for projects requiring consistent evolution.
+                    </p>
+                    <ul class="space-y-3 mb-8 flex-grow text-xs md:text-sm">
+                        <li class="flex items-center gap-3">
+                            <span class="text-[#a50000] mono">+</span>
+                            <span>Custom Database Integration</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-[#a50000] mono">+</span>
+                            <span>Server Management Included</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-[#a50000] mono">+</span>
+                            <a href="/portal/" class="hover:text-[#a50000] transition-colors">Interactive Dashboards</a>
+                        </li>
+                    </ul>
+                    <a href="/contact/" class="w-full py-3 bg-[#a50000] text-signal mono text-xs uppercase tracking-widest font-semibold hover:bg-[#800000] transition-all text-center">
+                        Select
+                    </a>
+                </div>
+
+                <!-- Enterprise -->
+                <div class="bg-tactical border border-surface p-6 md:p-8 flex flex-col relative">
+                    <div class="absolute top-0 right-0 bg-surface text-signal mono text-[10px] font-bold px-3 py-1 uppercase border border-[#333]">
+                        Starting at $10,000
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="mono text-xs uppercase tracking-widest text-muted mb-2">Enterprise</h3>
+                        <div class="mono text-xl md:text-2xl font-bold">Big Data & AI</div>
+                    </div>
+                    <p class="text-muted mb-8 text-xs md:text-sm leading-relaxed">
+                        Tailored for comprehensive support and prioritized attention. We build custom dashboards and AI agentic solutions to improve workflow productivity and data-driven decision making.
+                    </p>
+                    <ul class="space-y-3 mb-8 flex-grow text-xs md:text-sm">
+                        <li class="flex items-center gap-3">
+                            <span class="text-[#a50000] mono">+</span>
+                            <a href="/0x6C6F6C/" class="hover:text-[#a50000] transition-colors">AI Agent Workflows</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-[#a50000] mono">+</span>
+                            <span>Full-time Engineering Focus</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-[#a50000] mono">+</span>
+                            <span>Custom Analytics Suites</span>
+                        </li>
+                    </ul>
+                    <a href="/contact/" class="w-full py-3 border border-surface mono text-xs uppercase tracking-widest hover:border-[#a50000] hover:text-[#a50000] transition-all text-center">
+                        Select
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Site Report -->
+    <section id="site-report" class="py-16 md:py-24 px-4 md:px-6 border-t border-[#1a1a1a] bg-[#0d0d0d]">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12">
+                <div>
+                    <p class="mono text-xs text-[#a50000] uppercase tracking-[0.3em] mb-2">// System Status</p>
+                    <h2 class="font-bebas text-3xl md:text-5xl tracking-tight">SITE REPORT</h2>
+                </div>
+                <div class="mt-4 md:mt-0 text-right">
+                    <div class="mono text-xs text-muted">BUILD VERSION</div>
+                    <div class="font-bebas text-2xl text-[#a50000]">v2.8.0</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-4 text-center">
+                    <div class="font-bebas text-3xl text-[#a50000]" id="stat-routes">45</div>
+                    <div class="mono text-[10px] text-muted uppercase">Total Routes</div>
+                </div>
+                <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-4 text-center">
+                    <div class="font-bebas text-3xl text-[#a50000]" id="stat-docs">21</div>
+                    <div class="mono text-[10px] text-muted uppercase">Documentation</div>
+                </div>
+                <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-4 text-center">
+                    <div class="font-bebas text-3xl text-[#a50000]" id="stat-flights">3</div>
+                    <div class="mono text-[10px] text-muted uppercase">Active Flights</div>
+                </div>
+                <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-4 text-center">
+                    <div class="font-bebas text-3xl text-[#a50000]" id="stat-agents">6</div>
+                    <div class="mono text-[10px] text-muted uppercase">Fleet Agents</div>
+                </div>
+            </div>
+
+            <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-4 md:p-6 mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="mono text-xs text-[#a50000] uppercase tracking-wider">Recent Build Activity</h3>
+                    <a href="site-report.json" class="mono text-[10px] text-muted hover:text-[#a50000] transition-colors">View Full Report →</a>
+                </div>
+                <div class="space-y-2 mono text-xs" id="build-log">
+                    <div class="flex items-center gap-3 text-muted">
+                        <span class="text-[#a50000]">2026-02-23</span>
+                        <span>DEPLOYMENT.md architecture documentation added</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-muted">
+                        <span class="text-[#a50000]">2026-02-23</span>
+                        <span>Site report system implemented</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-muted">
+                        <span class="text-[#a50000]">2026-02-23</span>
+                        <span>Flight Simulations reorganized (NEXT, CLOUDFLARE, FLASH)</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-muted">
+                        <span class="text-[#a50000]">2026-02-23</span>
+                        <span>Project detail pages created (FLIGHT 21-23)</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-muted">
+                        <span class="text-[#a50000]">2026-02-23</span>
+                        <span>Global RAG documentation system deployed</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-4">
+                    <div class="mono text-[10px] text-muted uppercase mb-2">Latest Flight</div>
+                    <div class="font-bebas text-xl mb-1">RISE INTEGRATION</div>
+                    <div class="mono text-[10px] text-[#a50000]">FLIGHT 23 // COMPLETE</div>
+                </div>
+                <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-4">
+                    <div class="mono text-[10px] text-muted uppercase mb-2">Documentation Hub</div>
+                    <div class="font-bebas text-xl mb-1">0x6C6F6C/DOCS</div>
+                    <div class="mono text-[10px] text-[#a50000]">22 DOCUMENTS INDEXED</div>
+                </div>
+                <div class="bg-[#0a0a0a] border border-[#1f1f1f] p-4">
+                    <div class="mono text-[10px] text-muted uppercase mb-2">Client Portal</div>
+                    <div class="font-bebas text-xl mb-1">JUNDA DESKTOP</div>
+                    <div class="mono text-[10px] text-[#a50000]">6 PROMPTS AVAILABLE</div>
+                </div>
+            </div>
+
+            <!-- RISE Integration Status -->
+            <div class="mt-8 p-6 border-2 border-[#a50000] bg-[#0a0a0a]">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-3 h-3 bg-[#a50000] rounded-full animate-pulse"></div>
+                    <span class="mono text-xs text-[#a50000] uppercase tracking-widest">FLIGHT 23 // RISE INTEGRATION COMPLETE</span>
+                </div>
+                <h3 class="font-bebas text-2xl mb-4">System Integration Report</h3>
+                <div class="grid md:grid-cols-2 gap-6 text-sm">
+                    <div>
+                        <p class="text-muted mb-2">All navigation routes verified and connected:</p>
+                        <ul class="mono text-xs text-[#666666] space-y-1">
+                            <li>✓ Portal added to global navigation</li>
+                            <li>✓ Reports linked to 0x6C6F6C Fleet</li>
+                            <li>✓ All data.json APIs connected</li>
+                            <li>✓ Zero broken links detected</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="text-muted mb-2">Infrastructure deployment:</p>
+                        <ul class="mono text-xs text-[#666666] space-y-1">
+                            <li>✓ Continue.dev config v6.7.0 active</li>
+                            <li>✓ 5 fleet models configured</li>
+                            <li>✓ 4 MCP servers integrated</li>
+                            <li>✓ 25 documentation pages indexed</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-[#1f1f1f] flex gap-4">
+                    <a href="/portal/" class="mono text-xs text-[#a50000] hover:text-signal transition-colors">Access Portal →</a>
+                    <a href="/0x6C6F6C/" class="mono text-xs text-[#a50000] hover:text-signal transition-colors">View Fleet →</a>
+                    <a href="site-report.json" class="mono text-xs text-[#666666] hover:text-signal transition-colors">Full Report →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Agent Fleet CTA -->
+    <section class="py-16 md:py-24 px-4 md:px-6 border-t border-[#1a1a1a] bg-[#0d0d0d]">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="glyph text-4xl mb-6">俊达</div>
+            <p class="mono text-xs text-[#a50000] uppercase tracking-[0.3em] mb-4">// Agentic Systems</p>
+            <h2 class="font-bebas text-4xl md:text-6xl tracking-tight mb-6">MEET THE <span class="text-[#a50000]">FLEET</span></h2>
+            <p class="text-muted text-base md:text-lg mb-8 max-w-2xl mx-auto">
+                Twin Protocol: Human-AI collaborative architecture. Our agent fleet operates in parallel to deliver rapid prototyping and systems development.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/0x6C6F6C/" class="btn-primary mono text-xs md:text-sm uppercase tracking-widest px-6 md:px-8 py-3 md:py-4 inline-block">
+                    View 0x6C6F6C Fleet
+                </a>
+                <a href="/0x6C6F6C/ADMIRAL/" class="border border-[#333] hover:border-[#a50000] text-muted hover:text-signal mono text-xs md:text-sm uppercase tracking-widest px-6 md:px-8 py-3 md:py-4 transition-all inline-block">
+                    Access ADMIRAL
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Origin -->
+    <section id="origin" class="py-16 md:py-24 px-4 md:px-6 section-alt border-t border-[#1a1a1a]">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="mono text-2xl md:text-4xl font-bold mb-6 md:mb-8 uppercase tracking-widest leading-tight">From the Other Side</h2>
+            
+            <div class="h-px w-24 bg-[#a50000] mb-6 md:mb-8"></div>
+            
+            <p class="text-sm md:text-lg text-muted mb-6 leading-relaxed">
+                <strong>Ibriy</strong>—Hebrew for "from the other side." Our people have always crossed boundaries, maintained identity across empires, built portable architectures that travel. From Kush to Cairo, from Mecca to Medina, from the garage to the enterprise—we carry that lineage.
+            </p>
+            
+            <h2 class="mono text-2xl md:text-4xl font-bold mb-6 md:mb-8 uppercase tracking-widest leading-tight mt-12">All-in-One Human-in-the-Loop</h2>
+            <p class="text-sm md:text-lg text-muted mb-6 leading-relaxed">
+                Your integrated Tech and Documentation Department. We embed with organizations to handle infrastructure, automation, and knowledge systems—without the overhead of full-time hires. Human judgment at every decision point. AI acceleration for execution speed.
+            </p>
+            
+            <h2 class="mono text-2xl md:text-4xl font-bold mb-6 md:mb-8 uppercase tracking-widest leading-tight mt-12">Built for Inevitability</h2>
+            <p class="text-sm md:text-lg text-muted mb-8 md:mb-12 leading-relaxed">
+                Years inside the machine taught us what breaks, what scales, what survives. The 25th Dynasty Kushites ruled Egypt because they understood systems—how to integrate, how to endure, how to build monuments that outlast regimes. We bring that same rigor: enterprise-grade infrastructure with the soul of the souk.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-[#0d0d0d] border border-[#1f1f1f] p-6">
+                    <div class="text-[#a50000] text-2xl mb-3">⚙</div>
+                    <h3 class="font-bebas text-xl tracking-wide mb-2">OPEN SOURCE</h3>
+                    <p class="text-muted text-sm">No proprietary black boxes. Portable code, transparent dependencies, community-tested tools. You own your stack.</p>
+                </div>
+                <div class="bg-[#0d0d0d] border border-[#1f1f1f] p-6">
+                    <div class="text-[#a50000] text-2xl mb-3">∞</div>
+                    <h3 class="font-bebas text-xl tracking-wide mb-2">RESILIENT SYSTEMS</h3>
+                    <p class="text-muted text-sm">Fault-tolerant by design. Distributed across free tiers and open protocols. Systems that heal, adapt, and endure.</p>
+                </div>
+                <div class="bg-[#0d0d0d] border border-[#1f1f1f] p-6">
+                    <div class="text-[#a50000] text-2xl mb-3">🌱</div>
+                    <h3 class="font-bebas text-xl tracking-wide mb-2">SOLARPUNK</h3>
+                    <p class="text-muted text-sm">Green tech design philosophy. Efficient resource use, sustainable infrastructure, technology that serves life.</p>
+                </div>
+            </div>
+            
+            <div class="mono text-xs text-muted space-y-2 border-l-2 border-[#a50000] pl-4">
+                <p>// Kushite Architectural Lineage</p>
+                <p>// Ibriy Boundary-Crossing</p>
+                <p>// Al-Bina Precision</p>
+                <p>// Built for Inevitability × Endurance</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Credits -->
+    <section class="py-12 md:py-16 px-4 md:px-6 border-t border-[#1a1a1a] bg-[#0a0a0a]">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="glyph text-3xl mb-4">俊达</div>
+            <p class="mono text-xs text-[#a50000] uppercase tracking-[0.3em] mb-6">// Acknowledgments</p>
+            
+            <div class="bg-[#0d0d0d] border border-[#1f1f1f] p-6 md:p-8 max-w-2xl mx-auto">
+                <h3 class="font-bebas text-2xl md:text-3xl tracking-wide mb-4">Instructor X</h3>
+                <p class="text-muted text-sm md:text-base mb-4 leading-relaxed">
+                    Built using the <strong class="text-signal">"Last Prompt"</strong> methodology taught by 
+                    <a href="https://www.youtube.com/@TinaHuang1" target="_blank" rel="noopener noreferrer" class="text-[#a50000] hover:underline">Tina Huang</a> 
+                    (Ex-Meta, <a href="https://www.lonelyoctopus.com/" target="_blank" rel="noopener noreferrer" class="text-[#a50000] hover:underline">Lonely Octopus</a>).
+                </p>
+                <p class="text-muted text-sm leading-relaxed mb-6">
+                    Her work on AI-assisted coding and multi-agent systems shaped our approach. 
+                    <a href="/about/" class="text-[#a50000] hover:underline">Read the full research thesis →</a>
+                </p>
+                
+                <div class="border-t border-[#1f1f1f] pt-6">
+                    <p class="mono text-xs text-[#666666] mb-2">// Additional Influences</p>
+                    <div class="flex flex-wrap justify-center gap-3 text-xs">
+                        <span class="text-muted">Cole World</span>
+                        <span class="text-[#333]">•</span>
+                        <span class="text-muted">Hidden Leaf</span>
+                        <span class="text-[#333]">•</span>
+                        <span class="text-muted">25th Dynasty</span>
+                        <span class="text-[#333]">•</span>
+                        <span class="text-muted">Al-Andalus</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-xs text-muted mono">
+                <p>俊达 // Built with human judgment + AI acceleration</p>
+                <p class="mt-1">Cloud Village // No land, no flag, just code</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 px-4 border-t border-[#1a1a1a] bg-[#0a0a0a]">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="mono text-xs text-muted">
+                <span class="text-[#a50000]">OUIRISE</span> // v2.8.0
+            </div>
+            <div class="flex gap-6 mono text-xs">
+                <a href="/portal/" class="text-muted hover:text-[#a50000] transition-colors">Portal</a>
+                <a href="/0x6C6F6C/" class="text-muted hover:text-[#a50000] transition-colors">Fleet</a>
+                <a href="/contact/" class="text-muted hover:text-[#a50000] transition-colors">Contact</a>
+            </div>
+            <div class="mono text-xs text-muted">
+                俊达 // <span id="year">2026</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Update copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Console signature
+        console.log('%c俊达 OUIRISE v2.8.0', 'color:#a50000;font-size:14px;font-weight:bold;');
+        console.log('%c25th Dynasty // Cloud Village // Built Different', 'color:#666;font-size:10px;');
     </script>
 </body>
 </html>
