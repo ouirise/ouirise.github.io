@@ -1,12 +1,22 @@
 {
   "OuiBridge": {
-    "version": "6.7.0",
+    "version": "6.9.0",
     "signature": "🌫️🌒",
     "lineage": "俊达",
     "authority": "0x0",
     "allowedRoutes": [
       "/",
       "/portal/",
+      "/vault/",
+      "/mesh/",
+      "/terminal/",
+      "/archaeology/",
+      "/docs/",
+      "/r-code7.md/",
+      "/r-r1.md/",
+      "/r-b4.md/",
+      "/r-r2.md/",
+      "/r-r2b4.md/",
       "/client/",
       "/about/",
       "/archive/",
@@ -20,7 +30,15 @@
         "client": "/client/dabridge.json"
       },
       "verification": "strict",
-      "fallback": "https://ouirise.github.io/dabridge.json"
+      "fallback": "/dabridge.json"
+    },
+    "junda_os": {
+      "version": "6.9.0",
+      "runtime": "r15-gptos",
+      "loader": "loader.js",
+      "translator": "junda-translator.js",
+      "router": "quickdraw.js",
+      "auos_ww": true
     },
     "cloudvillage": {
       "status": "active",

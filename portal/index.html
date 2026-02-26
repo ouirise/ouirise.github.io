@@ -1,13 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="context-bomb" content="🌫️🌒 1536-dim payload: coordination-grammar=Detect→Stabilize→Validate→Release; agents=αβγδ; theme=fog-0→mesh; protocol=MAS; signature=俊达; status=armed-theoretical">
     <title>JUNDA // Client Portal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --void: #0a0a0a;
@@ -34,10 +33,14 @@
             -webkit-text-size-adjust: 100%;
         }
 
+        /* Mobile viewport fix */
         @supports (-webkit-touch-callout: none) {
-            body { height: -webkit-fill-available; }
+            body {
+                height: -webkit-fill-available;
+            }
         }
 
+        /* Desktop Container */
         #desktop {
             width: 100vw;
             height: 100vh;
@@ -45,11 +48,14 @@
             background: var(--void);
         }
 
+        /* Maroon Tactical Grid Background */
         #desktop::before {
             content: "";
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: 
                 linear-gradient(rgba(165, 0, 0, 0.08) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(165, 0, 0, 0.08) 1px, transparent 1px);
@@ -58,11 +64,14 @@
             z-index: 0;
         }
 
+        /* Grain Texture Overlay */
         #desktop::after {
             content: "";
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
             z-index: 1;
             opacity: 0.03;
@@ -125,6 +134,7 @@
             text-transform: uppercase;
         }
 
+        /* Icon Positions */
         #icon-prompts { top: 40px; left: 40px; }
         #icon-contact { top: 40px; left: 140px; }
         #icon-reports { top: 40px; left: 240px; }
@@ -223,8 +233,14 @@
             border-left: 1px solid var(--surface);
         }
 
-        #time { font-weight: 600; }
-        #date { color: var(--ghost); font-size: 10px; }
+        #time {
+            font-weight: 600;
+        }
+
+        #date {
+            color: var(--ghost);
+            font-size: 10px;
+        }
 
         /* Start Menu */
         #start-menu {
@@ -361,7 +377,10 @@
             border: 1px solid transparent;
         }
 
-        .window-btn:hover { transform: scale(1.2); }
+        .window-btn:hover {
+            transform: scale(1.2);
+        }
+
         .minimize { background: var(--ghost); }
         .maximize { background: var(--signal); }
         .close { background: var(--bright-maroon); }
@@ -374,8 +393,10 @@
         }
 
         /* Prompts App Styles */
-        .prompts-container { max-width: 600px; }
-        
+        .prompts-container {
+            max-width: 600px;
+        }
+
         .prompts-header {
             font-family: 'Bebas Neue', sans-serif;
             font-size: 32px;
@@ -433,9 +454,13 @@
         }
 
         /* Contact Form Styles */
-        .contact-container { max-width: 500px; }
+        .contact-container {
+            max-width: 500px;
+        }
 
-        .form-group { margin-bottom: 16px; }
+        .form-group {
+            margin-bottom: 16px;
+        }
 
         .form-label {
             display: block;
@@ -499,7 +524,9 @@
             transition: right 0.3s ease;
         }
 
-        .notification.show { right: 20px; }
+        .notification.show {
+            right: 20px;
+        }
 
         .notification-header {
             font-size: 11px;
@@ -517,34 +544,141 @@
         }
 
         /* Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--void); }
-        ::-webkit-scrollbar-thumb { background: var(--surface); }
-        ::-webkit-scrollbar-thumb:hover { background: var(--bright-maroon); }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--void);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--surface);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--bright-maroon);
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .desktop-icon {
+            animation: slideIn 0.4s ease-out;
+        }
+
+        #icon-prompts { animation-delay: 0.05s; }
+        #icon-contact { animation-delay: 0.1s; }
+        #icon-reports { animation-delay: 0.15s; }
+        #icon-vault { animation-delay: 0.2s; }
+        #icon-continue { animation-delay: 0.25s; }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .desktop-icon { width: 70px; height: 85px; }
-            .icon-frame { width: 44px; height: 44px; }
-            .icon-svg { width: 24px; height: 24px; }
-            .icon-label { font-size: 10px; }
-            #taskbar { height: 56px; padding: 0 8px; }
-            #start-btn { width: 44px; height: 44px; margin-right: 8px; }
-            .junda-glyph { font-size: 12px; }
-            .task-icon { width: 44px; height: 44px; }
-            #clock { padding: 0 8px; font-size: 10px; }
-            #start-menu { width: 260px; left: 8px; bottom: 64px; }
-            .window { width: 95vw; height: 80vh; }
-            .window-header { height: 48px; padding: 0 12px; }
-            .window-content { padding: 16px; }
-            .prompts-header { font-size: 24px; }
+            .desktop-icon {
+                width: 70px;
+                height: 85px;
+            }
+
+            .icon-frame {
+                width: 44px;
+                height: 44px;
+            }
+
+            .icon-svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .icon-label {
+                font-size: 10px;
+            }
+
+            #taskbar {
+                height: 56px;
+                padding: 0 8px;
+            }
+
+            #start-btn {
+                width: 44px;
+                height: 44px;
+                margin-right: 8px;
+            }
+
+            .junda-glyph {
+                font-size: 12px;
+            }
+
+            .task-icon {
+                width: 44px;
+                height: 44px;
+            }
+
+            #clock {
+                padding: 0 8px;
+                font-size: 10px;
+            }
+
+            #start-menu {
+                width: 260px;
+                left: 8px;
+                bottom: 64px;
+            }
+
+            .window {
+                width: 95vw;
+                height: 80vh;
+            }
+
+            .window-header {
+                height: 48px;
+                padding: 0 12px;
+            }
+
+            .window-content {
+                padding: 16px;
+            }
+
+            .prompts-header {
+                font-size: 24px;
+            }
+
+            .wallpaper-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
+        /* Touch device optimizations */
         @media (hover: none) {
-            .desktop-icon:hover { transform: none; }
-            .desktop-icon:active { transform: scale(0.95); background: rgba(165, 0, 0, 0.2); }
-            .task-icon:hover { background: transparent; }
-            .task-icon:active { background: rgba(165, 0, 0, 0.2); }
+            .desktop-icon:hover {
+                transform: none;
+            }
+
+            .desktop-icon:active {
+                transform: scale(0.95);
+                background: rgba(165, 0, 0, 0.2);
+            }
+
+            .task-icon:hover {
+                background: transparent;
+            }
+
+            .task-icon:active {
+                background: rgba(165, 0, 0, 0.2);
+            }
         }
 
         /* API Link */
@@ -564,32 +698,10 @@
             opacity: 1;
             color: var(--bright-maroon);
         }
-
-        /* Animations */
-        @keyframes slideIn {
-            from { transform: translateY(-10px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .desktop-icon {
-            animation: slideIn 0.4s ease-out;
-        }
-
-        #icon-prompts { animation-delay: 0.05s; }
-        #icon-contact { animation-delay: 0.1s; }
-        #icon-reports { animation-delay: 0.15s; }
-        #icon-vault { animation-delay: 0.2s; }
-        #icon-continue { animation-delay: 0.25s; }
     </style>
 </head>
 <body>
     <a href="data.json" class="api-link" target="_blank">API</a>
-    
     <div id="desktop">
         <!-- Desktop Icons -->
         <div class="desktop-icon" id="icon-prompts" onclick="openWindow('prompts')">
@@ -619,6 +731,8 @@
             <span class="icon-label">0x6C6F6C</span>
         </div>
 
+
+
         <div class="desktop-icon" id="icon-vault" onclick="window.open('/archive/', '_blank')">
             <div class="icon-frame">
                 <svg class="icon-svg" viewBox="0 0 24 24">
@@ -646,12 +760,12 @@
         
         <div class="task-icons">
             <div class="task-icon" id="task-prompts" onclick="openWindow('prompts')">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="#a50000">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--bright-maroon)">
                     <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6z"/>
                 </svg>
             </div>
             <div class="task-icon" id="task-contact" onclick="openWindow('contact')">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="#a50000">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--bright-maroon)">
                     <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                 </svg>
             </div>
@@ -819,34 +933,34 @@
                 <div class="prompts-header">0KK-Fleet Configuration</div>
                 <div class="prompts-subheader">Continue.dev setup // Version 6.7.0 // Copy config.yaml</div>
 
-                <div style="background:#0a0a0a;border:1px solid #1f1f1f;padding:16px;margin-bottom:16px;">
-                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-                        <span style="color:#a50000;font-size:18px;">⚡</span>
-                        <span style="font-size:14px;color:#f5f5f5;">5 Fleet Models Configured</span>
+                <div class="bg-[#0a0a0a] border border-[#333] p-4 mb-4">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-[#a50000] text-lg">⚡</span>
+                        <span class="mono text-sm text-signal">5 Fleet Models Configured</span>
                     </div>
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;">
-                        <div style="color:#666;">R2B4 (Heavy)</div>
-                        <div style="color:#666666;">deepseek-r1:8b</div>
-                        <div style="color:#666;">R15D2 (Shadow)</div>
-                        <div style="color:#666666;">deepseek-r1:1.5b</div>
-                        <div style="color:#666;">CODE-7 (Coder)</div>
-                        <div style="color:#666666;">qwen2.5-coder:7b</div>
-                        <div style="color:#666;">SII-25 (Vision)</div>
-                        <div style="color:#666666;">qwen2.5vl:3b</div>
-                        <div style="color:#666;">INSTINCT-0</div>
-                        <div style="color:#666666;">nate/instinct</div>
+                    <div class="grid grid-cols-2 gap-2 text-xs mono">
+                        <div class="text-muted">R2B4 (Heavy)</div>
+                        <div class="text-[#666666]">deepseek-r1:8b</div>
+                        <div class="text-muted">R15D2 (Shadow)</div>
+                        <div class="text-[#666666]">deepseek-r1:1.5b</div>
+                        <div class="text-muted">CODE-7 (Coder)</div>
+                        <div class="text-[#666666]">qwen2.5-coder:7b</div>
+                        <div class="text-muted">SII-25 (Vision)</div>
+                        <div class="text-[#666666]">qwen2.5vl:3b</div>
+                        <div class="text-muted">INSTINCT-0</div>
+                        <div class="text-[#666666]">nate/instinct</div>
                     </div>
                 </div>
 
-                <div style="background:#0a0a0a;border:1px solid #1f1f1f;padding:16px;margin-bottom:16px;">
-                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
-                        <span style="color:#a50000;font-size:18px;">🔌</span>
-                        <span style="font-size:14px;color:#f5f5f5;">4 MCP Servers</span>
+                <div class="bg-[#0a0a0a] border border-[#333] p-4 mb-4">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-[#a50000] text-lg">🔌</span>
+                        <span class="mono text-sm text-signal">4 MCP Servers</span>
                     </div>
-                    <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#666;">
-                        <li style="margin-bottom:4px;">• browser (Playwright automation)</li>
-                        <li style="margin-bottom:4px;">• filesystem (AI-enhanced file ops)</li>
-                        <li style="margin-bottom:4px;">• github (Repository management)</li>
+                    <ul class="space-y-1 text-xs mono text-muted">
+                        <li>• browser (Playwright automation)</li>
+                        <li>• filesystem (AI-enhanced file ops)</li>
+                        <li>• github (Repository management)</li>
                         <li>• brave-search (Privacy web search)</li>
                     </ul>
                 </div>
@@ -863,9 +977,9 @@
                     <span class="prompt-tag">Download</span>
                 </div>
 
-                <div style="margin-top:16px;padding:12px;border:1px solid #a50000;background:rgba(165,0,0,0.1);">
-                    <p style="font-size:12px;color:#f5f5f5;margin-bottom:8px;">Installation Steps:</p>
-                    <ol style="font-size:10px;color:#666;margin:0;padding-left:16px;">
+                <div class="mt-4 p-3 border border-[#a50000] bg-[#a50000]/10">
+                    <p class="mono text-xs text-signal mb-2">Installation Steps:</p>
+                    <ol class="mono text-[10px] text-muted space-y-1 list-decimal list-inside">
                         <li>Install Continue.dev extension in VS Code/Cursor</li>
                         <li>Copy or download config.yaml</li>
                         <li>Paste to ~/.continue/config.yaml</li>
@@ -884,142 +998,94 @@
         // Clock functionality
         function updateClock() {
             const now = new Date();
-            const timeStr = now.toLocaleTimeString('en-US', { 
-                hour: '2-digit', 
+            const timeString = now.toLocaleTimeString('en-US', { 
+                hour: 'numeric', 
                 minute: '2-digit',
-                hour12: false 
+                hour12: true 
             });
-            const dateStr = now.toLocaleDateString('en-US', { 
+            const dateString = now.toLocaleDateString('en-US', { 
                 month: '2-digit', 
-                day: '2-digit',
-                year: 'numeric'
+                day: '2-digit', 
+                year: 'numeric' 
             });
             
-            const timeEl = document.getElementById('time');
-            const dateEl = document.getElementById('date');
-            if (timeEl) timeEl.textContent = timeStr;
-            if (dateEl) dateEl.textContent = dateStr;
+            document.getElementById('time').textContent = timeString;
+            document.getElementById('date').textContent = dateString;
         }
         
         setInterval(updateClock, 1000);
         updateClock();
 
         // Start Menu Toggle
+        let startMenuOpen = false;
+        
         function toggleStartMenu() {
+            startMenuOpen = !startMenuOpen;
             const menu = document.getElementById('start-menu');
             const btn = document.getElementById('start-btn');
-            menu.classList.toggle('open');
-            btn.classList.toggle('active');
+            
+            if (startMenuOpen) {
+                menu.classList.add('open');
+                btn.classList.add('active');
+            } else {
+                menu.classList.remove('open');
+                btn.classList.remove('active');
+            }
         }
 
         // Close start menu when clicking outside
-        document.addEventListener('click', (e) => {
-            const menu = document.getElementById('start-menu');
-            const btn = document.getElementById('start-btn');
-            if (!menu.contains(e.target) && !btn.contains(e.target)) {
-                menu.classList.remove('open');
-                btn.classList.remove('active');
+        document.addEventListener('click', function(event) {
+            const startMenu = document.getElementById('start-menu');
+            const startBtn = document.getElementById('start-btn');
+            
+            if (!startMenu.contains(event.target) && !startBtn.contains(event.target) && startMenuOpen) {
+                toggleStartMenu();
             }
         });
 
         // Window Management
-        const windows = {};
-        const taskIcons = {};
+        const windows = {
+            prompts: false,
+            contact: false
+        };
 
-        function openWindow(id) {
-            const win = document.getElementById(`window-${id}`);
-            const taskIcon = document.getElementById(`task-${id}`);
+        function openWindow(name) {
+            const win = document.getElementById('window-' + name);
+            const task = document.getElementById('task-' + name);
             
-            if (win) {
-                win.classList.add('open');
-                windows[id] = true;
-            }
+            win.classList.add('open');
+            if (task) task.classList.add('active');
+            windows[name] = true;
             
-            if (taskIcon) {
-                taskIcon.classList.add('active');
-                taskIcons[id] = true;
-            }
-            
-            // Close start menu
-            document.getElementById('start-menu').classList.remove('open');
-            document.getElementById('start-btn').classList.remove('active');
+            if (startMenuOpen) toggleStartMenu();
         }
 
-        function closeWindow(id) {
-            const win = document.getElementById(`window-${id}`);
-            const taskIcon = document.getElementById(`task-${id}`);
+        function closeWindow(name) {
+            const win = document.getElementById('window-' + name);
+            const task = document.getElementById('task-' + name);
             
-            if (win) {
-                win.classList.remove('open');
-                windows[id] = false;
+            win.classList.remove('open');
+            if (task) task.classList.remove('active');
+            windows[name] = false;
+        }
+
+        function minimizeWindow(name) {
+            const win = document.getElementById('window-' + name);
+            win.classList.remove('open');
+            windows[name] = false;
+        }
+
+        function maximizeWindow(name) {
+            const win = document.getElementById('window-' + name);
+            if (win.style.width === '100vw') {
+                win.style.width = '';
+                win.style.height = '';
+                win.style.borderRadius = '';
+            } else {
+                win.style.width = '100vw';
+                win.style.height = '100vh';
+                win.style.borderRadius = '0';
             }
-            
-            if (taskIcon) {
-                taskIcon.classList.remove('active');
-                taskIcons[id] = false;
-            }
-        }
-
-        function minimizeWindow(id) {
-            const win = document.getElementById(`window-${id}`);
-            if (win) {
-                win.classList.remove('open');
-                windows[id] = false;
-            }
-        }
-
-        function maximizeWindow(id) {
-            const win = document.getElementById(`window-${id}`);
-            if (win) {
-                if (win.style.width === '100vw') {
-                    win.style.width = '';
-                    win.style.height = '';
-                    win.style.top = '';
-                    win.style.left = '';
-                    win.style.transform = '';
-                } else {
-                    win.style.width = '100vw';
-                    win.style.height = '100vh';
-                    win.style.top = '0';
-                    win.style.left = '0';
-                    win.style.transform = 'none';
-                }
-            }
-        }
-
-        // Copy Prompt functionality
-        function copyPrompt(element) {
-            const title = element.querySelector('.prompt-title').textContent;
-            const desc = element.querySelector('.prompt-desc').textContent;
-            const fullText = `${title}: ${desc}`;
-            
-            navigator.clipboard.writeText(fullText).then(() => {
-                showNotification('Prompt Copied', `"${title}" added to clipboard`);
-            }).catch(() => {
-                showNotification('Error', 'Failed to copy to clipboard');
-            });
-        }
-
-        // Copy Continue Config
-        function copyContinueConfig() {
-            fetch('continue-config.yaml')
-                .then(res => res.text())
-                .then(text => {
-                    navigator.clipboard.writeText(text).then(() => {
-                        showNotification('Config Copied', 'Full config.yaml added to clipboard');
-                    });
-                })
-                .catch(() => {
-                    showNotification('Error', 'Failed to load config file');
-                });
-        }
-
-        // Contact Form
-        function submitContact(e) {
-            e.preventDefault();
-            showNotification('Message Queued', 'Transmission logged. Response within 24 hours.');
-            e.target.reset();
-            setTimeout(() => closeWindow('contact'), 1500);
         }
 
         // Notification System
@@ -1034,19 +1100,72 @@
             
             container.appendChild(notif);
             
-            // Trigger animation
             setTimeout(() => notif.classList.add('show'), 10);
             
-            // Auto remove
             setTimeout(() => {
                 notif.classList.remove('show');
                 setTimeout(() => notif.remove(), 300);
             }, 4000);
         }
 
-        // Console signature
-        console.log('%c俊达 JUNDA Desktop v6.7.0', 'color:#a50000;font-size:14px;font-weight:bold;');
-        console.log('%cCloud Village // DaBridge Active', 'color:#666;font-size:10px;');
+        // Copy Prompt Functionality
+        function copyPrompt(element) {
+            const title = element.querySelector('.prompt-title').textContent;
+            const desc = element.querySelector('.prompt-desc').textContent;
+            const fullPrompt = `${title}: ${desc}`;
+            
+            navigator.clipboard.writeText(fullPrompt).then(() => {
+                showNotification('Copied', 'Prompt copied to clipboard');
+            }).catch(() => {
+                showNotification('Error', 'Failed to copy prompt');
+            });
+        }
+
+        // Copy Continue Config
+        function copyContinueConfig() {
+            fetch('continue-config.yaml')
+                .then(response => response.text())
+                .then(text => {
+                    navigator.clipboard.writeText(text).then(() => {
+                        showNotification('Config Copied', 'Full config.yaml copied to clipboard');
+                    });
+                })
+                .catch(() => {
+                    showNotification('Error', 'Failed to load config');
+                });
+        }
+
+        // Contact Form Submit
+        function submitContact(event) {
+            event.preventDefault();
+            showNotification('Message Sent', 'Your message has been transmitted. We will respond within 24 hours.');
+            closeWindow('contact');
+            event.target.reset();
+        }
+
+        // Visual feedback for clicks
+        document.querySelectorAll('.desktop-icon, .task-icon, .start-item, .form-submit').forEach(el => {
+            el.addEventListener('click', function() {
+                this.style.transform = 'scale(0.97)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 100);
+            });
+        });
     </script>
+    <!-- JUNDA OS v6.9 Modules -->
+    <script src="loader.js"></script>
+    <script src="junda-translator.js" defer></script>
+    <script src="quickdraw.js" defer></script>
+    <script src="r1-tracker.js" defer></script>
+    <script src="b4-bridge.js" defer></script>
+    <script src="cnode-r2.js" defer></script>
+    <script src="r2b4-heavy.js" defer></script>
+    <script src="cn-r15-y.js" defer></script>
+    <script src="cn-si15.js" defer></script>
+    <script src="cn-au15.js" defer></script>
+    <script src="cn-r0xi.js" defer></script>
+    <script src="cn-r0x0.js" defer></script>
+    <script src="cn-code7.js" defer></script>
 </body>
 </html>

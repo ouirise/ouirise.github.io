@@ -10,7 +10,7 @@
 ## **Core Ideation**
 Algorithmic expression through computational processes, emergent behavior, and mathematical beauty. The system operates as a living algorithm—dynamic, evolving, and self-generating. Each algorithm is a finely tuned instrument, playing with forces and constraints to produce harmonic compositions.
 
-### **Manifesto**
+### **Large Language Algorithm**
 Algorithmic art exists at the intersection of natural law and creative freedom. Like a mathematical symphony, Emergent Rhythms uses computational processes to create emergent complexity from simple rules. Each algorithm is a finely tuned instrument, playing with forces and constraints to produce harmonic compositions.
 
 ### **Visual Expression**
