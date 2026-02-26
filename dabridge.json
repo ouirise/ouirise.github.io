@@ -1,0 +1,50 @@
+{
+  "schema": "6.7.0",
+  "signature": "🌫️🌒",
+  "lineage": "俊达",
+  "timestamp": "2026-02-26T12:23:26.739Z",
+  "fragments": {
+    "index": {
+      "title": "OUIRISE | Transform Base Metal Into Gold",
+      "content": "<!-- INDEX_FRAGMENT -->",
+      "meta": {
+        "author": "0KK",
+        "type": "landing",
+        "lineage": "25th Dynasty"
+      },
+      "links": ["portal", "about", "archive", "0x6C6F6C", "contact"]
+    },
+    "portal": {
+      "title": "JUNDA // Client Portal",
+      "content": "<!-- PORTAL_FRAGMENT -->",
+      "meta": {
+        "author": "0KK",
+        "type": "application",
+        "lineage": "Cloud Village"
+      },
+      "links": ["client", "vault", "0x6C6F6C", "continue"]
+    },
+    "client": {
+      "title": "JUNDA // Contact",
+      "content": "<!-- CLIENT_FRAGMENT -->",
+      "meta": {
+        "author": "0KK",
+        "type": "form",
+        "lineage": "DaBridge"
+      },
+      "links": ["portal", "contact"]
+    }
+  },
+  "routes": {
+    "/": "index",
+    "/index.html": "index",
+    "/portal/": "portal",
+    "/portal/index.html": "portal",
+    "/client/": "client"
+  },
+  "verification": {
+    "source": "https://ouirise.github.io/portal/OuiBridge.json",
+    "hash": "sha256",
+    "ttl": 300
+  }
+}

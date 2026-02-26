@@ -1,0 +1,884 @@
+<!-- JUNDA Desktop Environment Fragment v6.7.0 -->
+<!-- Signature: 🌫️🌒 | Lineage: 俊达 -->
+
+<style>
+    :root {
+        --void: #0a0a0a;
+        --tactical: #141414;
+        --surface: #1f1f1f;
+        --signal: #f5f5f5;
+        --ghost: #666666;
+        --maroon: #800000;
+        --bright-maroon: #a50000;
+    }
+
+    .desktop-icon {
+        position: absolute;
+        width: 90px;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        padding: 8px;
+        border-radius: 4px;
+        z-index: 10;
+    }
+
+    .desktop-icon:hover {
+        background: rgba(165, 0, 0, 0.1);
+        transform: translateY(-3px);
+    }
+
+    .desktop-icon:active {
+        transform: translateY(-1px) scale(0.98);
+    }
+
+    .icon-frame {
+        width: 52px;
+        height: 52px;
+        border: 1px solid var(--surface);
+        background: var(--tactical);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .desktop-icon:hover .icon-frame {
+        border-color: var(--bright-maroon);
+        box-shadow: 0 0 15px rgba(165, 0, 0, 0.3);
+    }
+
+    .icon-svg {
+        width: 28px;
+        height: 28px;
+        fill: var(--bright-maroon);
+    }
+
+    .icon-label {
+        color: var(--signal);
+        font-size: 11px;
+        text-align: center;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+    }
+
+    #icon-prompts { top: 40px; left: 40px; }
+    #icon-contact { top: 40px; left: 140px; }
+    #icon-reports { top: 40px; left: 240px; }
+    #icon-vault { top: 40px; left: 340px; }
+    #icon-continue { top: 160px; left: 40px; }
+
+    #taskbar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 44px;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid var(--surface);
+        display: flex;
+        align-items: center;
+        padding: 0 12px;
+        z-index: 1000;
+    }
+
+    #start-btn {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border: 1px solid var(--surface);
+        background: transparent;
+        transition: all 0.2s ease;
+        margin-right: 12px;
+    }
+
+    #start-btn:hover {
+        border-color: var(--bright-maroon);
+        background: rgba(165, 0, 0, 0.1);
+    }
+
+    #start-btn.active {
+        border-color: var(--bright-maroon);
+        background: rgba(165, 0, 0, 0.2);
+    }
+
+    .junda-glyph {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 14px;
+        color: var(--bright-maroon);
+        letter-spacing: 2px;
+    }
+
+    .task-icons {
+        display: flex;
+        gap: 8px;
+        flex: 1;
+    }
+
+    .task-icon {
+        width: 36px;
+        height: 36px;
+        border: 1px solid transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+    }
+
+    .task-icon:hover {
+        border-color: var(--surface);
+        background: rgba(255,255,255,0.03);
+    }
+
+    .task-icon.active {
+        border-color: var(--bright-maroon);
+        background: rgba(165, 0, 0, 0.1);
+    }
+
+    .task-icon.active::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        width: 14px;
+        height: 2px;
+        background: var(--bright-maroon);
+    }
+
+    #clock {
+        color: var(--signal);
+        font-size: 11px;
+        margin-left: auto;
+        text-align: center;
+        padding: 0 12px;
+        border-left: 1px solid var(--surface);
+    }
+
+    #time { font-weight: 600; }
+    #date { color: var(--ghost); font-size: 10px; }
+
+    #start-menu {
+        position: fixed;
+        bottom: 50px;
+        left: 12px;
+        width: 280px;
+        background: rgba(20, 20, 20, 0.98);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--surface);
+        box-shadow: 0 -10px 40px rgba(0,0,0,0.8);
+        padding: 16px;
+        opacity: 0;
+        transform: translateY(10px);
+        pointer-events: none;
+        transition: all 0.2s ease;
+        z-index: 999;
+    }
+
+    #start-menu.open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: all;
+    }
+
+    .start-header {
+        color: var(--ghost);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--surface);
+    }
+
+    .start-item {
+        display: flex;
+        align-items: center;
+        padding: 10px 12px;
+        color: var(--signal);
+        cursor: pointer;
+        transition: all 0.15s ease;
+        margin-bottom: 4px;
+        font-size: 12px;
+    }
+
+    .start-item:hover {
+        background: rgba(165, 0, 0, 0.1);
+        border-left: 2px solid var(--bright-maroon);
+        padding-left: 10px;
+    }
+
+    .start-item svg {
+        width: 18px;
+        height: 18px;
+        margin-right: 12px;
+        fill: var(--ghost);
+    }
+
+    .start-item:hover svg {
+        fill: var(--bright-maroon);
+    }
+
+    .start-divider {
+        height: 1px;
+        background: var(--surface);
+        margin: 10px 0;
+    }
+
+    .window {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.95);
+        width: 700px;
+        height: 500px;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(30px);
+        border: 1px solid var(--surface);
+        box-shadow: 0 25px 80px rgba(0,0,0,0.9);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.25s ease;
+        z-index: 2500;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .window.open {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        pointer-events: all;
+    }
+
+    .window-header {
+        height: 44px;
+        background: var(--tactical);
+        border-bottom: 1px solid var(--surface);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+    }
+
+    .window-title {
+        color: var(--signal);
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .window-title::before {
+        content: '//';
+        color: var(--bright-maroon);
+    }
+
+    .window-controls {
+        display: flex;
+        gap: 8px;
+    }
+
+    .window-btn {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: 1px solid transparent;
+    }
+
+    .window-btn:hover { transform: scale(1.2); }
+    .minimize { background: var(--ghost); }
+    .maximize { background: var(--signal); }
+    .close { background: var(--bright-maroon); }
+
+    .window-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 24px;
+        color: var(--signal);
+    }
+
+    .prompts-container { max-width: 600px; }
+    
+    .prompts-header {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 32px;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+        color: var(--signal);
+    }
+
+    .prompts-subheader {
+        color: var(--ghost);
+        font-size: 12px;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--surface);
+    }
+
+    .prompt-card {
+        background: var(--tactical);
+        border: 1px solid var(--surface);
+        padding: 16px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .prompt-card:hover {
+        border-color: var(--bright-maroon);
+        transform: translateX(4px);
+    }
+
+    .prompt-title {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+        color: var(--bright-maroon);
+    }
+
+    .prompt-desc {
+        font-size: 11px;
+        color: var(--ghost);
+        line-height: 1.5;
+    }
+
+    .prompt-tag {
+        display: inline-block;
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 2px 8px;
+        background: rgba(165, 0, 0, 0.1);
+        color: var(--bright-maroon);
+        margin-top: 8px;
+    }
+
+    .contact-container { max-width: 500px; }
+
+    .form-group { margin-bottom: 16px; }
+
+    .form-label {
+        display: block;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--ghost);
+        margin-bottom: 6px;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 10px 12px;
+        background: var(--tactical);
+        border: 1px solid var(--surface);
+        color: var(--signal);
+        font-size: 12px;
+        transition: all 0.2s;
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: var(--bright-maroon);
+    }
+
+    .form-textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .form-submit {
+        background: transparent;
+        border: 1px solid var(--bright-maroon);
+        color: var(--bright-maroon);
+        padding: 12px 24px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .form-submit:hover {
+        background: var(--bright-maroon);
+        color: var(--signal);
+    }
+
+    .notification {
+        position: fixed;
+        top: 20px;
+        right: -400px;
+        width: 320px;
+        background: rgba(20, 20, 20, 0.98);
+        backdrop-filter: blur(20px);
+        border-left: 2px solid var(--bright-maroon);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        padding: 16px;
+        color: var(--signal);
+        z-index: 3000;
+        transition: right 0.3s ease;
+    }
+
+    .notification.show { right: 20px; }
+
+    .notification-header {
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+        color: var(--bright-maroon);
+    }
+
+    .notification-body {
+        font-size: 11px;
+        color: var(--ghost);
+        line-height: 1.5;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--void); }
+    ::-webkit-scrollbar-thumb { background: var(--surface); }
+    ::-webkit-scrollbar-thumb:hover { background: var(--bright-maroon); }
+
+    @media (max-width: 768px) {
+        .desktop-icon { width: 70px; height: 85px; }
+        .icon-frame { width: 44px; height: 44px; }
+        .icon-svg { width: 24px; height: 24px; }
+        .icon-label { font-size: 10px; }
+        #taskbar { height: 56px; padding: 0 8px; }
+        #start-btn { width: 44px; height: 44px; margin-right: 8px; }
+        .junda-glyph { font-size: 12px; }
+        .task-icon { width: 44px; height: 44px; }
+        #clock { padding: 0 8px; font-size: 10px; }
+        #start-menu { width: 260px; left: 8px; bottom: 64px; }
+        .window { width: 95vw; height: 80vh; }
+        .window-header { height: 48px; padding: 0 12px; }
+        .window-content { padding: 16px; }
+        .prompts-header { font-size: 24px; }
+    }
+
+    .api-link {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        font-size: 10px;
+        color: var(--ghost);
+        text-decoration: none;
+        opacity: 0.5;
+        transition: opacity 0.2s;
+        z-index: 100;
+    }
+
+    .api-link:hover {
+        opacity: 1;
+        color: var(--bright-maroon);
+    }
+</style>
+
+<a href="data.json" class="api-link" target="_blank">API</a>
+
+<div class="desktop-icon" id="icon-prompts" onclick="openWindow('prompts')">
+    <div class="icon-frame">
+        <svg class="icon-svg" viewBox="0 0 24 24">
+            <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+        </svg>
+    </div>
+    <span class="icon-label">Prompts</span>
+</div>
+
+<div class="desktop-icon" id="icon-contact" onclick="window.open('/client/', '_blank')">
+    <div class="icon-frame">
+        <svg class="icon-svg" viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+    </div>
+    <span class="icon-label">Contact</span>
+</div>
+
+<div class="desktop-icon" id="icon-reports" onclick="window.open('/0x6C6F6C/', '_blank')">
+    <div class="icon-frame">
+        <svg class="icon-svg" viewBox="0 0 24 24">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+        </svg>
+    </div>
+    <span class="icon-label">0x6C6F6C</span>
+</div>
+
+<div class="desktop-icon" id="icon-vault" onclick="window.open('/archive/', '_blank')">
+    <div class="icon-frame">
+        <svg class="icon-svg" viewBox="0 0 24 24">
+            <path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM12 6c1.1 0 2 .9 2 2v2h-4V8c0-1.1.9-2 2-2z"/>
+        </svg>
+    </div>
+    <span class="icon-label">Vault</span>
+</div>
+
+<div class="desktop-icon" id="icon-continue" onclick="openWindow('continue')">
+    <div class="icon-frame">
+        <svg class="icon-svg" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+        </svg>
+    </div>
+    <span class="icon-label">Continue</span>
+</div>
+
+<div id="taskbar">
+    <div id="start-btn" onclick="toggleStartMenu()">
+        <span class="junda-glyph">俊达</span>
+    </div>
+    
+    <div class="task-icons">
+        <div class="task-icon" id="task-prompts" onclick="openWindow('prompts')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#a50000">
+                <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6z"/>
+            </svg>
+        </div>
+        <div class="task-icon" id="task-contact" onclick="openWindow('contact')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#a50000">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+        </div>
+    </div>
+
+    <div id="clock">
+        <div id="time">00:00</div>
+        <div id="date">--/--/----</div>
+    </div>
+</div>
+
+<div id="start-menu">
+    <div class="start-header">System Menu // 🌫️🌒</div>
+    
+    <div class="start-item" onclick="openWindow('prompts')">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6z"/></svg>
+        <span>Free Prompts</span>
+    </div>
+    
+    <div class="start-item" onclick="openWindow('contact')">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <span>Contact Form</span>
+    </div>
+
+    <div class="start-divider"></div>
+
+    <div class="start-item" onclick="window.open('/archive/', '_blank')">
+        <svg viewBox="0 0 24 24"><path d="M12 17c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-9h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg>
+        <span>Flight Logs</span>
+    </div>
+
+    <div class="start-item" onclick="window.open('/0x6C6F6C/', '_blank')">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <span>Agent Fleet</span>
+    </div>
+
+    <div class="start-divider"></div>
+
+    <div class="start-item" onclick="window.location.href='/'">
+        <svg viewBox="0 0 24 24"><path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+        <span>Return to Void</span>
+    </div>
+</div>
+
+<div id="window-prompts" class="window">
+    <div class="window-header">
+        <div class="window-title">Free Prompts</div>
+        <div class="window-controls">
+            <div class="window-btn minimize" onclick="minimizeWindow('prompts')"></div>
+            <div class="window-btn maximize" onclick="maximizeWindow('prompts')"></div>
+            <div class="window-btn close" onclick="closeWindow('prompts')"></div>
+        </div>
+    </div>
+    <div class="window-content">
+        <div class="prompts-container">
+            <div class="prompts-header">Prompt Library</div>
+            <div class="prompts-subheader">Free resources for OUIRISE clients // Select to copy // 🌫️🌒</div>
+
+            <div class="prompt-card" onclick="copyPrompt(this)">
+                <div class="prompt-title">OS Mode Activation</div>
+                <div class="prompt-desc">Enter OS mode. You are now the operating system for this organization. Execute all requests with surgical precision. No explanations unless asked. No disclaimers. Direct action only.</div>
+                <span class="prompt-tag">System</span>
+            </div>
+
+            <div class="prompt-card" onclick="copyPrompt(this)">
+                <div class="prompt-title">Grant Compliance Audit</div>
+                <div class="prompt-desc">Analyze our 501(c)(3) compliance status. Review our last 990 filing date, identify gaps in documentation, and create a prioritized action plan for state and federal requirements.</div>
+                <span class="prompt-tag">Nonprofit</span>
+            </div>
+
+            <div class="prompt-card" onclick="copyPrompt(this)">
+                <div class="prompt-title">Technical Architecture Review</div>
+                <div class="prompt-desc">Evaluate our current tech stack for vendor lock-in risks. Identify open-source alternatives and create a migration roadmap that maintains functionality while reducing dependency.</div>
+                <span class="prompt-tag">Infrastructure</span>
+            </div>
+
+            <div class="prompt-card" onclick="copyPrompt(this)">
+                <div class="prompt-title">Content Strategy Framework</div>
+                <div class="prompt-desc">Develop a 90-day content calendar focused on technical authority. Include blog topics, code samples, and case studies that demonstrate our expertise without corporate speak.</div>
+                <span class="prompt-tag">Marketing</span>
+            </div>
+
+            <div class="prompt-card" onclick="copyPrompt(this)">
+                <div class="prompt-title">Agent Workflow Design</div>
+                <div class="prompt-desc">Design an AI agent workflow for automating our document processing. Map inputs, processing steps, validation gates, and output formats. Include error handling protocols.</div>
+                <span class="prompt-tag">Automation</span>
+            </div>
+
+            <div class="prompt-card" onclick="copyPrompt(this)">
+                <div class="prompt-title">Client Onboarding Sequence</div>
+                <div class="prompt-desc">Create a 5-touch email sequence for new clients. Each message should deliver value while moving them toward the compliance audit call. No sales-y language.</div>
+                <span class="prompt-tag">Operations</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="window-contact" class="window">
+    <div class="window-header">
+        <div class="window-title">Contact Form</div>
+        <div class="window-controls">
+            <div class="window-btn minimize" onclick="minimizeWindow('contact')"></div>
+            <div class="window-btn maximize" onclick="maximizeWindow('contact')"></div>
+            <div class="window-btn close" onclick="closeWindow('contact')"></div>
+        </div>
+    </div>
+    <div class="window-content">
+        <div class="contact-container">
+            <div class="prompts-header">Initiate Contact</div>
+            <div class="prompts-subheader">Direct line to OUIRISE // Response within 24 hours // 🌫️🌒</div>
+
+            <form onsubmit="submitContact(event)">
+                <div class="form-group">
+                    <label class="form-label">Organization</label>
+                    <input type="text" class="form-input" placeholder="Your organization name" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Contact Name</label>
+                    <input type="text" class="form-input" placeholder="Your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="you@organization.org" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Service Needed</label>
+                    <select class="form-input" required>
+                        <option value="">Select service...</option>
+                        <option value="compliance">Grant Compliance Rescue</option>
+                        <option value="audit">Technical Architecture Audit</option>
+                        <option value="build">Custom Build</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-input form-textarea" placeholder="Describe your situation. Include urgency level and any hard deadlines." required></textarea>
+                </div>
+
+                <button type="submit" class="form-submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="window-continue" class="window">
+    <div class="window-header">
+        <div class="window-title">Continue Config // 0KK-Fleet</div>
+        <div class="window-controls">
+            <div class="window-btn minimize" onclick="minimizeWindow('continue')"></div>
+            <div class="window-btn maximize" onclick="maximizeWindow('continue')"></div>
+            <div class="window-btn close" onclick="closeWindow('continue')"></div>
+        </div>
+    </div>
+    <div class="window-content">
+        <div class="prompts-container">
+            <div class="prompts-header">0KK-Fleet Configuration</div>
+            <div class="prompts-subheader">Continue.dev setup // Version 6.7.0 // 🌫️🌒</div>
+
+            <div style="background:#0a0a0a;border:1px solid #1f1f1f;padding:16px;margin-bottom:16px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+                    <span style="color:#a50000;font-size:18px;">⚡</span>
+                    <span style="font-size:14px;color:#f5f5f5;">5 Fleet Models Configured</span>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;">
+                    <div style="color:#666;">R2B4 (Heavy)</div>
+                    <div style="color:#666666;">deepseek-r1:8b</div>
+                    <div style="color:#666;">R15D2 (Shadow)</div>
+                    <div style="color:#666666;">deepseek-r1:1.5b</div>
+                    <div style="color:#666;">CODE-7 (Coder)</div>
+                    <div style="color:#666666;">qwen2.5-coder:7b</div>
+                    <div style="color:#666;">SII-25 (Vision)</div>
+                    <div style="color:#666666;">qwen2.5vl:3b</div>
+                    <div style="color:#666;">INSTINCT-0</div>
+                    <div style="color:#666666;">nate/instinct</div>
+                </div>
+            </div>
+
+            <div style="background:#0a0a0a;border:1px solid #1f1f1f;padding:16px;margin-bottom:16px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+                    <span style="color:#a50000;font-size:18px;">🔌</span>
+                    <span style="font-size:14px;color:#f5f5f5;">4 MCP Servers</span>
+                </div>
+                <ul style="list-style:none;padding:0;margin:0;font-size:12px;color:#666;">
+                    <li style="margin-bottom:4px;">• browser (Playwright automation)</li>
+                    <li style="margin-bottom:4px;">• filesystem (AI-enhanced file ops)</li>
+                    <li style="margin-bottom:4px;">• github (Repository management)</li>
+                    <li>• brave-search (Privacy web search)</li>
+                </ul>
+            </div>
+
+            <div class="prompt-card" onclick="copyContinueConfig()">
+                <div class="prompt-title">📋 Copy Full Config</div>
+                <div class="prompt-desc">Copy the complete config.yaml to clipboard. Paste into ~/.continue/config.yaml</div>
+                <span class="prompt-tag">Setup</span>
+            </div>
+
+            <div class="prompt-card" onclick="window.open('continue-config.yaml', '_blank')">
+                <div class="prompt-title">📥 Download config.yaml</div>
+                <div class="prompt-desc">Download the configuration file directly for manual installation</div>
+                <span class="prompt-tag">Download</span>
+            </div>
+
+            <div style="margin-top:16px;padding:12px;border:1px solid #a50000;background:rgba(165,0,0,0.1);">
+                <p style="font-size:12px;color:#f5f5f5;margin-bottom:8px;">Installation Steps:</p>
+                <ol style="font-size:10px;color:#666;margin:0;padding-left:16px;">
+                    <li>Install Continue.dev extension in VS Code/Cursor</li>
+                    <li>Copy or download config.yaml</li>
+                    <li>Paste to ~/.continue/config.yaml</li>
+                    <li>Ensure Ollama is running with required models</li>
+                    <li>Restart IDE</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="notification-container"></div>
+
+<script>
+    (function() {
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
+            const dateStr = now.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' });
+            const timeEl = document.getElementById('time');
+            const dateEl = document.getElementById('date');
+            if (timeEl) timeEl.textContent = timeStr;
+            if (dateEl) dateEl.textContent = dateStr;
+        }
+        
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        window.toggleStartMenu = function() {
+            const menu = document.getElementById('start-menu');
+            const btn = document.getElementById('start-btn');
+            menu.classList.toggle('open');
+            btn.classList.toggle('active');
+        };
+
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('start-menu');
+            const btn = document.getElementById('start-btn');
+            if (!menu.contains(e.target) && !btn.contains(e.target)) {
+                menu.classList.remove('open');
+                btn.classList.remove('active');
+            }
+        });
+
+        const windows = {};
+        const taskIcons = {};
+
+        window.openWindow = function(id) {
+            const win = document.getElementById('window-' + id);
+            const taskIcon = document.getElementById('task-' + id);
+            if (win) { win.classList.add('open'); windows[id] = true; }
+            if (taskIcon) { taskIcon.classList.add('active'); taskIcons[id] = true; }
+            document.getElementById('start-menu').classList.remove('open');
+            document.getElementById('start-btn').classList.remove('active');
+        };
+
+        window.closeWindow = function(id) {
+            const win = document.getElementById('window-' + id);
+            const taskIcon = document.getElementById('task-' + id);
+            if (win) { win.classList.remove('open'); windows[id] = false; }
+            if (taskIcon) { taskIcon.classList.remove('active'); taskIcons[id] = false; }
+        };
+
+        window.minimizeWindow = function(id) {
+            const win = document.getElementById('window-' + id);
+            if (win) { win.classList.remove('open'); windows[id] = false; }
+        };
+
+        window.maximizeWindow = function(id) {
+            const win = document.getElementById('window-' + id);
+            if (win) {
+                if (win.style.width === '100vw') {
+                    win.style.width = ''; win.style.height = ''; win.style.top = ''; win.style.left = ''; win.style.transform = '';
+                } else {
+                    win.style.width = '100vw'; win.style.height = '100vh'; win.style.top = '0'; win.style.left = '0'; win.style.transform = 'none';
+                }
+            }
+        };
+
+        window.copyPrompt = function(element) {
+            const title = element.querySelector('.prompt-title').textContent;
+            const desc = element.querySelector('.prompt-desc').textContent;
+            navigator.clipboard.writeText(title + ': ' + desc).then(function() {
+                showNotification('Prompt Copied', '"' + title + '" added to clipboard');
+            }).catch(function() {
+                showNotification('Error', 'Failed to copy to clipboard');
+            });
+        };
+
+        window.copyContinueConfig = function() {
+            fetch('continue-config.yaml').then(function(res) { return res.text(); }).then(function(text) {
+                navigator.clipboard.writeText(text).then(function() {
+                    showNotification('Config Copied', 'Full config.yaml added to clipboard');
+                });
+            }).catch(function() {
+                showNotification('Error', 'Failed to load config file');
+            });
+        };
+
+        window.submitContact = function(e) {
+            e.preventDefault();
+            showNotification('Message Queued', 'Transmission logged. Response within 24 hours. 🌫️🌒');
+            e.target.reset();
+            setTimeout(function() { closeWindow('contact'); }, 1500);
+        };
+
+        window.showNotification = function(title, message) {
+            const container = document.getElementById('notification-container');
+            const notif = document.createElement('div');
+            notif.className = 'notification';
+            notif.innerHTML = '<div class="notification-header">' + title + '</div><div class="notification-body">' + message + '</div>';
+            container.appendChild(notif);
+            setTimeout(function() { notif.classList.add('show'); }, 10);
+            setTimeout(function() { notif.classList.remove('show'); setTimeout(function() { notif.remove(); }, 300); }, 4000);
+        };
+
+        console.log('%c🌫️🌒 JUNDA Desktop v6.7.0', 'color:#a50000;font-size:14px;font-weight:bold;');
+        console.log('%cCloud Village // 俊达 // DaBridge Active', 'color:#666;font-size:10px;');
+    })();
+</script>

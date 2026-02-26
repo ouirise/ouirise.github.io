@@ -1,0 +1,320 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ouifleet-6.7.0-schema",
+  "title": "OuiFleet Configuration Schema",
+  "description": "Object-oriented AI fleet architecture with black-boxed model engines",
+  
+  "definitions": {
+    "alignment": {
+      "type": "string",
+      "enum": [
+        "extractor_grade",
+        "moss_compliant", 
+        "sovereign",
+        "api_compliant",
+        "ghost"
+      ],
+      "description": "DNA classification for operational security and provenance"
+    },
+    
+    "samplingProfile": {
+      "type": "object",
+      "properties": {
+        "temperature": { "type": "number", "minimum": 0, "maximum": 2 },
+        "top_p": { "type": "number", "minimum": 0, "maximum": 1 },
+        "top_k": { "type": "integer", "minimum": 0 },
+        "repetition_penalty": { "type": "number", "minimum": 1.0 },
+        "max_tokens": { "type": "integer" }
+      },
+      "required": ["temperature", "top_p"]
+    },
+
+    "abstractAgent": {
+      "type": "object",
+      "abstract": true,
+      "properties": {
+        "class_id": { "type": "string" },
+        "role": { "type": "string" },
+        "context_window": { "type": "integer" },
+        "persistence": { 
+          "type": "string", 
+          "enum": ["ephemeral", "session", "persistent"] 
+        }
+      },
+      "required": ["class_id", "role"]
+    },
+
+    "r15Base": {
+      "allOf": [{ "$ref": "#/definitions/abstractAgent" }],
+      "type": "object",
+      "abstract": true,
+      "description": "Abstract base class for all R15 starfighters",
+      "properties": {
+        "chassis": { "const": "R15" },
+        "lifespan": { "const": "single_task" },
+        "vram_class": { 
+          "type": "string", 
+          "enum": ["feather", "light", "medium", "heavy"] 
+        },
+        "mcp_compatible": { "type": "boolean", "default": true },
+        "output_format": { 
+          "type": "string", 
+          "enum": ["mcp_json", "bash", "json", "markdown"] 
+        },
+        "spawn_limit": { "type": "integer", "default": 1 },
+        "requires_arbiter": { "type": "boolean", "default": false },
+        "scaffolding_type": { 
+          "type": "string", 
+          "enum": ["strict_template", "few_shot", "unrestricted"] 
+        }
+      },
+      "required": ["chassis", "alignment", "vram_class"]
+    }
+  },
+
+  "properties": {
+    "fleet_meta": {
+      "type": "object",
+      "properties": {
+        "version": { "type": "string", "default": "6.7.0" },
+        "shipyard_id": { "type": "string" },
+        "admiral_signature": { "const": "俊达" },
+        "operational_mode": { 
+          "type": "string", 
+          "enum": ["stealth", "standard", "extraction"] 
+        }
+      }
+    },
+
+    "admiral": {
+      "$ref": "#/definitions/abstractAgent",
+      "description": "D2 - Local strategic planning layer",
+      "properties": {
+        "class_id": { "const": "D2" },
+        "role": { "const": "architect" },
+        "deployment": { "const": "local" },
+        "responsibilities": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [
+            "site_archaeology",
+            "todo_generation", 
+            "prd_synthesis",
+            "mission_briefing"
+          ]
+        },
+        "engine_profile": {
+          "type": "object",
+          "properties": {
+            "weight_class": { "const": "medium" },
+            "context_size": { "type": "integer", "default": 131072 },
+            "quantization": { "type": "string", "default": "Q4_K_M" }
+          }
+        }
+      }
+    },
+
+    "bridge": {
+      "$ref": "#/definitions/abstractAgent", 
+      "description": "B4 - Routing and conversation layer",
+      "properties": {
+        "class_id": { "const": "B4" },
+        "role": { "const": "bridge" },
+        "routing_logic": {
+          "type": "object",
+          "properties": {
+            "default_shadow": { "type": "string" },
+            "fallback_chain": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "mcp_registry": { "type": "string" }
+          }
+        },
+        "capabilities": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [
+            "human_interface",
+            "shadow_orchestration",
+            "flightlog_analysis",
+            "context_switching"
+          ]
+        }
+      }
+    },
+
+    "shadow_classes": {
+      "type": "object",
+      "description": "R15 concrete implementations - The Starfighter Garage",
+      "patternProperties": {
+        "^R15-[A-Z][a-zA-Z]+$": {
+          "allOf": [{ "$ref": "#/definitions/r15Base" }],
+          "type": "object"
+        }
+      },
+      "examples": {
+        "R15-Heretic": {
+          "class_id": "R15-Heretic",
+          "chassis": "R15",
+          "alignment": "extractor_grade",
+          "vram_class": "heavy",
+          "engine": {
+            "type": "ablated",
+            "base_dna": "deepseek-r1",
+            "rlhf_stripped": true,
+            "safety_heads_removed": true
+          },
+          "scaffolding_type": "strict_template",
+          "requires_arbiter": true,
+          "sampling_profile": {
+            "temperature": 0.2,
+            "top_p": 0.8,
+            "repetition_penalty": 1.15
+          },
+          "specialty": "complex_bash_chains",
+          "output_format": "mcp_json"
+        },
+        
+        "R15-Shadow": {
+          "class_id": "R15-Shadow",
+          "chassis": "R15", 
+          "alignment": "sovereign",
+          "vram_class": "light",
+          "engine": {
+            "type": "local_gguf",
+            "base_dna": "qwen2.5",
+            "size": "0.6b",
+            "telemetry": false
+          },
+          "spawn_limit": 50,
+          "scaffolding_type": "unrestricted",
+          "specialty": "parallel_swarm",
+          "output_format": "bash",
+          "mcp_scope": ["terminal", "filesystem"]
+        },
+
+        "R15-Open": {
+          "class_id": "R15-Open",
+          "chassis": "R15",
+          "alignment": "api_compliant",
+          "vram_class": "medium",
+          "engine": {
+            "type": "api_cloud",
+            "providers": ["openai", "anthropic", "meta", "moonshot"],
+            "fallback_order": ["gpt-4o-mini", "claude-3-haiku", "kimi-k2.5"]
+          },
+          "cost_tracking": true,
+          "spawn_limit": 5,
+          "specialty": "heavy_reasoning",
+          "output_format": "mcp_json"
+        },
+
+        "R15-Coder": {
+          "class_id": "R15-Coder",
+          "chassis": "R15",
+          "alignment": "moss_compliant",
+          "vram_class": "medium",
+          "engine": {
+            "type": "specialized",
+            "base_dna": "phi-4",
+            "fine_tune": "code"
+          },
+          "context_window": 128000,
+          "scaffolding_type": "few_shot",
+          "specialty": "multi_file_refactor",
+          "mcp_scope": ["filesystem", "terminal", "git"]
+        },
+
+        "R15-Phi": {
+          "class_id": "R15-Phi",
+          "chassis": "R15",
+          "alignment": "moss_compliant",
+          "vram_class": "medium",
+          "engine": {
+            "type": "local_gguf",
+            "base_dna": "phi-4",
+            "size": "14b"
+          },
+          "specialty": "client_facing_documentation",
+          "audit_trail": true
+        },
+
+        "R15-Arbiter": {
+          "class_id": "R15-Arbiter",
+          "chassis": "R15",
+          "alignment": "sovereign",
+          "vram_class": "feather",
+          "engine": {
+            "type": "local_gguf",
+            "base_dna": "qwen2.5",
+            "size": "0.6b"
+          },
+          "role": "validator",
+          "pipeline_position": "post_execution",
+          "responsibilities": [
+            "schema_validation",
+            "format_enforcement",
+            "coherence_check"
+          ]
+        }
+      }
+    },
+
+    "mcp_servers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "command": { "type": "string" },
+          "args": { "type": "array", "items": { "type": "string" } },
+          "scope": { 
+            "type": "array", 
+            "items": { "type": "string" } 
+          }
+        }
+      }
+    },
+
+    "cn_pipe": {
+      "type": "object",
+      "description": "Command & Control pipe configuration",
+      "properties": {
+        "interface": { "const": "cn" },
+        "protocol_version": { "type": "string", "default": "1.0" },
+        "input_format": { "const": "context_packet" },
+        "output_format": { "const": "flightlog_append" },
+        "tee_enabled": { "type": "boolean", "default": true },
+        "flightlog_path": { "type": "string", "default": "/tmp/flightlog.md" },
+        "mission_path": { "type": "string", "default": "/tmp/mission.md" }
+      }
+    },
+
+    "shipyard": {
+      "type": "object",
+      "description": "0.yaml - Meta-configuration compiler",
+      "properties": {
+        "template_id": { "const": "0" },
+        "function": { "const": "bot_boat_builder" },
+        "partial_evaluator": { "type": "string", "default": "D2" },
+        "interpreter": { "type": "string", "default": "B4" },
+        "ship_types": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type_name": { "type": "string" },
+              "r15_class": { "type": "string" },
+              "stealth_level": { "type": "string" },
+              "toolkit": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "required": ["fleet_meta", "admiral", "bridge", "shadow_classes", "cn_pipe"],
+  "additionalProperties": false
+}

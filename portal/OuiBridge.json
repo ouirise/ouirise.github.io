@@ -1,0 +1,31 @@
+{
+  "OuiBridge": {
+    "version": "6.7.0",
+    "signature": "🌫️🌒",
+    "lineage": "俊达",
+    "authority": "0x0",
+    "allowedRoutes": [
+      "/",
+      "/portal/",
+      "/client/",
+      "/about/",
+      "/archive/",
+      "/0x6C6F6C/",
+      "/contact/"
+    ],
+    "portaldabridge": {
+      "apps": {
+        "index": "/dabridge.json",
+        "portal": "/portal/dabridge.json",
+        "client": "/client/dabridge.json"
+      },
+      "verification": "strict",
+      "fallback": "https://ouirise.github.io/dabridge.json"
+    },
+    "cloudvillage": {
+      "status": "active",
+      "nodes": ["github-pages"],
+      "protocol": "ghost-loader"
+    }
+  }
+}
