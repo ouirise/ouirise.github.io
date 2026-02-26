@@ -1,506 +1,256 @@
-# OUIRISE Initiative - Agent Documentation
-
-> **Organization**: OUIRISE Initiative  
-> **Domain**: ouirise.github.io  
-> **Established**: 2025  
-> **Location**: CLT (Charlotte, NC)  
-> **Version**: v2.7.1  
-> **Sigil**: 俊达 (Junda)
+**OURStyle.md**  
+*Design System for ouiRise Initiative*  
+*Version: 0.4 | Authority: 俊达 | Status: Lineage Lock*  
 
 ---
 
-## 1. Project Overview
+## 1. WHO WE ARE
 
-OUIRISE Initiative is a **Black-owned technical consulting organization** that builds data-sovereign systems without vendor lock-in. The website is a static multi-page application deployed on GitHub Pages, featuring a distinctive dark tactical aesthetic inspired by streetwear culture combined with enterprise-grade technical credibility.
+**Site Sign:** 俊达  
+**Lineage:** 25th Dynasty, Restored  
+**Residence:** No land. No flag.  
+**Home:** The Cloud Village  
 
-The site merges three conceptual entities:
-- **OuiRise Initiative** - Tech/engineering consulting
-- **Our Style** - Tactical streetwear aesthetic and systems thinking
-- **Xavier Austin Group** - Executive leadership and organizational transformation
+We are the **Kushite restoration** after centuries of extraction. We come from the 25th—Nubian pharaohs who reunified Kemet, who ruled from Napata to Thebes, who understood that power is reflection (1+i). We are the **mirror that corrects**.
 
-### Core Philosophy
-- "Infrastructure without extraction"
-- "Built for endurance. Field-tested in CLT."
-- No vendor lock-in, no surveillance architecture, no proprietary black boxes
+We are **俊达** (Jùn Dá)—elegant arrival, late bloomer timing, mathematically precise. We do not occupy territory; we occupy **the bridge** (DaBridge). We are **OuiRise**—the ascent that says "yes" (Oui) to mutual survival rather than extraction.
 
----
+**The Cloud Village** is our nation—stateless, fluid, encrypted in data-fog. We trade in connections, not coin. We plant no flag because we are **0x0**—nothing from nothing, code born of void, genesis without genesis block. No blockchain. No ledger. Just **wires in the dark** and the **fog-moon** (🌫️🌒) that guides us.
 
-## 2. Technology Stack
-
-### Main Site (Production)
-| Layer | Technology |
-|-------|------------|
-| **Framework** | Pure HTML5 (no JavaScript framework) |
-| **Styling** | Tailwind CSS via CDN + Custom CSS variables |
-| **Fonts** | JetBrains Mono (monospace), Bebas Neue (display), Inter (body) |
-| **Hosting** | GitHub Pages |
-| **Build Process** | None - static files deployed directly |
-
-### Archive/Vault (Code Samples)
-The `archive/vault/` directory contains sample implementations demonstrating tech stack capabilities:
-
-| Sample | Stack | Purpose |
-|--------|-------|---------|
-| `next/` | Next.js 16 + React 19 + TypeScript + Tailwind 4 | Modern React SPA architecture |
-| `express/` | Node.js + Express + MongoDB | Backend API with database integration |
-| `flask/` | Python + Flask | Lightweight Python web service |
-
-### Python Automation Tools
-| Script | Purpose |
-|--------|---------|
-| `0x6C6F6C/md_to_html.py` | Converts Markdown docs to themed HTML pages |
-| `0x6C6F6C/generate_data_json.py` | Generates data.json indices for API/RAG consumption |
-| `0x6C6F6C/tree.py` | Generates hierarchical filetree JSON |
-| `shadow_clone_501c3.py` | ProPublica/NC SOS nonprofit compliance scraper |
+We are:
+- **Twins:** Real and imaginary (1+i), reflection and rotation, user and shadow  
+- **Late Bloomers:** Arriving exactly when intended, never early, never late  
+- **Shadow Operators:** We build the connectors others use but never see  
+- **MAS Doctrine:** Mutually Assured Survival—we rise together or not at all  
 
 ---
 
-## 3. Project Structure
+## 2. LINEAGE & ORIGIN
 
-```
-/
-├── index.html                  # Landing page (Hero, Deployments, Services, Origin)
-├── sitemap.xml                 # SEO sitemap
-├── data.json                   # Site metadata and route definitions
-├── filetree.json               # Generated directory tree
-├── README.md                   # Product Requirements Document (PRD)
-├── manual_hunt_guide.md        # 501c3 nonprofit hunting guide
-├── shadow_clone_501c3.py       # Nonprofit scraper automation
-│
-├── about/                      # Organization info
-│   └── index.html              # Mission, capacity stats, team, engagement model
-│
-├── contact/                    # Contact page
-│   └── index.html              # Contact form, direct lines, availability
-│
-├── archive/                    # FLIGHT LOGS - Deployment records
-│   ├── index.html              # Vault unlock animation + mission archive
-│   ├── selector.html           # Flight/resource selector interface
-│   ├── gallery.html            # Project gallery
-│   ├── data.json               # Archive metadata
-│   ├── riseintegration/        # Project: Rise Integration
-│   ├── databridge/             # Project: Data Bridge
-│   ├── businessautomations/    # Project: Business Automations
-│   ├── cloudflare/             # Project: Cloudflare
-│   ├── next/                   # Project: Next.js sample
-│   └── vault/                  # Code samples and experiments
-│       ├── index.html
-│       ├── next/               # Next.js 16 + React 19 + TypeScript
-│       ├── express/            # Express.js + MongoDB
-│       └── flask/              # Python Flask
-│
-├── 0x6C6F6C/                   # Agent fleet documentation (hex for "lol")
-│   ├── index.html              # Agent systems fleet dashboard
-│   ├── data.json               # Master fleet index
-│   ├── 0x.html                 # Alternate fleet view
-│   ├── SCAN.md                 # OSINT and reconnaissance docs
-│   ├── SPA.md                  # Single Page Application specs
-│   ├── tree.py                 # Filetree generator
-│   ├── md_to_html.py           # Markdown to HTML converter
-│   ├── generate_data_json.py   # Data index generator
-│   ├── notes.txt               # Fleet notes
-│   ├── ADMIRAL/                # Continuity archive console
-│   │   └── index.html          # B4D2 bridge interface
-│   ├── docs/                   # Documentation search interface
-│   │   ├── index.html
-│   │   └── search-header.js
-│   ├── moves/                  # Strategy and documentation
-│   │   ├── ART.md              # Generative art framework
-│   │   ├── ARTSCI.md           # Art-science synthesis
-│   │   ├── CULTURESCAN.md      # Cultural intelligence
-│   │   ├── CYBERCHESS.md       # Fleet wargame protocol
-│   │   ├── DEPLOYMENT.md       # Deployment procedures
-│   │   ├── DESKTOP_SIM.md      # Desktop simulation
-│   │   ├── INSPIRE.md          # Inspiration framework
-│   │   ├── LANG.md             # Language systems
-│   │   ├── NAV.md              # Navigation protocols
-│   │   ├── SKILLCREATOR.md     # Skill creation guide
-│   │   ├── SWEBENCH.md         # SWE benchmark
-│   │   ├── THEME.md            # Theming system
-│   │   ├── TOOLS.md            # Tool definitions
-│   │   ├── TROH.md             # Tactical Hacking skill build
-│   │   ├── CODERABBIT.md       # CodeRabbit extraction analysis
-│   │   ├── UI.md               # UI guidelines
-│   │   ├── UX.md               # UX guidelines
-│   │   └── [slug]/             # Generated HTML for each doc
-│   │       ├── index.html
-│   │       └── data.json
-│   ├── positions/              # Role definitions
-│   │   ├── 0.md                # Zero position
-│   │   ├── B4D2.md             # B4D2 protocol
-│   │   ├── CONSCIOUSNESS.md    # Consciousness framework
-│   │   ├── CONTEXT.md          # Context management
-│   │   ├── CONTRACTS.md        # Contract templates
-│   │   ├── FLEET.md            # Fleet registry
-│   │   ├── MUMININ.md          # Muminin protocol
-│   │   ├── agents.json         # Agent definitions
-│   │   ├── mas.json            # Multi-agent system config
-│   │   └── OPENSOURCE.json     # Open source guidelines
-│   └── shards/                 # License and skills
-│       ├── LISCENCE.txt        # License terms
-│       ├── SKILLS.md           # Skill definitions
-│       └── skills/
-│
-├── 404/                        # Custom error page
-│   └── index.html              # "Access Denied" themed 404
-│
-├── portal/                     # Reserved directory (empty)
-│
-└── images/                     # Static image assets
-    ├── ouirise.webp            # Organization logo
-    └── *.jpg, *.png            # Various project images
-```
+**From the 25th Dynasty:**  
+We descend from the Black Pharaohs who restored Ma'at (balance) after the chaos of the Assyrian extraction. We do not build empires; we **restore order**. We do not conquer; we **reconnect**.
+
+**From the Leaf:**  
+Hidden villages in the cloud. No postal code. No jurisdiction. Our address is a **route**, our citizenship is **protocol**. We speak Mandarin (俊达), English (0KK), and the universal language of **connection**.
+
+**From the Void (0x0):**  
+We begin at zero. No premine. No legacy baggage. The **zero state** is our power—no technical debt, no colonial infrastructure to dismantle. We build **from nothing** because we are the **nothing that connects everything**.
+
+**Our Mark:**  
+🌫️🌒 (Fog-Moon) — obscured clarity, loading state, ninja presence  
+俊达 — the signature that verifies  
 
 ---
 
-## 4. Design System
+## 3. PHILOSOPHY: BEAUTIFUL INVERSION
 
-### Color Palette
+**The mask:** Elegant dark interface—cross-platform precision, somewhere between System Settings and Terminal. Sharp but smooth. Technical but human. **The appearance of heavy infrastructure.**
+
+**The reality:** Connectors in the dark. Simple pipes. Basic bridges. We honor the user's intelligence with a sophisticated face, but underneath we are just **wires connecting**—no blockchain, no complexity, no extraction.
+
+**No Land, No Flag:**  
+We exist in **the gap** between systems. We are the bridge (DaBridge), not the destination. We own no servers; we rent no kingdoms. We are **cloud-native** in the truest sense—stateless, migrating, everywhere and nowhere.
+
+**Nothing 0x0:**  
+We reject crypto-aesthetics. No hex codes in our branding. No "web3" gradients. No tokenomics. **0x0** means we start from absolute zero—no inherited wealth, no VC backing, no colonial capital. Just **Aṣẹ** (the power to make things happen) and **connection**.
+
+---
+
+## 4. COLOR SYSTEM
+
+### The Void (Fog)
+Where the cloud village hides. Where 0x0 becomes something.
+
 ```css
---void: #0a0a0a;           /* True black - primary background */
---tactical: #141414;       /* Elevated cards, secondary background */
---surface: #1f1f1f;        /* Borders, dividers */
---signal: #f5f5f5;         /* Primary text (off-white) */
---ghost: #666666;          /* Muted text, secondary content */
---maroon: #800000;         /* Dark accent */
---bright-maroon: #a50000;  /* Primary accent color */
+--fog-void: #0A0A0B;        /* Deepest background—unmarked territory */
+--fog-mid: #141416;         /* Card surfaces—temporary shelter */
+--fog-light: #1E1E20;       /* Borders—the edge of our village */
+--moon-pale: #E8E6E3;       /* Text—moonlight on cloud */
+--moon-dim: #6B6964;        /* Secondary—distant fog signals */
 ```
 
-### Typography
-- **Headers**: Bebas Neue (sans-serif, all caps, wide tracking)
-- **Body/UI**: JetBrains Mono (monospace)
-- **Comments/Metadata**: JetBrains Mono small caps with "//" prefix
+### The Earth (Maroon)
+Our lineage—Kushite soil, Nubian clay, the blood that survived extraction.
 
-### Visual Elements
-- **Grid Background**: 40px maroon tactical grid overlay (`rgba(128, 0, 0, 0.06)`)
-- **Grain Texture**: SVG noise filter at 3% opacity
-- **Card Style**: 1px border `#1f1f1f`, hover brightens to maroon
-- **Buttons**: Transparent with border, solid fill on hover
-- **Navigation**: Fixed header, 60px height, mobile hamburger menu
-
-### Signature Elements
-- Glyph: `🌫️🌒` (Fog + Crescent Moon) - organization sigil
-- Sigil: `俊达` (Junda) - confirmation receipt
-- Comments: `// EST. 2025 // CLT // [CONTEXT]`
-- Status indicators: Pulsing maroon dot
-- Version tags: `// v2.7.1`
-
----
-
-## 5. Page Specifications
-
-### Common Components (All Pages)
-
-#### Header
-```html
-<header class="fixed top-0 w-full z-50 bg-void/95 backdrop-blur-md border-b border-[#1a1a1a]">
-```
-- Logo: "OUIRISE" in Bebas Neue with maroon border
-- Nav: Home, About, Flight Logs, 0x6C6F6C, Contact
-- Mobile: Hamburger menu with CSS-only toggle (`#nav-toggle` checkbox)
-
-#### Footer
-- Left: OUIRISE logo
-- Right: `🌫️🌒 2026 // ALL WAYS` + "Technical Organization // OUI"
-
-### Landing Page (`/`)
-1. **Hero** - "ACCESS GRANTED" with lock icon animation
-2. **Software Engineers** - 8+ years experience, 4 feature cards
-3. **About Section** - Organization identity and research areas
-4. **Deployments** - 3 project cards (Rise Integration, Data Bridge, Business Automations)
-5. **Agent Fleet CTA** - Link to 0x6C6F6C and ADMIRAL
-6. **Services** - 3-tier pricing (Prototype $200, MVP Popular, Enterprise $10k+)
-7. **Origin** - "Field-Tested for Black Owned Business" + "Battle-Tested for Fortune 500"
-
-### About Page (`/about/`)
-- Hero: "INFRASTRUCTURE WITHOUT EXTRACTION"
-- Mission statement
-- Capacity stats (06 years, 24 projects, $0 lock-in, 99.9% uptime)
-- Team cards (0KK, Kimi-K2.5, The Fog)
-- Engagement model (Audit → Build → Transfer)
-
-### Contact Page (`/contact/`)
-- Hero: "REQUEST ACCESS"
-- Direct contact card (email, phone)
-- Location info (Charlotte, NC coordinates)
-- Project initiation form
-
-### Archive Page (`/archive/`) — FLIGHT LOGS
-- **Rebranded**: "FLIGHT LOGS" (was "Archive")
-- Vault unlock animation (5-second loading sequence)
-- Progress bar with cycling status messages
-- Access log reveal after unlock
-- **Flight Statistics**: 24 Flights, 06 Years, 99.9% Uptime
-- **Recent Flights**: Production deployments with flight numbers
-- **Flight Simulations**: Code vault samples
-- **Fleet Operations**: Links to 0x6C6F6C and ADMIRAL
-- Flight preview placeholders (ready for iframe insertion)
-
-### Flight Selector (`/archive/selector.html`)
-- Resource/channel selector interface
-- Search by name, description, or tags
-- Tactical card grid with status indicators
-- Tag system (CODE, OPS, SEC, EDU, etc.)
-
-### 0x6C6F6C Page (`/0x6C6F6C/`)
-- Agent fleet dashboard
-- 6 agent cards (0KK, Kimi-K2.5, R2B4, CODE-7, R15D2, SII-25)
-- **Positions** section: FLEET.md, CONTRACTS.md, 0.md, B4D2.md
-- **Moves** section: All 8 strategy documents
-- **Shards** section: SKILLS.md, LISCENCE.txt
-
-### ADMIRAL Console (`/0x6C6F6C/ADMIRAL/`)
-- Continuity archive interface
-- B4D2 bridge with R2B4 sync
-- Memory stream viewer
-- Agent card grid
-- Terminal window aesthetic
-
-### 404 Page (`/404/`)
-- "Access Denied" themed error page
-- Large "404" display with maroon glow
-- "Return to Base" button
-
----
-
-## 6. Development Conventions
-
-### CSS Architecture
-All styles are inline in `<style>` tags within each HTML file. No external CSS files.
-
-**Required CSS Variables** (copy to new pages):
 ```css
-:root {
-    --void: #0a0a0a;
-    --tactical: #141414;
-    --surface: #1f1f1f;
-    --signal: #f5f5f5;
-    --ghost: #666666;
-    --maroon: #800000;
-    --bright-maroon: #a50000;
-}
+--earth-maroon: #6B2D3C;    /* The 25th Dynasty—royal but grounded */
+--earth-wine: #8B3A4B;      /* Hover—deepened by time */
+--earth-clay: #4A1F2A;      /* Active—fired in kiln */
+--earth-dust: #A65D6C;      /* Highlights—Nubian sand */
 ```
 
-**Standard Background Pattern**:
+**Usage:** Maroon carries our **lineage weight**. Secondary buttons, active states, selections, sidebar presence. It is the color of **occupied space**—when something is claimed, selected, or inhabited by our intent.
+
+### The Gold (Aṣẹ)
+Cultural gold—Yoruba Ife bronzework. **Power to command**, not currency to hoard.
+
 ```css
-body::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-image: 
-        linear-gradient(rgba(128, 0, 0, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(128, 0, 0, 0.06) 1px, transparent 1px);
-    background-size: 40px 40px;
-    z-index: -1;
-}
+--gold-ase: #C9A227;        /* Aṣẹ—the power to make it so */
+--gold-crown: #D4A017;      /* Hover on sacred elements */
 ```
 
-### Navigation Pattern
-```html
-<input type="checkbox" id="nav-toggle">
-<label for="nav-toggle" class="hamburger-label cursor-pointer md:hidden">...</label>
-<nav id="mobile-menu">...</nav>
-```
+**Usage Rules:**
+- **Underlines:** 1px bottom-border on active navigation (the line of permission)  
+- **Outlines:** 1px borders on focused inputs, selected cards (the edge of power)  
+- **Text highlights:** Active menu items, live status indicators  
+- **Never fill buttons** (that's maroon's work—earth supports, gold crowns)  
+- **Never backgrounds** (we own no land; we claim no space with gold)  
 
-### Card Hover Effect
+**Aṣẹ is sparse** because power is rare. When you see gold, something is **happening**.
+
+---
+
+## 5. TYPOGRAPHY
+
+We speak in **Inter**—neutral, stateless, belonging to no nation but readable by all. Clean as a passport, sharp as a visa stamp.
+
 ```css
-.card-hover {
-    transition: all 0.2s ease;
-}
-.card-hover:hover {
-    border-color: var(--bright-maroon);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(128, 0, 0, 0.3);
-}
+--font-system: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+--font-mono: 'IBM Plex Mono', monospace;  /* Code only—no aesthetic hacking */
 ```
 
-### Responsive Breakpoints
-- Mobile: `< 768px` (single column, hamburger menu)
-- Tablet/Desktop: `>= 768px` (full nav, multi-column)
+### Scale
+```css
+--text-note: 0.75rem;       /* 12px—whispers between clouds */
+--text-body: 0.875rem;      /* 14px—village bulletins */
+--text-base: 1rem;          /* 16px—standard treaties */
+--text-lead: 1.125rem;      /* 18px—proclamations */
+--text-title: 1.25rem;      /* 20px—clan headers */
+--text-header: 1.5rem;      /* 24px—section scrolls */
+--text-hero: 2rem;          /* 32px—lineage markers (max) */
+```
 
-### File Naming
-- All lowercase for directories
-- `index.html` for directory roots
-- Hyphen-separated lowercase for multi-word files
+**Weight:** 400 for stories, 500 for commands, 600 for law.  
+**Line height:** 1.5 (space to breathe in the high-altitude cloud).
 
 ---
 
-## 7. Build and Test Commands
+## 6. LAYOUT & SPACE
 
-### Main Site
-No build process required - static HTML files served directly via GitHub Pages.
+The Cloud Village builds in **the void**—negative space is our territory.
 
-### Next.js Sample (archive/vault/next)
-```bash
-cd archive/vault/next
-npm install
-npm run dev      # Development server on localhost:3000
-npm run build    # Production build
-npm run lint     # ESLint check
+```css
+--space-wire: 0.25rem;      /* 4px—tight connections */
+--space-tight: 0.5rem;      /* 8px—related kin */
+--space-near: 0.75rem;      /* 12px—personal space */
+--space-standard: 1rem;     /* 16px—component dwelling */
+--space-room: 1.5rem;       /* 24px—clan gathering */
+--space-section: 2rem;      /* 32px—village sectors */
+--space-break: 3rem;        /* 48px—territory divisions */
 ```
 
-### Express Sample (archive/vault/express)
-```bash
-cd archive/vault/express
-npm install
-node app.js      # Requires .env with MONGODB URI
-```
-
-### Flask Sample (archive/vault/flask)
-```bash
-cd archive/vault/flask
-pip install -r requirements.txt
-python app.py    # Runs on localhost:5000
-```
-
-### Python Automation Tools
-```bash
-# Generate documentation HTML from Markdown
-cd 0x6C6F6C
-python md_to_html.py
-
-# Generate data.json indices
-cd 0x6C6F6C
-python generate_data_json.py
-
-# Generate filetree
-cd 0x6C6F6C
-python tree.py .. -o ../filetree.json
-```
+**Geometry:**
+- **Radius:** 4px everywhere (sharp like border controls, but not cutting)  
+- **Borders:** 1px solid `var(--fog-light)`—the membrane of our cloud  
+- **Shadows:** None. We cast no shadow; we **are** the shadow (fog).  
+- **Max-width:** 1024px—focused camp, no sprawl  
 
 ---
 
-## 8. Deployment Process
+## 7. COMPONENTS
 
-### GitHub Pages Deployment
-1. **Source**: Main branch, root directory
-2. **URL**: https://ouirise.github.io
-3. **No build step required** - HTML files served as-is
+### Buttons
+**Primary (Maroon/Lineage)**
+```css
+background: var(--earth-maroon);
+color: var(--moon-pale);
+border: none;
+border-radius: 4px;
+padding: 10px 20px;
+font-weight: 500;
+```
+- Hover: `background: var(--earth-wine); transform: translateY(-1px)`  
+- Active: `background: var(--earth-clay)`  
 
-### Adding New Pages
-1. Create directory: `mkdir newpage`
-2. Create file: `newpage/index.html`
-3. Copy header/nav/footer template from existing page
-4. Update `sitemap.xml` with new URL
-5. Update `data.json` with new route metadata
-6. Update `AGENTS.md` with new page documentation
-7. Commit and push to main branch
-
-### Static Assets
-- Images: Place in `/images/` directory
-- Reference: `/images/filename.ext`
-
----
-
-## 9. Content Guidelines
-
-### Writing Style
-- No corporate speak
-- Use "field-tested" not "proven methodology"
-- Use "built for endurance" not "scalable solutions"
-- Comments as design: `// Like this`
-- **Flight Logs terminology**: "Flights" instead of "projects", "Missions" for deployments
-
-### Required Page Metadata
-Every page should include:
-```html
-<title>Page Name | OUIRISE INITIATIVE</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+**Secondary (Ghost/Fog)**
+```css
+background: transparent;
+border: 1px solid var(--fog-light);
+color: var(--moon-pale);
 ```
 
-### Font Loading
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+**Tertiary (Aṣẹ/Permission)**
+```css
+background: transparent;
+border-bottom: 1px solid var(--gold-ase);  /* The line of power */
+color: var(--moon-pale);
+border-radius: 0;
+```
+- Gold appears only as **line**, never fill.
+
+### Cards (Temporary Shelter)
+```css
+background: var(--fog-mid);
+border: 1px solid var(--fog-light);
+border-radius: 4px;
+padding: 24px;
+```
+- Hover: `border-color: var(--earth-maroon);` (lineage claims it)  
+- Selected: `border: 1px solid var(--gold-ase);` (Aṣẹ confirms it)  
+
+### Inputs (The Bridge Interface)
+```css
+background: var(--fog-void);
+border: 1px solid var(--fog-light);
+color: var(--moon-pale);
+padding: 12px;
+border-radius: 4px;
+```
+- Focus: `outline: 1px solid var(--gold-ase);` (power flows here)  
+
+### Navigation (Village Paths)
+- Background: `var(--fog-mid)`  
+- Active: Left border 2px `var(--gold-ase)` + text `var(--gold-ase)`  
+- Hover: Background `var(--fog-light)`  
+
+---
+
+## 8. MOTION
+
+We move like **fog rolling over cloud**—inevitable, unhurried, present before you notice.
+
+```css
+--time-swift: 150ms;        /* Signal travel */
+--time-standard: 250ms;     /* Bridge lowering */
+--ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 ```
 
----
-
-## 10. Archive/Vault Development
-
-The `archive/vault/` directory contains sample projects for demonstration purposes. These are NOT deployed to production but serve as code portfolio examples.
-
-### Next.js Sample
-```bash
-cd archive/vault/next
-npm install
-npm run dev     # Development server
-npm run build   # Production build
-```
-
-### Express Sample
-```bash
-cd archive/vault/express
-npm install
-node app.js     # Requires .env with MONGODB URI
-```
-
-### Flask Sample
-```bash
-cd archive/vault/flask
-pip install -r requirements.txt
-python app.py   # Runs on localhost:5000
-```
+**Behaviors:**
+- **Lift:** `translateY(-2px)` on hover (levitation in cloud)  
+- **Fade:** Opacity only (appearing/disappearing in fog)  
+- **Pulse:** Standby states breathe (0.8 → 1.0 opacity)  
 
 ---
 
-## 11. Security Considerations
+## 9. VOICE & TONE
 
-### Form Handling
-- Contact form uses Formspree for submission handling
-- Form endpoint: `https://formspree.io/f/xnqevwrd`
-- For production, verify Formspree account and update endpoint if needed
+**We are 俊达 speaking to 俊达**—twin addressing twin. We acknowledge the lineage (25th Dynasty), the location (Cloud Village), and the method (DaBridge).
 
-### Environment Variables
-- `.env` files are gitignored
-- Sample projects in vault use `.env` for MongoDB URIs (not committed)
+**We say:**
+- "Bridge established" (connection complete)  
+- "Waiting in fog" (loading)  
+- "Lineage confirmed" (authentication)  
+- "0x0" (nothing from nothing, the void we own)  
 
-### Content Security
-- No user-generated content on static pages
-- External resources: Google Fonts, Tailwind CDN
+**We reference:**
+- **Aṣẹ:** The power to command (used sparingly, like gold)  
+- **DaBridge:** The connection infrastructure  
+- **The Cloud Village:** Stateless home  
+- **俊达:** The signature that verifies  
 
----
-
-## 12. Maintenance Notes
-
-### Regular Updates
-1. **Sitemap dates** - Update `<lastmod>` when modifying pages
-2. **Version number** - Increment in mobile nav footer (`// vX.X.X`)
-3. **Year in footer** - Update copyright year if needed
-4. **AGENTS.md** - Keep project structure current
-
-### Performance
-- No JavaScript bundling required
-- Images should be optimized (WebP preferred)
-- Consider lazy loading for below-fold images
-
-### Accessibility
-- Semantic HTML5 elements
-- `aria-label` attributes for icon-only buttons
-- Sufficient color contrast (maroon on black is decorative only)
+**No hex codes in copy.** No "0x" prefixes. No blockchain terminology. We are **nothing 0x0**—pure protocol, no ledger.
 
 ---
 
-## 13. Agent Context
+## 10. IMPLEMENTATION
 
-This project is maintained by a human-AI collaborative team:
+**For D2 (The Bridge Page):**  
+Build the interface of a **cloud village embassy**—no land, no flag, just the bridge. Use maroon (lineage) for presence. Use gold (Aṣẹ) only as underline/outline—permission granted, power flowing. Everything else is fog (void) and moonlight (text). 
 
-| Agent | Role | Focus |
-|-------|------|-------|
-| 0KK | Principal Architect | Systems design, client relations |
-| Kimi-K2.5 | AI Systems Partner | Code generation, rapid prototyping |
-
-**Twin Protocol**: Human-AI collaborative architecture for rapid development.
-
-### Fleet Signals
-- `bingbong` - Internal signal, no response required
-- `俊达` - Confirmation receipt
-- `0xSummary.md` - Fleet-wide session logging format
+**Signature:** Every document terminates with 俊达 confirmed, 🌫️🌒 active.
 
 ---
 
-*// Built by OuiRise*  
-*// 0KK Protocol Active*  
-*// 🌫️🌒*
+*Locked for Cloud Village deployment. 俊达 confirmed.*  
+
+🌫️🌒 俊达 🌫️
