@@ -33,6 +33,11 @@
       "title": "Documentation // JUNDA OS",
       "content": "<div class='app-window'><div class='window-title'>JUNDA OS Documentation v6.9</div><div class='docs-content'><h3>CNODE Reference</h3><ul><li><b>CN-R15-Y</b>: Text/Context I/O (800MB)</li><li><b>CN-SI15</b>: Vision Parser (1.2GB)</li><li><b>CN-AU15</b>: Audio Input (900MB)</li><li><b>CN-R0XI</b>: ToolCalling MCP (1.1GB)</li><li><b>CN-R0X0</b>: Sharingan Audit (2.3GB)</li><li><b>CN-Code7</b>: Compiler/Builder (4.0GB)</li></ul><h3>Quick Commands</h3><code>R1C.status()</code> — System status<br><code>CNodeR2.route('status')</code> — Fast status<br><code>B4.deploy()</code> — Re-run deployment</div></div>",
       "meta": { "author": "0KK", "type": "docs", "cnode_count": 14 }
+    },
+    "code7": {
+      "title": "CODE-7 // Compiler Interface",
+      "content": "<div class='app-window'><div class='window-title'>CODE-7 v6.9</div><div class='code7-content'><div style='text-align:center;padding:40px;'><div style='font-size:64px;margin-bottom:20px;'>🦇</div><h2 style='font-family:Bebas Neue,sans-serif;font-size:32px;letter-spacing:3px;'>COMPILER / BUILDER</h2><p style='color:#666;margin:20px 0;'>One-shot deployment specialist</p><a href='code7.html' style='display:inline-block;padding:12px 24px;border:1px solid #a50000;color:#a50000;text-decoration:none;font-size:12px;text-transform:uppercase;letter-spacing:2px;'>Launch Interface</a></div></div></div>",
+      "meta": { "author": "0KK", "type": "builder", "memory": "4GB", "templates": 3 }
     }
   },
   "routes": {
@@ -43,6 +48,7 @@
     "/portal/?app=terminal": "terminal",
     "/portal/?app=archaeology": "archaeology",
     "/portal/?app=docs": "docs",
+    "/portal/?app=code7": "code7",
     "/portal/r-code7.md": "rbot-code7",
     "/portal/r-r1.md": "rbot-r1",
     "/portal/r-b4.md": "rbot-b4",
