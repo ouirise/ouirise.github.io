@@ -31,7 +31,7 @@
     },
     "docs": {
       "title": "Documentation // JUNDA OS",
-      "content": "<div class='app-window'><div class='window-title'>JUNDA OS Documentation v6.9</div><div class='docs-content'><h3>CNODE Reference</h3><ul><li><b>CN-R15-Y</b>: Text/Context I/O (800MB)</li><li><b>CN-SI15</b>: Vision Parser (1.2GB)</li><li><b>CN-AU15</b>: Audio Input (900MB)</li><li><b>CN-R0XI</b>: ToolCalling MCP (1.1GB)</li><li><b>CN-R0X0</b>: Sharingan Audit (2.3GB)</li><li><b>CN-Code7</b>: Compiler/Builder (4.0GB)</li></ul><h3>Quick Commands</h3><code>R1C.status()</code> — System status<br><code>CNodeR2.route('status')</code> — Fast status<br><code>B4.deploy()</code> — Re-run deployment</div></div>",
+      "content": "<div class='app-window'><div class='window-title'>JUNDA OS Documentation v6.9</div><div class='docs-content'><h3>CNODE Reference</h3><ul><li><b>CN-R15-Y</b>: Text/Context I/O (800MB)</li><li><b>CN-SI15</b>: Vision Parser (1.2GB)</li><li><b>CN-AU15</b>: Audio Input (900MB)</li><li><b>CN-R0XI</b>: ToolCalling MCP (1.1GB)</li><li><b>CN-R0X0</b>: Sharingan Audit (2.3GB)</li><li><b>CN-Code7</b>: Compiler/Builder (4.0GB)</li><li><b>R2B2 TCP</b>: Heartbeat Router / PSSH (1.5GB)</li></ul><h3>Quick Commands</h3><code>R1C.status()</code> — System status<br><code>CNodeR2.route('status')</code> — Fast status<br><code>B4.deploy()</code> — Re-run deployment</div></div>",
       "meta": { "author": "0KK", "type": "docs", "cnode_count": 14 }
     },
     "code7": {
@@ -60,14 +60,16 @@
     "r1": { "file": "r-r1.md", "module": "R1", "memory": "512MB" },
     "b4": { "file": "r-b4.md", "module": "B4", "memory": "2GB" },
     "r2": { "file": "r-r2.md", "module": "CNodeR2", "memory": "2GB" },
-    "r2b4": { "file": "r-r2b4.md", "module": "R2B4", "memory": "16GB" }
+    "r2b4": { "file": "r-r2b4.md", "module": "R2B4", "memory": "16GB" },
+    "r2b2-tcp": { "file": "r2b2-tcp-patchnotes.md", "module": "R2B2_TCP", "memory": "1.5GB", "protocol": "PSSH", "template": "R2B2_TCP" }
   },
   "docs": {
     "cnode_registry": {
       "input_layer": ["cn-r15-y", "cn-si15", "cn-au15"],
       "port_layer": ["cn-r0xi", "cn-r0x0", "cn-code7"],
-      "core": ["loader", "junda-translator", "quickdraw", "r1-tracker", "b4-bridge", "cnode-r2", "r2b4-heavy"],
-      "test": ["test-junda-code7"]
+      "core": ["loader", "junda-translator", "quickdraw", "r1-tracker", "b4-bridge", "cnode-r2", "r2b4-heavy", "r2b2-tcp"],
+      "test": ["test-junda-code7"],
+      "pssh_templates": "/portal/pssh-templates.json"
     },
     "api_reference": {
       "R1": { "methods": ["registerModule", "log", "getStatus"], "console": "R1C" },

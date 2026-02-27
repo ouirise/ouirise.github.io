@@ -1,0 +1,16 @@
+/* index styles */
+:root {
+    --void: #0a0a0a;
+    --tactical: #141414;
+    --surface: #1f1f1f;
+    --signal: #f5f5f5;
+    --ghost: #666666;
+    --maroon: #800000;
+    --bright-maroon: #a50000;
+}
+
+body {
+    background-color: var(--void);
+    color: var(--signal);
+    font-family: 'JetBrains Mono', monospace;
+}

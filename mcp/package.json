@@ -1,0 +1,28 @@
+{
+  "name": "0xfleet-mcp-server",
+  "version": "6.7.0",
+  "description": "MAS FLEET MCP Server — Model Context Protocol implementation",
+  "main": "server.js",
+  "bin": {
+    "0xfleet-mcp": "./server.js"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js --dev"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "0xfleet",
+    "mas-fleet",
+    "junda"
+  ],
+  "author": "俊达",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

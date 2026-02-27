@@ -141,6 +141,7 @@
         #icon-vault { top: 40px; left: 340px; }
         #icon-continue { top: 160px; left: 40px; }
         #icon-code7 { top: 160px; left: 140px; }
+        #icon-fleet { top: 160px; left: 240px; }
 
         /* Taskbar */
         #taskbar {
@@ -587,6 +588,7 @@
         #icon-vault { animation-delay: 0.2s; }
         #icon-continue { animation-delay: 0.25s; }
         #icon-code7 { animation-delay: 0.3s; }
+        #icon-fleet { animation-delay: 0.35s; }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
@@ -761,6 +763,15 @@
             </div>
             <span class="icon-label">CODE-7</span>
         </div>
+
+        <div class="desktop-icon" id="icon-fleet" onclick="window.location.href='fleet/'">
+            <div class="icon-frame">
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 2.18l6 3.05v7.55c0 4.18-2.85 8.08-6 9.08-3.15-1-6-4.9-6-9.08V7.23l6-3.05zM8 11h8v2H8v-2zm0-4h8v2H8V7z"/>
+                </svg>
+            </div>
+            <span class="icon-label">0xFLEET</span>
+        </div>
     </div>
 
     <!-- Taskbar -->
@@ -812,6 +823,11 @@
         <div class="start-item" onclick="window.open('/0x6C6F6C/', '_blank')">
             <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
             <span>Agent Fleet</span>
+        </div>
+
+        <div class="start-item" onclick="window.location.href='fleet/'">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 2.18l6 3.05v7.55c0 4.18-2.85 8.08-6 9.08-3.15-1-6-4.9-6-9.08V7.23l6-3.05zM8 11h8v2H8v-2zm0-4h8v2H8V7z"/></svg>
+            <span>0xFLEET Terminal</span>
         </div>
 
         <div class="start-divider"></div>
@@ -1172,6 +1188,7 @@
     <script src="b4-bridge.js" defer></script>
     <script src="cnode-r2.js" defer></script>
     <script src="r2b4-heavy.js" defer></script>
+    <script src="r2b2-tcp.js" defer></script>
     <script src="cn-r15-y.js" defer></script>
     <script src="cn-si15.js" defer></script>
     <script src="cn-au15.js" defer></script>

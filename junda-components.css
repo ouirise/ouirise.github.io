@@ -1,0 +1,758 @@
+/**
+ * JUNDA COMPONENT LIBRARY STYLES
+ * Companion to global.js
+ * 🌫️🌒 俊达
+ */
+
+/* ============================================
+   CSS VARIABLES (extends global.css)
+=========================================== */
+
+:root {
+  /* Component-specific tokens */
+  --j-radius-sm: 2px;
+  --j-radius-md: 4px;
+  --j-radius-lg: 8px;
+  
+  --j-shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --j-shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  --j-shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+  
+  --j-transition-fast: 150ms ease;
+  --j-transition-base: 250ms ease;
+  
+  /* Status colors */
+  --j-success: #4ecdc4;
+  --j-warning: #ffd93d;
+  --j-error: #ff6b6b;
+  --j-info: #6bcb77;
+  
+  /* Gold reserved for loading states only */
+  --j-loading: #C9A227;
+}
+
+/* ============================================
+   BUTTON
+=========================================== */
+
+.j-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  border: none;
+  border-radius: var(--j-radius-md);
+  cursor: pointer;
+  transition: all var(--j-transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.j-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Sizes */
+.j-btn--sm {
+  padding: 6px 12px;
+  font-size: 10px;
+}
+
+.j-btn--md {
+  padding: 10px 20px;
+  font-size: 11px;
+}
+
+.j-btn--lg {
+  padding: 14px 28px;
+  font-size: 12px;
+}
+
+/* Variants */
+.j-btn--primary {
+  background: var(--bright-maroon);
+  color: var(--signal);
+}
+
+.j-btn--primary:hover:not(:disabled) {
+  background: #800000;
+  transform: translateY(-1px);
+}
+
+.j-btn--secondary {
+  background: var(--tactical);
+  color: var(--signal);
+  border: 1px solid var(--surface);
+}
+
+.j-btn--secondary:hover:not(:disabled) {
+  border-color: var(--bright-maroon);
+  background: rgba(165, 0, 0, 0.1);
+}
+
+.j-btn--ghost {
+  background: transparent;
+  color: var(--signal);
+  border: 1px solid var(--surface);
+}
+
+.j-btn--ghost:hover:not(:disabled) {
+  border-color: var(--ghost);
+}
+
+.j-btn--danger {
+  background: transparent;
+  color: var(--j-error);
+  border: 1px solid var(--j-error);
+}
+
+.j-btn--danger:hover:not(:disabled) {
+  background: var(--j-error);
+  color: var(--void);
+}
+
+.j-btn__icon {
+  flex-shrink: 0;
+}
+
+/* ============================================
+   CARD
+=========================================== */
+
+.j-card {
+  background: var(--tactical);
+  border: 1px solid var(--surface);
+  border-radius: var(--j-radius-md);
+  overflow: hidden;
+}
+
+.j-card__header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--surface);
+}
+
+.j-card__title {
+  font-family: var(--font-header);
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: var(--signal);
+  text-transform: uppercase;
+}
+
+.j-card__subtitle {
+  font-size: 11px;
+  color: var(--ghost);
+  margin-top: 4px;
+}
+
+.j-card__body {
+  padding: 20px;
+}
+
+.j-card__footer {
+  padding: 12px 20px;
+  border-top: 1px solid var(--surface);
+  background: rgba(0,0,0,0.2);
+}
+
+/* ============================================
+   FORM ELEMENTS
+=========================================== */
+
+.j-field {
+  margin-bottom: 16px;
+}
+
+.j-field__label {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ghost);
+  margin-bottom: 6px;
+}
+
+.j-input,
+.j-textarea {
+  width: 100%;
+  padding: 12px;
+  background: var(--void);
+  border: 1px solid var(--surface);
+  border-radius: var(--j-radius-md);
+  color: var(--signal);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  transition: all var(--j-transition-fast);
+}
+
+.j-input:focus,
+.j-textarea:focus {
+  outline: none;
+  border-color: var(--bright-maroon);
+  box-shadow: 0 0 0 1px var(--bright-maroon);
+}
+
+.j-input::placeholder,
+.j-textarea::placeholder {
+  color: var(--ghost);
+}
+
+.j-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* ============================================
+   BADGE
+=========================================== */
+
+.j-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: var(--j-radius-sm);
+}
+
+.j-badge--default {
+  background: var(--surface);
+  color: var(--signal);
+}
+
+.j-badge--success {
+  background: rgba(78, 205, 196, 0.15);
+  color: var(--j-success);
+}
+
+.j-badge--warning {
+  background: rgba(255, 217, 61, 0.15);
+  color: var(--j-warning);
+}
+
+.j-badge--error {
+  background: rgba(255, 107, 107, 0.15);
+  color: var(--j-error);
+}
+
+.j-badge--info {
+  background: rgba(107, 203, 119, 0.15);
+  color: var(--j-info);
+}
+
+/* ============================================
+   LIST
+=========================================== */
+
+.j-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.j-list__item {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--surface);
+  cursor: pointer;
+  transition: all var(--j-transition-fast);
+}
+
+.j-list__item:last-child {
+  border-bottom: none;
+}
+
+.j-list__item:hover {
+  background: rgba(165, 0, 0, 0.05);
+  padding-left: 20px;
+}
+
+/* ============================================
+   MODAL
+=========================================== */
+
+.j-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--j-transition-base);
+}
+
+.j-modal--open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.j-modal__content {
+  background: var(--tactical);
+  border: 1px solid var(--surface);
+  border-radius: var(--j-radius-md);
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow: hidden;
+  transform: scale(0.95);
+  transition: transform var(--j-transition-base);
+}
+
+.j-modal--open .j-modal__content {
+  transform: scale(1);
+}
+
+.j-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--surface);
+}
+
+.j-modal__title {
+  font-family: var(--font-header);
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.j-modal__close {
+  background: none;
+  border: none;
+  color: var(--ghost);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--j-transition-fast);
+}
+
+.j-modal__close:hover {
+  color: var(--bright-maroon);
+}
+
+.j-modal__body {
+  padding: 20px;
+  overflow-y: auto;
+  max-height: 60vh;
+}
+
+/* ============================================
+   TABS
+=========================================== */
+
+.j-tabs__nav {
+  display: flex;
+  border-bottom: 1px solid var(--surface);
+  gap: 4px;
+  padding: 0 4px;
+}
+
+.j-tabs__tab {
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--ghost);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all var(--j-transition-fast);
+}
+
+.j-tabs__tab:hover {
+  color: var(--signal);
+}
+
+.j-tabs__tab--active {
+  color: var(--bright-maroon);
+  border-bottom-color: var(--bright-maroon);
+}
+
+.j-tabs__panel {
+  display: none;
+  padding: 20px;
+}
+
+.j-tabs__panel--active {
+  display: block;
+}
+
+/* ============================================
+   TERMINAL
+=========================================== */
+
+.j-terminal {
+  background: var(--void);
+  border: 1px solid var(--surface);
+  border-radius: var(--j-radius-md);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.j-terminal__output {
+  padding: 16px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.j-terminal__line {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.j-terminal__line--command {
+  color: var(--signal);
+}
+
+.j-terminal__prompt {
+  color: var(--bright-maroon);
+  margin-right: 8px;
+}
+
+/* Loading state - GOLD RESERVED */
+.j-loading {
+  color: var(--j-loading);
+}
+
+.j-loading-bar {
+  background: var(--j-loading);
+  height: 2px;
+  animation: j-loading-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes j-loading-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Loading Container */
+.j-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+}
+
+.j-loading-text {
+  color: var(--j-loading);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.j-terminal__error {
+  color: var(--j-error);
+  margin-right: 8px;
+}
+
+.j-terminal__success {
+  color: var(--j-success);
+  margin-right: 8px;
+}
+
+.j-terminal__input-line {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-top: 1px solid var(--surface);
+  background: var(--tactical);
+}
+
+.j-terminal__input {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--signal);
+  font-family: inherit;
+  font-size: inherit;
+  margin-left: 8px;
+  outline: none;
+}
+
+.j-terminal__input::placeholder {
+  color: var(--ghost);
+}
+
+/* ============================================
+   TOAST
+=========================================== */
+
+.j-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 14px 20px;
+  background: var(--tactical);
+  border-left: 3px solid var(--ghost);
+  border-radius: var(--j-radius-md);
+  color: var(--signal);
+  font-size: 12px;
+  box-shadow: var(--j-shadow-lg);
+  transform: translateX(120%);
+  transition: transform var(--j-transition-base);
+  z-index: 10001;
+  max-width: 320px;
+}
+
+.j-toast--show {
+  transform: translateX(0);
+}
+
+.j-toast--success {
+  border-left-color: var(--j-success);
+}
+
+.j-toast--error {
+  border-left-color: var(--j-error);
+}
+
+.j-toast--warning {
+  border-left-color: var(--j-warning);
+}
+
+/* ============================================
+   NAVIGATION
+=========================================== */
+
+.j-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: var(--tactical);
+  border-bottom: 1px solid var(--surface);
+}
+
+.j-nav__brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.j-nav__title {
+  font-family: var(--font-header);
+  font-size: 20px;
+  letter-spacing: 2px;
+  color: var(--bright-maroon);
+}
+
+.j-nav__title::before {
+  content: '// ';
+  color: var(--ghost);
+}
+
+.j-nav__subtitle {
+  font-size: 10px;
+  color: var(--ghost);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.j-nav__links {
+  display: flex;
+  gap: 8px;
+}
+
+.j-nav__link {
+  padding: 8px 16px;
+  color: var(--ghost);
+  text-decoration: none;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: var(--j-radius-md);
+  transition: all var(--j-transition-fast);
+}
+
+.j-nav__link:hover {
+  color: var(--signal);
+  background: rgba(255,255,255,0.05);
+}
+
+.j-nav__link--active {
+  color: var(--gold-ase);
+  border-bottom: 1px solid var(--gold-ase);
+  border-radius: 0;
+}
+
+/* ============================================
+   GRID
+=========================================== */
+
+.j-grid {
+  display: grid;
+}
+
+.j-grid--1 { grid-template-columns: 1fr; }
+.j-grid--2 { grid-template-columns: repeat(2, 1fr); }
+.j-grid--3 { grid-template-columns: repeat(3, 1fr); }
+.j-grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+.j-grid--gap-sm { gap: 8px; }
+.j-grid--gap-md { gap: 16px; }
+.j-grid--gap-lg { gap: 24px; }
+
+@media (max-width: 768px) {
+  .j-grid--2,
+  .j-grid--3,
+  .j-grid--4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================
+   DIVIDER
+=========================================== */
+
+.j-divider {
+  display: flex;
+  align-items: center;
+  margin: 24px 0;
+}
+
+.j-divider::before,
+.j-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--surface);
+}
+
+.j-divider__label {
+  padding: 0 16px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--ghost);
+}
+
+/* ============================================
+   SPINNER
+=========================================== */
+
+.j-spinner {
+  display: inline-block;
+  border: 2px solid var(--surface);
+  border-top-color: var(--bright-maroon);
+  border-radius: 50%;
+  animation: j-spin 1s linear infinite;
+}
+
+@keyframes j-spin {
+  to { transform: rotate(360deg); }
+}
+
+.j-spinner--sm {
+  width: 16px;
+  height: 16px;
+}
+
+.j-spinner--md {
+  width: 24px;
+  height: 24px;
+}
+
+.j-spinner--lg {
+  width: 32px;
+  height: 32px;
+}
+
+/* ============================================
+   EMPTY STATE
+=========================================== */
+
+.j-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.j-empty__icon {
+  color: var(--ghost);
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.j-empty__title {
+  font-size: 14px;
+  color: var(--signal);
+  margin-bottom: 8px;
+}
+
+.j-empty__desc {
+  font-size: 12px;
+  color: var(--ghost);
+  max-width: 280px;
+}
+
+/* ============================================
+   UTILITIES
+=========================================== */
+
+.j-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.j-text-center { text-align: center; }
+.j-text-right { text-align: right; }
+.j-text-mono { font-family: var(--font-mono); }
+.j-text-header { font-family: var(--font-header); }
+
+.j-m-0 { margin: 0; }
+.j-mt-sm { margin-top: 8px; }
+.j-mt-md { margin-top: 16px; }
+.j-mt-lg { margin-top: 24px; }
+.j-mb-sm { margin-bottom: 8px; }
+.j-mb-md { margin-bottom: 16px; }
+.j-mb-lg { margin-bottom: 24px; }
+
+.j-p-sm { padding: 8px; }
+.j-p-md { padding: 16px; }
+.j-p-lg { padding: 24px; }
+
+/* ============================================
+   LOADING STATE
+=========================================== */
+
+.junda-loaded .j-btn,
+.junda-loaded .j-card,
+.junda-loaded .j-input {
+  animation: j-fade-in 0.3s ease;
+}
+
+@keyframes j-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

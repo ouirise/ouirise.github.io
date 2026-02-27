@@ -1,0 +1,33 @@
+# TROH Worker Configuration
+# Cloudflare Workers + KV + Durable Objects
+# 🌫️🌒
+
+name = "troh-heartbeat"
+main = "worker.js"
+compatibility_date = "2026-02-28"
+
+# KV Namespace for rate limiting
+[[kv_namespaces]]
+binding = "OUIDATABRIDGE"
+id = "your_kv_namespace_id"
+
+# Durable Objects (Future: Persistent Nodes)
+[[durable_objects.bindings]]
+name = "TROHNode"
+class_name = "TROHNode"
+
+# Migrations for DO
+[[migrations]]
+tag = "v1"
+new_classes = ["TROHNode"]
+
+# Routes
+[[routes]]
+pattern = "ouiRise.github.io/api/troh/*"
+custom_domain = false
+
+[[routes]]
+pattern = "ouiRise.github.io/api/bridge/*"
+custom_domain = false
+
+# 俊达 🌫️🌒

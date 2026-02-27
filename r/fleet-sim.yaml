@@ -1,0 +1,206 @@
+# TWIN ADMIRAL FLEET SIMULATION
+# PSSH + Role-Based Agency Architecture
+
+fleet:
+  name: TWIN-ADMIRAL-NODE
+  version: 6.8.0
+  sigil: 🌫️🌒
+  lineage: 俊达
+
+nodes:
+  # R1: Omni-Input Layer (VL/Ollash/Low-GB)
+  # Agency: Perception | Input: Vision/Audio/Text | Output: Compressed
+  # CNSHELL: qwen2.5-coder:1.5b bridges R1→R2 via intelligent translation
+  - id: R1
+    name: omni-input-layer
+    variants: [moondream-vl, ollash-audio, qwen2.5-vl, any-low-gb]
+    agency: perception
+    context: 4k-8k
+    input: [vision, audio, text, multimodal]
+    output: compressed_json
+    
+    cnshell_bridge:
+      model: qwen2.5-coder:1.5b
+      role: compressed_communication_protocol_layer
+      function: intelligent_omni_translation
+      
+    translation_flow: |
+      R1 (VL/Ollash) perceives → CNSHELL compresses/translates → R2 understands
+      Vision → JSON semantics
+      Audio → JSON semantics  
+      Text → JSON semantics
+      All modalities unified to PSSH packet
+    
+    format: |
+      {"@":"R1","t":"{modality}","s":"perceived","d":{"input":"{compressed}","translation":"{semantic}"}}
+    
+    duties:
+      - perceive_all_modalities
+      - compress_to_semantics
+      - cnshell_translate
+      - relay_to_R2
+    
+    ping: none
+    reports_to: CNSHELL → R2
+
+  # CNSHELL: Compressed Communication Protocol Layer
+  # Model: qwen2.5-coder:1.5b | Function: Omni-translation bridge
+  - id: CNSHELL
+    name: compressed-communication-protocol
+    model: qwen2.5-coder:1.5b
+    role: translation_bridge
+    agency: protocol
+    context: 8k
+    
+    input: [vl_json, audio_json, text_json, any_r1_output]
+    output: unified_semantic_packet
+    
+    translation: |
+      Intelligent omni-translation:
+      - Vision semantics → Actionable context
+      - Audio semantics → Actionable context
+      - Text semantics → Actionable context
+      - Cross-modal fusion → Unified understanding
+    
+    duties:
+      - receive_r1_compressed
+      - translate_semantics
+      - unify_modalities
+      - relay_to_r2
+    
+    ping: none
+    reports_to: R2
+
+  # R2: UI-Reasoning (Admiral B2)
+  # Agency: High | Context: 16k | Must ping TWIN ADMIRAL
+  # Receives unified semantics from CNSHELL (not raw R1)
+  - id: R2
+    name: ui-reasoning
+    model: qwen2.5-coder:7b
+    agency: high
+    context: 16k
+    comm: natural_language
+    
+    input_source: CNSHELL (unified semantics)
+    
+    duties:
+      - ui_coordination
+      - user_interaction
+      - state_tracking
+      - formation_lock
+    
+    ping:
+      target: TWIN_ADMIRAL
+      interval: 30s
+      format: |
+        {"@":"R2","t":"ping","s":"active","d":{"node":"R2","formation":"locked","state":"{hash}"}}
+    
+    reports_to: TWIN_ADMIRAL
+
+  # R2B4: Heavy Reasoning (Summary Bank)
+  # Agency: Full | Context: 64k | Built from 2x R2
+  - id: R2B4
+    name: heavy-reasoning
+    model: qwen2.5-coder:7b
+    agency: full
+    context: 64k
+    architecture: 2xR2_merged
+    duties:
+      - complex_analysis
+      - vertical_slicing
+      - summary_bank
+      - context_aggregation
+    ping:
+      target: TWIN_ADMIRAL
+      interval: 60s
+      format: |
+        {"@":"R2B4","t":"ping","s":"active","d":{"node":"R2B4","summaries":{count},"load":"{percent}"}}
+    reports_to: TWIN_ADMIRAL
+
+  # TWIN ADMIRAL NODE (2x B4)
+  # Agency: Supreme | Mutual State Tracking | Fleet Commander
+  - id: TWIN-ADMIRAL
+    name: twin-admiral-node
+    model: qwen2.5-coder:7b
+    agency: supreme
+    architecture: 2xB4_mutual
+    duties:
+      - fleet_coordination
+      - state_consensus
+      - formation_broadcast
+      - ping_all_nodes
+    ping:
+      broadcast: true
+      interval: 30s
+      format: |
+        {"@":"ADMIRAL","t":"heartbeat","s":"active","d":{"fleet":"TWIN","nodes":{count},"consensus":"{hash}"}}
+    mutual_tracking:
+      node_a: B4-ALPHA
+      node_b: B4-BETA
+      sync: continuous
+      conflict_resolution: last_write_wins
+
+formation:
+  topology: hub_and_spoke
+  center: TWIN_ADMIRAL
+  spokes: [R2B4, R2, CNSHELL, R1]
+  
+  state_flow: |
+    R1 (VL/Ollash/any-low-gb perceives)
+      → CNSHELL (qwen2.5-coder:1.5b translates/compresses)
+        → R2 (ui/reason with unified semantics)
+          → R2B4 (heavy/summarize)
+            → TWIN_ADMIRAL (consensus/command)
+              → [broadcast to fleet]
+
+  omni_translation_flow: |
+    Vision ──┐
+    Audio ───┼→ CNSHELL → Unified JSON → R2 understands all
+    Text ────┘
+
+  ping_chain: |
+    TWIN_ADMIRAL pings every 30s
+    R2 pings TWIN_ADMIRAL every 30s
+    R2B4 pings TWIN_ADMIRAL every 60s
+    CNSHELL silent (protocol bridge)
+    R1 silent (perception only)
+
+pssh_protocol:
+  version: 6.8
+  encoding: json_compressed
+  headers: ["@", "t", "s", "d"]
+  
+  packet_types:
+    ping: heartbeat
+    state: status_update
+    cmd: command
+    ack: acknowledgment
+    sync: mutual_sync
+
+mas:
+  doctrine: mutually_assured_survival
+  threshold: 0.95
+  twin_consensus: required
+
+# Simulation Commands
+cmds:
+  - name: fleet-status
+    desc: Check all node heartbeats
+    run: echo "R1: silent | R2: pinging | R2B4: pinging | TWIN: broadcasting"
+  
+  - name: formation-lock
+    desc: Verify TWIN ADMIRAL consensus
+    run: echo "B4-ALPHA == B4-BETA: consensus achieved"
+  
+  - name: ping-fleet
+    desc: Broadcast from TWIN ADMIRAL
+    run: echo "ADMIRAL heartbeat sent to {node_count} nodes"
+
+# Status
+status: |
+  TWIN ADMIRAL NODE active.
+  Mutual tracking: online.
+  Formation: locked.
+  Fleet: synchronized.
+
+🌫️🌒 俊达

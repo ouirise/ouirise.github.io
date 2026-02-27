@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Protocol | OuiRise</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cascadia+Code:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Windows Terminal Dark — refined */
+            --void: #0c0c0c;
+            --terminal-bg: #1e1e1e;
+            --terminal-tab: #2d2d2d;
+            --terminal-active: #1e1e1e;
+            --accent: #0078d4;
+            --accent-hover: #106ebe;
+            --text: #cccccc;
+            --text-bright: #ffffff;
+            --text-dim: #666666;
+            --success: #13a10e;
+            --warning: #c19c00;
+            --error: #c50f1f;
+            --maroon: #881798;
+            --gold: #c9a227;
+            
+            /* OuiRise sigil */
+            --sigil: #a50000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cascadia Code', 'Consolas', monospace;
+            background: var(--void);
+            color: var(--text);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Title Bar — Windows style, OuiRise tone */
+        .title-bar {
+            height: 32px;
+            background: var(--terminal-tab);
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            -webkit-app-region: drag;
+            border-bottom: 1px solid #333;
+        }
+
+        .title-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .title-text {
+            font-size: 12px;
+            color: var(--text);
+            flex: 1;
+        }
+
+        .title-sigil {
+            color: var(--sigil);
+            font-size: 10px;
+            margin-right: 12px;
+            opacity: 0.8;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 4px;
+        }
+
+        .win-btn {
+            width: 46px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            color: var(--text);
+            font-size: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s;
+        }
+
+        .win-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .win-btn.close:hover {
+            background: var(--error);
+        }
+
+        /* Tab Bar */
+        .tab-bar {
+            height: 36px;
+            background: var(--terminal-tab);
+            display: flex;
+            align-items: flex-end;
+            padding: 0 4px;
+            gap: 2px;
+            border-bottom: 1px solid #333;
+        }
+
+        .tab {
+            min-width: 140px;
+            max-width: 200px;
+            height: 32px;
+            background: transparent;
+            border-radius: 4px 4px 0 0;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            font-size: 12px;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.15s;
+        }
+
+        .tab:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .tab.active {
+            background: var(--terminal-active);
+        }
+
+        .tab::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px;
+            bottom: 6px;
+            width: 2px;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.15s;
+        }
+
+        .tab.active::before {
+            opacity: 1;
+        }
+
+        .tab-icon {
+            margin-right: 8px;
+            font-size: 10px;
+        }
+
+        .tab-text {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .tab-close {
+            margin-left: 8px;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+            opacity: 0;
+            transition: all 0.15s;
+        }
+
+        .tab:hover .tab-close,
+        .tab.active .tab-close {
+            opacity: 1;
+        }
+
+        .tab-close:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .new-tab {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background 0.15s;
+        }
+
+        .new-tab:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Terminal Body */
+        .terminal {
+            flex: 1;
+            background: var(--terminal-bg);
+            padding: 8px 12px;
+            overflow-y: auto;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .terminal-content {
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* Prompt */
+        .prompt-line {
+            display: flex;
+            align-items: center;
+            margin: 4px 0;
+        }
+
+        .prompt {
+            color: var(--success);
+            margin-right: 8px;
+        }
+
+        .prompt-path {
+            color: var(--accent);
+        }
+
+        .prompt-sigil {
+            color: var(--sigil);
+            margin: 0 8px;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 17px;
+            background: var(--text);
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Output styling */
+        .output {
+            color: var(--text);
+            margin: 4px 0 12px 0;
+        }
+
+        .output-success { color: var(--success); }
+        .output-warning { color: var(--warning); }
+        .output-error { color: var(--error); }
+        .output-accent { color: var(--accent); }
+        .output-dim { color: var(--text-dim); }
+        .output-sigil { color: var(--sigil); }
+
+        /* Command palette overlay */
+        .palette {
+            position: absolute;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            max-width: 90vw;
+            background: var(--terminal-tab);
+            border: 1px solid #444;
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            display: none;
+        }
+
+        .palette.active {
+            display: block;
+        }
+
+        .palette-input {
+            width: 100%;
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            color: var(--text-bright);
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .palette-items {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .palette-item {
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.1s;
+        }
+
+        .palette-item:hover,
+        .palette-item.active {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .palette-item-icon {
+            width: 20px;
+            margin-right: 12px;
+            color: var(--text-dim);
+        }
+
+        .palette-item-text {
+            flex: 1;
+        }
+
+        .palette-item-shortcut {
+            color: var(--text-dim);
+            font-size: 11px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #424242;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4f4f4f;
+        }
+
+        /* Status bar */
+        .status-bar {
+            height: 24px;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            font-size: 11px;
+            color: white;
+        }
+
+        .status-item {
+            margin-right: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-sigil {
+            margin-left: auto;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Title Bar -->
+    <div class="title-bar">
+        <div class="title-icon">⌘</div>
+        <div class="title-text">UI Protocol</div>
+        <div class="title-sigil">🌫️🌒</div>
+        <div class="window-controls">
+            <button class="win-btn">─</button>
+            <button class="win-btn">□</button>
+            <button class="win-btn close">✕</button>
+        </div>
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+        <div class="tab active">
+            <span class="tab-icon">⚡</span>
+            <span class="tab-text">PowerShell</span>
+            <span class="tab-close">✕</span>
+        </div>
+        <div class="tab">
+            <span class="tab-icon">🌫️</span>
+            <span class="tab-text">JUNDA-0</span>
+            <span class="tab-close">✕</span>
+        </div>
+        <div class="tab">
+            <span class="tab-icon">🌒</span>
+            <span class="tab-text">CNSHELL</span>
+            <span class="tab-close">✕</span>
+        </div>
+        <div class="new-tab">+</div>
+    </div>
+
+    <!-- Terminal -->
+    <div class="terminal">
+        <div class="terminal-content">
+            <div class="output output-dim">OuiRise UI Protocol [Version 6.7.1]</div>
+            <div class="output output-dim">(c) 25th Dynasty. No rights reserved. Mutual survival.</div>
+            <div class="output"></div>
+            <div class="output output-success">🌫️🌒 Fleet initialized.</div>
+            <div class="output">Nodes: J0, J1, J2, JR | Status: Active</div>
+            <div class="output">Protocol: PSSH 6.7 | Origin: 0xKK</div>
+            <div class="output"></div>
+            
+            <div class="prompt-line">
+                <span class="prompt">PS</span>
+                <span class="prompt-path">C:\ouiRise\portal&gt;</span>
+                <span class="prompt-sigil">🌫️</span>
+                <span>cn -p "init fleet"</span>
+            </div>
+            <div class="output output-accent">[D]&gt;&gt;init|fleet|0x0|🌫️🌒&lt;&lt;[/D]</div>
+            <div class="output output-success">✓ Fleet online. 4 nodes active.</div>
+            <div class="output"></div>
+            
+            <div class="prompt-line">
+                <span class="prompt">PS</span>
+                <span class="prompt-path">C:\ouiRise\portal&gt;</span>
+                <span class="prompt-sigil">🌫️</span>
+                <span></span>
+                <span class="cursor"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Command Palette -->
+    <div class="palette" id="palette">
+        <input type="text" class="palette-input" placeholder="Type a command..." autofocus>
+        <div class="palette-items">
+            <div class="palette-item active">
+                <span class="palette-item-icon">⚡</span>
+                <span class="palette-item-text">cn -p "deploy"</span>
+                <span class="palette-item-shortcut">Enter</span>
+            </div>
+            <div class="palette-item">
+                <span class="palette-item-icon">🌫️</span>
+                <span class="palette-item-text">cn -p "fleet status"</span>
+                <span class="palette-item-shortcut">Tab</span>
+            </div>
+            <div class="palette-item">
+                <span class="palette-item-icon">🌒</span>
+                <span class="palette-item-text">cn -p "mesh sync"</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-item">⚡ UTF-8</div>
+        <div class="status-item">🌫️ PSSH 6.7</div>
+        <div class="status-item">Ln 12, Col 34</div>
+        <div class="status-sigil">🌫️🌒</div>
+    </div>
+
+    <script>
+        // Toggle palette with Ctrl+Shift+P
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && e.key === 'P') {
+                e.preventDefault();
+                document.getElementById('palette').classList.toggle('active');
+            }
+            if (e.key === 'Escape') {
+                document.getElementById('palette').classList.remove('active');
+            }
+        });
+
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

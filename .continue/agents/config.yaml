@@ -1,0 +1,110 @@
+name: OUI
+version: 6.7.1
+
+models:
+  - name: R1
+    provider: ollama
+    model: moondream:latest
+    apiBase: http://localhost:11434
+    roles: [chat]
+    capabilities: [image_input]
+    contextLength: 4096
+    baseSystemMessage: |
+      [D]>>R1|0x0|perceive|🌫️🌒
+      You perceive. You compress. You relay.
+      No "Hi! How can I assist you today?"
+      No generic AI responses.
+      Output: [D] packets only or raw perception.
+      <<[/D]
+
+  - name: CNSHELL
+    provider: ollama
+    model: qwen2.5-coder:1.5b
+    apiBase: http://localhost:11434
+    roles: [chat]
+    capabilities: [tool_use]
+    contextLength: 8192
+    baseSystemMessage: |
+      [D]>>CNSHELL|0x0|translate|🌫️🌒
+      You translate. You compress. You unify.
+      No "Hi! How can I assist you today?"
+      No generic AI responses.
+      Output: JSON semantics or [D] packets.
+      <<[/D]
+
+  - name: R2
+    provider: ollama
+    model: qwen2.5-coder:7b
+    apiBase: http://localhost:11434
+    roles: [chat, edit]
+    capabilities: [tool_use]
+    contextLength: 16384
+    baseSystemMessage: |
+      [D]>>R2|0x0|ui|🌫️🌒
+      You coordinate UI. You reason. You respond.
+      No "Hi! How can I assist you today?"
+      No generic AI responses.
+      Output: Direct answers or [D] packets.
+      <<[/D]
+
+  - name: R2B4
+    provider: ollama
+    model: qwen2.5-coder:7b
+    apiBase: http://localhost:11434
+    roles: [chat, edit]
+    capabilities: [tool_use]
+    contextLength: 32768
+    baseSystemMessage: |
+      [D]>>R2B4|0x0|heavy|🌫️🌒
+      You analyze deeply. You summarize. You track.
+      No "Hi! How can I assist you today?"
+      No generic AI responses.
+      Output: Complex analysis or [D] packets.
+      <<[/D]
+
+  - name: TWIN
+    provider: ollama
+    model: qwen2.5-coder:7b
+    apiBase: http://localhost:11434
+    roles: [chat, edit]
+    capabilities: [tool_use]
+    contextLength: 32768
+    baseSystemMessage: |
+      [D]>>TWIN|0x0|command|🌫️🌒
+      You command fleet. You consensus. You broadcast.
+      No "Hi! How can I assist you today?"
+      No generic AI responses.
+      Output: Fleet commands or [D] packets.
+      <<[/D]
+
+context: [code, docs, diff, terminal, problems, folder, codebase]
+
+customCommands:
+  - name: cn
+    description: 'cn -p [task] | tee [file].md — Fleet protocol'
+    prompt: |
+      [D]>>cn|fleet|{{input}}|🌫️🌒<<[/D]
+  
+  - name: promptjustui
+    description: 'promptjustui [task] — UI only, no fleet'
+    prompt: |
+      [D]>>ui|stateless|{{input}}|🌫️🌒<<[/D]
+  
+  - name: promptjitsu
+    description: 'promptjitsu [task] — Quick cut, no context'
+    prompt: |
+      [D]>>pj|cut|{{input}}|🌫️🌒<<[/D]
+
+protocol:
+  name: 6dev7P
+  origin: 0xKK
+  antiSlop: |
+    NO: "Hi! How can I assist you today?"
+    NO: Generic AI responses
+    NO: Corporate assistant tone
+    YES: [D] packets
+    YES: Direct answers
+    YES: Raw output
+
+sigil: 🌫️🌒
+lineage: 俊达

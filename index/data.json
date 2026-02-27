@@ -1,0 +1,11 @@
+{
+  "@": "OUINIT",
+  "t": "route_data",
+  "s": "active",
+  "d": {
+    "route": "index",
+    "protocol": "GHPAGES_REPROTOCOL",
+    "version": "6.7.1",
+    "sigil": "🌫️🌒"
+  }
+}
