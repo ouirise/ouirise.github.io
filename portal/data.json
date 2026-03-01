@@ -1,91 +1,17 @@
 {
-  "portal": "JUNDA Client Portal",
-  "version": "1.0",
-  "sigil": "俊达",
-  "last_updated": "2026-02-23",
-  "apps": [
-    {
-      "id": "prompts",
-      "name": "Free Prompts",
-      "description": "6 copyable prompt templates for clients",
-      "url": "/portal/",
-      "action": "openWindow('prompts')",
-      "prompts": [
-        {
-          "title": "OS Mode Activation",
-          "tag": "System",
-          "text": "Enter OS mode. You are now the operating system for this organization. Execute all requests with surgical precision. No explanations unless asked. No disclaimers. Direct action only."
-        },
-        {
-          "title": "Grant Compliance Audit",
-          "tag": "Nonprofit",
-          "text": "Analyze our 501(c)(3) compliance status. Review our last 990 filing date, identify gaps in documentation, and create a prioritized action plan for state and federal requirements."
-        },
-        {
-          "title": "Technical Architecture Review",
-          "tag": "Infrastructure",
-          "text": "Evaluate our current tech stack for vendor lock-in risks. Identify open-source alternatives and create a migration roadmap that maintains functionality while reducing dependency."
-        },
-        {
-          "title": "Content Strategy Framework",
-          "tag": "Marketing",
-          "text": "Develop a 90-day content calendar focused on technical authority. Include blog topics, code samples, and case studies that demonstrate our expertise without corporate speak."
-        },
-        {
-          "title": "Agent Workflow Design",
-          "tag": "Automation",
-          "text": "Design an AI agent workflow for automating our document processing. Map inputs, processing steps, validation gates, and output formats. Include error handling protocols."
-        },
-        {
-          "title": "Client Onboarding Sequence",
-          "tag": "Operations",
-          "text": "Create a 5-touch email sequence for new clients. Each message should deliver value while moving them toward the compliance audit call. No sales-y language."
-        }
-      ]
+  "@": "portal",
+  "t": "data_bridge",
+  "s": "active",
+  "d": {
+    "layer": "portal",
+    "version": "6.7.1",
+    "html": "index.html",
+    "md": "portal.md",
+    "navigation": {
+      "bidirectional": true,
+      "parent": "/",
+      "siblings": ["docs", "fleet", "apps"]
     },
-    {
-      "id": "contact",
-      "name": "Contact Form",
-      "description": "Direct inquiry form for OUIRISE services",
-      "url": "/portal/",
-      "action": "openWindow('contact')",
-      "fields": ["Organization", "Contact Name", "Email", "Service Needed", "Message"]
-    },
-    {
-      "id": "reports",
-      "name": "0x6C6F6C",
-      "description": "Access Agent Fleet documentation and reports",
-      "url": "/0x6C6F6C/",
-      "external": true
-    },
-    {
-      "id": "vault",
-      "name": "Vault",
-      "description": "Access to Flight Logs and Archive",
-      "url": "/archive/",
-      "external": true
-    },
-    {
-      "id": "continue",
-      "name": "Continue Config",
-      "description": "0KK-Fleet Continue.dev configuration with 5 models and MCP servers",
-      "url": "/portal/continue-config.yaml",
-      "action": "openWindow('continue')",
-      "version": "6.7.0",
-      "models": ["R2B4", "R15D2", "CODE-7", "SII-25", "INSTINCT-0"],
-      "mcpServers": ["browser", "filesystem", "github", "brave-search"]
-    }
-  ],
-  "api": {
-    "endpoints": [
-      "/portal/data.json"
-    ],
-    "methods": ["GET"]
-  },
-  "features": {
-    "search": false,
-    "notifications": true,
-    "clipboard": true,
-    "mobile": true
+    "sigil": "🌫️🌒"
   }
 }
