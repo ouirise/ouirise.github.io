@@ -1,7 +1,0 @@
-{
-  "chat.agent.codeBlockProgress": false,
-  "chat.agent.enabled": false,
-  "chat.agent.maxRequests": 0,
-  "chat.agent.thinking.collapsedTools": "off",
-  "chat.agentsControl.enabled": false
-}
